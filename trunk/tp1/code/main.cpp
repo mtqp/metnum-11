@@ -7,7 +7,7 @@
 //#define big_mathLib float
 #define big_mathLib double
 //#define big_mathLib long double
-#define int_mathLib long int
+#define int_mathLib unsigned long long
 
 /*no olvidarse que si usamos nuestro tipo de respresentacion de los numeros, hay que definir esas constantes!!!*/
 
@@ -27,7 +27,7 @@ int_mathLib fact(int_mathLib x){
 	}
 }
 
-big_mathLib arctan(big_mathLib f, int cantIteraciones){
+/*big_mathLib arctan(big_mathLib f, int cantIteraciones){
 	big_mathLib resArc = 0;
 
 	for(int i=0; i<cantIteraciones; i++){
@@ -35,14 +35,48 @@ big_mathLib arctan(big_mathLib f, int cantIteraciones){
 	}
 	
 	return resArc;
+}*/
+
+big_mathLib arctan(big_mathLib f, int cantIteraciones){
+	big_mathLib resArc_par = 0;
+	big_mathLib resArc_impar = 0;
+
+	for(int i=0; i<cantIteraciones; i+=2){
+		resArc_par += pow(f,2*i+1) / (2*i+1);
+	}
+	
+	for(int i=1; i<cantIteraciones; i+=2){
+		resArc_impar += pow(f,2*i+1) / (2*i+1);
+	}
+	
+	resArc_par-resArc_impar;
+	
+	return resArc_par-resArc_impar;
 }
 
-big_mathLib Gregory(int cantIteraciones){
+/*big_mathLib Gregory(int cantIteraciones){
 	big_mathLib pi=0;	
 	
 	for(int i=0;i<cantIteraciones;i++){
 		pi += (pow(-1,i))/(2*i+1);
 	}
+
+	return pi*4;
+}*/
+
+big_mathLib Gregory(int cantIteraciones){
+	big_mathLib pi_par=0;
+	big_mathLib pi_impar=0;
+	
+	for(int i=0;i<cantIteraciones;i+=2){
+		pi_par += 1.0/(2*i+1);
+	}
+
+	for(int i=1;i<cantIteraciones;i+=2){
+		pi_impar += 1.0/(2*i+1);
+	}
+
+	big_mathLib pi=pi_par-pi_impar;
 
 	return pi*4;
 }
@@ -94,5 +128,3 @@ int main(int argc, char** argv){
 
 	return 0;
 }
-
-
