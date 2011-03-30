@@ -1,8 +1,7 @@
-all: analisis_teorico.pdf at.pdf
+all: analisis_teorico_v3.pdf
 
-analisis_teorico.pdf: analisis_teorico.tex at.tex
-	pdflatex analisis_teorico.tex && pdflatex at.tex
+analisis_teorico_v3.pdf: analisis_teorico_v3.tex
+	pdflatex analisis_teorico_v3.tex
 
 clean:
-	rm analisis_teorico.pdf
-	rm at.pdf
+	rm analisis_teorico_v3.pdf
