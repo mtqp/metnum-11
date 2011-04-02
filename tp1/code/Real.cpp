@@ -88,108 +88,22 @@ Real ::	Real raizCuad(){}
 	
 double convertir(){}
 
+void printReal(){
+    char * desmond = (char *) & _real;
+    int i;
+	cout << "real representation --> " << _original << ".0" << endl;;
+	printNotacion(); 		//RECORDAR DE SACAR DSP CUANDO ARREGLEMOS LO Q NO DETECTA EL PRINTFUNCS.H
+	
+	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
 
-/*por dios que horrible!*/
-void mostrar(double *x)
-{
-    unsigned char c0 = *((char*)x + 7);
-    unsigned char c1 = *((char*)x + 6);
-    unsigned char c2 = *((char*)x + 5);
-    unsigned char c3 = *((char*)x + 4);
-    unsigned char c4 = *((char*)x + 3);
-    unsigned char c5 = *((char*)x + 2);
-    unsigned char c6 = *((char*)x + 1);
-    unsigned char c7 = *((char*)x);
-
-    char todo[65];
-
-    unsigned char pot = 128;
-    for(int i=0; i<8; ++i)
-    {
-        todo[i] = '0' + (c0 / pot) % 2;
-        pot /= 2;
+    for (i=sizeof(double)-1; i>=0; i--) {
+        //printf ("%02X ", desmond[i]);		si se quiere en Hex
+        printCharsetInBits(desmond[i], bits); //RECORDAR DE SACAR DSP CUANDO ARREGLEMOS LO Q NO DETECTA EL PRINTFUNCS.H
+        printf ("%s ", bits);
     }
-
-    pot = 128;
-    for(int i=8; i<16; ++i)
-    {
-        todo[i] = '0' + (c1 / pot) % 2;
-        pot /= 2;
-    }
-
-    pot = 128;
-    for(int i=16; i<24; ++i)
-    {
-        todo[i] = '0' + (c2 / pot) % 2;
-        pot /= 2;
-    }
-
-    pot = 128;
-    for(int i=24; i<32; ++i)
-    {
-        todo[i] = '0' + (c3 / pot) % 2;
-        pot /= 2;
-    }
-
-    pot = 128;
-    for(int i=32; i<40; ++i)
-    {
-        todo[i] = '0' + (c4 / pot) % 2;
-        pot /= 2;
-    }
-
-    pot = 128;
-    for(int i=40; i<48; ++i)
-    {
-        todo[i] = '0' + (c5 / pot) % 2;
-        pot /= 2;
-    }
-
-    pot = 128;
-    for(int i=48; i<56; ++i)
-    {
-        todo[i] = '0' + (c6 / pot) % 2;
-        pot /= 2;
-    }
-
-    pot = 128;
-    for(int i=56; i<64; ++i)
-    {
-        todo[i] = '0' + (c7 / pot) % 2;
-        pot /= 2;
-    }
-
-    todo[64] = 0;
-
-    char signo = todo[0];
-    char exponente[11];
-    char mantisa[52];
-
-    int _exponente = 0;
-    float _mantisa = 1.0;
-
-    for(int i=0, pot=128; i<11; ++i)
-    {
-        exponente[i] = todo[i+1];
-        _exponente += (exponente[i] - '0') * pot;
-        pot /= 2;
-    }
-
-    float _pot = 0.5;
-    for(int i=0; i<52; ++i)
-    {
-        mantisa[i] = todo[i+11];
-        _mantisa += (mantisa[i] - '0') * _pot;
-        _pot /= 2;
-    }
-
-    exponente[11] = 0;
-    mantisa[52] = 0;
-
-    printf( "signo = %c, ", signo );
-    printf( "exp = %s (%d), ", exponente, _exponente );
-    printf( "mant = 1.%s \n", mantisa );
-//  printf( "%3.5f = %s \n", *x, todo );
+    printf ("\n");
+    
+    free(bits);
 }
 
 

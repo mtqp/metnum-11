@@ -18,11 +18,14 @@ class Real {
 		Real operator= (const bestInt a);
 		Real raizCuad();
 	
+		void printReal();
+	
 	private:
 		double convertir();
 		bool _trunca;
 		char _tdigitos;
 		char _real[8];
+		bestInt _original;
 	
 };
 
