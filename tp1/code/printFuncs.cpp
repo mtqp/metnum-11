@@ -1,10 +1,9 @@
 #include "printFuncs.h"
 
-/*
 void printDouble(double decker){
     char * desmond = (char *) & decker;
     int i;
-	cout << "double representation --> " << endl << decker;
+	cout << "double representation --> " << decker << endl;
 	printNotacion();
 	
 	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
@@ -15,9 +14,9 @@ void printDouble(double decker){
          printf ("%s ", bits);
     }
     printf ("\n");
-}*/
+}
 
-/*
+
 void printCharsetInBits(char set, unsigned char* bits){
 	unsigned char pot  = 128;
 	unsigned char data = (unsigned char) set;
@@ -40,5 +39,5 @@ void printNotacion(){
 	cout << "	izq = + significativa" << endl;
 	cout << "	der = - significativa" << endl;
 }
-*/
+
 
