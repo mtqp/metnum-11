@@ -5,6 +5,8 @@
 #include <cstdlib>
 #include <cstdio>
 
+using namespace std;
+
 void printDouble(double decker);
 void printCharsetInBits(char set, unsigned char* bits);
 void printNotacion();

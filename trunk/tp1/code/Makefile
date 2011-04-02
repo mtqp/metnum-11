@@ -3,9 +3,9 @@ MATH = -lm
 CFLAGS = -Wall
 
 errores: main.cpp 
-	g++ -o errores $(MATH) main.cpp 
+	g++ -o errores $(MATH) main.cpp $(OBJS)
 
-%.o: %.c
+%.o: %.cpp
 	g++ -c $< $(MATH)
 
 clean:

@@ -3,21 +3,27 @@
 
 #define bestInt unsigned long long
 
+#include <cstring>
+#include "printFuncs.h"
+
+using namespace std;
+
 class Real {
 	public:
-		Real();
-		Real(bestInt valor);
+//		Real();
+//		Real(bestInt valor);
 		Real(bestInt valor, int t_digitos,bool trunca);
 		~Real();
 		
 		Real operator+ (Real a); //--> van a ser constantes o no? PENSAR
 		Real operator* (Real a);
 		Real operator- (Real a);
-		Real operator/ (Real a);
-		Real operator= (const Real a);
-		Real operator= (const bestInt a);
+//		Real operator/ (Real a, Real b);
+//		Real operator= (Real a);
+//		Real operator= (bestInt a);
 		Real raizCuad();
 	
+		void copyDoubleToArray(double value);
 		void printReal();
 	
 	private:
