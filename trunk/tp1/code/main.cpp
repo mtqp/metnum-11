@@ -34,7 +34,7 @@ int main(int argc, char** argv){
 	/*
 		aca iria la ejecucion
 	*/
-	int nro = 1;
+	int nro = 2;
 	Real realTest(nro,52,true);
 	
 	realTest.printReal();
@@ -42,7 +42,7 @@ int main(int argc, char** argv){
 	cout << endl;
 
 	printDouble((double)nro);	
-
+	
 	return 0;
 }
 
