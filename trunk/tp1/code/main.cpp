@@ -25,6 +25,8 @@ void printDouble(double decker){
          printf ("%s ", bits);
     }
     printf ("\n");
+    
+    free(bits);
 }
 
 void printCharsetInBits(char set, unsigned char* bits){
@@ -73,12 +75,11 @@ int main(int argc, char** argv){
 	/*
 		aca iria la ejecucion
 	*/
-/*	int a = 2;
-	Real pruebaUno(a);
-	cout << "our real type --> " << endl;*/
+	int nro = 2;
+	Real realTest(nro);
+	realTest.printReal();
 
-	double a = 1.0;
-	printDouble(a);	
+	printDouble((double)nro);	
 
 	return 0;
 }
