@@ -1,13 +1,13 @@
-OBJS =  big_mathLib.cpp
+OBJS =  printFuncs.cpp intFuncs.cpp Real.cpp
 MATH = -lm
 CFLAGS = -Wall
 
-tpUno: main.cpp 
-	g++ -o tp1 $(MATH) main.cpp 
+errores: main.cpp 
+	g++ -o errores $(MATH) main.cpp 
 
 %.o: %.c
 	g++ -c $< $(MATH)
 
 clean:
-	rm -f tp1
+	rm -f errores
 	rm -f *.o

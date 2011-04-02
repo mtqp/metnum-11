@@ -1,20 +1,10 @@
-#include <cmath>
-#include <iostream>
-#include <cstdlib>
-#include <cstdio>
-
 #include "printFuncs.h"
-#include "intFuncs.h"
-#include "Real.h"
 
-using namespace std;
-
-#define it_default 10
-
+/*
 void printDouble(double decker){
     char * desmond = (char *) & decker;
     int i;
-	cout << "double representation --> " << decker << endl;;
+	cout << "double representation --> " << endl << decker;
 	printNotacion();
 	
 	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
@@ -25,8 +15,9 @@ void printDouble(double decker){
          printf ("%s ", bits);
     }
     printf ("\n");
-}
+}*/
 
+/*
 void printCharsetInBits(char set, unsigned char* bits){
 	unsigned char pot  = 128;
 	unsigned char data = (unsigned char) set;
@@ -49,38 +40,5 @@ void printNotacion(){
 	cout << "	izq = + significativa" << endl;
 	cout << "	der = - significativa" << endl;
 }
-
-int main(int argc, char** argv){
-	char t_digitos;	//se usa para el constructor del tipo de datos nuestro
-	int cantIteraciones;
-	int i = 0;
-		
-	if(argc<2)
-		cout << "use: ./errores [tdigitos] [cantidadIteraciones]" << endl << "El segundo parametro es opcional." << endl;
-	else {
-		if(argc==2){
-			cantIteraciones = it_default;
-		}
-		else
-		{ 
-			cantIteraciones = atoi(argv[2]);
-		}
-		
-		//t_digitos = atoi(argv[1]);
-		t_digitos = *argv[1];
-	}
-	
-	/*
-		aca iria la ejecucion
-	*/
-/*	int a = 2;
-	Real pruebaUno(a);
-	cout << "our real type --> " << endl;*/
-
-	double a = 1.0;
-	printDouble(a);	
-
-	return 0;
-}
-
+*/
 
