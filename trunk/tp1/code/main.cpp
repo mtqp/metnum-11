@@ -38,7 +38,9 @@ int main(int argc, char** argv){
 
 	Real res(0,0,true);
 	
-	res = uno/dos;
+	res = menosuno - dos; //-->ANDA MAL
+//	res = uno/dos;
+//	res = res + tres;
 	res.printReal();
 
 	/*xq tienen q estar hechos con el mismo constructor!!!!?????*/
