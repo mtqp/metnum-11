@@ -1,9 +1,5 @@
 #include "intFuncs.h"
 
-/*
- * 	Funciones extras
- */
-
 //no olvidarse de hacer un try catch para si hay overflow! asi lo podemos controlar...
 ullInt fact(ullInt x){
 	if(x != 0){
@@ -19,7 +15,6 @@ ullInt fact(ullInt x){
 	}
 }
 
-/*hay que hacerle el complemento a dos*/
 ullInt cleanSign(llInt number){
 	if(number<0)
 		number *= -1;

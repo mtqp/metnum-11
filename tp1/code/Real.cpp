@@ -24,13 +24,8 @@ Real ::	Real(llInt number, int t_digits,bool truncates){
 
 	sign 	 = getSign();
 	exp  	 = getExp();
-	mantissa = getMantissa();	//--> ponele que ande bien
+	mantissa = getMantissa();
 	
-/*	cout << "signo" << endl; printInt(sign);
-	cout << "original sin signo" << endl; printInt(cleanSign(_original));
-	cout << "mantisa" << endl; printInt(mantissa);	
-	cout << "exponente" << endl; printInt(exp);
-	*/
 	copyDoubleToArray(sign,exp,mantissa);
 }
 
@@ -53,9 +48,7 @@ ullInt Real :: getExp(){
 	ullInt exp 	  = 0;
 	
 	exp = (ullInt) placesToShift(number,0); /*se le pasa el cero, suponiendo notacion 0.xxxx * e^(+- algo)*/
-//	cout << "valor exponente == " << exp << endl;
 	exp += 1023ull;							/*lo normaliza al desvio 1023*/
-	
 	exp -= 1ull;
 
 	exp = exp << 52;
@@ -63,9 +56,6 @@ ullInt Real :: getExp(){
 	return exp;
 }
 
-/*considerar que NO deberia verse el 1er digito, ya que se considera UNO siempre... xq aparece?
-	en la implementacion de c++?
-*/
 /*tener en cuenta que la creacion de la mantissa no esta chequeando si TRUNCA y los TDIGITS!!!*/
 ullInt Real :: getMantissa(){
 	ullInt mantissa;
@@ -76,7 +66,6 @@ ullInt Real :: getMantissa(){
 
 	mantissa = cleanFirstNotZero(mantissa,shift);
 
-	/*fijarse que el number este bien del shift! o es 52?*/
 	if(shift>51){	//==>va a existir truncamiento del numero
 		shift	 = 63 - shift;
 		mantissa = mantissa >> shift; //chequear esta rama dsp
