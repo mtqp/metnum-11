@@ -5,9 +5,9 @@
  */
 
 //no olvidarse de hacer un try catch para si hay overflow! asi lo podemos controlar...
-bestInt fact(bestInt x){
+ullInt fact(ullInt x){
 	if(x != 0){
-		bestInt i = x-1;
+		ullInt i = x-1;
 		for(i;i!=0;i--){
 			x *= i;
 		}
@@ -18,3 +18,14 @@ bestInt fact(bestInt x){
 		return 1;
 	}
 }
+
+ullInt cleanSign(llInt number){
+	if(number<0){
+		number = number << 1;
+		number = number >> 1;
+	}
+
+	return (ullInt) number;	
+}
+
+

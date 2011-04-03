@@ -6,6 +6,7 @@
 
 #include <cstring>
 #include "printFuncs.h"
+#include "intFuncs.h"
 
 using namespace std;
 

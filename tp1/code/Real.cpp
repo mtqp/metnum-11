@@ -53,9 +53,16 @@ ullInt Real :: getSign(){
 	return signedNumber;
 }
 
-ullInt Real :: getExp(){}
-ullInt Real :: getMantissa(){}
+ullInt Real :: getExp(){
+	/*recordar que tiene un offset de 1023?*/
+}
 
+ullInt Real :: getMantissa(){
+	ullInt mantissa;
+
+	mantissa = cleanSign(_original);
+
+}
 
 /*no olvidar que todas estas operaciones pueden dar Nan u OverFlow! pensar como controlar.*/
 
