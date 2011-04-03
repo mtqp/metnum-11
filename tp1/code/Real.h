@@ -24,6 +24,7 @@ class Real {
 	
 		void printReal();
 
+		friend ostream &operator<<(ostream &stream, Real r);
 	private:
 		void copyDoubleToArray(double number);
 		void copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa);
