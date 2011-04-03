@@ -52,8 +52,17 @@ const Real Real :: operator+ (const Real &a) const{
 Real ::	Real operator* (Real a){}
 Real ::	Real operator- (Real a){}
 //Real ::	Real operator/ (Real a, Real b){}
-const Real Real :: operator= (const Real &a)const{
-
+Real& Real :: operator= (const Real &a){
+	if(this!=&a){
+		this->_truncates = a._truncates;
+		this->_tdigits	 = a._tdigits;
+		this->_original	 = a._original;
+	
+		for(int i=0;i<sizeof(double);i++){
+			this->_real[i] = a._real[i];
+		}
+	}
+	return *this;
 }
 //Real ::	Real operator= (ullInt a){}
 Real ::	Real raizCuad(){}
