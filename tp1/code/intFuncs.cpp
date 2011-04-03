@@ -27,13 +27,13 @@ ullInt cleanSign(llInt number){
 	return (ullInt) number;	
 }
 
+/*lo ponemos como unsigned int el until?*/
 int placesToShift(ullInt number,int until){
 	int places = 0;
 	
 	while(number!=until){
 		number = number >> 1;
 		places++;
-		cout << number << "-"  << until << endl;
 	}
 	
 	return places;
