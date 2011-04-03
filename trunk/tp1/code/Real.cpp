@@ -34,11 +34,27 @@ Real ::	~Real(){
 
 /*no olvidar que todas estas operaciones pueden dar Nan u OverFlow! pensar como controlar.*/
 
-Real ::	Real operator+ (Real a){} //--> van a ser constantes o no? PENSAR
+
+const Real Real :: operator+ (const Real &a) const{
+/*
+  // Add this instance's value to other, and return a new instance
+  // with the result.
+  const MyClass MyClass::operator+(const MyClass &other) const {
+    MyClass result = *this;     // Make a copy of myself.  Same as MyClass result(*this);
+    result += other;            // Use += to add other to the copy.
+    return result;              // All done!
+  }
+
+*/
+
+}
+
 Real ::	Real operator* (Real a){}
 Real ::	Real operator- (Real a){}
 //Real ::	Real operator/ (Real a, Real b){}
-//Real ::	Real operator= (Real a){}
+const Real Real :: operator= (const Real &a)const{
+
+}
 //Real ::	Real operator= (ullInt a){}
 Real ::	Real raizCuad(){}
 	
@@ -124,6 +140,14 @@ void Real :: copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa){
 
 	for(int i=0;i<sizeof(ullInt);i++){
 		_real[i] = r_array[i];
+	}
+}
+
+void Real :: copyDoubleToArray(double number){
+	char* real = (char*) &number;
+	
+	for(int i=0;i<sizeof(double);i++){
+		_real[i] = real[i];
 	}
 }
 
