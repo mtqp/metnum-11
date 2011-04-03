@@ -6,5 +6,5 @@
 
 ullInt fact(ullInt x);
 ullInt cleanSign(llInt number);
-
+int placesToShift(ullInt number);
 #endif

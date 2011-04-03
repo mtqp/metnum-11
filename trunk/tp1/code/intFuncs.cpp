@@ -28,4 +28,13 @@ ullInt cleanSign(llInt number){
 	return (ullInt) number;	
 }
 
-
+int placesToShift(ullInt number){
+	int places = 0;
+	
+	while(number>=1){
+		number = number >> 1;
+		places++;
+	}
+	
+	return places;
+}
