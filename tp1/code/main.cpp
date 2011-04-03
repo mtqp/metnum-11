@@ -26,14 +26,13 @@ int main(int argc, char** argv){
 	/*
 		aca iria la ejecucion
 	*/
-	int nro = -1;
+	int nro = 12345;
 	Real realTest(nro,52,true);
 	
 
 	cout << endl << endl << endl;
 	realTest.printReal();
-	cout << endl << endl << endl;
-	
+
 	cout << endl;
 
 	printDouble((double)nro);	

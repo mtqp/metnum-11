@@ -26,11 +26,11 @@ Real ::	Real(llInt number, int t_digits,bool truncates){
 	exp  	 = getExp();
 	mantissa = getMantissa();	//--> ponele que ande bien
 	
-	cout << "signo" << endl; printInt(sign);
+/*	cout << "signo" << endl; printInt(sign);
 	cout << "original sin signo" << endl; printInt(cleanSign(_original));
 	cout << "mantisa" << endl; printInt(mantissa);	
 	cout << "exponente" << endl; printInt(exp);
-	
+	*/
 	copyDoubleToArray(sign,exp,mantissa);
 }
 
@@ -55,6 +55,8 @@ ullInt Real :: getExp(){
 	exp = (ullInt) placesToShift(number,0); /*se le pasa el cero, suponiendo notacion 0.xxxx * e^(+- algo)*/
 //	cout << "valor exponente == " << exp << endl;
 	exp += 1023ull;							/*lo normaliza al desvio 1023*/
+	
+	exp -= 1ull;
 
 	exp = exp << 52;
 	
@@ -70,7 +72,9 @@ ullInt Real :: getMantissa(){
 	int shift;
 
 	mantissa = cleanSign(_original);
-	shift    = placesToShift(mantissa,1);
+	shift    = placesToShift(mantissa,0);
+
+	mantissa = cleanFirstNotZero(mantissa,shift);
 
 	/*fijarse que el number este bien del shift! o es 52?*/
 	if(shift>51){	//==>va a existir truncamiento del numero
