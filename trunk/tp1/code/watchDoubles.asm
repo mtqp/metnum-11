@@ -1,6 +1,6 @@
 
 section .data
-	nro: dd 0,2.0
+	nro: dd 0,43.0
 
 section .text
 	global asm_watchDouble
@@ -16,6 +16,8 @@ break_asm:
 	mov eax,nro
 	movddup xmm0,[eax]
 
+	finit
+	fld1
 	
 	pop ebx
 	pop esi

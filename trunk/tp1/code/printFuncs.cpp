@@ -1,5 +1,22 @@
 #include "printFuncs.h"
 
+void printInt(long long rocker){
+    char * desmond = (char *) & rocker;
+    int i;
+	cout << "int representation --> " << rocker << endl;
+	printNotacion();
+	
+	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
+
+    for (i=sizeof(double)-1; i>=0; i--) {
+         //printf ("%02X ", desmond[i]);
+         printCharsetInBits(desmond[i], bits);
+         printf ("%s ", bits);
+    }
+    printf ("\n");
+
+}
+
 void printDouble(double decker){
     char * desmond = (char *) & decker;
     int i;

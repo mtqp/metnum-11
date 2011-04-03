@@ -51,10 +51,23 @@ Real ::	Real(bestInt numero, int t_digitos,bool trunca){
 		cout<< valor_exp << endl;
 	}	
 
-	int shift_mantisa = 52-exponente;
+	int shift_mantisa = 52-exponente+1;
+	//shift_mantisa = 52; //todavia no entiendo xq, ahora hardcore:
 
-	exponente = exponente<<51;				//posicionandose para armar el real!
+	cout << shift_mantisa << " mantisa shifter" << endl;
+
+	/*cout << "######################################################" << endl;
+	printInt(exponente);	
+	cout << "######################################################" << endl;
+	cout << "exponent  " << exponente << endl;
 	
+	*/
+	exponente = exponente<<51;				//posicionandose para armar el real!
+	/*cout << "exponent shifteed  " << exponente << endl;
+	cout << "######################################################" << endl;
+	printInt(exponente);	
+	cout << "######################################################" << endl;		
+	*/
 	/*esto esta mal!!!*/
 /*	if(signo){				//busca signo
 		exponente *= -1;
@@ -68,11 +81,22 @@ Real ::	Real(bestInt numero, int t_digitos,bool trunca){
 		valor = valor >> ((-1)*shift_mantisa);
 	}
 	else {
+		cout << "######################################################" << endl;
+		printInt(valor);	
+		cout << "######################################################" << endl;		
 		valor = valor << shift_mantisa;
+		cout << "######################################################" << endl;
+		printInt(valor);	
+		cout << "######################################################" << endl;		
 	}
-	
+/*
+	cout << "######################################################" << endl;
+	printInt(signo_exponente);	
+	cout << "######################################################" << endl;		
 	signo_exponente |= valor;
-	
+	cout << "######################################################" << endl;
+	printInt(signo_exponente);	
+	cout << "######################################################" << endl;			*/
 	copyDoubleToArray(signo_exponente);	//dsp si se hace sobrecarga del = esta linea puede volar
 }
 

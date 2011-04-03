@@ -7,6 +7,7 @@
 
 using namespace std;
 
+void printInt(long long rocker);
 void printDouble(double decker);
 void printCharsetInBits(char set, unsigned char* bits);
 void printNotacion();

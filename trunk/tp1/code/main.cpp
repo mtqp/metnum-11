@@ -34,10 +34,10 @@ int main(int argc, char** argv){
 	/*
 		aca iria la ejecucion
 	*/
-	int nro = 2;
+	int nro = 1;
 	Real realTest(nro,52,true);
 	
-	realTest.printReal();
+//	realTest.printReal();
 
 	cout << endl;
 

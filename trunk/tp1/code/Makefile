@@ -1,12 +1,12 @@
 OBJS =  printFuncs.cpp intFuncs.cpp Real.cpp
 ASMOBJS = watchDoubles.o
 MATH = -lm
-CFLAGS = -ggdb -Wall
+CFLAGS = -ggdb 
 NASM = -f elf
 DEBUGNASM = -g
 
-errores: main.cpp 
-	g++ -o errores $(MATH) main.cpp $(OBJS) 
+errores: main.cpp $(OBJS)
+	g++ -o errores $(CFLAGS) $(MATH) main.cpp $(OBJS) 
 
 asm:
 	nasm $(DEBUGNASM) $(NASM) watchDoubles.asm
