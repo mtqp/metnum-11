@@ -17,6 +17,8 @@ Real ::	Real(llInt number, int t_digits,bool truncates){
 	_tdigits = t_digits;
 	_original = number;
 
+	setMascara();
+
 	memset((void *) &_real, 0, 8);
 	if(number==0){
 		return;
@@ -97,8 +99,18 @@ Real& Real :: operator= (const Real &a){
 	}
 	return *this;
 }
+
 //Real ::	Real operator= (ullInt a){}
-Real ::	Real raizCuad(){}
+
+Real Real :: raizCuad(){
+	double real = this->convert();
+
+	real = sqrt(real);
+	
+	this->copyDoubleToArray(real);
+	
+	return *this;
+}
 	
 	
 double Real :: convert() const{
@@ -193,4 +205,19 @@ void Real :: copyDoubleToArray(double number){
 		_real[i] = real[i];
 	}
 }
+
+void Real :: setMascara(){
+	memset((void*) &_mascaraTdigits,255,8);
+	
+	ullInt mascara = (ullInt) _mascaraTdigits;
+	
+	mascara = mascara >> 52-_tdigits;
+	mascara = mascara << _tdigits;
+	
+	char* pmask = (char*) &mascara;
+	for(int i=0;i<sizeof(double);i++){
+		_mascaraTdigits[i] = pmask[i];
+	}
+}
+
 

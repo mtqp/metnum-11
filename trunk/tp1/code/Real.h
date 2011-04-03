@@ -29,6 +29,7 @@ class Real {
 	private:
 		void copyDoubleToArray(double number);
 		void copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa);
+		void setMascara();
 		ullInt getSign();
 		ullInt getExp();
 		ullInt getMantissa();	
@@ -36,6 +37,7 @@ class Real {
 		bool _truncates;
 		char _tdigits;
 		char _real[8];
+		char _mascaraTdigits[8];
 		llInt _original;
 	
 };
