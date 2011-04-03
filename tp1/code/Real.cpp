@@ -59,10 +59,26 @@ ullInt Real :: getExp(){
 
 ullInt Real :: getMantissa(){
 	ullInt mantissa;
+	int shift;
 
 	mantissa = cleanSign(_original);
+	shift    = placesToShift(mantissa);
 
+	/*fijarse que el number este bien del shift! o es 52?*/
+	if(shift>51){	//==>va a existir truncamiento del numero
+		shift	 = 63 - shift;
+		mantissa = mantissa >> shift;
+	} 
+	else
+	{
+		shift 	 = 51-shift;
+		mantissa = mantissa << shift;	
+	}
+	
+	return mantissa;
 }
+
+
 
 /*no olvidar que todas estas operaciones pueden dar Nan u OverFlow! pensar como controlar.*/
 
