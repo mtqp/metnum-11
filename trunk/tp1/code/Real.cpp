@@ -1,28 +1,12 @@
 #include "Real.h"
 
-/*
-double convertir();
-bool _trunca;
-char* _real;
-*/
-
-/*
-
-	cout << sizeof(unsigned long long) << endl; --> 8
-	cout << sizeof(unsigned long) << endl;		--> 4
-	cout << sizeof(int) << endl;				--> 4
-	cout << sizeof(double) << endl;				--> 8
-*/
-
-#define ullInt unsigned long long
-
 Real ::	Real(){
 	Real(0,52,true);
 }
 
-Real ::	Real(bestInt valor){
+Real ::	Real(llInt valor){ 	//se va o no se va???
 	Real(valor,52,true);
-}//se va o no se va???
+}
 
 
 /*For double precision, the exponent field is 11 bits, and has a bias of 1023.
@@ -36,7 +20,80 @@ Real ::	Real(bestInt valor){
 		- cargar el exponente con el desvio de 1023, es decir... 0000 = -1023
 */
 
-Real ::	Real(bestInt numero, int t_digitos,bool trunca){
+Real ::	Real(llInt number, int t_digits,bool truncates){
+	_truncates = truncates;
+	_tdigits = t_digits;
+	_original = number;
+
+	ullInt sign;
+	ullInt exp;
+	ullInt mantissa;
+
+	sign 	 = getSign();
+	exp  	 = getExp();
+	mantissa = getMantissa();
+	
+	printInt(sign);
+	
+	copyDoubleToArray(sign,exp,mantissa);
+	
+}
+
+Real ::	~Real(){
+}
+
+ullInt Real :: getSign(){
+	ullInt signedNumber = 0;
+	
+	if(_original<0)
+	{
+		signedNumber = signedNumber+1<<63;
+	}
+	
+	return signedNumber;
+}
+
+ullInt Real :: getExp(){}
+ullInt Real :: getMantissa(){}
+
+
+/*no olvidar que todas estas operaciones pueden dar Nan u OverFlow! pensar como controlar.*/
+
+Real ::	Real operator+ (Real a){} //--> van a ser constantes o no? PENSAR
+Real ::	Real operator* (Real a){}
+Real ::	Real operator- (Real a){}
+//Real ::	Real operator/ (Real a, Real b){}
+//Real ::	Real operator= (Real a){}
+//Real ::	Real operator= (ullInt a){}
+Real ::	Real raizCuad(){}
+	
+	
+double Real :: convert(){}
+
+void Real :: printReal(){
+    char * desmond = (char *) & _real;
+    int i;
+	cout << "real representation --> " << _original << ".0" << endl;;
+	printNotacion();
+	
+	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
+
+    for (i=sizeof(double)-1; i>=0; i--) {
+        //printf ("%02X ", desmond[i]);		si se quiere en Hex
+        printCharsetInBits(desmond[i], bits);
+        printf ("%s ", bits);
+    }
+    printf ("\n");
+    
+    free(bits);
+}
+
+void Real :: copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa){
+	/*implementar*/
+}
+
+
+/*Real ::	Real(llInt numero, int t_digitos,bool trunca){
 	_trunca = trunca;
 	_tdigitos = t_digitos;
 
@@ -73,17 +130,17 @@ Real ::	Real(bestInt numero, int t_digitos,bool trunca){
 	cout << "######################################################" << endl;
 	cout << "exponent  " << exponente << endl;
 	
-	*/
+	
 	exponente = exponente<<51;				//posicionandose para armar el real!
 	/*cout << "exponent shifteed  " << exponente << endl;
 	cout << "######################################################" << endl;
 	printInt(exponente);	
 	cout << "######################################################" << endl;		
-	*/
-	/*esto esta mal!!!*/
-/*	if(signo){				//busca signo
-		exponente *= -1;
-	}*/
+	
+	///*esto esta mal!!!
+//	if(signo){				//busca signo
+	//	exponente *= -1;
+//	}
 	///////////////////
 
 	ullInt signo_exponente;
@@ -101,56 +158,16 @@ Real ::	Real(bestInt numero, int t_digitos,bool trunca){
 		printInt(valor);	
 		cout << "######################################################" << endl;		
 	}
-/*
+
 	cout << "######################################################" << endl;
 	printInt(signo_exponente);	
 	cout << "######################################################" << endl;		
 	signo_exponente |= valor;
 	cout << "######################################################" << endl;
 	printInt(signo_exponente);	
-	cout << "######################################################" << endl;			*/
+	cout << "######################################################" << endl;
 	copyDoubleToArray(signo_exponente);	//dsp si se hace sobrecarga del = esta linea puede volar
 }
+*/
 
-Real ::	~Real(){
-}
-
-/*no olvidar que todas estas operaciones pueden dar Nan u OverFlow! pensar como controlar.*/
-
-Real ::	Real operator+ (Real a){} //--> van a ser constantes o no? PENSAR
-Real ::	Real operator* (Real a){}
-Real ::	Real operator- (Real a){}
-//Real ::	Real operator/ (Real a, Real b){}
-//Real ::	Real operator= (Real a){}
-//Real ::	Real operator= (bestInt a){}
-Real ::	Real raizCuad(){}
-	
-	
-double Real :: convertir(){}
-
-void Real :: printReal(){
-    char * desmond = (char *) & _real;
-    int i;
-	cout << "real representation --> " << _original << ".0" << endl;;
-	printNotacion();
-	
-	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
-
-    for (i=sizeof(double)-1; i>=0; i--) {
-        //printf ("%02X ", desmond[i]);		si se quiere en Hex
-        printCharsetInBits(desmond[i], bits);
-        printf ("%s ", bits);
-    }
-    printf ("\n");
-    
-    free(bits);
-}
-
-void Real :: copyDoubleToArray(double value){
-	char* ad = (char*) &value;
-
-	for(int i=0;i<8;i++){
-		_real[i] = ad[i];
-	}
-}
 

@@ -1,6 +1,6 @@
 #include "printFuncs.h"
 
-void printInt(long long rocker){
+void printInt(ullInt rocker){
     char * desmond = (char *) & rocker;
     int i;
 	cout << "int representation --> " << rocker << endl;

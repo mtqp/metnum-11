@@ -5,9 +5,12 @@
 #include <cstdlib>
 #include <cstdio>
 
+#define ullInt unsigned long long
+#define llInt  long long
+
 using namespace std;
 
-void printInt(long long rocker);
+void printInt(ullInt rocker);
 void printDouble(double decker);
 void printCharsetInBits(char set, unsigned char* bits);
 void printNotacion();

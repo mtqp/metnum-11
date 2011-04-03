@@ -1,7 +1,8 @@
 #ifndef __REAL_H__
 #define	__REAL_H__
 
-#define bestInt unsigned long long
+#define ullInt unsigned long long
+#define llInt  long long
 
 #include <cstring>
 #include "printFuncs.h"
@@ -11,8 +12,8 @@ using namespace std;
 class Real {
 	public:
 		Real();
-		Real(bestInt valor);
-		Real(bestInt valor, int t_digitos,bool trunca);
+		Real(llInt value);
+		Real(llInt value, int t_digits,bool truncates);
 		~Real();
 		
 		Real operator+ (Real a); //--> van a ser constantes o no? PENSAR
@@ -20,18 +21,21 @@ class Real {
 		Real operator- (Real a);
 //		Real operator/ (Real a, Real b);
 //		Real operator= (Real a);
-//		Real operator= (bestInt a);
+//		Real operator= (ullInt a);
 		Real raizCuad();
 	
-		void copyDoubleToArray(double value);
 		void printReal();
 	
 	private:
-		double convertir();
-		bool _trunca;
-		char _tdigitos;
+		void copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa);
+		ullInt getSign();
+		ullInt getExp();
+		ullInt getMantissa();	
+		double convert();
+		bool _truncates;
+		char _tdigits;
 		char _real[8];
-		bestInt _original;
+		llInt _original;
 	
 };
 
