@@ -31,7 +31,8 @@ class Real {
 		void setMascara();
 		ullInt getSign();
 		ullInt getExp();
-		ullInt getMantissa();	
+		ullInt getMantissa();
+		ullInt getMascara();	
 		double convert() const;
 		bool _truncates;
 		char _tdigits;

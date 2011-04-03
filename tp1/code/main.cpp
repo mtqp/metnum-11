@@ -28,22 +28,26 @@ int main(int argc, char** argv){
 	*/
 	int nro = 1;
 	Real menosuno(-1,52,true);
-	Real uno(nro,52,true);
 	Real dos(2,3,true);
-	Real tres(3,3,true);
 	Real nueve(9,52,true);
-	
+	Real cuatro(4,52,true);
+	Real cinco(5,52,true);
+	Real uno(1,52,true);	
+	Real tres(3,52,true);
 //	nueve.squareRoot().printReal();
 //	menosuno.squareRoot().printReal();
 
 	Real res(0,0,true);
 	//menosuno.printReal();
 	//dos.printReal();
-	res = menosuno - dos; // =)
-	res = uno/dos;
+//	res = menosuno - dos; // =)
+	res = uno/nueve;
 //	res = res + tres;
-	//res.printReal();
+	res.printReal();
 	
+	Real bla(12341,52,true);
+	
+	cout << uno << endl << bla << endl;
 	cout << res << endl;
 	
 	/*xq tienen q estar hechos con el mismo constructor!!!!?????*/
