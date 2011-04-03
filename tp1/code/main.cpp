@@ -26,11 +26,18 @@ int main(int argc, char** argv){
 	/*
 		aca iria la ejecucion
 	*/
-	int nro = -123457885;
-	Real realTest(nro,52,true);
-	realTest.printReal();
+	int nro = 1;
+	Real uno(nro,52,true);
+	
+	Real dos(-1555,3,true);
+	
+	/*xq tienen q estar hechos con el mismo constructor!!!!?????*/
+	uno = dos;
+	uno.printReal();
+	
+/*	realTest.printReal();
 	cout << endl;
-	printDouble((double)nro);	
+	printDouble((double)nro);	*/
 
 	return 0;
 }
