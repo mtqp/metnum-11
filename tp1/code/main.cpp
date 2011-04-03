@@ -29,8 +29,6 @@ int main(int argc, char** argv){
 	int nro = 12345;
 	Real realTest(nro,52,true);
 	
-
-	cout << endl << endl << endl;
 	realTest.printReal();
 
 	cout << endl;
