@@ -20,7 +20,7 @@ void printInt(ullInt rocker){
 void printDouble(double decker){
     char * desmond = (char *) & decker;
     int i;
-	cout << "double representation --> " << decker << endl;
+	cout << "double representation (of type 'double' from C++)--> " << decker << endl;
 	printNotacion();
 	
 	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);

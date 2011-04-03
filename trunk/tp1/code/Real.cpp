@@ -87,7 +87,7 @@ Real Real :: operator- (const Real &a) const{
 	Real resultSub(this->_tdigits, this->_truncates);
 	resultSub.copyDoubleToArray(resSub);
 	
-	return resSub;
+	return resultSub;
 }
 
 Real Real :: operator/ (const Real &a) const{
@@ -184,8 +184,8 @@ ullInt Real :: getMantissa(){
 void Real :: printReal(){
     char * desmond = (char *) & _real;
     int i;
-	cout << "int representation --> " << _original << ".0" << endl;
-	cout << "double representation -->" << convert() << endl;
+	cout << "int representation (of array of class)   --> " << _original << ".0" << endl;
+	cout << "double representation (of array of class)--> " << convert() << endl;
 	printNotacion();
 	
 	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
@@ -217,19 +217,9 @@ void Real :: copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa){
 void Real :: copyDoubleToArray(double number){
 	char* real = (char*) &number;
 	
-	cout << "COPY DOUBLE TO ARRAY --> " << number << endl;
-	
-	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
-	
 	for(int i=0;i<sizeof(double);i++){
 		_real[i] = real[i];
-		
-         printCharsetInBits(real[i], bits);
-         printf ("%s ", bits);
 	}
-    printf ("\n");
-	free(bits);
-	
 }
 
 void Real :: setMascara(){
