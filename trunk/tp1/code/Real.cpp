@@ -55,9 +55,36 @@ Real Real :: operator+ (const Real &a) const{
 	return resultSum;
 }
 
-Real ::	Real operator* (Real a){}
-Real ::	Real operator- (Real a){}
+Real Real :: operator* (const Real &a) const{
+/*
+	Nuevamente no le estamos dando pelota al truncamiento y los tdigits
+*/
+
+	double thisValue = this->convert();
+	double aValue    = a.convert();
+	
+	double resMult	 = thisValue * aValue;
+	
+	Real resultMult(this->_tdigits, this->_truncates);
+	resultMult.copyDoubleToArray(resMult);
+	
+	return resultMult;
+}
+
+
+Real Real :: operator- (const Real &a) const{
+	double thisValue = this->convert();
+	double aValue	 = a.convert();
+	
+	double resSub	 = thisValue - aValue;
+	
+	Real resultSub(this->_tdigits, this->_truncates);
+	
+	return resSub;
+}
+
 //Real ::	Real operator/ (Real a, Real b){}
+
 Real& Real :: operator= (const Real &a){
 	if(this!=&a){
 		this->_truncates = a._truncates;
