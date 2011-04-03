@@ -1,5 +1,15 @@
 #include "Real.h"
 
+/*
+	No debemos controlar Nan ni Over/UnderFlow ya que las operaciones se realizan con doubles
+	y eso se maneja automaticamente
+*/
+
+/*	AVERIGUAR POR FAVOR!:
+	Porque el uso de los operadores funciona solo si el objeto se crea con el mismo
+	constructor??!!!!?????
+*/
+
 Real ::	Real(){
 	Real(0,52,true);
 }
@@ -38,9 +48,6 @@ Real ::	Real(llInt number, int t_digits,bool truncates){
 Real ::	~Real(){
 }
 
-/*no olvidar que todas estas operaciones pueden dar Nan u OverFlow! pensar como controlar.*/
-
-
 Real Real :: operator+ (const Real &a) const{
 /*
 	COMO HACEMOS LA SUMA, PRECOND MISMO TRUNCAMIENTO Y TDIGITS O LO SOLUCIONAMOS AL MENOR!?!?!?
@@ -61,7 +68,6 @@ Real Real :: operator* (const Real &a) const{
 /*
 	Nuevamente no le estamos dando pelota al truncamiento y los tdigits
 */
-
 	double thisValue = this->convert();
 	double aValue    = a.convert();
 	
@@ -78,7 +84,6 @@ Real Real :: operator- (const Real &a) const{
 /*
 	Nuevamente no le estamos dando pelota al truncamiento y los tdigits
 */
-//LA RESTA ANDA MAL!
 	double thisValue = this->convert();
 	double aValue	 = a.convert();
 	
@@ -170,7 +175,7 @@ ullInt Real :: getMantissa(){
 
 	if(shift>51){	//==>va a existir truncamiento del numero
 		shift	 = 63 - shift;
-		mantissa = mantissa >> shift; //chequear esta rama dsp
+		mantissa = mantissa >> shift; //CHEQUEAR QUE ESTA RAMA FUNCIONE CORRECTAMENTE Q NO LA PROBE
 	} 
 	else
 	{
@@ -178,26 +183,14 @@ ullInt Real :: getMantissa(){
 		mantissa = mantissa << shift;	
 	}
 	
+	//mantissa &= getMascara();
+	
 	return mantissa;
 }
 
-void Real :: printReal(){
-    char * desmond = (char *) & _real;
-    int i;
-	cout << "int representation (of array of class)   --> " << _original << ".0" << endl;
-	cout << "double representation (of array of class)--> " << convert() << endl;
-	printNotacion();
-	
-	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
-
-    for (i=sizeof(double)-1; i>=0; i--) {
-        //printf ("%02X ", desmond[i]);		si se quiere en Hex
-        printCharsetInBits(desmond[i], bits);
-        printf ("%s ", bits);
-    }
-    printf ("\n");
-    
-    free(bits);
+ullInt Real :: getMascara(){
+	ullInt mask = *(ullInt*) &_mascaraTdigits;
+	return mask;
 }
 
 void Real :: copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa){
@@ -236,6 +229,28 @@ void Real :: setMascara(){
 	}
 }
 
+void Real :: printReal(){
+    char * desmond = (char *) & _real;
+    int i;
+	cout << "int representation (of array of class)   --> " << _original << ".0" << endl;
+	cout << "double representation (of array of class)--> " << convert() << endl;
+	printNotacion();
+	
+	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
+
+    for (i=sizeof(double)-1; i>=0; i--) {
+        //printf ("%02X ", desmond[i]);		si se quiere en Hex
+        printCharsetInBits(desmond[i], bits);
+        printf ("%s ", bits);
+    }
+    printf ("\n");
+    
+    free(bits);
+}
+
+//fijarse si no se necesita ver cierta precisión del numero o demás
+//pensar que se esta convirtiendo a double y se imprime, fijarse si se quiere
+//realizar la conversion a manopla!
 ostream &operator<<(ostream &stream, Real real)
 {
   stream << real.convert();
