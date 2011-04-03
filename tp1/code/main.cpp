@@ -34,7 +34,7 @@ int main(int argc, char** argv){
 	/*
 		aca iria la ejecucion
 	*/
-	int nro = 69;
+	int nro = -69;
 	Real realTest(nro,52,true);
 	
 //	realTest.printReal();
