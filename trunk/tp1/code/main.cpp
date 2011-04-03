@@ -37,12 +37,14 @@ int main(int argc, char** argv){
 //	menosuno.squareRoot().printReal();
 
 	Real res(0,0,true);
-	menosuno.printReal();
-	dos.printReal();
+	//menosuno.printReal();
+	//dos.printReal();
 	res = menosuno - dos; // =)
-//	res = uno/dos;
+	res = uno/dos;
 //	res = res + tres;
-	res.printReal();
+	//res.printReal();
+	
+	cout << res << endl;
 	
 	/*xq tienen q estar hechos con el mismo constructor!!!!?????*/
 /*	uno.printReal();

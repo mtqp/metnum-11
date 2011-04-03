@@ -236,4 +236,10 @@ void Real :: setMascara(){
 	}
 }
 
+ostream &operator<<(ostream &stream, Real real)
+{
+  stream << real.convert();
+  return stream; 
+}
+
 
