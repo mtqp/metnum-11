@@ -1,14 +1,7 @@
 #ifndef _PRINTFUNCS_H_
 #define _PRINTFUNCS_H_
 
-#include <iostream>
-#include <cstdlib>
-#include <cstdio>
-
-#define ullInt unsigned long long
-#define llInt  long long
-
-using namespace std;
+#include "includes.h"
 
 void printInt(ullInt rocker);
 void printDouble(double decker);

@@ -1,10 +1,7 @@
 #ifndef __REAL_H__
 #define	__REAL_H__
 
-#define ullInt unsigned long long
-#define llInt  long long
-
-#include <cstring>
+#include "includes.h"
 #include "printFuncs.h"
 #include "intFuncs.h"
 

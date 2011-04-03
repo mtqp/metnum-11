@@ -1,15 +1,7 @@
-#include <cmath>
-#include <iostream>
-#include <cstdlib>
-#include <cstdio>
-
+#include "includes.h"
 #include "printFuncs.h"
 #include "intFuncs.h"
 #include "Real.h"
-
-using namespace std;
-
-#define it_default 10
 
 int main(int argc, char** argv){
 	char t_digitos;	//se usa para el constructor del tipo de datos nuestro
@@ -34,7 +26,7 @@ int main(int argc, char** argv){
 	/*
 		aca iria la ejecucion
 	*/
-	int nro = -69;
+	int nro = 596;
 	Real realTest(nro,52,true);
 	
 //	realTest.printReal();

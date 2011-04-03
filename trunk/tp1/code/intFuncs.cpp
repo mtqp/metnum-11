@@ -19,21 +19,21 @@ ullInt fact(ullInt x){
 	}
 }
 
+/*hay que hacerle el complemento a dos*/
 ullInt cleanSign(llInt number){
-	if(number<0){
-		number = number << 1;
-		number = number >> 1;
-	}
+	if(number<0)
+		number *= -1;
 
 	return (ullInt) number;	
 }
 
-int placesToShift(ullInt number){
+int placesToShift(ullInt number,int until){
 	int places = 0;
 	
-	while(number>=1){
+	while(number>=until){
 		number = number >> 1;
 		places++;
+		cout << number << endl;
 	}
 	
 	return places;

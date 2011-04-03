@@ -25,15 +25,24 @@ Real ::	Real(llInt number, int t_digits,bool truncates){
 	_tdigits = t_digits;
 	_original = number;
 
+	memset((void *) &_real, 0, 8);
+	if(number==0){
+		return;
+	}
+
 	ullInt sign;
 	ullInt exp;
 	ullInt mantissa;
 
 	sign 	 = getSign();
 	exp  	 = getExp();
-	mantissa = getMantissa();
+	mantissa = getMantissa();	//--> ponele que ande bien
 	
-	printInt(sign);
+	cout << "signo" << endl; printInt(sign);
+	cout << "original sin signo" << endl; printInt(cleanSign(_original));
+	cout << "mantisa" << endl; printInt(mantissa);	
+	cout << "exponente" << endl; printInt(exp);
+	
 	
 	copyDoubleToArray(sign,exp,mantissa);
 	
@@ -54,24 +63,36 @@ ullInt Real :: getSign(){
 }
 
 ullInt Real :: getExp(){
-	/*recordar que tiene un offset de 1023?*/
+	/*cargar el exponente con el desvio de 1023, es decir... 0000 = -1023*/
+	ullInt number = cleanSign(_original);
+	ullInt exp 	  = 0;
+	
+	exp = (ullInt) placesToShift(number,0); /*se le pasa el cero, suponiendo notacion 0.xxxx * e^(+- algo)*/
+	exp += 1023ull;							/*lo normaliza al desvio 1023*/
+
+	exp = exp << 52;
+	
+	return exp;
 }
 
+/*considerar que NO deberia verse el 1er digito, ya que se considera UNO siempre... xq aparece?
+	en la implementacion de c++?
+*/
 ullInt Real :: getMantissa(){
 	ullInt mantissa;
 	int shift;
 
 	mantissa = cleanSign(_original);
-	shift    = placesToShift(mantissa);
+	shift    = placesToShift(mantissa,1);
 
 	/*fijarse que el number este bien del shift! o es 52?*/
 	if(shift>51){	//==>va a existir truncamiento del numero
 		shift	 = 63 - shift;
-		mantissa = mantissa >> shift;
+		mantissa = mantissa >> shift; //chequear esta rama dsp
 	} 
 	else
 	{
-		shift 	 = 51-shift;
+		shift 	 = 52-shift+1;
 		mantissa = mantissa << shift;	
 	}
 	
