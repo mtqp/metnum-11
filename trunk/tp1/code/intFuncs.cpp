@@ -38,3 +38,9 @@ int placesToShift(ullInt number,int until){
 	
 	return places;
 }
+
+ullInt cleanFirstNotZero(ullInt number, int shift){
+	number = number << 64-shift+1;
+	number = number >> 64-shift+1;
+	return number;
+}
