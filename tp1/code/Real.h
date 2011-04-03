@@ -10,8 +10,8 @@ using namespace std;
 
 class Real {
 	public:
-//		Real();
-//		Real(bestInt valor);
+		Real();
+		Real(bestInt valor);
 		Real(bestInt valor, int t_digitos,bool trunca);
 		~Real();
 		

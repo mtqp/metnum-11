@@ -16,14 +16,26 @@ char* _real;
 
 #define ullInt unsigned long long
 
-/*Real ::	Real(){
+Real ::	Real(){
 	Real(0,52,true);
 }
 
 Real ::	Real(bestInt valor){
 	Real(valor,52,true);
 }//se va o no se va???
+
+
+/*For double precision, the exponent field is 11 bits, and has a bias of 1023.
+  nos falta agregar eso
 */
+
+/*
+	Que debe hacer:
+		- conseguir el signo
+		- saber en QUE posicion esta el bit mas significativo en uno (ese no se cuenta para pegar en el ad)
+		- cargar el exponente con el desvio de 1023, es decir... 0000 = -1023
+*/
+
 Real ::	Real(bestInt numero, int t_digitos,bool trunca){
 	_trunca = trunca;
 	_tdigitos = t_digitos;
