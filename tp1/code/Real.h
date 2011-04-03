@@ -20,7 +20,7 @@ class Real {
 //		Real operator/ (Real a, Real b);
 //		Real operator= (Real a);
 //		Real operator= (ullInt a);
-		const Real operator= (const Real &a)const;
+		Real& operator= (const Real &a);
 		Real raizCuad();
 	
 		void printReal();
