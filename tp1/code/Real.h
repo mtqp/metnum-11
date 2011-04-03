@@ -15,7 +15,7 @@ class Real {
 		Real(int t_digits, bool truncates);
 		~Real();
 		
-		Real operator+ (const Real &a) const; //--> van a ser constantes o no? PENSAR
+		Real operator+ (const Real &a) const;
 		Real operator* (const Real &a) const;
 		Real operator- (const Real &a) const;
 		Real operator/ (const Real &a) const;

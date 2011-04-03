@@ -217,9 +217,19 @@ void Real :: copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa){
 void Real :: copyDoubleToArray(double number){
 	char* real = (char*) &number;
 	
+	cout << "COPY DOUBLE TO ARRAY --> " << number << endl;
+	
+	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
+	
 	for(int i=0;i<sizeof(double);i++){
 		_real[i] = real[i];
+		
+         printCharsetInBits(real[i], bits);
+         printf ("%s ", bits);
 	}
+    printf ("\n");
+	free(bits);
+	
 }
 
 void Real :: setMascara(){
