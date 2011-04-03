@@ -32,6 +32,22 @@ Real ::	Real(llInt number, int t_digits,bool truncates){
 Real ::	~Real(){
 }
 
+/*no olvidar que todas estas operaciones pueden dar Nan u OverFlow! pensar como controlar.*/
+
+Real ::	Real operator+ (Real a){} //--> van a ser constantes o no? PENSAR
+Real ::	Real operator* (Real a){}
+Real ::	Real operator- (Real a){}
+//Real ::	Real operator/ (Real a, Real b){}
+//Real ::	Real operator= (Real a){}
+//Real ::	Real operator= (ullInt a){}
+Real ::	Real raizCuad(){}
+	
+	
+double Real :: convert(){
+	double realConverted = *(double*) _real;
+	return realConverted;
+}
+
 ullInt Real :: getSign(){
 	ullInt signedNumber = 0;
 	
@@ -78,21 +94,6 @@ ullInt Real :: getMantissa(){
 	
 	return mantissa;
 }
-
-
-
-/*no olvidar que todas estas operaciones pueden dar Nan u OverFlow! pensar como controlar.*/
-
-Real ::	Real operator+ (Real a){} //--> van a ser constantes o no? PENSAR
-Real ::	Real operator* (Real a){}
-Real ::	Real operator- (Real a){}
-//Real ::	Real operator/ (Real a, Real b){}
-//Real ::	Real operator= (Real a){}
-//Real ::	Real operator= (ullInt a){}
-Real ::	Real raizCuad(){}
-	
-	
-double Real :: convert(){}
 
 void Real :: printReal(){
     char * desmond = (char *) & _real;

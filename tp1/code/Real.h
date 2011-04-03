@@ -23,7 +23,7 @@ class Real {
 		Real raizCuad();
 	
 		void printReal();
-	
+
 	private:
 		void copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa);
 		ullInt getSign();
