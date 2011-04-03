@@ -1,8 +1,10 @@
 #ifndef _INTFUNCS_H_
 #define _INTFUNCS_H_
 
-#define bestInt unsigned long long
+#define ullInt unsigned long long
+#define llInt  long long
 
-bestInt fact(bestInt x);
+ullInt fact(ullInt x);
+ullInt cleanSign(llInt number);
 
 #endif
