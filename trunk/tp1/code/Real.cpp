@@ -4,21 +4,9 @@ Real ::	Real(){
 	Real(0,52,true);
 }
 
-Real ::	Real(llInt valor){ 	//se va o no se va???
+Real ::	Real(llInt valor){
 	Real(valor,52,true);
 }
-
-
-/*For double precision, the exponent field is 11 bits, and has a bias of 1023.
-  nos falta agregar eso
-*/
-
-/*
-	Que debe hacer:
-		- conseguir el signo
-		- saber en QUE posicion esta el bit mas significativo en uno (ese no se cuenta para pegar en el ad)
-		- cargar el exponente con el desvio de 1023, es decir... 0000 = -1023
-*/
 
 Real ::	Real(llInt number, int t_digits,bool truncates){
 	_truncates = truncates;
@@ -43,9 +31,7 @@ Real ::	Real(llInt number, int t_digits,bool truncates){
 	cout << "mantisa" << endl; printInt(mantissa);	
 	cout << "exponente" << endl; printInt(exp);
 	
-	
 	copyDoubleToArray(sign,exp,mantissa);
-	
 }
 
 Real ::	~Real(){
@@ -63,11 +49,11 @@ ullInt Real :: getSign(){
 }
 
 ullInt Real :: getExp(){
-	/*cargar el exponente con el desvio de 1023, es decir... 0000 = -1023*/
 	ullInt number = cleanSign(_original);
 	ullInt exp 	  = 0;
 	
 	exp = (ullInt) placesToShift(number,0); /*se le pasa el cero, suponiendo notacion 0.xxxx * e^(+- algo)*/
+//	cout << "valor exponente == " << exp << endl;
 	exp += 1023ull;							/*lo normaliza al desvio 1023*/
 
 	exp = exp << 52;
@@ -78,6 +64,7 @@ ullInt Real :: getExp(){
 /*considerar que NO deberia verse el 1er digito, ya que se considera UNO siempre... xq aparece?
 	en la implementacion de c++?
 */
+/*tener en cuenta que la creacion de la mantissa no esta chequeando si TRUNCA y los TDIGITS!!!*/
 ullInt Real :: getMantissa(){
 	ullInt mantissa;
 	int shift;
@@ -133,85 +120,16 @@ void Real :: printReal(){
 }
 
 void Real :: copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa){
-	/*implementar*/
+	ullInt real = 0;
+
+	real |= sign;
+	real |= exp;
+	real |= mantissa;
+
+	char* r_array = (char*) &real;
+
+	for(int i=0;i<sizeof(ullInt);i++){
+		_real[i] = r_array[i];
+	}
 }
-
-
-/*Real ::	Real(llInt numero, int t_digitos,bool trunca){
-	_trunca = trunca;
-	_tdigitos = t_digitos;
-
-	_original = numero;
-
-	long long  	valor = (long long) numero; 
-	bool 		signo = numero<0;
-
-	memset((void *) &_real, 0, 8);
-	if(valor == 0){
-		return;
-	}
-
-	if(signo){
-		valor *= -1;
-	}
-	
-	ullInt valor_exp = (ullInt) valor;
-	long long exponente = 0;	//la posicion del 1 MAS significativo (exceptuando el signo)	
-	
-	while(valor_exp != 0){		//busca cual es el exponente al que hay q elevar
-		valor_exp = valor_exp>>1;
-		exponente++;
-		cout<< valor_exp << endl;
-	}	
-
-	int shift_mantisa = 52-exponente+1;
-	//shift_mantisa = 52; //todavia no entiendo xq, ahora hardcore:
-
-	cout << shift_mantisa << " mantisa shifter" << endl;
-
-	/*cout << "######################################################" << endl;
-	printInt(exponente);	
-	cout << "######################################################" << endl;
-	cout << "exponent  " << exponente << endl;
-	
-	
-	exponente = exponente<<51;				//posicionandose para armar el real!
-	/*cout << "exponent shifteed  " << exponente << endl;
-	cout << "######################################################" << endl;
-	printInt(exponente);	
-	cout << "######################################################" << endl;		
-	
-	///*esto esta mal!!!
-//	if(signo){				//busca signo
-	//	exponente *= -1;
-//	}
-	///////////////////
-
-	ullInt signo_exponente;
-	signo_exponente = exponente; //tenemos los 1ros doce bits armados en exponente!
-
-	if(shift_mantisa<0){
-		valor = valor >> ((-1)*shift_mantisa);
-	}
-	else {
-		cout << "######################################################" << endl;
-		printInt(valor);	
-		cout << "######################################################" << endl;		
-		valor = valor << shift_mantisa;
-		cout << "######################################################" << endl;
-		printInt(valor);	
-		cout << "######################################################" << endl;		
-	}
-
-	cout << "######################################################" << endl;
-	printInt(signo_exponente);	
-	cout << "######################################################" << endl;		
-	signo_exponente |= valor;
-	cout << "######################################################" << endl;
-	printInt(signo_exponente);	
-	cout << "######################################################" << endl;
-	copyDoubleToArray(signo_exponente);	//dsp si se hace sobrecarga del = esta linea puede volar
-}
-*/
-
 
