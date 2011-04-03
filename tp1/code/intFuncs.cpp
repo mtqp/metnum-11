@@ -30,10 +30,10 @@ ullInt cleanSign(llInt number){
 int placesToShift(ullInt number,int until){
 	int places = 0;
 	
-	while(number>=until){
+	while(number!=until){
 		number = number >> 1;
 		places++;
-		cout << number << endl;
+		cout << number << "-"  << until << endl;
 	}
 	
 	return places;
