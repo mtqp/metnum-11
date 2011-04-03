@@ -12,9 +12,10 @@ class Real {
 		Real();
 		Real(llInt value);
 		Real(llInt value, int t_digits,bool truncates);
+		Real(int t_digits, bool truncates);
 		~Real();
 		
-		const Real operator+ (const Real &a) const; //--> van a ser constantes o no? PENSAR
+		Real operator+ (const Real &a) const; //--> van a ser constantes o no? PENSAR
 		Real operator* (Real a);
 		Real operator- (Real a);
 //		Real operator/ (Real a, Real b);
@@ -31,7 +32,7 @@ class Real {
 		ullInt getSign();
 		ullInt getExp();
 		ullInt getMantissa();	
-		double convert();
+		double convert() const;
 		bool _truncates;
 		char _tdigits;
 		char _real[8];

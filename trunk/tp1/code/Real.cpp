@@ -8,6 +8,10 @@ Real ::	Real(llInt valor){
 	Real(valor,52,true);
 }
 
+Real ::	Real(int t_digits, bool truncates){
+	Real(0,t_digits,truncates);
+}
+
 Real ::	Real(llInt number, int t_digits,bool truncates){
 	_truncates = truncates;
 	_tdigits = t_digits;
@@ -35,18 +39,20 @@ Real ::	~Real(){
 /*no olvidar que todas estas operaciones pueden dar Nan u OverFlow! pensar como controlar.*/
 
 
-const Real Real :: operator+ (const Real &a) const{
+Real Real :: operator+ (const Real &a) const{
 /*
-  // Add this instance's value to other, and return a new instance
-  // with the result.
-  const MyClass MyClass::operator+(const MyClass &other) const {
-    MyClass result = *this;     // Make a copy of myself.  Same as MyClass result(*this);
-    result += other;            // Use += to add other to the copy.
-    return result;              // All done!
-  }
-
+	COMO HACEMOS LA SUMA, PRECOND MISMO TRUNCAMIENTO Y TDIGITS O LO SOLUCIONAMOS AL MENOR!?!?!?
 */
-
+	double thisValue = this->convert();
+	double aValue	 = a.convert();
+	
+	double resSum = thisValue + aValue;
+	
+	//harcoded al this
+	Real resultSum(this->_tdigits,this->_truncates);
+	resultSum.copyDoubleToArray(resSum);
+	
+	return resultSum;
 }
 
 Real ::	Real operator* (Real a){}
@@ -68,7 +74,7 @@ Real& Real :: operator= (const Real &a){
 Real ::	Real raizCuad(){}
 	
 	
-double Real :: convert(){
+double Real :: convert() const{
 	double realConverted = *(double*) _real;
 	return realConverted;
 }
@@ -123,7 +129,8 @@ ullInt Real :: getMantissa(){
 void Real :: printReal(){
     char * desmond = (char *) & _real;
     int i;
-	cout << "real representation --> " << _original << ".0" << endl;;
+	cout << "int representation --> " << _original << ".0" << endl;
+	cout << "double representation -->" << convert() << endl;
 	printNotacion();
 	
 	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
