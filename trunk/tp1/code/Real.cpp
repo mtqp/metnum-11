@@ -27,7 +27,7 @@ Real ::	Real(llInt number, int t_digits,bool truncates){
 	_tdigits = t_digits;
 	_original = number;
 
-	//setMascara();	//-->chequear que este bien.
+	setMascara();	//-->chequear que este bien.
 
 	memset((void *) &_real, 0, 8);
 	if(number==0){
@@ -190,7 +190,7 @@ ullInt Real :: getMantissa(){
 
 ullInt Real :: getMascara(){
 	ullInt mask = *(ullInt*) &_mascaraTdigits;
-	return mask;
+	return mask>>1;
 }
 
 void Real :: copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa){
@@ -217,16 +217,28 @@ void Real :: copyDoubleToArray(double number){
 
 void Real :: setMascara(){
 	memset((void*) &_mascaraTdigits,255,8);
+//	cout << "original" << endl;
+//	printInt(getMascara());
 	
-	ullInt mascara = (ullInt) _mascaraTdigits;
+	llInt mascara = *(llInt*) &_mascaraTdigits;
 	
-	mascara = mascara >> 52-_tdigits;
-	mascara = mascara << _tdigits;
+	int shiftDer = 52-_tdigits;
+	int shiftIzq = _tdigits;
 	
+	mascara = mascara >> shiftDer;
+//	cout << "shift der t bits = " << shiftDer << endl;
+///	printInt((ullInt) mascara);
+
+	mascara = mascara << shiftIzq;
+//	cout << "shift izq t bits = " << shiftIzq << endl;
+//	printInt((ullInt) mascara);
+		
 	char* pmask = (char*) &mascara;
 	for(int i=0;i<sizeof(double);i++){
 		_mascaraTdigits[i] = pmask[i];
 	}
+//	cout << "in mem" << endl;
+//	printInt(getMascara());
 }
 
 void Real :: printReal(){
