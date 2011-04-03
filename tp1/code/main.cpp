@@ -27,17 +27,21 @@ int main(int argc, char** argv){
 		aca iria la ejecucion
 	*/
 	int nro = 1;
+	Real menosuno(-1,52,true);
+	
 	Real uno(nro,52,true);
 	
 	Real dos(2,3,true);
 	
+	Real tres(3,3,true);
 	/*xq tienen q estar hechos con el mismo constructor!!!!?????*/
-	uno.printReal();
-	dos.printReal();
-	
+/*	uno.printReal();
+	dos.printReal();*/
+	menosuno.printReal();
+	tres.printReal();
 	Real res(0,0,true);
 	
-	res = uno + dos;
+	res = tres * menosuno;
 	
 	res.printReal();
 /*	realTest.printReal();

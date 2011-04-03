@@ -17,7 +17,7 @@ Real ::	Real(llInt number, int t_digits,bool truncates){
 	_tdigits = t_digits;
 	_original = number;
 
-	setMascara();
+	//setMascara();	//-->chequear que este bien.
 
 	memset((void *) &_real, 0, 8);
 	if(number==0){
@@ -75,12 +75,19 @@ Real Real :: operator* (const Real &a) const{
 
 
 Real Real :: operator- (const Real &a) const{
+/*
+	Nuevamente no le estamos dando pelota al truncamiento y los tdigits
+*/
+//LA RESTA ANDA MAL!
 	double thisValue = this->convert();
 	double aValue	 = a.convert();
 	
 	double resSub	 = thisValue - aValue;
+
+	cout << "RES SUB IS = " << resSub << endl;
 	
 	Real resultSub(this->_tdigits, this->_truncates);
+	resultSub.copyDoubleToArray(resSub);
 	
 	return resSub;
 }
