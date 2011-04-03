@@ -84,15 +84,26 @@ Real Real :: operator- (const Real &a) const{
 	
 	double resSub	 = thisValue - aValue;
 
-	cout << "RES SUB IS = " << resSub << endl;
-	
 	Real resultSub(this->_tdigits, this->_truncates);
 	resultSub.copyDoubleToArray(resSub);
 	
 	return resSub;
 }
 
-//Real ::	Real operator/ (Real a, Real b){}
+Real Real :: operator/ (const Real &a) const{
+/*
+	Nuevamente no le estamos dando pelota al truncamiento y los tdigits
+*/
+	double thisValue = this->convert();
+	double aValue 	 = a.convert();
+	
+	double resDiv	 = thisValue / aValue;
+
+	Real resultDiv(this->_tdigits, this->_truncates);
+	resultDiv.copyDoubleToArray(resDiv);
+	
+	return resultDiv;	
+}
 
 Real& Real :: operator= (const Real &a){
 	if(this!=&a){
@@ -107,9 +118,7 @@ Real& Real :: operator= (const Real &a){
 	return *this;
 }
 
-//Real ::	Real operator= (ullInt a){}
-
-Real Real :: raizCuad(){
+Real Real :: squareRoot(){
 	double real = this->convert();
 
 	real = sqrt(real);
