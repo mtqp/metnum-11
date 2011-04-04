@@ -27,7 +27,7 @@ Real ::	Real(llInt number, int t_digits,bool truncates){
 	_tdigits = t_digits;
 	_original = number;
 
-	setMascara();	//-->chequear que este bien.
+	setMascara();
 
 	memset((void *) &_real, 0, 8);
 	if(number==0){
