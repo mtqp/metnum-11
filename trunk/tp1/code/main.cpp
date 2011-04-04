@@ -38,11 +38,10 @@ int main(int argc, char** argv){
 	*/
 
 	truncate = true;
-	
+/*	
 	for(int i=0;i<cantIteraciones;i++){
 		Real r(i,t_digitos,truncate);
 		Real r2(i+1,t_digitos,truncate);
-		Real res(0,t_digitos,truncate);
 		Real mUno(-1,t_digitos,truncate);
 		Real dos(2,t_digitos,truncate);
 		res = mUno*(mUno*r+dos*r2);
@@ -50,8 +49,17 @@ int main(int argc, char** argv){
 //		res = res + r2;
 		cout << i << " --> " << res << endl;
 	}
+*/
 
+	Real uno(1,t_digitos,truncate);	
+	Real tres(3,t_digitos,truncate);
+	Real res(0,t_digitos,truncate);
 
+	res = uno / tres;
+	
+	uno.printReal();
+	tres.printReal();
+	res.printReal();
 
 /*
 	PRUEBAS VIEJAS

@@ -83,7 +83,7 @@ Real Real :: operator* (const Real &a) const{
 Real Real :: operator- (const Real &a) const{
 /*
 	Nuevamente no le estamos dando pelota al truncamiento y los tdigits
-*/
+*/	
 	double thisValue = this->convert();
 	double aValue	 = a.convert();
 	
@@ -95,9 +95,10 @@ Real Real :: operator- (const Real &a) const{
 	return resultSub;
 }
 
-Real Real :: operator/ (const Real &a) const{
+Real Real :: operator/ (const Real &a) {//const{
 /*
 	Nuevamente no le estamos dando pelota al truncamiento y los tdigits
+	(CUAL DE LOS DOS TRUNCAMIENOS TOMO?)
 */
 	double thisValue = this->convert();
 	double aValue 	 = a.convert();
@@ -105,6 +106,13 @@ Real Real :: operator/ (const Real &a) const{
 	double resDiv	 = thisValue / aValue;
 
 	Real resultDiv(this->_tdigits, this->_truncates);
+
+/*	ullInt mask = charToInt(&_mascaraTdigits);
+	ullInt res  = doubleToInt(resDiv);
+	
+	res &= mask;*/	/*perdida de presicion por t_digits*/
+	
+	//resultDiv.copyDoubleToArray(intToDouble(res));
 	resultDiv.copyDoubleToArray(resDiv);
 	
 	return resultDiv;	
@@ -183,12 +191,12 @@ ullInt Real :: getMantissa(){
 		mantissa = mantissa << shift;	
 	}
 	
-	//mantissa &= getMascara();
+	mantissa &= getMascara();
 	
 	return mantissa;
 }
 
-ullInt Real :: getMascara(){
+ullInt Real :: getMascara() const{
 	ullInt mask = *(ullInt*) &_mascaraTdigits;
 	return mask>>1;
 }

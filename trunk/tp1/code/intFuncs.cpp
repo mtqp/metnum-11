@@ -39,3 +39,11 @@ ullInt cleanFirstNotZero(ullInt number, int shift){
 	number = number >> 64-shift+1;
 	return number;
 }
+
+ullInt doubleToInt(double value){
+	return *(ullInt*) &value;
+}
+
+ullInt charToInt(char* value){
+	return *(ullInt*) value;
+}
