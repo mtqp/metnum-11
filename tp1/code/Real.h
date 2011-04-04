@@ -4,6 +4,7 @@
 #include "includes.h"
 #include "printFuncs.h"
 #include "intFuncs.h"
+#include "decimalFuncs.h"
 
 using namespace std;
 
@@ -18,7 +19,7 @@ class Real {
 		Real operator+ (const Real &a) const;
 		Real operator* (const Real &a) const;
 		Real operator- (const Real &a) const;
-		Real operator/ (const Real &a) const;
+		Real operator/ (const Real &a);// const;
 		Real& operator= (const Real &a);
 		Real squareRoot();
 	
@@ -32,7 +33,7 @@ class Real {
 		ullInt getSign();
 		ullInt getExp();
 		ullInt getMantissa();
-		ullInt getMascara();	
+		ullInt getMascara() const;	
 		double convert() const;
 		bool _truncates;
 		char _tdigits;
