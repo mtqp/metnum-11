@@ -1,0 +1,94 @@
+\documentclass[12pt,titlepage]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{graphicx} % para insertar imagenes
+\usepackage{verbatim}
+
+\newcommand{\func}[2]{\texttt{#1}(#2)}
+\newcommand{\funcFull}[2]{\texttt{#1}=#2}
+\newcommand{\tab}{\hspace*{2em}}
+\newcommand{\FOR}{\textbf{for }}
+\newcommand{\TO}{\textbf{ to }}
+\newcommand{\IF}{\textbf{if }}
+\newcommand{\WHILE}{\textbf{while }}
+\newcommand{\THEN}{\textbf{then }}
+\newcommand{\ELSE}{\textbf{else }}
+\newcommand{\RET}{\textbf{return }}
+\newcommand{\MOD}{\textbf{ \% }}
+\newcommand{\OR}{\textbf{ or }}
+\newcommand{\AND}{\textbf{ and }}
+\newcommand{\tOde}[1]{\tab \small{O($#1$)}}
+\newcommand{\Ode}[1]{O($#1$)}
+\newcommand{\Thetade}[1]{{\small$\Theta$($#1$)}}
+\newcommand{\Omegade}[1]{{\small$\Omega$($#1$)}}
+\newcommand{\VSP}{\vspace*{3em}}
+\newcommand{\pa}{\vspace{5mm}}
+\newcommand{\e}[2]{\varepsilon _{#1}({#2})}
+\newcommand{\er}[2]{\varepsilon _{({#1})}^{({#2})}}
+\newcommand{\ev}[1]{\varepsilon _{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newenvironment{pseudo}{\begin{tabular}{p{11cm}l}}{\end{tabular}\VSP}
+
+\newcommand{\gra}[1]{{\noindent\centering\includegraphics[width=14cm]{#1}}\\}
+
+\begin{document}
+	\begin{section}{Serie de Gregory}
+
+		\large
+		
+		Definamos primero el error de un término de la serie de Gregory.\\
+
+		Dado $n \in \N$, sea $\funcFull{f(x,y)} {\frac{x}{y}}$, donde $x=(-1)^n$ e $y=2n+1$.\\
+		
+		\underline{Analicemos el error de $\func{f}{x,y}$:}\\
+		
+		$\funcFull{$\e{f}{x,y,:}$}{\frac{\frac{x}{y}\ev{x}}{f} + \frac{\frac{-xy}{y^2}\ev{y}}{f} + \er{:}{x,y}} = 
+		\frac{\frac{x}{y}\ev{x}}{\frac{x}{y}} + \frac{\frac{-x}{y}\ev{y}}{\frac{x}{y}} + \er{:}{x,y} =$\\
+		
+		 $= \ev{x} - \ev{y} + \er{:}{x,y}$\\
+		
+		\begin{itemize}
+		\item \underline{Analicemos el error de $x$:}\\
+		
+		$\funcFull{$\ev{x}$}{\frac{n(-1)^{n-1}n}{(-1)^n}\ev{n} + \er{POT}{1,n}} = -n^2\ev{n} + \er{POT}{1,n}$\\
+		
+		\item \underline{Analicemos el error de $y$:}\\
+		
+		Definamos $x' = 2n$ e $y'=1$.\\
+		
+		$\funcFull{f'}{x'+y'}$\\
+		
+		$\e{f'}{x',y',+} = \frac{x'}{x'+y'}\ev{x'} + \frac{y'}{x'+y'}\ev{y'} + \er{+}{x',y'}$\\
+		
+		$\ev{x'} = \e{2n}{2,n,*} = \frac{2n}{2n}\ev{2} + \frac{2n}{2n}\ev{n} + \er{*}{2,n} = \ev{2} + \ev{n} + \er{*}{2,n}$
+		\newpage
+		
+		Podemos reemplazar en $f'$ y nos queda.\\
+		
+		$\e{f'}{2n,1,+} = \frac{2n}{2n+1}\ev{2n} + \frac{1}{2n+1}\ev{1} + \er{+}{2n,1} =$\\
+		
+		$= \frac{2n}{2n+1}(\ev{2} + \ev{n} + \er{*}{2,n}) + \frac{1}{2n+1}\ev{1} + \er{+}{2n,1}$\\
+		\end{itemize}
+		
+		Reemplazando en la funcion $f$ tenemos que.\\
+		
+		$\e{f}{x,y,:} = \ev{\frac{x}{y}} = \ev{x} - \ev{y} + \ev{:} =$\\
+		
+		$= -n^2\ev{n} + \er{POT}{1,n} - (\frac{2n}{2n+1}(\ev{2} + \ev{n} + \er{*}{2,n}) + \frac{1}{2n+1}\ev{1}) + \er{+}{2n,1} + \er{:}{x,y}$\\
+		
+		Teniendo esta información, queremos realizar el análisis teórico sobre la serie de Gregory para los primeros tres términos. Para poder realizarlo, llamamos $a$ al primer término de la serie,
+		$b$ al segundo y $c$ al tercero (llamamos $k=a+b$).\\
+		
+		Sea $\funcFull{g(k,c)}{k+c}$\\
+		
+		$\e{g}{k,c,+} = \frac{k}{k+c}\ev{k} + \frac{c}{k+c}\ev{c} + \er{+}{k,c}$\\
+		
+		$\e{g}{a+b,c,+} = \frac{a+b}{a+b+c}(\frac{a}{a+b}\ev{a} + \frac{b}{a+b}\ev{b} + \er{+}{a,b}) + \frac{c}{a+b+c}\ev{c} + \er{+}{a+b,c} =$\\
+		 
+		$= \frac{a\ev{a} + b\ev{b} + c\ev{c} + (a+b)\er{+}{a,b}}{a+b+c} + \er{+}{a+b,c}$
+	\end{section}
+\end{document}
