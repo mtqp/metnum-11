@@ -1,0 +1,57 @@
+\begin{section}{Serie de Ramanujan}
+	\large
+	
+	Definimos primero el error de un término de la serie de Ramanujan.\\
+
+	Dado $n \in \N$, sea $\funcFull{f(x,y)} {\frac{x}{y}}$, donde $x=(4n)!(1103+26390n)$ e $y=(n!)^4396^{4n}$.\\
+	
+	El error de $\func{f}{x,y}$ es el error de un término de la serie de Gregory ya que $x$ e $y$ son de tipo entero (exactos).\\
+	
+	\underline{Analicemos el error de $\func{f}{x,y}$:}\\
+	
+	$\funcFull{$\e{f}{x,y,:}$}{\frac{\frac{x}{y}\ev{x}}{f} + \frac{\frac{-xy}{y^2}\ev{y}}{f} + \er{:}{x,y}} = 
+	\frac{\frac{x}{y}\ev{x}}{\frac{x}{y}} + \frac{\frac{-x}{y}\ev{y}}{\frac{x}{y}} + \er{:}{x,y} =$\\
+	
+	$\ev{x} - \ev{y} + \er{:}{x,y}$\\
+
+	Queremos realizar el análisis teórico sobre la serie de Ramanujan para los primeros tres términos de la sumatoria. Para poder realizarlo, llamamos $a$ al primer término de la serie,
+	$b$ al segundo y $c$ al tercero (llamamos $k=a+b$).\\
+	
+	Sea $\funcFull{g(k,c)}{k+c}$\\
+	
+	$\e{g}{k,c,+} = \frac{k}{k+c}\ev{k} + \frac{c}{k+c}\ev{c} + \er{+}{k,c}$\\
+	
+	$\e{g}{a+b,c,+} = \frac{a+b}{a+b+c}(\frac{a}{a+b}\ev{a} + \frac{b}{a+b}\ev{b} + \er{+}{a,b}) + \frac{c}{a+b+c}\ev{c} + \er{+}{a+b,c} =$\\
+	 
+	$= \frac{a\ev{a} + b\ev{b} + c\ev{c} + (a+b)\er{+}{a,b}}{a+b+c} + \er{+}{a+b,c}$\\
+	
+	Dado $a=0$, $b=\frac{659832}{396^4}$ y $c=\frac{8!*53883}{2^4*396^8}$ el error de los tres primeros términos es el siguiente:\\
+	
+	$\frac{\frac{659832}{396^4}(\ev{659832} - \ev{396^4} + \er{:}{659832,396^4}) + \frac{8!*53883}{2^4*396^8}(\ev{8!*53883} - \ev{2^4*396^8} + \er{:}{8!*53883,2^4*396^8}) + \frac{659832}{396^4}\er{+}{0,\frac{659832}{396^4}}}{\frac{659832}{396^4}+\frac{8!*53883}{2^4*396^8}} + \er{+}{\frac{659832}{396^4},\frac{8!*53883}{2^4*396^8}}$\\
+	
+	Por otro lado calculamos el error de $\funcFull{h(z)}{\sqrt{z}}$.\\
+	
+	$\e{h}{z,\sqrt{ }} = \frac{\frac{1}{2\sqrt{z}}}{\sqrt{z}}z\ev{z} + \er{\sqrt{ }}{z} = \frac{1}{2\sqrt{z}}\frac{1}{\sqrt{z}}z\ev{z} + \er{\sqrt{ }}{z} = \frac{\ev{z}}{2} + \er{\sqrt{ }}{z}$\\
+	
+	Conociendo el error de $\func{f}{x,y}$ calculamos el error de $\frac{\sqrt{8}}{9801}$\\ instanciando $x=\sqrt{z}$ e $y=9801$.\\
+	
+	$\Rightarrow \frac{\ev{z}}{2} + \er{\sqrt{ }}{z} - \ev{9801} + \er{:}{\sqrt{8},9801}$\\
+	
+	Sea $\funcFull{h'(x,y)} {x*y}$, donde $x=\frac{\sqrt{8}}{9801}$ e $y=\sum_{n=0}^{\infty}{\frac{(4n)!(1103+26390n)}{(n!)^4396^{4n}}}$.\\
+	
+	sabemos que: $\e{h'}{x,y,*} = \ev{x} + \ev{y} + \er{*}{x,y}$\\
+	
+	$\Rightarrow \e{h'}{x,y,*} = \ev{\frac{\sqrt{8}}{9801}} + \ev{\sum_{n=0}^{\infty}{\frac{(4n)!(1103+26390n)}{(n!)^4396^{4n}}}} + \er{*}{\frac{\sqrt{8}}{9801},\sum_{n=0}^{\infty}{\frac{(4n)!(1103+26390n)}{(n!)^4396^{4n}}}} = $\\
+	
+	$\frac{\frac{659832}{396^4}(\ev{659832} - \ev{396^4} + \er{:}{659832,396^4}) + \frac{8!*53883}{2^4*396^8}(\ev{8!*53883} - \ev{2^4*396^8} + \er{:}{8!*53883,2^4*396^8}) + \frac{659832}{396^4}\er{+}{0,\frac{659832}{396^4}}}{\frac{659832}{396^4}+\frac{8!*53883}{2^4*396^8}} +$\\
+	
+	$\er{+}{\frac{659832}{396^4},\frac{8!*53883}{2^4*396^8}} + \frac{\ev{z}}{2} + \er{\sqrt{ }}{z}  + \er{*}{\frac{\sqrt{8}}{9801},\sum_{n=0}^{\infty}{\frac{(4n)!(1103+26390n)}{(n!)^4396^{4n}}}}$\\
+	
+	Conociendo el error de $\func{f}{x,y}$ calculamos el error de $\frac{1}{\frac{\sqrt{8}}{9801}\sum_{n=0}^{\infty}{\frac{(4n)!(1103+26390n)}{(n!)^4396^{4n}}}}$ instanciando $x=1$ e $y=\frac{\sqrt{8}}{9801}\sum_{n=0}^{\infty}{\frac{(4n)!(1103+26390n)}{(n!)^4396^{4n}}}$.\\
+	
+	$\Rightarrow \ev{1} - \frac{\frac{659832}{396^4}(\ev{659832} - \ev{396^4} + \er{:}{659832,396^4}) + \frac{8!*53883}{2^4*396^8}(\ev{8!*53883} - \ev{2^4*396^8} + \er{:}{8!*53883,2^4*396^8}) + \frac{659832}{396^4}\er{+}{0,\frac{659832}{396^4}}}{\frac{659832}{396^4}+\frac{8!*53883}{2^4*396^8}}$\\
+	
+	
+	$+ \er{+}{\frac{659832}{396^4},\frac{8!*53883}{2^4*396^8}} + \frac{\ev{z}}{2} + \er{\sqrt{ }}{z}  + \er{*}{\frac{\sqrt{8}}{9801},\sum_{n=0}^{\infty}{\frac{(4n)!(1103+26390n)}{(n!)^4396^{4n}}}} + \er{:}{1,\frac{\sqrt{8}}{9801}\sum_{n=0}^{\infty}{\frac{(4n)!(1103+26390n)}{(n!)^4396^{4n}}}}$
+	
+\end{section}
