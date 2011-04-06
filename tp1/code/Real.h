@@ -19,10 +19,11 @@ class Real {
 		Real operator+ (const Real &a) const;
 		Real operator* (const Real &a) const;
 		Real operator- (const Real &a) const;
-		Real operator/ (const Real &a);// const;
+		Real operator/ (const Real &a) const;
 		Real& operator= (const Real &a);
 		Real squareRoot();
 	
+		double filterPrecision(double value) const;
 		void printReal();
 
 		friend ostream &operator<<(ostream &stream, Real r);
@@ -34,9 +35,10 @@ class Real {
 		ullInt getExp();
 		ullInt getMantissa();
 		ullInt getMascara() const;	
-		double convert() const;
+
+		double convert(bool isMask) const;
 		bool _truncates;
-		char _tdigits;
+		int _tdigits;
 		char _real[8];
 		char _mascaraTdigits[8];
 		llInt _original;
