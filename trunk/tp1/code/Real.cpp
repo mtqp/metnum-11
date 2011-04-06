@@ -5,9 +5,10 @@
 	y eso se maneja automaticamente
 */
 
-/*	AVERIGUAR POR FAVOR!:
-	Porque el uso de los operadores funciona solo si el objeto se crea con el mismo
-	constructor??!!!!?????
+
+/*
+	CHE NO ME GUSTA ESTO DSP ARREGLAR 
+	this->convert(!isMask);
 */
 
 Real ::	Real(){
@@ -24,7 +25,7 @@ Real ::	Real(int t_digits, bool truncates){
 
 Real ::	Real(llInt number, int t_digits,bool truncates){
 	_truncates = truncates;
-	_tdigits = t_digits;
+	_tdigits = 52-t_digits;
 	_original = number;
 
 	setMascara();
@@ -49,72 +50,80 @@ Real ::	~Real(){
 }
 
 Real Real :: operator+ (const Real &a) const{
-/*
-	COMO HACEMOS LA SUMA, PRECOND MISMO TRUNCAMIENTO Y TDIGITS O LO SOLUCIONAMOS AL MENOR!?!?!?
-*/
-	double thisValue = this->convert();
-	double aValue	 = a.convert();
+	bool isMask = true;
+	double thisValue = this->convert(!isMask);
+	double aValue	 = a.convert(!isMask);
 	
 	double resSum = thisValue + aValue;
 	
-	//harcoded al this
-	Real resultSum(this->_tdigits,this->_truncates);
-	resultSum.copyDoubleToArray(resSum);
+	const Real* selector;
+	if(this->_tdigits < a._tdigits)
+		selector = &a;
+	else 
+		selector = this;
+		
+	Real resultSum(selector->_tdigits,selector->_truncates);
+	resultSum.copyDoubleToArray(resultSum.filterPrecision(resSum));
 	
 	return resultSum;
 }
 
 Real Real :: operator* (const Real &a) const{
-/*
-	Nuevamente no le estamos dando pelota al truncamiento y los tdigits
-*/
-	double thisValue = this->convert();
-	double aValue    = a.convert();
+	bool isMask = true;
+	double thisValue = this->convert(!isMask);
+	double aValue    = a.convert(!isMask);
 	
 	double resMult	 = thisValue * aValue;
+
+	const Real* selector;
+	if(this->_tdigits < a._tdigits)
+		selector = &a;
+	else 
+		selector = this;
 	
-	Real resultMult(this->_tdigits, this->_truncates);
-	resultMult.copyDoubleToArray(resMult);
+	Real resultMult(selector->_tdigits, selector->_truncates);
+	resultMult.copyDoubleToArray(filterPrecision(resMult));
 	
 	return resultMult;
 }
 
 
 Real Real :: operator- (const Real &a) const{
-/*
-	Nuevamente no le estamos dando pelota al truncamiento y los tdigits
-*/	
-	double thisValue = this->convert();
-	double aValue	 = a.convert();
+	bool isMask = true;
+	double thisValue = this->convert(!isMask);
+	double aValue	 = a.convert(!isMask);
 	
 	double resSub	 = thisValue - aValue;
 
-	Real resultSub(this->_tdigits, this->_truncates);
-	resultSub.copyDoubleToArray(resSub);
+	const Real* selector;
+	if(this->_tdigits < a._tdigits)
+		selector = &a;
+	else 
+		selector = this;
+
+	Real resultSub(selector->_tdigits, selector->_truncates);
+	resultSub.copyDoubleToArray(filterPrecision(resSub));
 	
 	return resultSub;
 }
 
-Real Real :: operator/ (const Real &a) {//const{
-/*
-	Nuevamente no le estamos dando pelota al truncamiento y los tdigits
-	(CUAL DE LOS DOS TRUNCAMIENOS TOMO?)
-*/
-	double thisValue = this->convert();
-	double aValue 	 = a.convert();
+Real Real :: operator/ (const Real &a) const{
+	bool isMask = true;
+	double thisValue = this->convert(!isMask);
+	double aValue 	 = a.convert(!isMask);
 	
 	double resDiv	 = thisValue / aValue;
 
-	Real resultDiv(this->_tdigits, this->_truncates);
+	const Real* selector;
+	if(this->_tdigits < a._tdigits)
+		selector = &a;
+	else 
+		selector = this;
 
-/*	ullInt mask = charToInt(&_mascaraTdigits);
-	ullInt res  = doubleToInt(resDiv);
-	
-	res &= mask;*/	/*perdida de presicion por t_digits*/
-	
-	//resultDiv.copyDoubleToArray(intToDouble(res));
-	resultDiv.copyDoubleToArray(resDiv);
-	
+	Real resultDiv(selector->_tdigits, selector->_truncates);
+
+	resultDiv.copyDoubleToArray(filterPrecision(resDiv));
+
 	return resultDiv;	
 }
 
@@ -132,7 +141,8 @@ Real& Real :: operator= (const Real &a){
 }
 
 Real Real :: squareRoot(){
-	double real = this->convert();
+	bool isMask = true;
+	double real = this->convert(!isMask);
 
 	real = sqrt(real);
 	
@@ -142,8 +152,16 @@ Real Real :: squareRoot(){
 }
 	
 	
-double Real :: convert() const{
-	double realConverted = *(double*) _real;
+double Real :: convert(bool isMask) const{
+	double realConverted;
+	if(isMask){
+		realConverted = *(double*) _mascaraTdigits;
+	}
+	else 
+	{
+		realConverted = *(double*) _real;
+	}
+	
 	return realConverted;
 }
 
@@ -201,6 +219,22 @@ ullInt Real :: getMascara() const{
 	return mask>>1;
 }
 
+
+double Real :: filterPrecision(double value) const{
+	ullInt filteredDouble;
+	ullInt mask;
+	
+	bool isMask = true;
+	mask = doubleToInt(this->convert(isMask));	
+
+	if(!_truncates)
+		value += doubleToInt(getRoundFactor(this->_tdigits));
+		
+	filteredDouble = doubleToInt(value) & mask;	
+	return intToDouble(filteredDouble);
+}
+
+
 void Real :: copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa){
 	ullInt real = 0;
 
@@ -253,7 +287,7 @@ void Real :: printReal(){
     char * desmond = (char *) & _real;
     int i;
 	cout << "int representation (of array of class)   --> " << _original << ".0" << endl;
-	cout << "double representation (of array of class)--> " << convert() << endl;
+	cout << "double representation (of array of class)--> " << convert(false) << endl;
 	printNotacion();
 	
 	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
@@ -273,7 +307,7 @@ void Real :: printReal(){
 //realizar la conversion a manopla!
 ostream &operator<<(ostream &stream, Real real)
 {
-  stream << real.convert();
+  stream << real.convert(false);
   return stream; 
 }
 
