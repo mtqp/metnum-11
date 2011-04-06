@@ -1,0 +1,50 @@
+\begin{centering}
+\bf Laboratorio de M\'etodos Num\'ericos - Primer cuatrimestre 2011 \\
+\bf Trabajo Pr\'actico N\'umero 1: Errores en serie ... \\
+\end{centering}
+
+\vskip 25pt
+\hrule
+\vskip 11pt
+
+El objetivo del trabajo pr\'actico es analizar el comportamiento num\'erico de varios m\'etodos para aproximar $\pi$ cuando cada m\'etodo se implementa por medio de una aritm\'etica finita de $t$ d\'igitos. Los m\'etodos consisten en evaluar las siguientes series hasta un cierto t\'ermino:
+\begin{description}
+    \item[Serie de Gregory (1671):]
+      \begin{equation*}
+      \frac{\pi}{4} = \sum_{n=0}^{\infty} \frac{\left(-1\right)^n}{2n+1}
+      \end{equation*}
+    \item[F\'ormula de Machin (1706):]
+      \begin{equation*}
+      \frac{\pi}{4} = 4 \; \mathrm{arctan}(1/5) - \mathrm{arctan}(1/239), \qquad \text{con } \mathrm{arctan}(x) = \sum_{n=0}^{\infty} \left(-1\right)^n \frac{x^{2n+1}}{2n+1} \quad \text{cuando } \left|x\right|<1
+      \end{equation*}
+    \item[Serie de Ramanujan (1914):]
+      \begin{equation*}
+      \frac{1}{\pi} = \frac{\sqrt{8}}{9801} \sum_{n=0}^{\infty} \frac{(4n)! \, (1103 + 26390 n)}{(n!)^4 \, 396^{4n}}
+      \end{equation*}
+\end{description}
+
+El trabajo pr\'actico consta de dos partes:
+\vspace{-12pt}
+\begin{enumerate}
+ \item {\bf An\'alisis te\'orico} \label{punto1}
+
+%     Analizar cada m\'etodo utilizando la f\'ormula del error, tomando en cuenta el error cometido en las operaciones debido a la representaci\'on finita de la aritm\'etica. Graficar la cota de error obtenida en cada caso en funci\'on de la cantidad de d\'igitos utilizados en la representaci\'on.
+
+    Analizar la propagaci\'on de errores en el tercer t\'ermino (en funci\'on de los errores de los dos primeros) de cada una de las series propuestas, en funci\'on de la precisi\'on aritm\'etica utilizada. Emplear estos resultados en la argumentaci\'on de sus conclusiones luego de realizar el an\'alisis emp\'irico del punto~\ref{punto2}.
+
+ \item {\bf An\'alisis emp\'irico} \label{punto2}
+
+    Implementar los tres m\'etodos con aritm\'etica binaria de punto flotante con $t$ d\'igitos de precisi\'on en la mantisa (el valor $t$ debe ser un par\'ametro de la implementaci\'on, $t < 52$) y comparar los errores relativos de los resultados obtenidos en los tres casos y con las cotas de error del punto anterior. Realizar al menos los siguientes experimentos num\'ericos:
+    \begin{enumerate}
+    \item Reportar el error relativo de cada m\'etodo en funci\'on de la cantidad de d\'igitos $t$ de precisi\'on en la mantisa, para cantidades fijas de t\'erminos $n$ de la serie.
+    \item Reportar el error relativo de cada m\'etodo en funci\'on de la cantidad de t\'erminos $n$ de la serie correspondiente, para cantidad de d\'igitos $t$ de precisi\'on.
+    \item Comparar los resultados obtenidos en \textit{a}) y \textit{b}) con las cotas de error calculadas en el punto~\ref{punto1}.
+    %no uso \label + \ref porque me pone 2a 2b y ocupa demasiado
+    \item (Opcional) Explorar distintas formas de implementar las f\'ormulas (realizar las cuentas) de cada cada m\'etodo.
+    % Explorar distintas formas de evaluar cada m\'etodo.
+    \end{enumerate}
+
+    Se deben presentar los resultados de estas pruebas en un formato conveniente para su visualizaci\'on y an\'alisis.
+    Sobre la base de los resultados obtenidos, ?`se pueden extraer conclusiones sobre la conveniencia de utilizar uno u otro m\'etodo?
+\end{enumerate}
+
