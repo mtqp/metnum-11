@@ -16,14 +16,14 @@ class Real {
 		Real(int t_digits, bool truncates);
 		~Real();
 		
-		Real operator+ (const Real &a) const;
-		Real operator* (const Real &a) const;
-		Real operator- (const Real &a) const;
-		Real operator/ (const Real &a) const;
+		Real operator+ (const Real &a);
+		Real operator* (const Real &a);
+		Real operator- (const Real &a);
+		Real operator/ (const Real &a);
 		Real& operator= (const Real &a);
 		Real squareRoot();
 	
-		double filterPrecision(double value) const;
+		void filterPrecision();
 		void printReal();
 
 		friend ostream &operator<<(ostream &stream, Real r);
@@ -35,6 +35,7 @@ class Real {
 		ullInt getExp();
 		ullInt getMantissa();
 		ullInt getMascara() const;	
+		void setReal(llInt,int,bool);
 
 		double convert(bool isMask) const;
 		bool _truncates;

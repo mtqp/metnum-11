@@ -37,7 +37,7 @@ int main(int argc, char** argv){
 		aca iria la ejecucion
 	*/
 
-	truncate = true;
+	truncate = false;
 /*	
 	for(int i=0;i<cantIteraciones;i++){
 		Real r(i,t_digitos,truncate);
@@ -57,10 +57,10 @@ int main(int argc, char** argv){
 
 	res = uno / tres;
 	
-	uno.printReal();
+/*	uno.printReal();
 	tres.printReal();
 	res.printReal();
-
+*/
 /*
 	PRUEBAS VIEJAS
 */

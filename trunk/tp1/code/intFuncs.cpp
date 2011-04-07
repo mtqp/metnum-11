@@ -47,3 +47,13 @@ ullInt doubleToInt(double value){
 ullInt charToInt(char* value){
 	return *(ullInt*) value;
 }
+
+ullInt getRoundFactor(int places){
+	ullInt exp = 1020ull;		/*lo normaliza al desvio 1023*/
+	ullInt roundFactor = 1ull;
+
+	exp = exp << 52;
+	roundFactor =  roundFactor << places;
+	
+	return exp | roundFactor;
+}
