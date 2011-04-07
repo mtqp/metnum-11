@@ -12,20 +12,24 @@
 */
 
 Real ::	Real(){
-	Real(0,52,true);
+	setReal(0,52,true);
 }
 
 Real ::	Real(llInt valor){
-	Real(valor,52,true);
+	setReal(valor,52,true);
 }
 
 Real ::	Real(int t_digits, bool truncates){
-	Real(0,t_digits,truncates);
+	setReal(0,t_digits,truncates);
 }
 
 Real ::	Real(llInt number, int t_digits,bool truncates){
+	setReal(number,t_digits,truncates);
+}
+
+void Real :: setReal(llInt number, int t_digits,bool truncates){
 	_truncates = truncates;
-	_tdigits = 52-t_digits;
+	_tdigits = t_digits;
 	_original = number;
 
 	setMascara();
@@ -44,12 +48,13 @@ Real ::	Real(llInt number, int t_digits,bool truncates){
 	mantissa = getMantissa();
 	
 	copyDoubleToArray(sign,exp,mantissa);
+
 }
 
 Real ::	~Real(){
 }
 
-Real Real :: operator+ (const Real &a) const{
+Real Real :: operator+ (const Real &a){
 	bool isMask = true;
 	double thisValue = this->convert(!isMask);
 	double aValue	 = a.convert(!isMask);
@@ -63,12 +68,13 @@ Real Real :: operator+ (const Real &a) const{
 		selector = this;
 		
 	Real resultSum(selector->_tdigits,selector->_truncates);
-	resultSum.copyDoubleToArray(resultSum.filterPrecision(resSum));
+	resultSum.copyDoubleToArray(resSum);
+	resultSum.filterPrecision();
 	
 	return resultSum;
 }
 
-Real Real :: operator* (const Real &a) const{
+Real Real :: operator* (const Real &a){
 	bool isMask = true;
 	double thisValue = this->convert(!isMask);
 	double aValue    = a.convert(!isMask);
@@ -82,13 +88,14 @@ Real Real :: operator* (const Real &a) const{
 		selector = this;
 	
 	Real resultMult(selector->_tdigits, selector->_truncates);
-	resultMult.copyDoubleToArray(filterPrecision(resMult));
+	resultMult.copyDoubleToArray(resMult);
+	resultMult.filterPrecision();
 	
 	return resultMult;
 }
 
 
-Real Real :: operator- (const Real &a) const{
+Real Real :: operator- (const Real &a){
 	bool isMask = true;
 	double thisValue = this->convert(!isMask);
 	double aValue	 = a.convert(!isMask);
@@ -102,12 +109,13 @@ Real Real :: operator- (const Real &a) const{
 		selector = this;
 
 	Real resultSub(selector->_tdigits, selector->_truncates);
-	resultSub.copyDoubleToArray(filterPrecision(resSub));
-	
+	resultSub.copyDoubleToArray(resSub);
+	resultSub.filterPrecision();
+
 	return resultSub;
 }
 
-Real Real :: operator/ (const Real &a) const{
+Real Real :: operator/ (const Real &a){
 	bool isMask = true;
 	double thisValue = this->convert(!isMask);
 	double aValue 	 = a.convert(!isMask);
@@ -120,9 +128,10 @@ Real Real :: operator/ (const Real &a) const{
 	else 
 		selector = this;
 
-	Real resultDiv(selector->_tdigits, selector->_truncates);
+	Real resultDiv((selector->_tdigits), selector->_truncates);
 
-	resultDiv.copyDoubleToArray(filterPrecision(resDiv));
+	resultDiv.copyDoubleToArray(resDiv);
+	resultDiv.filterPrecision();
 
 	return resultDiv;	
 }
@@ -181,15 +190,13 @@ ullInt Real :: getExp(){
 	ullInt exp 	  = 0;
 	
 	exp = (ullInt) placesToShift(number,0); /*se le pasa el cero, suponiendo notacion 0.xxxx * e^(+- algo)*/
-	exp += 1023ull;							/*lo normaliza al desvio 1023*/
-	exp -= 1ull;
+	exp += 1022ull;							/*lo normaliza al desvio 1023*/
 
 	exp = exp << 52;
 	
 	return exp;
 }
 
-/*tener en cuenta que la creacion de la mantissa no esta chequeando si TRUNCA y los TDIGITS!!!*/
 ullInt Real :: getMantissa(){
 	ullInt mantissa;
 	int shift;
@@ -219,21 +226,30 @@ ullInt Real :: getMascara() const{
 	return mask>>1;
 }
 
-
-double Real :: filterPrecision(double value) const{
+void Real :: filterPrecision(){
+	double value = intToDouble(_original);
+	
+	cout << _tdigits << " {{{{{ TE DIYITS" << endl;	
 	ullInt filteredDouble;
 	ullInt mask;
 	
 	bool isMask = true;
-	mask = doubleToInt(this->convert(isMask));	
+	mask = doubleToInt(convert(isMask));	
 
-	if(!_truncates)
-		value += doubleToInt(getRoundFactor(this->_tdigits));
-		
-	filteredDouble = doubleToInt(value) & mask;	
-	return intToDouble(filteredDouble);
+//	printDouble(value);
+
+	if(!_truncates){
+		value += intToDouble(getRoundFactor(52-_tdigits));
+		//printInt(getRoundFactor(52-_tdigits));
+	}
+	printDouble(intToDouble(getRoundFactor(52-_tdigits)));
+//	printDouble(value);	
+//	printInt(mask);
+
+	filteredDouble = doubleToInt(value) & mask;
+//	printDouble(filteredDouble);	
+	copyDoubleToArray(filteredDouble);
 }
-
 
 void Real :: copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa){
 	ullInt real = 0;
@@ -247,6 +263,8 @@ void Real :: copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa){
 	for(int i=0;i<sizeof(ullInt);i++){
 		_real[i] = r_array[i];
 	}
+	
+	_original = real;
 }
 
 void Real :: copyDoubleToArray(double number){
@@ -255,6 +273,8 @@ void Real :: copyDoubleToArray(double number){
 	for(int i=0;i<sizeof(double);i++){
 		_real[i] = real[i];
 	}
+	
+	_original = doubleToInt(number);
 }
 
 void Real :: setMascara(){
@@ -263,9 +283,12 @@ void Real :: setMascara(){
 //	printInt(getMascara());
 	
 	llInt mascara = *(llInt*) &_mascaraTdigits;
-	
+/*	
 	int shiftDer = 52-_tdigits;
 	int shiftIzq = _tdigits;
+*/
+	int shiftDer = _tdigits;
+	int shiftIzq = 52-_tdigits;
 	
 	mascara = mascara >> shiftDer;
 //	cout << "shift der t bits = " << shiftDer << endl;

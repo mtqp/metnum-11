@@ -13,5 +13,7 @@ ullInt cleanFirstNotZero(ullInt number, int shift);
 int placesToShift(ullInt number, int until);
 ullInt doubleToInt(double value);
 ullInt charToInt(char* value);
+ullInt getRoundFactor(int places);
+
 
 #endif
