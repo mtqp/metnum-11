@@ -5,6 +5,9 @@
 	y eso se maneja automaticamente
 */
 
+/*
+	si llegas a dividir x cero te da floating point exception, tenemos q trappear la exception?
+*/
 
 /*
 	CHE NO ME GUSTA ESTO DSP ARREGLAR 
@@ -160,6 +163,47 @@ Real Real :: squareRoot(){
 	return *this;
 }
 	
+
+Real Real :: arctan(int cantIt){
+	Real resArc_par(_tdigits,_truncates);
+	Real resArc_impar(_tdigits,_truncates);
+
+	ullInt num;
+	ullInt den;
+
+/*	for(int i=0; i<cantIt; i+=2){
+		num = pot(
+
+		resArc_par += pow(f,2*i+1) / (2*i+1);
+	}
+	
+	for(int i=1; i<cantIt; i+=2){
+		resArc_impar += pow(f,2*i+1) / (2*i+1);
+	}
+	
+	resArc_par-resArc_impar;
+	
+	return resArc_par-resArc_impar;
+*/
+	return NULL;
+}
+
+/*NECESITO LA CANTIDAD DE ITERACIONES*/
+Real Real :: pot(int exp){
+	double number = this->convert(false);
+	double fresh  = number;
+	
+	int _cantIt = 100;
+	
+	for(int i=0;i<_cantIt;i++){
+		number *= fresh;
+	}
+	
+	this->copyDoubleToArray(number);
+	return *this;
+}
+
+
 	
 double Real :: convert(bool isMask) const{
 	double realConverted;
