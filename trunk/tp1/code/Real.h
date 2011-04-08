@@ -21,7 +21,9 @@ class Real {
 		Real operator- (const Real &a);
 		Real operator/ (const Real &a);
 		Real& operator= (const Real &a);
-		Real squareRoot();
+		Real squareRoot();	//NO DEBERIA IR COMO UN DATO DE LA CLASE???
+		Real arctan(int cantIt);
+		Real pot(int exp);
 	
 		void filterPrecision();
 		void printReal();

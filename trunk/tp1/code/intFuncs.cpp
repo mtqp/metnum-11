@@ -1,8 +1,7 @@
 #include "intFuncs.h"
 
-//no olvidarse de hacer un try catch para si hay overflow! asi lo podemos controlar...
 ullInt fact(ullInt x){
-	if(x != 0){
+	if(x > 0){
 		ullInt i = x-1;
 		for(i;i!=0;i--){
 			x *= i;
@@ -13,6 +12,23 @@ ullInt fact(ullInt x){
 	{
 		return 1;
 	}
+}
+
+ullInt intPot(ullInt number, int exp){
+	if(exp==0)
+		return 1ull;
+		
+	if(exp<0)
+		return 0ull;
+	else
+	{
+		ullInt freshNumber = number;
+		for(exp;exp>0;exp--){
+			number *= freshNumber;
+		}
+		return number;
+	}
+
 }
 
 ullInt cleanSign(llInt number){

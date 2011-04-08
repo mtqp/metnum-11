@@ -1,4 +1,4 @@
-OBJS =  printFuncs.cpp intFuncs.cpp decimalFuncs.cpp Real.cpp 
+OBJS =  printFuncs.cpp intFuncs.cpp decimalFuncs.cpp Real.cpp algorithms.o
 ASMOBJS = watchDoubles.o
 MATH = -lm
 CFLAGS = -ggdb 
