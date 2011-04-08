@@ -1,7 +1,7 @@
 #include "includes.h"
-#include "printFuncs.h"
-#include "intFuncs.h"
-#include "Real.h"
+#include "printFuncs.cpp"
+#include "intFuncs.cpp"
+#include "Real.cpp"
 #include "algorithms.h"
 
 /*
