@@ -7,7 +7,7 @@ NASM = -f elf
 DEBUGNASM = -g
 
 errores: main.cpp $(OBJSo) 
-	g++ -o errores $(CFLAGS) $(MATH) main.cpp $(OBJSo) 
+	g++ -o pi $(CFLAGS) $(MATH) main.cpp $(OBJSo) 
 
 asm:
 	nasm $(DEBUGNASM) $(NASM) watchDoubles.asm
@@ -20,5 +20,5 @@ asm:
 	nasm $(DEBUGNASM) $(NASM) $< 
 
 clean:
-	rm -f errores
+	rm -f pi
 	rm -f *.o
