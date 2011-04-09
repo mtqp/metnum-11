@@ -19,18 +19,37 @@ int main(int argc, char** argv){
 
 	switch(argc){
 		case 2:
-			t_digits = atoi(argv[1]);
+			t_digits = t_digits_default;
 			cantIt   = it_default;
+			truncate = truncate_default;
 			break;
 		case 3:
-			t_digits = atoi(argv[1]);
-			cantIt   = atoi(argv[2]);
+			t_digits = atoi(argv[2]);
+			cantIt   = it_default;
+			truncate = truncate_default;
 			break;
 		case 4:
-			t_digits = atoi(argv[1]);
-			cantIt   = atoi(argv[2]);
+			t_digits = atoi(argv[2]);
+			cantIt   = atoi(argv[3]);
+			truncate = truncate_default;
+			break;
+		case 5:
+			t_digits = atoi(argv[2]);
+			cantIt   = atoi(argv[3]);
 			truncate = (bool) atoi(argv[4]);
 			break;			
+		default:
+			usage();
+			exit(0);
+	}
+	
+	switch(atoi(argv[1])){
+		case 1:
+			cout << "PI calculado con Gregory: " << Gregory(t_digits, cantIt, truncate) << endl;
+		/*case 2:
+			cout << "PI calculado con Machin: " << Machin(t_digits, cantIt, truncate) << endl;
+		case 3:
+			cout << "PI calculado con Ramanujan: " << Ramanujan(t_digits, cantIt, truncate) << endl;*/
 		default:
 			usage();
 			exit(0);
@@ -57,8 +76,12 @@ int main(int argc, char** argv){
 }
 
 void usage(){
-	cout << "use: ./errores [tdigitos] [cantidadIteraciones] [trunca?] [PATH A GUARDAR]" << endl;
-	cout << "	Son opcionales los ultimos dos parametros??¿?¿?" << endl;
+	cout << "use: ./errores [metodo] [tdigitos] [cantidadIteraciones] [trunca?] [PATH A GUARDAR]" << endl;
+	cout << "El parametro 'metodos' debe ser una de las siguientes opciones:" << endl;
+	cout << "\t 1 para gregory" << endl;
+	cout << "\t 2 para machin" << endl;
+	cout << "\t 3 para ramanujan" << endl;
+	cout << "Son opcionales los ultimos tres parametros" << endl;
 }
 
 
