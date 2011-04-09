@@ -53,7 +53,16 @@ Real pot(Real real, int exp){
 	double number = real.convert();
 	double fresh  = number;
 	
-	for(int i=0;i<exp;i++){
+	if(exp == 0){
+		real.save(1.0);
+		return real;
+	}
+	
+	if(exp==1){
+		return real;
+	}
+	
+	for(int i=1;i<exp;i++){
 		number *= fresh;
 	}
 	

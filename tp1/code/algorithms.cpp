@@ -12,8 +12,6 @@ Real Gregory(int t_digits, int cantIt, bool truncates){
 	for(int i=0;i<cantIt;i+=2){
 		acumDenominador = 2*i+1;
 		Real denominador(acumDenominador, cantIt, truncates);
-//		cout << "pi " << pi_par << endl << "div " << (uno/denominador) << endl;
-//		cout << "uno " << uno << endl << "den " << denominador << endl;
 		pi_par = pi_par + (uno/denominador);
 	}
 
@@ -31,8 +29,8 @@ Real Machin(int t_digits, int cantIt, bool truncates){
 	Real    uno(1,t_digits, truncates);
 	Real  cinco(5,t_digits, truncates);
 	Real  dos39(239,t_digits, truncates);
-	
-	return cuatro*(cuatro*arctan(uno/cinco,cantIt) - arctan(uno/dos39,cantIt));
+
+	return cuatro*((cuatro*arctan(uno/cinco,cantIt)) - arctan(uno/dos39,cantIt));
 }
 
 Real Ramanujan(int t_digits, int cantIt, bool truncates){
