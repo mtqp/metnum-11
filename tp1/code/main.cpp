@@ -43,13 +43,23 @@ int main(int argc, char** argv){
 			exit(0);
 	}
 	
+	//cout.presicion(52);
+	
 	switch(atoi(argv[1])){
 		case 1:
-			cout << "PI calculado con Gregory: " << Gregory(t_digits, cantIt, truncate) << endl;
-		/*case 2:
-			cout << "PI calculado con Machin: " << Machin(t_digits, cantIt, truncate) << endl;
+			cout << "PI calculado con Gregory: " 	<< Gregory(t_digits, cantIt, truncate) << endl;
+			break;
+		case 2:
+			cout << "PI calculado con Machin: " 	<< Machin(t_digits, cantIt, truncate) << endl;
+			break;
 		case 3:
-			cout << "PI calculado con Ramanujan: " << Ramanujan(t_digits, cantIt, truncate) << endl;*/
+			cout << "PI calculado con Ramanujan: " 	<< Ramanujan(t_digits, cantIt, truncate) << endl;
+			break;
+		case 4:
+			cout << "PI calculado con Gregory: " 	<< Gregory(t_digits, cantIt, truncate) << endl;
+			cout << "PI calculado con Machin: " 	<< Machin(t_digits, cantIt, truncate) << endl;
+			cout << "PI calculado con Ramanujan: " 	<< Ramanujan(t_digits, cantIt, truncate) << endl;
+			break;
 		default:
 			usage();
 			exit(0);
@@ -76,11 +86,12 @@ int main(int argc, char** argv){
 }
 
 void usage(){
-	cout << "use: ./errores [metodo] [tdigitos] [cantidadIteraciones] [trunca?] [PATH A GUARDAR]" << endl;
+	cout << "use: ./errores [metodo] [tdigitos] [cantidadIteraciones] [trunca?]" << endl;
 	cout << "El parametro 'metodos' debe ser una de las siguientes opciones:" << endl;
-	cout << "\t 1 para gregory" << endl;
-	cout << "\t 2 para machin" << endl;
-	cout << "\t 3 para ramanujan" << endl;
+	cout << "\t 1 para Gregory" << endl;
+	cout << "\t 2 para Machin" << endl;
+	cout << "\t 3 para Ramanujan" << endl;
+	cout << "\t 4 para los tres algoritmos" << endl;
 	cout << "Son opcionales los ultimos tres parametros" << endl;
 }
 

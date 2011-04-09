@@ -21,15 +21,17 @@ class Real {
 		Real operator- (const Real &a);
 		Real operator/ (const Real &a);
 		Real& operator= (const Real &a);
-		Real squareRoot();	
-		Real arctan(int cantIt); //NO DEBERIA IR COMO UN DATO DE LA CLASE???
-		Real pot(int exp);
 	
-		void filterPrecision();
 		void printReal();
+		double convert() const;	
+		void save(double value);
+
+		int presicion() const;
+		bool truncate() const;
 
 		friend ostream &operator<<(ostream &stream, Real r);
 	private:
+		void filterPrecision();		//ESTA CREO Q VA PRIVADA!
 		void copyDoubleToArray(double number);
 		void copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa);
 		void setMascara();
@@ -39,7 +41,6 @@ class Real {
 		ullInt getMascara() const;	
 		void setReal(llInt,int,bool);
 
-		double convert(bool isMask) const;
 		bool _truncates;
 		int _tdigits;
 		char _real[8];
