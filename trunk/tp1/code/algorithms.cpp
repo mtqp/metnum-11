@@ -40,10 +40,10 @@ Real Ramanujan(int t_digits, int cantIt, bool truncates){
 		ullInt num = fact(4*i)* (1103+26390*i);	
 		ullInt den = intPot(fact(i),4) * intPot(396,4*i);
 		Real rnum(num,t_digits,truncates);
-
+		Real rden(den,t_digits,truncates);
 		//cout << "den!! " << den << endl;
 
-		pi = pi + (num/den);
+		pi = pi + (rnum/rden);
 	}
 
 	Real 	  uno(1,t_digits,truncates);
