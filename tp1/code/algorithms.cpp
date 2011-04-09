@@ -37,8 +37,8 @@ Real Ramanujan(int t_digits, int cantIt, bool truncates){
 	Real pi(t_digits,truncates);
 	
 	for(int i=0;i<cantIt;i++){
-		ullInt num = fact(4ull*i)* (1103ull+26390ull*i);	
-		ullInt den = intPot(fact(i),4ull) * intPot(396ull,4ull*i);
+		ullInt num = fact(4*i)* (1103+26390*i);	
+		ullInt den = intPot(fact(i),4) * intPot(396,4*i);
 		Real rnum(num,t_digits,truncates);
 
 		pi = pi + (num/den);

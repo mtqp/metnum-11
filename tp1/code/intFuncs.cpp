@@ -17,13 +17,14 @@ ullInt fact(ullInt x){
 ullInt intPot(ullInt number, int exp){
 	if(exp==0)
 		return 1ull;
-		
+	if(exp==1)
+		return number;
 	if(exp<0)
 		return 0ull;
 	else
 	{
 		ullInt freshNumber = number;
-		for(exp;exp>0;exp--){
+		for(exp;exp>1;exp--){
 			number *= freshNumber;
 		}
 		return number;
