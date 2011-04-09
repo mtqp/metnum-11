@@ -1,7 +1,7 @@
 #include "includes.h"
-#include "printFuncs.cpp"
-#include "intFuncs.cpp"
-#include "Real.cpp"
+#include "printFuncs.h"
+#include "intFuncs.h"
+#include "Real.h"
 #include "algorithms.h"
 
 /*
@@ -36,13 +36,19 @@ int main(int argc, char** argv){
 			exit(0);
 	}
 	
+/*	t_digits = 52;
+	truncate = true;
 	
-/*	Real uno(1,t_digitos,truncate);	
-	Real tres(3,t_digitos,truncate);
-	Real res(0,t_digitos,truncate);
+	Real uno(1,t_digits,truncate);	
+	Real tres(3,t_digits,truncate);
+	Real res(0,t_digits,truncate);
+	Real n(0,t_digits,truncate);
 
-	res = uno / tres;
-	
+	printDouble(15.0);
+
+	res = uno/diez;
+	*/
+	/*
 	uno.printReal();
 	tres.printReal();
 	res.printReal();
@@ -51,7 +57,7 @@ int main(int argc, char** argv){
 }
 
 void usage(){
-	cout << "use: ./errores [tdigitos] [cantidadIteraciones] [trunca?]" << endl;
+	cout << "use: ./errores [tdigitos] [cantidadIteraciones] [trunca?] [PATH A GUARDAR]" << endl;
 	cout << "	Son opcionales los ultimos dos parametros??¿?¿?" << endl;
 }
 

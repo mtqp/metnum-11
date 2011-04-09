@@ -286,10 +286,9 @@ void Real :: filterPrecision(){
 		value += intToDouble(getRoundFactor(52-_tdigits));
 		//printInt(getRoundFactor(52-_tdigits));
 	}
-	printDouble(intToDouble(getRoundFactor(52-_tdigits)));
+	//printDouble(intToDouble(getRoundFactor(52-_tdigits)));
 //	printDouble(value);	
 //	printInt(mask);
-
 	filteredDouble = doubleToInt(value) & mask;
 //	printDouble(filteredDouble);	
 	copyDoubleToArray(filteredDouble);
