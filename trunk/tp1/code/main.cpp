@@ -16,7 +16,7 @@ int main(int argc, char** argv){
 	int t_digits;	//se usa para el constructor del tipo de datos nuestro
 	int  cantIt;
 	bool truncate;
-		
+
 	switch(argc){
 		case 2:
 			t_digits = atoi(argv[1]);
