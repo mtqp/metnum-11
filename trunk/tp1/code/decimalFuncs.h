@@ -2,9 +2,15 @@
 #define __DECIMALFUNCS_H__
 
 #include "includes.h"
+#include "Real.h"
 
-double convertToDouble(ullInt* value);
 double intToDouble(ullInt value);
-double charToDouble(char* value); //precond, levanto 8bytes... mas te vale tenerlo con datos veridicos
+double charToDouble(char* value);
+
+/*MATHS functions*/
+class Real;
+Real squareRoot(Real num);	
+Real arctan(Real real, int cantIt);
+Real pot(Real real, int exp);
 
 #endif

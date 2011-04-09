@@ -58,9 +58,8 @@ Real ::	~Real(){
 }
 
 Real Real :: operator+ (const Real &a){
-	bool isMask = true;
-	double thisValue = this->convert(!isMask);
-	double aValue	 = a.convert(!isMask);
+	double thisValue = this->convert();
+	double aValue	 = a.convert();
 	
 	double resSum = thisValue + aValue;
 	
@@ -72,15 +71,14 @@ Real Real :: operator+ (const Real &a){
 		
 	Real resultSum(selector->_tdigits,selector->_truncates);
 	resultSum.copyDoubleToArray(resSum);
-	resultSum.filterPrecision();
+	//resultSum.filterPrecision();
 	
 	return resultSum;
 }
 
 Real Real :: operator* (const Real &a){
-	bool isMask = true;
-	double thisValue = this->convert(!isMask);
-	double aValue    = a.convert(!isMask);
+	double thisValue = this->convert();
+	double aValue    = a.convert();
 	
 	double resMult	 = thisValue * aValue;
 
@@ -92,16 +90,15 @@ Real Real :: operator* (const Real &a){
 	
 	Real resultMult(selector->_tdigits, selector->_truncates);
 	resultMult.copyDoubleToArray(resMult);
-	resultMult.filterPrecision();
+	//resultMult.filterPrecision();
 	
 	return resultMult;
 }
 
 
 Real Real :: operator- (const Real &a){
-	bool isMask = true;
-	double thisValue = this->convert(!isMask);
-	double aValue	 = a.convert(!isMask);
+	double thisValue = this->convert();
+	double aValue	 = a.convert();
 	
 	double resSub	 = thisValue - aValue;
 
@@ -113,15 +110,14 @@ Real Real :: operator- (const Real &a){
 
 	Real resultSub(selector->_tdigits, selector->_truncates);
 	resultSub.copyDoubleToArray(resSub);
-	resultSub.filterPrecision();
+	//resultSub.filterPrecision();
 
 	return resultSub;
 }
 
 Real Real :: operator/ (const Real &a){
-	bool isMask = true;
-	double thisValue = this->convert(!isMask);
-	double aValue 	 = a.convert(!isMask);
+	double thisValue = this->convert();
+	double aValue 	 = a.convert();
 	
 	double resDiv	 = thisValue / aValue;
 
@@ -134,7 +130,7 @@ Real Real :: operator/ (const Real &a){
 	Real resultDiv((selector->_tdigits), selector->_truncates);
 
 	resultDiv.copyDoubleToArray(resDiv);
-	resultDiv.filterPrecision();
+	//resultDiv.filterPrecision();
 
 	return resultDiv;	
 }
@@ -147,75 +143,38 @@ Real& Real :: operator= (const Real &a){
 	
 		for(int i=0;i<sizeof(double);i++){
 			this->_real[i] = a._real[i];
+			this->_mascaraTdigits[i] = a._mascaraTdigits[i];
 		}
 	}
 	return *this;
+	
 }
 
-Real Real :: squareRoot(){
-	bool isMask = true;
-	double real = this->convert(!isMask);
-
-	real = sqrt(real);
-	
-	this->copyDoubleToArray(real);
-	
-	return *this;
-}
-	
-
-Real Real :: arctan(int cantIt){
-	Real resArc_par(_tdigits,_truncates);
-	Real resArc_impar(_tdigits,_truncates);
-
-	ullInt num;
-	ullInt den;
-
-/*	for(int i=0; i<cantIt; i+=2){
-		num = pot(
-
-		resArc_par += pow(f,2*i+1) / (2*i+1);
-	}
-	
-	for(int i=1; i<cantIt; i+=2){
-		resArc_impar += pow(f,2*i+1) / (2*i+1);
-	}
-	
-	resArc_par-resArc_impar;
-	
-	return resArc_par-resArc_impar;
-*/
-	return NULL;
+int Real ::presicion() const{
+	return _tdigits;
 }
 
-/*NECESITO LA CANTIDAD DE ITERACIONES*/
-Real Real :: pot(int exp){
-	double number = this->convert(false);
-	double fresh  = number;
-	
-	int _cantIt = 100;
-	
-	for(int i=0;i<_cantIt;i++){
-		number *= fresh;
-	}
-	
-	this->copyDoubleToArray(number);
-	return *this;
+bool Real :: truncate() const{
+	return _truncates;
 }
 
 
 	
-double Real :: convert(bool isMask) const{
+double Real :: convert() const{
 	double realConverted;
-	if(isMask){
+/*	if(isMask){
 		realConverted = *(double*) _mascaraTdigits;
 	}
 	else 
-	{
+	{*/
 		realConverted = *(double*) _real;
-	}
 	
 	return realConverted;
+}
+
+void Real :: save(double value){
+	copyDoubleToArray(value);
+	//filterPrecision();
 }
 
 ullInt Real :: getSign(){
@@ -273,12 +232,12 @@ ullInt Real :: getMascara() const{
 void Real :: filterPrecision(){
 	double value = intToDouble(_original);
 	
-	cout << _tdigits << " {{{{{ TE DIYITS" << endl;	
+//	cout << _tdigits << " {{{{{ TE DIYITS" << endl;	
 	ullInt filteredDouble;
 	ullInt mask;
 	
-	bool isMask = true;
-	mask = doubleToInt(convert(isMask));	
+//	bool isMask = true;
+	mask = doubleToInt(convert());	
 
 //	printDouble(value);
 
@@ -353,7 +312,7 @@ void Real :: printReal(){
     char * desmond = (char *) & _real;
     int i;
 	cout << "int representation (of array of class)   --> " << _original << ".0" << endl;
-	cout << "double representation (of array of class)--> " << convert(false) << endl;
+	cout << "double representation (of array of class)--> " << convert() << endl;
 	printNotacion();
 	
 	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
@@ -373,7 +332,7 @@ void Real :: printReal(){
 //realizar la conversion a manopla!
 ostream &operator<<(ostream &stream, Real real)
 {
-  stream << real.convert(false);
+  stream << real.convert();
   return stream; 
 }
 
