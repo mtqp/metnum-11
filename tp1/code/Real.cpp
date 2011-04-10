@@ -210,6 +210,7 @@ ullInt Real :: getMantissa(){
 	mantissa = cleanFirstNotZero(mantissa,shift);
 
 	if(shift>51){	//==>va a existir truncamiento del numero
+		cout << "SHIT!!!" << endl;
 		shift	 = 63 - shift;
 		mantissa = mantissa >> shift; //CHEQUEAR QUE ESTA RAMA FUNCIONE CORRECTAMENTE Q NO LA PROBE
 	} 
@@ -219,7 +220,7 @@ ullInt Real :: getMantissa(){
 		mantissa = mantissa << shift;	
 	}
 	
-	mantissa &= getMascara();
+//	mantissa &= getMascara();
 	
 	return mantissa;
 }
