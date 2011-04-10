@@ -6,7 +6,7 @@ CFLAGS = -ggdb
 NASM = -f elf
 DEBUGNASM = -g
 
-errores: main.cpp $(OBJSo) 
+pi: main.cpp $(OBJSo) 
 	g++ -o pi $(CFLAGS) $(MATH) main.cpp $(OBJSo) 
 
 asm:
