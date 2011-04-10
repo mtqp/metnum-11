@@ -3,6 +3,7 @@
 //#include <string>
 #include <cstdlib>
 #include <cstdio>
+#include <limits>
 
 //#define big_mathLib float
 #define big_mathLib double
@@ -15,9 +16,9 @@ using namespace std;
 
 #define bestInt int
 
-bestInt fact(bestInt x){
-	if(x != 0){
-		bestInt i = x-1;
+int_mathLib fact(int_mathLib x){
+	if(x > 0){
+		int_mathLib i = x-1;
 		for(i;i!=0;i--){
 			x *= i;
 		}
@@ -72,9 +73,25 @@ big_mathLib Machin(int cantIteraciones){
 
 big_mathLib Ramanujan(int cantIteraciones){
 	big_mathLib pi=0;;
-	
+	int_mathLib num;
+	int_mathLib den;
 	for(int i=0;i<cantIteraciones;i++){
-		pi += (fact(4*i) * (1103+26390*i))/(pow(fact(i),4) * pow(396,4*i));
+		cout << "i " << i << endl;
+		
+		num = fact(4*i)*(1103+26390*i);
+		cout << "num " << num << endl;
+		
+		double num_double = (double) num;
+		cout << "num_double " << num_double << endl;
+		
+		cout << pow(fact(i),4) << endl << pow(396,4*i) << endl;
+		den = pow(fact(i),4) * pow(396,4*i);
+		cout << "den " << den << endl;
+		
+		double den_double = (double) den;
+		cout << "den_double " << den_double << endl;
+		
+		pi += num_double/den_double;
 	}
 
 	pi *= sqrt(8)/9801;
@@ -83,6 +100,7 @@ big_mathLib Ramanujan(int cantIteraciones){
 }
 
 int main(int argc, char** argv){
+	cout << "Maximum ull value: " << std::numeric_limits<unsigned long long>::max() << std::endl;
 	int t;	//se usa para el constructor del tipo de datos nuestro
 	int cantIteraciones;
 	int i = 1;
@@ -97,8 +115,11 @@ int main(int argc, char** argv){
 	}
 	
 	//big_mathLib pi = Gregory(cantIteraciones);
+	cout.precision(10);
+	cout << "Machin " << Machin(cantIteraciones) << endl;
+	cout << "Ramanujan " << Ramanujan(cantIteraciones) << endl;
 
-	while(i < cantIteraciones){
+	/*while(i < cantIteraciones){
 		big_mathLib piGreg = Gregory(i);
 		big_mathLib piMac  = Machin(i);
 		big_mathLib piRam  = Ramanujan(i);
@@ -108,7 +129,7 @@ int main(int argc, char** argv){
 		cout << "G_" << piGreg  << "|\tM_" << piMac << "|\tR_" << piRam << endl;
 //		printf("G_%lf |\tM_%lf \tR_%lf\n",piGreg,piMac,piRam);
 		i++;
-	}
+	}*/
 
 	return 0;
 }

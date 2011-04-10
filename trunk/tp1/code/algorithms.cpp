@@ -37,11 +37,22 @@ Real Ramanujan(int t_digits, int cantIt, bool truncates){
 	Real pi(t_digits,truncates);
 	
 	for(int i=0;i<cantIt;i++){
-		ullInt num = fact(4*i)* (1103+26390*i);	
-		ullInt den = intPot(fact(i),4) * intPot(396,4*i);
+		cout << "i " << i << endl;
+		
+		ullInt num = fact(4*i)* (1103+26390*i);
+		cout << "num " << num << endl;
+		
+		cout << pow(fact(i),4) << endl << pow(396,4*i) << endl;
+		ullInt den = pow(fact(i),4) * pow(396,4*i);
+		cout << "den " << den << endl;
+		
 		Real rnum(num,t_digits,truncates);
+		double num_double = rnum.convert();
+		cout << "num_double " << num_double << endl;
+		
 		Real rden(den,t_digits,truncates);
-		//cout << "den!! " << den << endl;
+		double den_double = rden.convert();
+		cout << "dem_double " << den_double << endl;
 
 		pi = pi + (rnum/rden);
 	}
