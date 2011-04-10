@@ -35,6 +35,43 @@ Real Machin(int t_digits, int cantIt, bool truncates){
 
 Real Ramanujan(int t_digits, int cantIt, bool truncates){
 	Real pi(t_digits,truncates);
+
+	Real _1103(1103,t_digits,truncates);
+	Real _26390(26390,t_digits,truncates);
+	Real _396(396,t_digits,truncates);
+	
+	for(int i=0;i<cantIt;i++){
+/*		ullInt num = fact(4*i)* (1103+26390*i);
+		ullInt den = pow(fact(i),4) * pow(396,4*i);
+*/
+		Real iReal(i,t_digits,truncates);
+
+		ullInt factNumULL = fact(4*i);	//como calculamos fact de un real, existe eso? FEITO
+		ullInt factDenULL = fact(i);
+
+		Real factNum(factNumULL,t_digits,truncates);
+		Real factDen(factDenULL,t_digits,truncates);
+		
+		Real rnum(t_digits,truncates);
+		Real rden(t_digits,truncates);
+		
+		rnum = factNum * (_1103 + (_26390*iReal));
+		rden = pot(factDen,4) * pot(_396,4*i);
+
+		pi = pi + (rnum/rden);
+	}
+
+	Real 	  _1(1,t_digits,truncates);
+	Real     _8(8,t_digits,truncates);
+	Real _9801(9801,t_digits,truncates);
+
+	pi = pi * (squareRoot(_8)/_9801);
+	
+	return _1/pi;
+}
+
+/*Real Ramanujan(int t_digits, int cantIt, bool truncates){
+	Real pi(t_digits,truncates);
 	
 	for(int i=0;i<cantIt;i++){
 		cout << "i " << i << endl;
@@ -64,5 +101,8 @@ Real Ramanujan(int t_digits, int cantIt, bool truncates){
 	pi = pi * (squareRoot(ocho)/nueve801);
 	
 	return uno/pi;
-}
+}*/
+
+
+
 
