@@ -31,6 +31,7 @@ class Real {
 		/*Otros*/	
 		double convert() const;	
 		void save(double value);
+//		void save(ullInt sign, ullInt exp, ullInt mantissa);
 		
 		void filterPrecision();		//VA PRIVADA!
 
