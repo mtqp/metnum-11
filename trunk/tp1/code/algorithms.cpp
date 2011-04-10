@@ -55,12 +55,21 @@ Real Ramanujan(int t_digits, int cantIt, bool truncates){
 		rnum = factNum * (_1103 + (_26390*iReal));
 		rden = pot(factDen,4) * pot(_396,4*i);
 
+		cout << "factNUm = " << factNum.convert()  << endl << "1103_ = " << _1103.convert() << endl;
+		cout << "26390   = " << _26390.convert() << endl << "ireal =  " << iReal.convert() << endl;
+
+		cout << "rnum = " << rnum << endl;
+		cout << "rden = " << rden << endl;
+		cout << "pi   = " << pi << endl;
+
 		pi = pi + (rnum/rden);
 	}
 
-	Real 	  _1(1,t_digits,truncates);
-	Real     _8(8,t_digits,truncates);
+	Real _1(1,t_digits,truncates);
+	Real _8(8,t_digits,truncates);
 	Real _9801(9801,t_digits,truncates);
+
+	cout << "pi = " << pi << endl;
 
 	pi = pi * (squareRoot(_8)/_9801);
 	
