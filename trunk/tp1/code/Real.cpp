@@ -49,8 +49,8 @@ Real Real :: operator+ (const Real &a){
 		selector = this;
 		
 	Real resultSum(selector->_tdigits,selector->_truncates);
-	resultSum.copyDoubleToArray(resSum);
-	//resultSum.filterPrecision();
+	
+	resultSum.save(resSum);
 	
 	return resultSum;
 }
@@ -68,8 +68,8 @@ Real Real :: operator* (const Real &a){
 		selector = this;
 	
 	Real resultMult(selector->_tdigits, selector->_truncates);
-	resultMult.copyDoubleToArray(resMult);
-	//resultMult.filterPrecision();
+
+	resultMult.save(resMult);
 	
 	return resultMult;
 }
@@ -88,8 +88,8 @@ Real Real :: operator- (const Real &a){
 		selector = this;
 
 	Real resultSub(selector->_tdigits, selector->_truncates);
-	resultSub.copyDoubleToArray(resSub);
-	//resultSub.filterPrecision();
+
+	resultSub.save(resSub);
 
 	return resultSub;
 }
@@ -108,8 +108,7 @@ Real Real :: operator/ (const Real &a){
 
 	Real resultDiv((selector->_tdigits), selector->_truncates);
 
-	resultDiv.copyDoubleToArray(resDiv);
-	//resultDiv.filterPrecision();
+	resultDiv.save(resDiv);
 
 	return resultDiv;	
 }
@@ -126,7 +125,6 @@ Real& Real :: operator= (const Real &a){
 		}
 	}
 	return *this;
-	
 }
 
 double Real :: convert() const{
@@ -137,7 +135,7 @@ double Real :: convert() const{
 
 void Real :: save(double value){
 	copyDoubleToArray(value);
-	//filterPrecision();
+	filterPrecision();
 }
 
 void Real :: printReal(){
@@ -209,7 +207,7 @@ void Real :: filterPrecision(){
 	int exp = getExp();
 
 	if(!_truncates){
-		cout << "!_truncates" << endl;
+		cout << "!_truncates -- ESTO NO ANDA TODAVIA" << endl;
 		double redondeo = pot(base2,exp).convert();
 		for(int i=0;i<_tdigits;i++){
 			redondeo /= 2.0;
@@ -225,6 +223,8 @@ void Real :: filterPrecision(){
 //	printInt(filteredDouble);
 
 	copyDoubleToArray(intToDouble(filteredDouble));
+	
+//	printDouble(convert());
 }
 
 void Real :: copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa){
@@ -291,8 +291,6 @@ void Real :: setReal(llInt number, int t_digits,bool truncates){
 	mantissa = getInitMantissa();
 	
 	copyDoubleToArray(sign,exp,mantissa);
-	
-	//filterPrecision();
 }
 
 ullInt Real :: getInitSign(){

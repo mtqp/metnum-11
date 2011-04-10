@@ -31,8 +31,9 @@ int main(int argc, char** argv){
 
 	res = _1/_3;
 	res.printReal();
-	res.filterPrecision();
-	res.printReal();
+//	cout << _1 << endl;
+
+//	res.printReal();
 /*	res = _1/_2;
 
 	cout << "RES = " << endl;
