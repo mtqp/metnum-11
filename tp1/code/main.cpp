@@ -37,6 +37,7 @@ int main(int argc, char** argv){
 			t_digits = atoi(argv[2]);
 			cantIt   = atoi(argv[3]);
 			truncate = (bool) atoi(argv[4]);
+			cout << "t_digits" << t_digits << "cantIt" << cantIt << "truncate" << truncate << endl;
 			break;			
 		default:
 			usage();
@@ -44,7 +45,7 @@ int main(int argc, char** argv){
 	}
 	
 	//cout.presicion(52);
-	
+	cout.precision(10);
 	switch(atoi(argv[1])){
 		case 1:
 			cout << "PI calculado con Gregory: " 	<< Gregory(t_digits, cantIt, truncate) << endl;
@@ -86,7 +87,7 @@ int main(int argc, char** argv){
 }
 
 void usage(){
-	cout << "use: ./errores [metodo] [tdigitos] [cantidadIteraciones] [trunca?]" << endl;
+	cout << "use: ./pi [metodo] [tdigitos] [cantidadIteraciones] [trunca?]" << endl;
 	cout << "El parametro 'metodos' debe ser una de las siguientes opciones:" << endl;
 	cout << "\t 1 para Gregory" << endl;
 	cout << "\t 2 para Machin" << endl;

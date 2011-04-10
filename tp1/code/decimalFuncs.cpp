@@ -9,11 +9,11 @@ double charToDouble(char* value){
 }
 
 Real squareRoot(Real number){
-	double real = number.convert();
+	double num_double = number.convert();
 
-	real = sqrt(real);
+	num_double = sqrt(num_double);
 	
-	number.save(real);
+	number.save(num_double);
 	
 	return number;
 }
@@ -24,10 +24,10 @@ Real arctan(Real real, int cantIt){
 	Real resATAN_impar(real.presicion(), real.truncate());
 
 	ullInt den;
+	Real num(real.presicion(), real.truncate());
 
 	for(int i=0; i<cantIt; i+=2){
 		den = (2*i)+1;
-		Real num(0, real.presicion(), real.truncate());
 		num = pot(real,den);
 
 		Real acumDen(den, real.presicion(), real.truncate());
@@ -37,7 +37,6 @@ Real arctan(Real real, int cantIt){
 	
 	for(int i=1; i<cantIt; i+=2){
 		den = (2*i)+1;
-		Real num(0, real.presicion(), real.truncate());
 		num = pot(real,den);
 
 		Real acumDen(den, real.presicion(), real.truncate());
