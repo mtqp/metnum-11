@@ -3,7 +3,6 @@
 #include "intFuncs.h"
 #include "Real.h"
 #include "algorithms.h"
-
 /*
 	HAY QUE POR PARAMETRO DE ENTRADA ELEGIR EL ALGO???
 	tener en cuenta que hasta ahora la implementacion que tiene no soporta x ejemplo
@@ -13,68 +12,125 @@
 void usage();
 
 int main(int argc, char** argv){
-	int t_digits;	//se usa para el constructor del tipo de datos nuestro
-	int  cantIt;
-	bool truncate;
+	int t_digits = 51;	//se usa para el constructor del tipo de datos nuestro
+	int  cantIt = 10;
+	bool truncate = true;
 
 	switch(argc){
-		case 2:
-			t_digits = t_digits_default;
-			cantIt   = it_default;
-			truncate = truncate_default;
-			break;
 		case 3:
-			t_digits = atoi(argv[2]);
-			cantIt   = it_default;
-			truncate = truncate_default;
+			cout << "Uso de parametros por defecto: " << endl;
+			cout << "\t tdigitos = " << t_digits << endl;
+			cout << "\t cantidadIteraciones = " << cantIt << endl;
+			cout << "\t trunca? = " << truncate << endl;
 			break;
 		case 4:
-			t_digits = atoi(argv[2]);
-			cantIt   = atoi(argv[3]);
-			truncate = truncate_default;
+			t_digits = atoi(argv[3]);
+			cout << "Uso de parametros por defecto: " << endl;
+			cout << "\t cantidadIteraciones = " << cantIt << endl;
+			cout << "\t trunca? = " << truncate << endl;
 			break;
 		case 5:
+			t_digits = atoi(argv[3]);
+			cantIt   = atoi(argv[4]);
+			cout << "Uso de parametros por defecto: " << endl;
+			cout << "\t trunca? = " << truncate << endl;
+			break;
+		case 6:
+			t_digits = atoi(argv[3]);
+			cantIt   = atoi(argv[4]);
+			if (strcmp(argv[5],"-r")==0) truncate = 0;
+			//cout << "tdigits " << t_digits << "cantIt " << cantIt << "truncate " << truncate << endl;
+			break;
 			t_digits = atoi(argv[2]);
 			cantIt   = atoi(argv[3]);
 			truncate = (bool) atoi(argv[4]);
 			//cout << "t_digits" << t_digits << "cantIt" << cantIt << "truncate" << truncate << endl;
-			break;			
-		default:
-			usage();
-			exit(0);
-	}
-	
-//	cout.presicion(t_digits);
-//	cout.precision(10);
-	Real _1(1,t_digits,truncate);	
-	Real _3(3,t_digits,truncate);
-	
-  	_1 = _1/_3;
-//  	_1.printReal();
-  	_1.filterPrecision();
-//	_1.printReal();
-	exit(0);
-
-
-	switch(atoi(argv[1])){
-		case 1:
-			cout << "PI calculado con Gregory: " 	<< Gregory(t_digits, cantIt, truncate) << endl;
-			break;
-		case 2:
-			cout << "PI calculado con Machin: " 	<< Machin(t_digits, cantIt, truncate) << endl;
-			break;
-		case 3:
-			cout << "PI calculado con Ramanujan: " 	<< Ramanujan(t_digits, cantIt, truncate) << endl;
-			break;
-		case 4:
-			cout << "PI calculado con Gregory: " 	<< Gregory(t_digits, cantIt, truncate) << endl;
-			cout << "PI calculado con Machin: " 	<< Machin(t_digits, cantIt, truncate) << endl;
-			cout << "PI calculado con Ramanujan: " 	<< Ramanujan(t_digits, cantIt, truncate) << endl;
 			break;
 		default:
 			usage();
 			exit(0);
 	}
+	
+	if(t_digits > 51 || (argc>=6 && strcmp(argv[5],"-t")!=0 && strcmp(argv[5],"-r")!=0) || (strcmp(argv[1],"-i")!=0 && strcmp(argv[1],"-terminos")!=0 && strcmp(argv[1],"-digitos")!=0)){
+		usage();
+		exit(0);
+	}
+
+cout.precision(t_digits);
+switch(atoi(argv[2])){
+	case 1:
+		if(strcmp(argv[1],"-terminos")==0){
+			for(int j=1; j<=t_digits; j++){
+				cout.precision(j);
+				cout << "PI calculado con Gregory: " << Gregory(j, cantIt, truncate) << endl;
+			}
+		}
+		else{
+			if(strcmp(argv[1],"-digitos")==0){
+				for(int j=1; j<=cantIt; j++)
+					cout << "PI calculado con Gregory: " << Gregory(t_digits, j, truncate) << endl;
+			}
+			else cout << "PI calculado con Gregory: " << Gregory(t_digits, cantIt, truncate) << endl;
+		}
+		break;
+	case 2:
+		if(strcmp(argv[1],"-terminos")==0){
+			for(int j=1; j<=t_digits; j++){
+				cout.precision(j);
+				cout << "PI calculado con Machin: " << Machin(j, cantIt, truncate) << endl;
+			}
+		}
+		else{
+			if(strcmp(argv[1],"-digitos")==0){
+				for(int j=1; j<=cantIt; j++)
+					cout << "PI calculado con Machin: " << Machin(t_digits, j, truncate) << endl;
+			}
+			else cout << "PI calculado con Machin: " << Machin(t_digits, cantIt, truncate) << endl;
+		}
+		break;
+	case 3:
+		if(strcmp(argv[1],"-terminos")==0){
+			for(int j=1; j<=t_digits; j++){
+				cout.precision(j);
+				cout << "PI calculado con Ramanujan: " << Ramanujan(j, cantIt, truncate) << endl;
+			}
+		}
+		else{
+			if(strcmp(argv[1],"-digitos")==0){
+				for(int j=1; j<=cantIt; j++)
+					cout << "PI calculado con Ramanujan: " << Ramanujan(t_digits, j, truncate) << endl;
+			}
+			else cout << "PI calculado con Ramanujan: " << Ramanujan(t_digits, cantIt, truncate) << endl;
+		}
+		break;
+	case 4:
+		if(strcmp(argv[1],"-terminos")==0){
+			for(int j=1; j<=t_digits; j++){
+				cout.precision(j);
+				cout << "PI calculado con Gregory: " 	<< Gregory(t_digits, cantIt, truncate) << endl;
+				cout << "PI calculado con Machin: " 	<< Machin(t_digits, cantIt, truncate) << endl;
+				cout << "PI calculado con Ramanujan: " 	<< Ramanujan(t_digits, cantIt, truncate) << endl;
+			}
+		}
+		else{
+			if(strcmp(argv[1],"-digitos")==0){
+				for(int j=1; j<=cantIt; j++){
+					cout << "PI calculado con Gregory: " 	<< Gregory(t_digits, cantIt, truncate) << endl;
+					cout << "PI calculado con Machin: " 	<< Machin(t_digits, cantIt, truncate) << endl;
+					cout << "PI calculado con Ramanujan: " 	<< Ramanujan(t_digits, cantIt, truncate) << endl;
+				}
+			}
+			else{
+				cout << "PI calculado con Gregory: " 	<< Gregory(t_digits, cantIt, truncate) << endl;
+				cout << "PI calculado con Machin: " 	<< Machin(t_digits, cantIt, truncate) << endl;
+				cout << "PI calculado con Ramanujan: " 	<< Ramanujan(t_digits, cantIt, truncate) << endl;
+			}
+		}
+		break;
+	default:
+		usage();
+		exit(0);
+}
 	
 /*	t_digits = 52;
 	truncate = true;
@@ -97,13 +153,24 @@ int main(int argc, char** argv){
 }
 
 void usage(){
-	cout << "use: ./pi [metodo] [tdigitos] [cantidadIteraciones] [trunca?]" << endl;
+	cout << "uso: ./pi [modoUso] [metodo] [tdigitos] [cantidadIteraciones] [trunca?] \t(opcionales los ultimos tres parametros) " << endl;
+	cout << endl;
+	cout << "El parametro 'modoUso' debe ser una de las siguientes opciones:" << endl;
+	cout << "\t -i  para ejecutar una instancia" << endl;
+	cout << "\t -terminos para fijar la cantidad de terminos de la serie en 'cantidadIteraciones' y variar la precision hasta 'tdigitos'" << endl;
+	cout << "\t -digitos para fijar la precision en 'tdigitos' y variar la cantidad de terminos de la serie hasta 'cantidadIteraciones'" << endl;
+	cout << endl;
 	cout << "El parametro 'metodos' debe ser una de las siguientes opciones:" << endl;
 	cout << "\t 1 para Gregory" << endl;
 	cout << "\t 2 para Machin" << endl;
 	cout << "\t 3 para Ramanujan" << endl;
 	cout << "\t 4 para los tres algoritmos" << endl;
-	cout << "Son opcionales los ultimos tres parametros" << endl;
+	cout << endl;
+	cout << "El parametro 'tdigitos' debe ser menor a 52" << endl;
+	cout << endl;
+	cout << "El parametro 'trunca?' se especifica de la siguiente manera:" << endl;
+	cout << "\t -t para Truncar el resultado" << endl;
+	cout << "\t -r para Redondear el resultado" << endl;
 }
 
 

@@ -76,20 +76,19 @@ big_mathLib Ramanujan(int cantIteraciones){
 	int_mathLib num;
 	int_mathLib den;
 	for(int i=0;i<cantIteraciones;i++){
-		cout << "i " << i << endl;
+		//cout << "i " << i << endl;
 		
 		num = fact(4*i)*(1103+26390*i);
-		cout << "num " << num << endl;
+		//cout << "num " << num << endl;
 		
 		double num_double = (double) num;
-		cout << "num_double " << num_double << endl;
-		
-		cout << pow(fact(i),4) << endl << pow(396,4*i) << endl;
+		//cout << "num_double " << num_double << endl;
+	
 		den = pow(fact(i),4) * pow(396,4*i);
-		cout << "den " << den << endl;
+		//cout << "den " << den << endl;
 		
 		double den_double = (double) den;
-		cout << "den_double " << den_double << endl;
+		//cout << "den_double " << den_double << endl;
 		
 		pi += num_double/den_double;
 	}
@@ -100,7 +99,7 @@ big_mathLib Ramanujan(int cantIteraciones){
 }
 
 int main(int argc, char** argv){
-	cout << "Maximum ull value: " << std::numeric_limits<unsigned long long>::max() << std::endl;
+	//cout << "Maximum ull value: " << std::numeric_limits<unsigned long long>::max() << std::endl;
 	int t;	//se usa para el constructor del tipo de datos nuestro
 	int cantIteraciones;
 	int i = 1;
@@ -116,20 +115,8 @@ int main(int argc, char** argv){
 	
 	//big_mathLib pi = Gregory(cantIteraciones);
 	cout.precision(10);
-	cout << "Machin " << Machin(cantIteraciones) << endl;
-	cout << "Ramanujan " << Ramanujan(cantIteraciones) << endl;
-
-	/*while(i < cantIteraciones){
-		big_mathLib piGreg = Gregory(i);
-		big_mathLib piMac  = Machin(i);
-		big_mathLib piRam  = Ramanujan(i);
-		
-//		cout.precision(60);
-//		cout << M_PI << endl;
-		cout << "G_" << piGreg  << "|\tM_" << piMac << "|\tR_" << piRam << endl;
-//		printf("G_%lf |\tM_%lf \tR_%lf\n",piGreg,piMac,piRam);
-		i++;
-	}*/
-
+	for(int j=1;j<=cantIteraciones;j++)
+		cout << "PI calculado con Ramanujan: " << Ramanujan(j) << endl;
+	
 	return 0;
 }

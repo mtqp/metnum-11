@@ -36,78 +36,45 @@ Real Machin(int t_digits, int cantIt, bool truncates){
 Real Ramanujan(int t_digits, int cantIt, bool truncates){
 	Real pi(t_digits,truncates);
 
+	Real _1(1,t_digits,truncates);
+	Real _2(2,t_digits,truncates);
+	Real _3(3,t_digits,truncates);	
 	Real _1103(1103,t_digits,truncates);
-	Real _26390(26390,t_digits,truncates);
 	Real _396(396,t_digits,truncates);
+	Real fact_4n(1,t_digits,truncates);
+	Real fact_n(1,t_digits,truncates);
 	
-	for(int i=0;i<cantIt;i++){
-		Real iReal(i,t_digits,truncates);
-
-		ullInt factNumULL = fact(4*i);	//como calculamos fact de un real, existe eso? FEITO
-		ullInt factDenULL = fact(i);
-
+	for(int i=1;i<cantIt;i++){
+		ullInt factNumULL = 4*i;
 		Real factNum(factNumULL,t_digits,truncates);
-		Real factDen(factDenULL,t_digits,truncates);
+	
+		//Calculo de (4i)! a partir de la iteracion anterior (4*(i-1))!
+		fact_4n = fact_4n*(factNum*((factNum-_1)*((factNum-_2)*(factNum-_3))));
+		
+		ullInt numULL = (1103+26390*i);
+		Real num(numULL,t_digits,truncates);
 		
 		Real rnum(t_digits,truncates);
-		Real rden(t_digits,truncates);
+		rnum = fact_4n*num;
 		
-		rnum = factNum * (_1103 + (_26390*iReal));
-		rden = pot(factDen,4) * pot(_396,4*i);
+		fact_n = fact_n*i;
+	
+		Real rden(t_digits,truncates);
+		rden = pot(fact_n,4) * pot(_396,4*i);
 
-/*		cout << "factNUm = " << factNum.convert()  << endl << "1103_ = " << _1103.convert() << endl;
-		cout << "26390   = " << _26390.convert() << endl << "ireal =  " << iReal.convert() << endl;
-
-		cout << "rnum = " << rnum << endl;
-		cout << "rden = " << rden << endl;
-		cout << "pi   = " << pi << endl;
-*/
 		pi = pi + (rnum/rden);
 	}
+	
+	//Suma del primer termino de la serie
+	pi = pi + _1103;
 
-	Real _1(1,t_digits,truncates);
 	Real _8(8,t_digits,truncates);
 	Real _9801(9801,t_digits,truncates);
-
-	cout << "pi = " << pi << endl;
 
 	pi = pi * (squareRoot(_8)/_9801);
 	
 	return _1/pi;
 }
-
-/*Real Ramanujan(int t_digits, int cantIt, bool truncates){
-	Real pi(t_digits,truncates);
-	
-	for(int i=0;i<cantIt;i++){
-		cout << "i " << i << endl;
-		
-		ullInt num = fact(4*i)* (1103+26390*i);
-		cout << "num " << num << endl;
-		
-		cout << pow(fact(i),4) << endl << pow(396,4*i) << endl;
-		ullInt den = pow(fact(i),4) * pow(396,4*i);
-		cout << "den " << den << endl;
-		
-		Real rnum(num,t_digits,truncates);
-		double num_double = rnum.convert();
-		cout << "num_double " << num_double << endl;
-		
-		Real rden(den,t_digits,truncates);
-		double den_double = rden.convert();
-		cout << "dem_double " << den_double << endl;
-
-		pi = pi + (rnum/rden);
-	}
-
-	Real 	  uno(1,t_digits,truncates);
-	Real     ocho(8,t_digits,truncates);
-	Real nueve801(9801,t_digits,truncates);
-
-	pi = pi * (squareRoot(ocho)/nueve801);
-	
-	return uno/pi;
-}*/
 
 
 
