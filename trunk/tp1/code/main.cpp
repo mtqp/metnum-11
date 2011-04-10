@@ -44,8 +44,8 @@ int main(int argc, char** argv){
 			exit(0);
 	}
 	
-	//cout.presicion(52);
-	cout.precision(10);
+//	cout.presicion(t_digits);
+//	cout.precision(10);
 	switch(atoi(argv[1])){
 		case 1:
 			cout << "PI calculado con Gregory: " 	<< Gregory(t_digits, cantIt, truncate) << endl;

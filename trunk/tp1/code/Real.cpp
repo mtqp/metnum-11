@@ -150,7 +150,7 @@ Real& Real :: operator= (const Real &a){
 	
 }
 
-int Real ::presicion() const{
+int Real :: presicion() const{
 	return _tdigits;
 }
 
