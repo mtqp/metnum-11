@@ -4,33 +4,33 @@ Real Gregory(int t_digits, int cantIt, bool truncates){
 	Real pi_par(t_digits,truncates);
 	Real pi_impar(t_digits,truncates);
 	
-	Real uno(1,t_digits,truncates);
-	Real cuatro(4,t_digits,truncates);
+	Real _1(1,t_digits,truncates);
+	Real _4(4,t_digits,truncates);
 	
 	ullInt acumDenominador;
 	
 	for(int i=0;i<cantIt;i+=2){
 		acumDenominador = 2*i+1;
 		Real denominador(acumDenominador, cantIt, truncates);
-		pi_par = pi_par + (uno/denominador);
+		pi_par = pi_par + (_1/denominador);
 	}
 
 	for(int i=1;i<cantIt;i+=2){
 		acumDenominador = 2*i+1;
 		Real denominador(acumDenominador, cantIt, truncates);
-		pi_impar = pi_impar + (uno/denominador);
+		pi_impar = pi_impar + (_1/denominador);
 	}
 
-	return (pi_par-pi_impar)*cuatro;
+	return (pi_par-pi_impar)*_4;
 }
 
 Real Machin(int t_digits, int cantIt, bool truncates){
-	Real cuatro(4,t_digits, truncates);
-	Real    uno(1,t_digits, truncates);
-	Real  cinco(5,t_digits, truncates);
-	Real  dos39(239,t_digits, truncates);
+	Real _4(4,t_digits, truncates);
+	Real _1(1,t_digits, truncates);
+	Real _5(5,t_digits, truncates);
+	Real _239(239,t_digits, truncates);
 
-	return cuatro*((cuatro*arctan(uno/cinco,cantIt)) - arctan(uno/dos39,cantIt));
+	return _4*((_4*arctan(_1/_5,cantIt)) - arctan(_1/_239,cantIt));
 }
 
 Real Ramanujan(int t_digits, int cantIt, bool truncates){
@@ -41,9 +41,6 @@ Real Ramanujan(int t_digits, int cantIt, bool truncates){
 	Real _396(396,t_digits,truncates);
 	
 	for(int i=0;i<cantIt;i++){
-/*		ullInt num = fact(4*i)* (1103+26390*i);
-		ullInt den = pow(fact(i),4) * pow(396,4*i);
-*/
 		Real iReal(i,t_digits,truncates);
 
 		ullInt factNumULL = fact(4*i);	//como calculamos fact de un real, existe eso? FEITO

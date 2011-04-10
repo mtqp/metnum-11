@@ -46,11 +46,11 @@ int main(int argc, char** argv){
 	
 //	cout.presicion(t_digits);
 //	cout.precision(10);
-	Real _396(396,52,true);
+/*	Real _396(396,52,true);
 	
 	cout << pot(_396,8) << " || " << pow(396,8) << endl;
 	exit(0);
-
+*/
 	switch(atoi(argv[1])){
 		case 1:
 			cout << "PI calculado con Gregory: " 	<< Gregory(t_digits, cantIt, truncate) << endl;
