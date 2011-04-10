@@ -217,9 +217,14 @@ void Real :: filterPrecision(){
 		value += redondeo;
 	}
 
+//	printInt(doubleToInt(value));
+//	printInt(mask);
+
 	filteredDouble = doubleToInt(value) & mask;
 
-	copyDoubleToArray(filteredDouble);
+//	printInt(filteredDouble);
+
+	copyDoubleToArray(intToDouble(filteredDouble));
 }
 
 void Real :: copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa){
@@ -286,7 +291,8 @@ void Real :: setReal(llInt number, int t_digits,bool truncates){
 	mantissa = getInitMantissa();
 	
 	copyDoubleToArray(sign,exp,mantissa);
-
+	
+	//filterPrecision();
 }
 
 ullInt Real :: getInitSign(){
