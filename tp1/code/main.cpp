@@ -20,6 +20,47 @@ int main(int argc, char** argv){
 	int  cantIt = 10;
 	bool truncate = true;
 
+//----------------------		
+	t_digits = atoi(argv[1]);
+	truncate = (bool) atoi(argv[2]);
+	
+	Real _1(1,t_digits,truncate);	
+	Real _2(2,t_digits,truncate);	
+	Real _3(3,t_digits,truncate);
+	Real res(0,t_digits,truncate);
+
+	res = _1/_3;
+	res.printReal();
+	res.filterPrecision();
+	res.printReal();
+/*	res = _1/_2;
+
+	cout << "RES = " << endl;
+	res.printReal();
+
+	res = res/_3;
+	
+	cout << "res/3" << endl;
+	res.printReal();
+	
+	res = res+(_1/_2)+(_1/_3);
+	
+	cout << "res/3 + 1/2 + 1/3" << endl;
+	res.printReal();
+
+	res = res/_2;
+	
+	cout << "res/4" << endl;
+	res.printReal();
+	
+	res = res/_2;
+	
+	cout << "res/8" << endl;
+	res.printReal();
+*/
+	return 0;
+
+//-------------------
 	switch(argc){
 		case 3:
 			cout << "Uso de parametros por defecto: " << endl;
@@ -39,16 +80,10 @@ int main(int argc, char** argv){
 			cout << "Uso de parametros por defecto: " << endl;
 			cout << "\t trunca? = " << truncate << endl;
 			break;
-		case 6:		//wtf?
+		case 6:	
 			t_digits = atoi(argv[3]);
 			cantIt   = atoi(argv[4]);
-			if (strcmp(argv[5],"-r")==0) truncate = 0;
-			//cout << "tdigits " << t_digits << "cantIt " << cantIt << "truncate " << truncate << endl;
-			break;
-			t_digits = atoi(argv[2]);
-			cantIt   = atoi(argv[3]);
-			truncate = (bool) atoi(argv[4]);
-			//cout << "t_digits" << t_digits << "cantIt" << cantIt << "truncate" << truncate << endl;
+			if (strcmp(argv[5],"-r")==0) truncate = false;
 			break;
 		default:
 			usage();
@@ -115,14 +150,12 @@ int main(int argc, char** argv){
 				for(int j=1; j<=t_digits; j++){
 					cout.precision(j);
 					outThree(j, cantIt, truncate);
-					//outThree(t_digits, cantIt, truncate);
 				}
 			}
 			else{
 				if(strcmp(argv[1],"-digitos")==0){
 					for(int j=1; j<=cantIt; j++){
 						outThree(t_digits, j, truncate);
-						//outThree(t_digits, cantIt, truncate);				
 					}
 				}
 				else
@@ -133,24 +166,7 @@ int main(int argc, char** argv){
 			usage();
 			exit(0);
 	}
-	
-/*	t_digits = 52;
-	truncate = true;
-	
-	Real uno(1,t_digits,truncate);	
-	Real tres(3,t_digits,truncate);
-	Real res(0,t_digits,truncate);
-	Real n(0,t_digits,truncate);
 
-	printDouble(15.0);
-
-	res = uno/diez;
-	*/
-	/*
-	uno.printReal();
-	tres.printReal();
-	res.printReal();
-*/
 	return 0;
 }
 
@@ -161,7 +177,7 @@ int main(int argc, char** argv){
 void outThree(int tdigits, int cantIt, bool truncate){
 	outGregory(tdigits,cantIt,truncate);
 	outMachin(tdigits,cantIt,truncate);
-	outGregory(tdigits,cantIt,truncate);	
+	outRamanujan(tdigits,cantIt,truncate);	
 }
 
 void outGregory(int tdigits, int cantIt, bool truncate){
