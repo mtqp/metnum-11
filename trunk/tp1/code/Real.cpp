@@ -5,6 +5,10 @@
 	y eso se maneja automaticamente
 */
 
+/*
+	Public
+*/
+
 Real ::	Real(){
 	setReal(0,52,true);
 }
@@ -21,31 +25,15 @@ Real ::	Real(llInt number, int t_digits,bool truncates){
 	setReal(number,t_digits,truncates);
 }
 
-void Real :: setReal(llInt number, int t_digits,bool truncates){
-	_truncates = truncates;
-	_tdigits = t_digits;
-	_original = number;
-
-	setMascara();
-
-	memset((void *) &_real, 0, 8);
-	if(number==0){
-		return;
-	}
-
-	ullInt sign;
-	ullInt exp;
-	ullInt mantissa;
-
-	sign 	 = getSign();
-	exp  	 = getExp();
-	mantissa = getMantissa();
-	
-	copyDoubleToArray(sign,exp,mantissa);
-
+Real ::	~Real(){
 }
 
-Real ::	~Real(){
+int Real :: presicion() const{
+	return _tdigits;
+}
+
+bool Real :: truncate() const{
+	return _truncates;
 }
 
 Real Real :: operator+ (const Real &a){
@@ -141,16 +129,6 @@ Real& Real :: operator= (const Real &a){
 	
 }
 
-int Real :: presicion() const{
-	return _tdigits;
-}
-
-bool Real :: truncate() const{
-	return _truncates;
-}
-
-
-	
 double Real :: convert() const{
 	double realConverted;
 	realConverted = *(double*) _real;
@@ -162,56 +140,60 @@ void Real :: save(double value){
 	//filterPrecision();
 }
 
-ullInt Real :: getSign(){
-	ullInt signedNumber = 0;
+void Real :: printReal(){
+    char * desmond = (char *) & _real;
+    int i;
+	cout << "int representation (of array of class)   --> " << _original << ".0" << endl;
+	cout << "double representation (of array of class)--> " << convert() << endl;
+	printNotacion();
 	
-	if(_original<0)
-	{
-		signedNumber = signedNumber+1<<63;
-	}
-	
-	return signedNumber;
+	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
+
+    for (i=sizeof(double)-1; i>=0; i--) {
+        printCharsetInBits(desmond[i], bits);
+        printf ("%s ", bits);
+    }
+    printf ("\n");
+    
+    free(bits);
 }
 
-ullInt Real :: getExp(){
-	ullInt number = cleanSign(_original);
-	ullInt exp 	  = 0;
-	
-	exp = (ullInt) placesToShift(number,0); /*se le pasa el cero, suponiendo notacion 0.xxxx * e^(+- algo)*/
-	exp += 1022ull;							/*lo normaliza al desvio 1023*/
-
-	exp = exp << 52;
-	
-	return exp;
+ostream &operator<<(ostream &stream, Real real){
+  stream << real.convert();
+  return stream; 
 }
 
-ullInt Real :: getMantissa(){
-	ullInt mantissa;
-	int shift;
-
-	mantissa = cleanSign(_original);
-	shift    = placesToShift(mantissa,0);
-
-	mantissa = cleanFirstNotZero(mantissa,shift);
-
-	if(shift>51){	//==>va a existir truncamiento del numero
-		shift	 = 63 - shift;
-		mantissa = mantissa >> shift; //CHEQUEAR QUE ESTA RAMA FUNCIONE CORRECTAMENTE Q NO LA PROBE
-	} 
-	else
-	{
-		shift 	 = 52-shift+1;
-		mantissa = mantissa << shift;	
-	}
-	
-	mantissa &= getMascara();
-	
-	return mantissa;
-}
+/*
+	Private
+*/
 
 ullInt Real :: getMascara() const{
 	ullInt mask = *(ullInt*) &_mascaraTdigits;
 	return mask>>1;
+}
+
+int Real :: getExp(){
+	unsigned char exp[4];
+	
+	memset((void*) &exp,0,4);
+	
+	unsigned char exp_0 = _real[6];
+	unsigned char exp_1 = _real[7]; 
+
+	exp_1 = exp_1 >> 1;		//limpia signo
+	exp_1 = exp_1 << 1;
+	
+	exp_0 = exp_0 >> 4;		//limpia digitos provenientes de mantissa
+	exp_0 = exp_0 << 4; 
+	
+	exp[0] = exp_0;
+	exp[1] = exp_1;
+	
+	int intExp = *(int*) &exp;
+	
+	intExp = intExp >> 4;			//corre el valor a la parte menos significativa
+	
+	return intExp;
 }
 
 void Real :: filterPrecision(){
@@ -222,10 +204,15 @@ void Real :: filterPrecision(){
 	
 	mask = getMascara();	
 
+	Real base2(2,_tdigits,_truncates);
+
+	int exp = getExp();
+
 	if(!_truncates){
-		double redondeo = 5.0;		/*esto redondea a decimal, y me aprece q qremos a bits*/
+		cout << "!_truncates" << endl;
+		double redondeo = pot(base2,exp).convert();
 		for(int i=0;i<_tdigits;i++){
-			redondeo /= 10.0;
+			redondeo /= 2.0;
 		}
 		value += redondeo;
 	}
@@ -263,55 +250,89 @@ void Real :: copyDoubleToArray(double number){
 
 void Real :: setMascara(){
 	memset((void*) &_mascaraTdigits,255,8);
-//	cout << "original" << endl;
-//	printInt(getMascara());
 	
 	llInt mascara = *(llInt*) &_mascaraTdigits;
-/*	
-	int shiftDer = 52-_tdigits;
-	int shiftIzq = _tdigits;
-*/
+
 	int shiftDer = _tdigits;
 	int shiftIzq = 52-_tdigits;
 	
 	mascara = mascara >> shiftDer;
-//	cout << "shift der t bits = " << shiftDer << endl;
-///	printInt((ullInt) mascara);
-
 	mascara = mascara << shiftIzq;
-//	cout << "shift izq t bits = " << shiftIzq << endl;
-//	printInt((ullInt) mascara);
 		
 	char* pmask = (char*) &mascara;
 	for(int i=0;i<sizeof(double);i++){
 		_mascaraTdigits[i] = pmask[i];
 	}
-//	cout << "in mem" << endl;
-//	printInt(getMascara());
 }
 
-void Real :: printReal(){
-    char * desmond = (char *) & _real;
-    int i;
-	cout << "int representation (of array of class)   --> " << _original << ".0" << endl;
-	cout << "double representation (of array of class)--> " << convert() << endl;
-	printNotacion();
+void Real :: setReal(llInt number, int t_digits,bool truncates){
+	_truncates = truncates;
+	_tdigits = t_digits;
+	_original = number;
+
+	setMascara();
+
+	memset((void *) &_real, 0, 8);
+	if(number==0){
+		return;
+	}
+
+	ullInt sign;
+	ullInt exp;
+	ullInt mantissa;
+
+	sign 	 = getInitSign();
+	exp  	 = getInitExp();
+	mantissa = getInitMantissa();
 	
-	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
+	copyDoubleToArray(sign,exp,mantissa);
 
-    for (i=sizeof(double)-1; i>=0; i--) {
-        printCharsetInBits(desmond[i], bits);
-        printf ("%s ", bits);
-    }
-    printf ("\n");
-    
-    free(bits);
 }
 
-ostream &operator<<(ostream &stream, Real real)
-{
-  stream << real.convert();
-  return stream; 
+ullInt Real :: getInitSign(){
+	ullInt signedNumber = 0;
+	
+	if(_original<0)
+	{
+		signedNumber = signedNumber+1<<63;
+	}
+	
+	return signedNumber;
 }
 
+ullInt Real :: getInitExp(){
+	ullInt number = cleanSign(_original);
+	ullInt exp 	  = 0;
+	
+	exp = (ullInt) placesToShift(number,0); /*se le pasa el cero, suponiendo notacion 0.xxxx * e^(+- algo)*/
+	exp += 1022ull;							/*lo normaliza al desvio 1023*/
+
+	exp = exp << 52;
+	
+	return exp;
+}
+
+ullInt Real :: getInitMantissa(){
+	ullInt mantissa;
+	int shift;
+
+	mantissa = cleanSign(_original);
+	shift    = placesToShift(mantissa,0);
+
+	mantissa = cleanFirstNotZero(mantissa,shift);
+
+	if(shift>51){	//==>va a existir truncamiento del numero
+		shift	 = 63 - shift;
+		mantissa = mantissa >> shift; //CHEQUEAR QUE ESTA RAMA FUNCIONE CORRECTAMENTE Q NO LA PROBE
+	} 
+	else
+	{
+		shift 	 = 52-shift+1;
+		mantissa = mantissa << shift;	
+	}
+	
+	mantissa &= getMascara();
+	
+	return mantissa;
+}
 
