@@ -220,6 +220,8 @@ ullInt Real :: getMantissa(){
 		mantissa = mantissa << shift;	
 	}
 	
+	printInt(mantissa);
+	printInt(getMascara());
 //	mantissa &= getMascara();
 	
 	return mantissa;
