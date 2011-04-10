@@ -9,11 +9,6 @@
 	si llegas a dividir x cero te da floating point exception, tenemos q trappear la exception?
 */
 
-/*
-	CHE NO ME GUSTA ESTO DSP ARREGLAR 
-	this->convert(!isMask);
-*/
-
 Real ::	Real(){
 	setReal(0,52,true);
 }
@@ -162,13 +157,7 @@ bool Real :: truncate() const{
 	
 double Real :: convert() const{
 	double realConverted;
-/*	if(isMask){
-		realConverted = *(double*) _mascaraTdigits;
-	}
-	else 
-	{*/
-		realConverted = *(double*) _real;
-	
+	realConverted = *(double*) _real;
 	return realConverted;
 }
 
@@ -210,7 +199,6 @@ ullInt Real :: getMantissa(){
 	mantissa = cleanFirstNotZero(mantissa,shift);
 
 	if(shift>51){	//==>va a existir truncamiento del numero
-		cout << "SHIT!!!" << endl;
 		shift	 = 63 - shift;
 		mantissa = mantissa >> shift; //CHEQUEAR QUE ESTA RAMA FUNCIONE CORRECTAMENTE Q NO LA PROBE
 	} 
@@ -220,9 +208,7 @@ ullInt Real :: getMantissa(){
 		mantissa = mantissa << shift;	
 	}
 	
-	printInt(mantissa);
-	printInt(getMascara());
-//	mantissa &= getMascara();
+	mantissa &= getMascara();
 	
 	return mantissa;
 }
@@ -233,26 +219,27 @@ ullInt Real :: getMascara() const{
 }
 
 void Real :: filterPrecision(){
-	double value = intToDouble(_original);
+	double value = convert();
+//	printDouble(value);
 	
 //	cout << _tdigits << " {{{{{ TE DIYITS" << endl;	
 	ullInt filteredDouble;
 	ullInt mask;
 	
-//	bool isMask = true;
-	mask = doubleToInt(convert());	
-
-//	printDouble(value);
+	mask = getMascara();	
 
 	if(!_truncates){
-		value += intToDouble(getRoundFactor(52-_tdigits));
-		//printInt(getRoundFactor(52-_tdigits));
+		/*necesito armar el 1.0 * 2^-(tdigitos+1)*/
+		cout << "ENTRE EN EL NOT TRUNCATES" << endl;
+		value += 1.0*pow(2,-_tdigits+1);
+		//printDouble(1.0*pow(2,-_tdigits+1));
+		/*DO ALGO*/
+		//value += intToDouble(getRoundFactor(52-_tdigits));
+
 	}
-	//printDouble(intToDouble(getRoundFactor(52-_tdigits)));
-//	printDouble(value);	
-//	printInt(mask);
+
 	filteredDouble = doubleToInt(value) & mask;
-//	printDouble(filteredDouble);	
+
 	copyDoubleToArray(filteredDouble);
 }
 
