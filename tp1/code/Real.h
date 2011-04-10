@@ -29,11 +29,11 @@ class Real {
 		int presicion() const;
 		bool truncate() const;
 		
-		void filterPrecision();		//ESTA CREO Q VA PRIVADA!
+		void filterPrecision();		//VA PRIVADA!
 
 		friend ostream &operator<<(ostream &stream, Real r);
 	private:
-		//void filterPrecision();		//ESTA CREO Q VA PRIVADA!
+		//void filterPrecision();		
 		void copyDoubleToArray(double number);
 		void copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa);
 		void setMascara();

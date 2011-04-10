@@ -3,16 +3,20 @@
 #include "intFuncs.h"
 #include "Real.h"
 #include "algorithms.h"
+
 /*
-	HAY QUE POR PARAMETRO DE ENTRADA ELEGIR EL ALGO???
 	tener en cuenta que hasta ahora la implementacion que tiene no soporta x ejemplo
 	(-1)*Real+...
 */
 
+void outThree(int tdigits, int cantIt, bool truncate);
+void outGregory(int tdigits, int cantIt, bool truncate);
+void outMachin(int tdigits, int cantIt, bool truncate);
+void outRamanujan(int tdigits, int cantIt, bool truncate);
 void usage();
 
 int main(int argc, char** argv){
-	int t_digits = 51;	//se usa para el constructor del tipo de datos nuestro
+	int t_digits = 51;
 	int  cantIt = 10;
 	bool truncate = true;
 
@@ -35,7 +39,7 @@ int main(int argc, char** argv){
 			cout << "Uso de parametros por defecto: " << endl;
 			cout << "\t trunca? = " << truncate << endl;
 			break;
-		case 6:
+		case 6:		//wtf?
 			t_digits = atoi(argv[3]);
 			cantIt   = atoi(argv[4]);
 			if (strcmp(argv[5],"-r")==0) truncate = 0;
@@ -56,81 +60,79 @@ int main(int argc, char** argv){
 		exit(0);
 	}
 
-cout.precision(t_digits);
-switch(atoi(argv[2])){
-	case 1:
-		if(strcmp(argv[1],"-terminos")==0){
-			for(int j=1; j<=t_digits; j++){
-				cout.precision(j);
-				cout << "PI calculado con Gregory: " << Gregory(j, cantIt, truncate) << endl;
-			}
-		}
-		else{
-			if(strcmp(argv[1],"-digitos")==0){
-				for(int j=1; j<=cantIt; j++)
-					cout << "PI calculado con Gregory: " << Gregory(t_digits, j, truncate) << endl;
-			}
-			else cout << "PI calculado con Gregory: " << Gregory(t_digits, cantIt, truncate) << endl;
-		}
-		break;
-	case 2:
-		if(strcmp(argv[1],"-terminos")==0){
-			for(int j=1; j<=t_digits; j++){
-				cout.precision(j);
-				cout << "PI calculado con Machin: " << Machin(j, cantIt, truncate) << endl;
-			}
-		}
-		else{
-			if(strcmp(argv[1],"-digitos")==0){
-				for(int j=1; j<=cantIt; j++)
-					cout << "PI calculado con Machin: " << Machin(t_digits, j, truncate) << endl;
-			}
-			else cout << "PI calculado con Machin: " << Machin(t_digits, cantIt, truncate) << endl;
-		}
-		break;
-	case 3:
-		if(strcmp(argv[1],"-terminos")==0){
-			for(int j=1; j<=t_digits; j++){
-				cout.precision(j);
-				cout << "PI calculado con Ramanujan: " << Ramanujan(j, cantIt, truncate) << endl;
-			}
-		}
-		else{
-			if(strcmp(argv[1],"-digitos")==0){
-				for(int j=1; j<=cantIt; j++)
-					cout << "PI calculado con Ramanujan: " << Ramanujan(t_digits, j, truncate) << endl;
-			}
-			else cout << "PI calculado con Ramanujan: " << Ramanujan(t_digits, cantIt, truncate) << endl;
-		}
-		break;
-	case 4:
-		if(strcmp(argv[1],"-terminos")==0){
-			for(int j=1; j<=t_digits; j++){
-				cout.precision(j);
-				cout << "PI calculado con Gregory: " 	<< Gregory(t_digits, cantIt, truncate) << endl;
-				cout << "PI calculado con Machin: " 	<< Machin(t_digits, cantIt, truncate) << endl;
-				cout << "PI calculado con Ramanujan: " 	<< Ramanujan(t_digits, cantIt, truncate) << endl;
-			}
-		}
-		else{
-			if(strcmp(argv[1],"-digitos")==0){
-				for(int j=1; j<=cantIt; j++){
-					cout << "PI calculado con Gregory: " 	<< Gregory(t_digits, cantIt, truncate) << endl;
-					cout << "PI calculado con Machin: " 	<< Machin(t_digits, cantIt, truncate) << endl;
-					cout << "PI calculado con Ramanujan: " 	<< Ramanujan(t_digits, cantIt, truncate) << endl;
+	cout.precision(t_digits);
+	switch(atoi(argv[2])){
+		case 1:
+			if(strcmp(argv[1],"-terminos")==0){
+				for(int j=1; j<=t_digits; j++){
+					cout.precision(j);
+					outThree(j, cantIt, truncate);
 				}
 			}
 			else{
-				cout << "PI calculado con Gregory: " 	<< Gregory(t_digits, cantIt, truncate) << endl;
-				cout << "PI calculado con Machin: " 	<< Machin(t_digits, cantIt, truncate) << endl;
-				cout << "PI calculado con Ramanujan: " 	<< Ramanujan(t_digits, cantIt, truncate) << endl;
+				if(strcmp(argv[1],"-digitos")==0){
+					for(int j=1; j<=cantIt; j++)
+						outGregory(t_digits, j, truncate);
+				}
+				else 
+					outGregory(t_digits, cantIt, truncate);
 			}
-		}
-		break;
-	default:
-		usage();
-		exit(0);
-}
+			break;
+		case 2:
+			if(strcmp(argv[1],"-terminos")==0){
+				for(int j=1; j<=t_digits; j++){
+					cout.precision(j);
+					outMachin(j, cantIt, truncate);
+				}
+			}
+			else{
+				if(strcmp(argv[1],"-digitos")==0){
+					for(int j=1; j<=cantIt; j++)
+						outMachin(t_digits, j, truncate);
+				}
+				else 
+					outMachin(t_digits, cantIt, truncate);
+			}
+			break;
+		case 3:
+			if(strcmp(argv[1],"-terminos")==0){
+				for(int j=1; j<=t_digits; j++){
+					cout.precision(j);
+					outRamanujan(j, cantIt, truncate);
+				}
+			}
+			else{
+				if(strcmp(argv[1],"-digitos")==0){
+					for(int j=1; j<=cantIt; j++)
+						outRamanujan(t_digits, j, truncate);
+				}
+				else 
+					outRamanujan(t_digits, cantIt, truncate);
+			}
+			break;
+		case 4:
+			if(strcmp(argv[1],"-terminos")==0){
+				for(int j=1; j<=t_digits; j++){
+					cout.precision(j);
+					outThree(j, cantIt, truncate);
+					//outThree(t_digits, cantIt, truncate);
+				}
+			}
+			else{
+				if(strcmp(argv[1],"-digitos")==0){
+					for(int j=1; j<=cantIt; j++){
+						outThree(t_digits, j, truncate);
+						//outThree(t_digits, cantIt, truncate);				
+					}
+				}
+				else
+					outThree(t_digits, cantIt, truncate);
+			}
+			break;
+		default:
+			usage();
+			exit(0);
+	}
 	
 /*	t_digits = 52;
 	truncate = true;
@@ -150,6 +152,28 @@ switch(atoi(argv[2])){
 	res.printReal();
 */
 	return 0;
+}
+
+/*
+	Extra funcs
+*/
+
+void outThree(int tdigits, int cantIt, bool truncate){
+	outGregory(tdigits,cantIt,truncate);
+	outMachin(tdigits,cantIt,truncate);
+	outGregory(tdigits,cantIt,truncate);	
+}
+
+void outGregory(int tdigits, int cantIt, bool truncate){
+	cout << "PI calculado con Gregory: " << Gregory(tdigits, cantIt, truncate) << endl;
+}
+
+void outMachin(int tdigits, int cantIt, bool truncate){
+	cout << "PI calculado con Machin: " << Machin(tdigits, cantIt, truncate) << endl;
+}
+
+void outRamanujan(int tdigits, int cantIt, bool truncate){
+	cout << "PI calculado con Ramanujan: " 	<< Ramanujan(tdigits, cantIt, truncate) << endl;
 }
 
 void usage(){
@@ -173,17 +197,4 @@ void usage(){
 	cout << "\t -r para Redondear el resultado" << endl;
 }
 
-
-/*	
-	for(int i=0;i<cantIteraciones;i++){
-		Real r(i,t_digitos,truncate);
-		Real r2(i+1,t_digitos,truncate);
-		Real mUno(-1,t_digitos,truncate);
-		Real dos(2,t_digitos,truncate);
-		res = mUno*(mUno*r+dos*r2);
-//		res = mUno*r;
-//		res = res + r2;
-		cout << i << " --> " << res << endl;
-	}
-*/
 

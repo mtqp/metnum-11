@@ -5,10 +5,6 @@
 	y eso se maneja automaticamente
 */
 
-/*
-	si llegas a dividir x cero te da floating point exception, tenemos q trappear la exception?
-*/
-
 Real ::	Real(){
 	setReal(0,52,true);
 }
@@ -304,7 +300,6 @@ void Real :: printReal(){
 	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
 
     for (i=sizeof(double)-1; i>=0; i--) {
-        //printf ("%02X ", desmond[i]);		si se quiere en Hex
         printCharsetInBits(desmond[i], bits);
         printf ("%s ", bits);
     }
@@ -313,9 +308,6 @@ void Real :: printReal(){
     free(bits);
 }
 
-//fijarse si no se necesita ver cierta precisión del numero o demás
-//pensar que se esta convirtiendo a double y se imprime, fijarse si se quiere
-//realizar la conversion a manopla!
 ostream &operator<<(ostream &stream, Real real)
 {
   stream << real.convert();
