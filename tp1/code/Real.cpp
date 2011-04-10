@@ -220,22 +220,18 @@ ullInt Real :: getMascara() const{
 
 void Real :: filterPrecision(){
 	double value = convert();
-//	printDouble(value);
-	
-//	cout << _tdigits << " {{{{{ TE DIYITS" << endl;	
+
 	ullInt filteredDouble;
 	ullInt mask;
 	
 	mask = getMascara();	
 
 	if(!_truncates){
-		/*necesito armar el 1.0 * 2^-(tdigitos+1)*/
-		cout << "ENTRE EN EL NOT TRUNCATES" << endl;
-		value += 1.0*pow(2,-_tdigits+1);
-		//printDouble(1.0*pow(2,-_tdigits+1));
-		/*DO ALGO*/
-		//value += intToDouble(getRoundFactor(52-_tdigits));
-
+		double redondeo = 5.0;		/*esto redondea a decimal, y me aprece q qremos a bits*/
+		for(int i=0;i<_tdigits;i++){
+			redondeo /= 10.0;
+		}
+		value += redondeo;
 	}
 
 	filteredDouble = doubleToInt(value) & mask;

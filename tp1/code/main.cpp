@@ -37,7 +37,7 @@ int main(int argc, char** argv){
 			t_digits = atoi(argv[2]);
 			cantIt   = atoi(argv[3]);
 			truncate = (bool) atoi(argv[4]);
-			cout << "t_digits" << t_digits << "cantIt" << cantIt << "truncate" << truncate << endl;
+			//cout << "t_digits" << t_digits << "cantIt" << cantIt << "truncate" << truncate << endl;
 			break;			
 		default:
 			usage();
@@ -46,6 +46,15 @@ int main(int argc, char** argv){
 	
 //	cout.presicion(t_digits);
 //	cout.precision(10);
+	Real _1(1,t_digits,truncate);	
+	Real _3(3,t_digits,truncate);
+	
+  	_1 = _1/_3;
+//  	_1.printReal();
+  	_1.filterPrecision();
+//	_1.printReal();
+	exit(0);
+
 
 	switch(atoi(argv[1])){
 		case 1:

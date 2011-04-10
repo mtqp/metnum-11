@@ -65,7 +65,7 @@ ullInt charToInt(char* value){
 	return *(ullInt*) value;
 }
 
-ullInt getRoundFactor(int places){
+ullInt getRoundFactor(int places){	//QUIERO EVITAR USARLA!!!!!
 	ullInt exp = 1020ull;		/*lo normaliza al desvio 1023*/
 	ullInt roundFactor = 1ull;
 
