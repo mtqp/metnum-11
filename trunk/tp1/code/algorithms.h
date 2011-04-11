@@ -4,8 +4,10 @@
 #include "includes.h"
 #include "Real.h"
 
-Real   Gregory(int t_digits, int cantIt, bool truncates);
-Real    Machin(int t_digits, int cantIt, bool truncates);
-Real Ramanujan(int t_digits, int cantIt, bool truncates);
+typedef Real (SERIES)(int t_digits, int cantIt, bool truncate);
+
+SERIES Gregory;
+SERIES Machin;
+SERIES Ramanujan;
 
 #endif
