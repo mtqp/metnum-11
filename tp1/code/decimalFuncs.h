@@ -12,5 +12,6 @@ class Real;
 Real squareRoot(Real num);	
 Real arctan(Real real, int cantIt);
 Real pot(Real real, int exp);
+double doublePot(double num, int exp);
 
 #endif

@@ -141,6 +141,7 @@ void Real :: save(double value){
 void Real :: printReal(){
     char * desmond = (char *) & _real;
     int i;
+    cout.precision(_tdigits);
 	cout << "int representation (of array of class)   --> " << _original << ".0" << endl;
 	cout << "double representation (of array of class)--> " << convert() << endl;
 	printNotacion();
@@ -178,20 +179,20 @@ int Real :: getExp(){
 	unsigned char exp_0 = _real[6];
 	unsigned char exp_1 = _real[7]; 
 
-	exp_1 = exp_1 >> 1;		//limpia signo
-	exp_1 = exp_1 << 1;
+	exp_1 = exp_1 << 1;		//limpia signo
+	exp_1 = exp_1 >> 1;
 	
 	exp_0 = exp_0 >> 4;		//limpia digitos provenientes de mantissa
 	exp_0 = exp_0 << 4; 
-	
+
 	exp[0] = exp_0;
 	exp[1] = exp_1;
 	
 	int intExp = *(int*) &exp;
 	
 	intExp = intExp >> 4;			//corre el valor a la parte menos significativa
-	
-	return intExp;
+
+	return intExp-1023;
 }
 
 void Real :: filterPrecision(){
@@ -202,29 +203,21 @@ void Real :: filterPrecision(){
 	
 	mask = getMascara();	
 
-	Real base2(2,_tdigits,_truncates);
-
 	int exp = getExp();
 
-	if(!_truncates){
-		cout << "!_truncates -- ESTO NO ANDA TODAVIA" << endl;
-		double redondeo = pot(base2,exp).convert();
-		for(int i=0;i<_tdigits;i++){
+	if((!_truncates) && (_tdigits!=51)){
+//		double redondeo = pot(base2,exp).convert();
+		double redondeo = doublePot(2.0,exp);
+		for(int i=0;i<_tdigits+5;i++){
 			redondeo /= 2.0;
 		}
+		
 		value += redondeo;
 	}
 
-//	printInt(doubleToInt(value));
-//	printInt(mask);
-
 	filteredDouble = doubleToInt(value) & mask;
 
-//	printInt(filteredDouble);
-
 	copyDoubleToArray(intToDouble(filteredDouble));
-	
-//	printDouble(convert());
 }
 
 void Real :: copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa){

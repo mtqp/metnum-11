@@ -77,5 +77,31 @@ Real pot(Real real, int exp){
 	return real;
 }
 
+double doublePot(double num, int exp){
+	if(exp == 0){
+		return 1.0;
+	}
+	
+	if(exp==1){
+		return num;
+	}
+
+	double fresh = num;
+	
+	if(exp>0){
+		for(int i=1;i<exp;i++){
+			num *= fresh;
+		}
+	}
+	else
+	{
+		for(int i=1;i<exp;i++){
+			num /= fresh;
+		}		
+	}
+	
+	return num;
+}
+
 
 
