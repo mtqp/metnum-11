@@ -10,8 +10,13 @@
 */
 
 void out(SERIES*, char*, int, int, bool);
+void checkForHelp(char** argv);
 void usage();
 void help();
+
+bool eligeModoTruncamiento(int argc, char** argv);
+bool eligeModoUso(char** argv);
+
 
 int main(int argc, char** argv){
 	int t_digits = 51;
@@ -19,6 +24,9 @@ int main(int argc, char** argv){
 	bool truncate = true;
 
 	switch(argc){
+		case 2:
+			checkForHelp(argv);
+			break;
 		case 3:
 			cout << "Uso de parametros por defecto: " << endl;
 			cout << "\t tdigitos = " << t_digits << endl;
@@ -47,7 +55,7 @@ int main(int argc, char** argv){
 			exit(0);
 	}
 	
-	if(t_digits > 51 || (argc>=6 && strcmp(argv[5],"-t")!=0 && strcmp(argv[5],"-r")!=0) || (strcmp(argv[1],"-i")!=0 && strcmp(argv[1],"-terminos")!=0 && strcmp(argv[1],"-digitos")!=0)){
+	if(t_digits > 51 || !eligeModoTruncamiento(argc,argv) || !eligeModoUso(argv)){
 		usage();
 		exit(0);
 	}
@@ -97,10 +105,26 @@ void out(SERIES* funcion, char* arg, int cantIt, int t_digits, bool truncate){
 	}
 }
 
+bool eligeModoTruncamiento(int argc, char** argv){
+	if(argc>=6)
+		return strcmp(argv[5],"-t")!=0 || strcmp(argv[5],"-r")!=0;
+	return false;
+}
+
+bool eligeModoUso(char** argv){
+	return strcmp(argv[1],"-i")==0 || strcmp(argv[1],"-terminos")==0 || strcmp(argv[1],"-digitos")==0;
+}
+
+void checkForHelp(char** argv){
+	if(strcmp(argv[1],"--help")==0)
+		help();
+	else
+		usage();
+}
+
 void usage(){
-	cout << "uso: ./pi [modoUso] [metodo] [tdigitos] [cantidadIteraciones] [trunca?] \t(opcionales los ultimos tres parametros) " << endl;
-	cout << endl;
-	cout << "Para mas informacion usar ./pi --help"
+	cout << "uso: ./pi [modoUso] [metodo] [tdigitos] [cantidadIteraciones] [trunca?]" << endl << "(opcionales los ultimos tres parametros) " << endl << endl;
+	cout << "Para mas informacion usar ./pi --help" << endl;
 }
 
 /*
@@ -109,22 +133,22 @@ void usage(){
 
 
 void help(){
-	cout << "uso: ./pi [modoUso] [metodo] [tdigitos] [cantidadIteraciones] [trunca?] \t(opcionales los ultimos tres parametros) " << endl;
-	cout << endl;
-	cout << "El parametro 'modoUso' debe ser una de las siguientes opciones:" << endl;
+	cout << "uso: ./pi [modoUso] [metodo] [tdigitos] [cantidadIteraciones] [trunca?]" << endl << "(opcionales los ultimos tres parametros) " << endl << endl;
+	cout << "----------" << endl;
+	cout << "'modoUso':" << endl;
 	cout << "\t -i  para ejecutar una instancia" << endl;
 	cout << "\t -terminos para fijar la cantidad de terminos de la serie en 'cantidadIteraciones' y variar la precision hasta 'tdigitos'" << endl;
 	cout << "\t -digitos para fijar la precision en 'tdigitos' y variar la cantidad de terminos de la serie hasta 'cantidadIteraciones'" << endl;
-	cout << endl;
-	cout << "El parametro 'metodos' debe ser una de las siguientes opciones:" << endl;
+	cout << "----------" << endl;
+	cout << "'metodos':" << endl;
 	cout << "\t 1 para Gregory" << endl;
 	cout << "\t 2 para Machin" << endl;
 	cout << "\t 3 para Ramanujan" << endl;
 	cout << "\t 4 para los tres algoritmos" << endl;
-	cout << endl;
-	cout << "El parametro 'tdigitos' debe ser menor a 52" << endl;
-	cout << endl;
-	cout << "El parametro 'trunca?' se especifica de la siguiente manera:" << endl;
+	cout << "----------" << endl;
+	cout << "'tdigitos' debe ser menor a 52." << endl;
+	cout << "----------" << endl;
+	cout << "'trunca?':" << endl;
 	cout << "\t -t para Truncar el resultado" << endl;
 	cout << "\t -r para Redondear el resultado" << endl;
 }
