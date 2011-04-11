@@ -103,6 +103,11 @@ void usage(){
 	cout << "Para mas informacion usar ./pi --help"
 }
 
+/*
+	faltan dos opciones mas, error relativo para terminmos, y para digitos.
+*/
+
+
 void help(){
 	cout << "uso: ./pi [modoUso] [metodo] [tdigitos] [cantidadIteraciones] [trunca?] \t(opcionales los ultimos tres parametros) " << endl;
 	cout << endl;
