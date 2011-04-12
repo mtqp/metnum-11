@@ -91,9 +91,8 @@ int main(int argc, char** argv){
 void out(SERIES* funcion, char* arg, int cantIt, int t_digits, bool truncate){
 	if(strcmp(arg,"-terminos")==0){
 		for(int j=1; j<=t_digits; j++){
-			cout.precision(j);
-//			cout << j << "\t" << funcion(j, cantIt, truncate) << endl;
-			cout << j << "\t" << funcion(j, cantIt, truncate) << "\t";
+			//cout.precision(j);
+			//cout << j << "\t" << funcion(j, cantIt, truncate) << endl;
 			funcion(j, cantIt, truncate).printRealBits();
 		}
 	}
@@ -101,12 +100,13 @@ void out(SERIES* funcion, char* arg, int cantIt, int t_digits, bool truncate){
 		if(strcmp(arg,"-digitos")==0){
 			for(int j=1; j<=cantIt; j++){
 				//cout << j << "\t" << funcion(t_digits, j, truncate) << endl;
-				cout << j << "\t" << funcion(t_digits, j, truncate) << "\t"; 
 				funcion(t_digits, j, truncate).printRealBits();
 			}
 		}
-		else 
-			cout << funcion(t_digits, cantIt, truncate) << endl;
+		else{
+			//cout << funcion(t_digits, cantIt, truncate) << endl;
+			funcion(t_digits, cantIt, truncate).printRealBits();
+		}
 	}
 }
 
@@ -131,11 +131,6 @@ void usage(){
 	cout << "uso: ./pi [modoUso] [metodo] [tdigitos] [cantidadIteraciones] [trunca?]" << endl << "(opcionales los ultimos tres parametros) " << endl << endl;
 	cout << "Para mas informacion usar ./pi --help" << endl;
 }
-
-/*
-	faltan dos opciones mas, error relativo para terminmos, y para digitos.
-*/
-
 
 void help(){
 	cout << "uso: ./pi [modoUso] [metodo] [tdigitos] [cantidadIteraciones] [trunca?]" << endl << "(opcionales los ultimos tres parametros) " << endl << endl;

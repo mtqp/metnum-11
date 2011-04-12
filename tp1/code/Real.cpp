@@ -17,15 +17,15 @@ Real ::	Real(llInt valor){
 	setReal(valor,52,true);
 }
 
-Real :: Real(double value, int t_digits, bool truncates){
-/*	ullInt int_value = doubleToInt(value);
+/*Real :: Real(double value, int t_digits, bool truncates){
+	ullInt int_value = doubleToInt(value);
 	
 	_t_digits = t_digits;
 	_truncates= truncates;
 	_original = int_value;
 
-	this.save(value);*/
-}
+	this.save(value);
+}*/
 
 Real ::	Real(int t_digits, bool truncates){
 	setReal(0,t_digits,truncates);
