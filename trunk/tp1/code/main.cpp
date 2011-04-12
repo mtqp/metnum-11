@@ -92,13 +92,18 @@ void out(SERIES* funcion, char* arg, int cantIt, int t_digits, bool truncate){
 	if(strcmp(arg,"-terminos")==0){
 		for(int j=1; j<=t_digits; j++){
 			cout.precision(j);
-			cout << j << "\t" << funcion(j, cantIt, truncate) << endl;
+//			cout << j << "\t" << funcion(j, cantIt, truncate) << endl;
+			cout << j << "\t" << funcion(j, cantIt, truncate) << "\t";
+			funcion(j, cantIt, truncate).printRealBits();
 		}
 	}
 	else{
 		if(strcmp(arg,"-digitos")==0){
-			for(int j=1; j<=cantIt; j++)
-				cout << j << "\t" << funcion(t_digits, j, truncate) << endl;
+			for(int j=1; j<=cantIt; j++){
+				//cout << j << "\t" << funcion(t_digits, j, truncate) << endl;
+				cout << j << "\t" << funcion(t_digits, j, truncate) << "\t"; 
+				funcion(t_digits, j, truncate).printRealBits();
+			}
 		}
 		else 
 			cout << funcion(t_digits, cantIt, truncate) << endl;
