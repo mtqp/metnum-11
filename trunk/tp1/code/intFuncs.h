@@ -7,9 +7,6 @@
 #define ullInt unsigned long long
 #define llInt  long long
 
-ullInt fact(ullInt x);
-ullInt intPot(ullInt number, int exp);
-
 ullInt cleanSign(llInt number);
 ullInt cleanFirstNotZero(ullInt number, int shift);
 int placesToShift(ullInt number, int until);
