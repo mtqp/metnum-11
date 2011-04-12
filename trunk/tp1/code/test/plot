@@ -25,20 +25,23 @@ set style line 6 lt 3 pt 3 ps 1
 set style line 7 lt 1 pt 1 ps 1
 set style line 8 lt 2 pt 2 ps 1
 
+#calcula el error relativo
+er(x)=((x-pi)/pi)
+
 set output 'graficos/gregory_it.eps'
 #dibuja los puntos. index es porque lo separe en bloques de primos/no primos para ponerle distinto estilo..
-plot	'data/gregory_it3_51_t.dat' title "3 iteraciones" linestyle 1,\
-		'data/gregory_it10_51_t.dat' title "10 iteraciones" linestyle 2,\
-		'data/gregory_it100_51_t.dat' title "100 iteraciones" linestyle 3
+plot	'data/gregory_it3_51_t.dat' using 1:(er($2)) title "3 iteraciones" linestyle 1,\
+		'data/gregory_it10_51_t.dat' using 1:(er($2)) title "10 iteraciones" linestyle 2,\
+		'data/gregory_it100_51_t.dat' using 1:(er($2)) title "100 iteraciones" linestyle 3
 		
 set output 'graficos/machin_it.eps'
-plot	'data/machin_it3_51_t.dat' title "3 iteraciones" linestyle 4,\
-		'data/machin_it10_51_t.dat' title "10 iteraciones" linestyle 5,\
-		'data/machin_it100_51_t.dat' title "100 iteraciones" linestyle 6
+plot	'data/machin_it3_51_t.dat' using 1:(er($2)) title "3 iteraciones" linestyle 4,\
+		'data/machin_it10_51_t.dat' using 1:(er($2)) title "10 iteraciones" linestyle 5,\
+		'data/machin_it100_51_t.dat' using 1:(er($2)) title "100 iteraciones" linestyle 6
 		
 set output 'graficos/ramanujan_it.eps'
-plot	'data/ramanujan_it3_51_t.dat' title "3 iteraciones" linestyle 7,\
-		'data/ramanujan_it10_51_t.dat' title "10 iteraciones" linestyle 8
+plot	'data/ramanujan_it3_51_t.dat' using 1:(er($2)) title "3 iteraciones" linestyle 7,\
+		'data/ramanujan_it10_51_t.dat' using 1:(er($2)) title "10 iteraciones" linestyle 8
 
 #pongo la salida default para mostrar en pantalla
 set term pop

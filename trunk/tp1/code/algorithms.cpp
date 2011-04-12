@@ -1,11 +1,13 @@
 #include "algorithms.h"
 
 Real Gregory(int t_digits, int cantIt, bool truncates){
+	cout << "t " << t_digits << endl;
 	Real pi_par(t_digits,truncates);
 	Real pi_impar(t_digits,truncates);
 	
 	Real _1(1,t_digits,truncates);
 	Real _4(4,t_digits,truncates);
+	
 	
 	ullInt acumDenominador;
 	
