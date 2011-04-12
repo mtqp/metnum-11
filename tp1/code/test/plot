@@ -4,10 +4,10 @@
 set term postscript enhanced color
 
 #le pone titulo al grafico
-set title "Error relativo con el algoritmo de Gregory en función de la cantidad de digitos de precisión"
+set title "Error relativo en funcién de la cantidad de términos de la serie"
 
 #pone la descripccion de los ejes
-set xlabel "Cantidad de digitos de precisión"
+set xlabel "Cantidad de términos de la serie"
 set ylabel "Error relativo"
 
 #pone la leyenda a la izquierda y con borde
@@ -19,29 +19,15 @@ set key left box
 set style line 1 lt 1 pt 1 ps 1
 set style line 2 lt 2 pt 2 ps 1
 set style line 3 lt 3 pt 3 ps 1
-set style line 4 lt 1 pt 1 ps 1
-set style line 5 lt 2 pt 2 ps 1
-set style line 6 lt 3 pt 3 ps 1
-set style line 7 lt 1 pt 1 ps 1
-set style line 8 lt 2 pt 2 ps 1
 
 #calcula el error relativo
 er(x)=((x-pi)/pi)
 
-set output 'graficos/gregory_it.eps'
-#dibuja los puntos. index es porque lo separe en bloques de primos/no primos para ponerle distinto estilo..
-plot	'data/gregory_it3_51_t.dat' using 1:(er($2)) title "3 iteraciones" linestyle 1,\
-		'data/gregory_it10_51_t.dat' using 1:(er($2)) title "10 iteraciones" linestyle 2,\
-		'data/gregory_it100_51_t.dat' using 1:(er($2)) title "100 iteraciones" linestyle 3
-		
-set output 'graficos/machin_it.eps'
-plot	'data/machin_it3_51_t.dat' using 1:(er($2)) title "3 iteraciones" linestyle 4,\
-		'data/machin_it10_51_t.dat' using 1:(er($2)) title "10 iteraciones" linestyle 5,\
-		'data/machin_it100_51_t.dat' using 1:(er($2)) title "100 iteraciones" linestyle 6
-		
-set output 'graficos/ramanujan_it.eps'
-plot	'data/ramanujan_it3_51_t.dat' using 1:(er($2)) title "3 iteraciones" linestyle 7,\
-		'data/ramanujan_it10_51_t.dat' using 1:(er($2)) title "10 iteraciones" linestyle 8
+set logscale x
+set output 'graficos/ramanujan_digitos.eps'
+plot	'data/r_it42_p3_t.dat' using 1:(er($2)) title "3 digitos" linestyle 1,\
+		'data/r_it42_p10_t.dat' using 1:(er($2)) title "10 digitos" linestyle 2,\
+		'data/r_it42_p51_t.dat' using 1:(er($2)) title "51 digitos" linestyle 3
 
 #pongo la salida default para mostrar en pantalla
 set term pop
