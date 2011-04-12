@@ -102,6 +102,3 @@ double doublePot(double num, int exp){
 	
 	return num;
 }
-
-
-

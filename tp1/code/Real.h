@@ -13,7 +13,6 @@ class Real {
 		/*Constructores*/
 		Real();
 		Real(llInt value);
-		//Real(double value, int t_digits, bool truncates);
 		Real(llInt value, int t_digits,bool truncates);
 		Real(int t_digits, bool truncates);
 		~Real();

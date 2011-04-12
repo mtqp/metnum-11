@@ -17,7 +17,6 @@ void help();
 bool eligeModoTruncamiento(int argc, char** argv);
 bool eligeModoUso(char** argv);
 
-
 int main(int argc, char** argv){
 	int t_digits = 51;
 	int  cantIt = 10;
@@ -91,21 +90,21 @@ int main(int argc, char** argv){
 void out(SERIES* funcion, char* arg, int cantIt, int t_digits, bool truncate){
 	if(strcmp(arg,"-terminos")==0){
 		for(int j=1; j<=t_digits; j++){
-			//cout.precision(j);
-			//cout << j << "\t" << funcion(j, cantIt, truncate) << endl;
-			funcion(j, cantIt, truncate).printRealBits();
+			cout.precision(j);
+			cout << j << "\t" << funcion(j, cantIt, truncate) << endl;
+			//funcion(j, cantIt, truncate).printRealBits();
 		}
 	}
 	else{
 		if(strcmp(arg,"-digitos")==0){
 			for(int j=1; j<=cantIt; j++){
-				//cout << j << "\t" << funcion(t_digits, j, truncate) << endl;
-				funcion(t_digits, j, truncate).printRealBits();
+				cout << j << "\t" << funcion(t_digits, j, truncate) << endl;
+				//funcion(t_digits, j, truncate).printRealBits();
 			}
 		}
 		else{
-			//cout << funcion(t_digits, cantIt, truncate) << endl;
-			funcion(t_digits, cantIt, truncate).printRealBits();
+			cout << funcion(t_digits, cantIt, truncate) << endl;
+			//funcion(t_digits, cantIt, truncate).printRealBits();
 		}
 	}
 }

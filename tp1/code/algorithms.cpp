@@ -1,25 +1,24 @@
 #include "algorithms.h"
 
 Real Gregory(int t_digits, int cantIt, bool truncates){
-	cout << "t " << t_digits << endl;
 	Real pi_par(t_digits,truncates);
 	Real pi_impar(t_digits,truncates);
 	
-	Real _1(1,t_digits,truncates);
+	Real _1(1,t_digits,truncates);	
 	Real _4(4,t_digits,truncates);
-	
+
 	
 	ullInt acumDenominador;
 	
 	for(int i=0;i<cantIt;i+=2){
 		acumDenominador = 2*i+1;
-		Real denominador(acumDenominador, cantIt, truncates);
+		Real denominador(acumDenominador, t_digits, truncates);
 		pi_par = pi_par + (_1/denominador);
 	}
 
 	for(int i=1;i<cantIt;i+=2){
 		acumDenominador = 2*i+1;
-		Real denominador(acumDenominador, cantIt, truncates);
+		Real denominador(acumDenominador, t_digits, truncates);
 		pi_impar = pi_impar + (_1/denominador);
 	}
 
@@ -40,7 +39,7 @@ Real Ramanujan(int t_digits, int cantIt, bool truncates){
 
 	Real _1(1,t_digits,truncates);
 	Real _2(2,t_digits,truncates);
-	Real _3(3,t_digits,truncates);	
+	Real _3(3,t_digits,truncates);
 	Real _1103(1103,t_digits,truncates);
 	Real _396(396,t_digits,truncates);
 	Real fact_4n(1,t_digits,truncates);
@@ -59,11 +58,12 @@ Real Ramanujan(int t_digits, int cantIt, bool truncates){
 		Real rnum(t_digits,truncates);
 		rnum = fact_4n*num;
 		
-		fact_n = fact_n*i;
+		Real _i(i,t_digits,truncates);
+		fact_n = fact_n*_i;
 	
 		Real rden(t_digits,truncates);
 		rden = pot(fact_n,4) * pot(_396,4*i);
-
+		
 		pi = pi + (rnum/rden);
 	}
 	
