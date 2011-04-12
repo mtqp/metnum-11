@@ -275,11 +275,7 @@ void Real :: setMascara(){
 	
 	llInt mascara = *(llInt*) &_mascaraTdigits;
 
-	int shiftDer = _tdigits;
-	int shiftIzq = 52-_tdigits;
-	
-	mascara = mascara >> shiftDer;
-	mascara = mascara << shiftIzq;
+	mascara = mascara << 52-_tdigits;
 		
 	char* pmask = (char*) &mascara;
 	for(int i=0;i<sizeof(double);i++){
