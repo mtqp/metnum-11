@@ -8,8 +8,7 @@ void printInt(ullInt rocker){
 	
 	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
 
-    for (i=sizeof(double)-1; i>=0; i--) {
-         //printf ("%02X ", desmond[i]);
+    for (i=sizeof(ullInt)-1; i>=0; i--) {
          printCharsetInBits(desmond[i], bits);
          printf ("%s ", bits);
     }
@@ -26,13 +25,11 @@ void printDouble(double decker){
 	unsigned char* bits = (unsigned char*) malloc(sizeof(unsigned char)*8);
 
     for (i=sizeof(double)-1; i>=0; i--) {
-         //printf ("%02X ", desmond[i]);
          printCharsetInBits(desmond[i], bits);
          printf ("%s ", bits);
     }
     printf ("\n");
 }
-
 
 void printCharsetInBits(char set, unsigned char* bits){
 	unsigned char pot  = 128;

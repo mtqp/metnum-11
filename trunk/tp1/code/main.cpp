@@ -21,6 +21,18 @@ int main(int argc, char** argv){
 	int t_digits = 51;
 	int  cantIt = 10;
 	bool truncate = true;
+/*
+	Real _1(1,atoi(argv[1]),false);
+	Real _2(2,atoi(argv[1]),false);
+	Real _3(3,atoi(argv[1]),false);
+	Real res(atoi(argv[1]),false);
+	
+	res = (_1/_2)+ (_1/_3) + _3;
+	res.printReal();
+	cout << "filtrando presicion WOWOWOWOWOW" << endl;
+		
+	return 0;*/
+
 
 	switch(argc){
 		case 2:
@@ -92,14 +104,14 @@ void out(SERIES* funcion, char* arg, int cantIt, int t_digits, bool truncate){
 		for(int j=1; j<=t_digits; j++){
 			cout.precision(j);
 			cout << j << "\t" << funcion(j, cantIt, truncate) << endl;
-			//funcion(j, cantIt, truncate).printRealBits();
+			funcion(j, cantIt, truncate).printRealBits();
 		}
 	}
 	else{
 		if(strcmp(arg,"-digitos")==0){
 			for(int j=1; j<=cantIt; j++){
 				cout << j << "\t" << funcion(t_digits, j, truncate) << endl;
-				//funcion(t_digits, j, truncate).printRealBits();
+				funcion(t_digits, j, truncate).printRealBits();
 			}
 		}
 		else{

@@ -8,15 +8,6 @@
 /*
 	Public
 */
-
-Real ::	Real(){
-	setReal(0,52,true);
-}
-
-Real ::	Real(llInt valor){
-	setReal(valor,52,true);
-}
-
 Real ::	Real(int t_digits, bool truncates){
 	setReal(0,t_digits,truncates);
 }
@@ -51,7 +42,7 @@ Real Real :: operator+ (const Real &a){
 	Real resultSum(selector->_tdigits,selector->_truncates);
 	
 	resultSum.save(resSum);
-	
+		
 	return resultSum;
 }
 
@@ -109,7 +100,7 @@ Real Real :: operator/ (const Real &a){
 	Real resultDiv((selector->_tdigits), selector->_truncates);
 
 	resultDiv.save(resDiv);
-
+	
 	return resultDiv;	
 }
 
@@ -182,7 +173,7 @@ ostream &operator<<(ostream &stream, Real real){
 
 ullInt Real :: getMascara() const{
 	ullInt mask = *(ullInt*) &_mascaraTdigits;
-	return mask>>1;
+	return mask;
 }
 
 int Real :: getExp(){
@@ -219,13 +210,11 @@ void Real :: filterPrecision(){
 
 	int exp = getExp();
 
-	if((!_truncates) && (_tdigits!=51)){
-//		double redondeo = pot(base2,exp).convert();
+	if(!_truncates){
 		double redondeo = doublePot(2.0,exp);
-		for(int i=0;i<_tdigits+5;i++){
+		for(int i=0;i<_tdigits+4;i++){
 			redondeo /= 2.0;
 		}
-		
 		value += redondeo;
 	}
 
@@ -265,12 +254,8 @@ void Real :: setMascara(){
 	
 	llInt mascara = *(llInt*) &_mascaraTdigits;
 
-	int shiftDer = _tdigits;
-	int shiftIzq = 52-_tdigits;
+	mascara = mascara << 52-_tdigits;
 	
-	mascara = mascara >> shiftDer;
-	mascara = mascara << shiftIzq;
-		
 	char* pmask = (char*) &mascara;
 	for(int i=0;i<sizeof(double);i++){
 		_mascaraTdigits[i] = pmask[i];
@@ -332,9 +317,9 @@ ullInt Real :: getInitMantissa(){
 
 	mantissa = cleanFirstNotZero(mantissa,shift);
 
-	if(shift>51){	//==>va a existir truncamiento del numero
-		shift	 = 63 - shift;
-		mantissa = mantissa >> shift; //CHEQUEAR QUE ESTA RAMA FUNCIONE CORRECTAMENTE Q NO LA PROBE
+	if(shift>52){	//==>va a existir truncamiento del numero
+		shift	 = shift - 52;
+		mantissa = mantissa >> shift;
 	} 
 	else
 	{
