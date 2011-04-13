@@ -1,0 +1,23 @@
+#!/usr/bin/gnuplot -persist
+load 'error_relativo'
+
+#le pone titulo al grafico
+set title "Error relativo en funcion de la cantidad de terminos de la serie"
+
+#pone la descripccion de los ejes
+set xlabel "Iteraciones"
+set ylabel "Error relativo"
+
+set logscale y
+
+set output 'truncamiento/graficos/comparacion_42it.eps'
+plot	'truncamiento/data/gregory/gregory_42it_0a51p.dat' using 1:(er($2)) title "Gregory" linestyle 1,\
+		'truncamiento/data/machin/machin_42it_0a51p.dat' using 1:(er($2)) title "Machin" linestyle 2,\
+		'truncamiento/data/ramanujan/ramanujan_42it_0a51p.dat' using 1:(er($2)) title "Ramanujan" linestyle 3
+		
+#set output 'redondeo/graficos/comparacion_42it.eps'
+
+#pongo la salida default para mostrar en pantalla
+set term pop
+set output
+replot
