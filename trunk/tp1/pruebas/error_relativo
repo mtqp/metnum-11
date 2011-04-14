@@ -16,5 +16,7 @@ set style line 4 lt 2 pt 6 ps 2
 
 PI=3.14159265358979323846264338327950288419716939937510
 
+cota_gregory(x) = 5*(2**(1-x))
+
 #calcula el error relativo
 er(x)=abs((x-PI)/PI)
