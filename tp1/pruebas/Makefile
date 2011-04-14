@@ -1,18 +1,19 @@
-data_digitos = truncamiento/data/gregory/gregory_1a42it_51p.dat truncamiento/data/machin/machin_1a42it_51p.dat truncamiento/data/ramanujan/ramanujan_1a42it_51p.dat
-data_terminos = truncamiento/data/gregory/gregory_42it_1a51p.dat truncamiento/data/machin/machin_42it_1a51p.dat truncamiento/data/ramanujan/ramanujan_42it_1a51p.dat	
+all: digitos terminos cotas
 
-all: digitos terminos
-
-digitos: plot_comparacion_1a42it_51p $(data_digitos)
+digitos: plot_comparacion_1a42it_51p
 	./plot_comparacion_1a42it_51p
 	ps2pdf truncamiento/graficos/comparacion_1a42it_51p.eps ../informe/graficos/comparacion_1a42it_51p.pdf
 	ps2pdf truncamiento/graficos/comparacion_machin-ram.eps ../informe/graficos/comparacion_machin-ram.pdf
 
-terminos: plot_comparacion_42it_1a51p $(data_terminos)
+terminos: plot_comparacion_42it_1a51p
 	./plot_comparacion_42it_1a51p
 	ps2pdf truncamiento/graficos/comparacion_42it_1a51p.eps ../informe/graficos/comparacion_42it_1a51p.pdf
 	ps2pdf truncamiento/graficos/comparacion_5it_1a51p.eps ../informe/graficos/comparacion_5it_1a51p.pdf
 
+cotas: plot_cotas 
+	./plot_cotas
+	ps2pdf truncamiento/graficos/cotas.eps ../informe/graficos/cotas.pdf
+	
 clean:
 	rm truncamiento/graficos/*.eps
 

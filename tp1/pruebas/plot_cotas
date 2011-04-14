@@ -1,0 +1,20 @@
+#!/usr/bin/gnuplot -persist
+load 'error_relativo'
+
+#le pone titulo al grafico
+set title "Error relativo en funcion de la cantidad de digitos"
+
+#pone la descripccion de los ejes
+set xlabel "Digitos"
+set ylabel "Error relativo"
+
+set logscale y
+
+set output 'truncamiento/graficos/cotas.eps'
+plot	'truncamiento/data/gregory/cota_gregory.dat' using 1:(er($2)) title "Gregory",\
+		cota_gregory(x) title "Cota Gregory" linestyle 1 with lines
+
+#pongo la salida default para mostrar en pantalla
+set term pop
+set output
+replot
