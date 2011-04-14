@@ -60,5 +60,23 @@
 	
 	$\Rightarrow$\\
 	
-	$\frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}(\ev{arctan(\frac{1}{5})}+\ev{4}+\er{*}{arctan(\frac{1}{5}),4}) - \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{arctan(\frac{1}{239})} + \er{-}{\frac{1}{5}),\frac{1}{239})} + \ev{4} + \er{*}{z,4}$
+	$\frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}(\ev{arctan(\frac{1}{5})}+\ev{4}+\er{*}{arctan(\frac{1}{5}),4}) - \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{arctan(\frac{1}{239})} + \er{-}{\frac{1}{5}),\frac{1}{239})} + \ev{4} + \er{*}{z,4} < $
+	
+	$\Rightarrow_{Acotando \; los \; errores \; por \; k, \; es \; menor \; a:}$\\
+	
+	$< \frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}3k - \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}4k $
+	
+	$\Rightarrow$\\
+	
+	$< \frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}3k + \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}4k $
+	
+	$\Rightarrow$\\
+	
+	$< \frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})+arctan(\frac{1}{239})}7k < \frac{4*arctan(\frac{1}{5})}{5*arctan(\frac{1}{239})}7k < \frac{arctan(\frac{1}{5})}{arctan(\frac{1}{239})}7k < 48 7k = 336k = 2^{4}.3.7$
+	
+	Reemplazando $k=2^{1-t}$ nos queda que el error relativo del algoritmo de Machin:
+	
+		$\ev{\pi} < 2^{4} x 3 x 7 x 2^{1-t} = 3 x 7 x 2^{5-t}$
+	
+	
 \end{section}
