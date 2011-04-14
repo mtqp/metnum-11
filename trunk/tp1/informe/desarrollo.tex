@@ -1,24 +1,33 @@
 \begin{section}{Desarrollo}
-	\begin{subsection}{Explicación}
+	\begin{subsection}{Analisis teórico}
+			
+		\input{gregory.tex}
+		\newpage
+		\input{machin.tex}
+		\newpage
+		\input{ramanujan.tex}
+		
 	\end{subsection}
 	\begin{subsection}{Implementación}
-		La implementación se realizó en C++. Al necesitar manejar presición arbitraria los tipos de datos nativos del lenguaje no satisfacían nuestras necesidades.
+		Al necesitar manejar presición arbitraria los tipos de datos nativos del lenguaje C++ no satisfacían nuestras necesidades.
 		
-		Una solución encontrada a este problema, fue implementar una clase con esta funcionalidad. La clase $Real$ implementa los operadores básicos: suma, resta, multiplicación. división y asignación, los observadores sobre la presición y truncamiento, y funciones para visualización de la información del $Real$ en stdout. Se exporta además dos métodos con funcionalidad importante, uno de ellos para convertir el $Real$ en $double$ (tipo nativo de C++) y otro método que dado un $double$ refresca esta información en la instancia $Real$ correspondiente.
+		Una solución encontrada a este problema, fue implementar un tipo de datos (clase $Real$) con esta funcionalidad (presición variable). La clase $Real$ implementa los operadores básicos: suma, resta, multiplicación. división y asignación, los observadores sobre la presición y truncamiento, y funciones para visualización de la información del $Real$ en stdout. Se exporta además dos métodos con funcionalidad importante, uno de ellos para convertir el $Real$ en $double$ (tipo nativo de C++) y otro método que dado un $double$ refresca esta información en la instancia $Real$ correspondiente.
 		
 		Como precondición de este trabajo práctico la presición máxima de digitos (en base 2) del cálculo de $\pi$ debe ser a lo sumo 51 bits.
-		Sabiendo que C++ cumple con el standar IEEE-754, el cual establece 52 bits de mantisa para un tipo de datos $double$, utilizamos a este como cimiento de nuestra clase $Real$. Las operaciones aritméticas sobre $Real$ consisten en convertirlos en $double$, realizar la operación correspondiente y transformar el resultado nuevamente en un $Real$, aplicándole previamente el algoritmo de truncamiento o redondeo según corresponda acorde a los parámetros de entrada del programa (cantidad de dígitos).
+		Sabiendo que C++ cumple con el standar IEEE-754, el cual establece 52 bits de mantisa para un tipo de datos $double$, utilizamos a este como cimiento de nuestra clase $Real$. Las operaciones aritméticas sobre $Real$ consisten en convertirlos en $double$, realizar la operación correspondiente y transformar el resultado nuevamente en un $Real$, aplicándole previamente el algoritmo de truncamiento
+		 %o redondeo según corresponda 
+		acorde a los parámetros de entrada del programa (cantidad de dígitos).
 		
-		Fuera de la clase implementamos el cálculo de raíz cuadrada, arco tangente y exponenciación de $Real$. Se tomó esta decisión ya que consideramos que estas no son operaciones básicas, por lo que el uso de estas sólo tiene sentido en instancias de $Real$ en situaciones complejas (el cálculo de $\pi$). Tomamos como modelo la implementación de estas operaciones en C++ que requiere la inclusión de una biblioteca (cmath).
+		Fuera de la clase implementamos el cálculo de raíz cuadrada, arco tangente y exponenciación de $Real$. Se tomó esta decisión ya que consideramos que estas no son operaciones básicas, por lo que el uso de estas sólo tiene sentido en instancias de $Real$ en situaciones complejas (por ejemplo el cálculo de $\pi$). Tomamos como modelo la implementación de estas operaciones en C++ que requiere la inclusión de una biblioteca (cmath).
 		
-		Una instancia de $Real$ se puede generar sólo a partir de un entero de 64 bits con signo, esta decisión se sustenta en la base de que las cuentas en número flotante poseen error. Nuestra implementación de todos los algoritmos de cálculo de $\pi$ maximizan el uso de variables de tipo entero. Cuando los cálculos dejan de tener sentido en el mundo de los enteros o su presición no es suficiente, se crea una instancia de $Real$ que represente al valor entero y se continúa operando sobre este tipo.
+		 La implementación de todos los algoritmos del cálculo de $\pi$ maximizan el uso de variables de tipo entero ya que las cuentas en número flotante poseen error mientras que enteros no. Cuando los cálculos dejan de tener sentido en el mundo de los enteros o su presición no es suficiente, se crea una instancia de $Real$ que represente al valor entero y se continúa operando sobre este tipo. Por ese motivo una instancia de $Real$ se puede generar sólo a partir de un entero de 64 bits con signo.\\
 		   
 	   A continuación detallamos las optimizaciones de los algoritmos:
 
 		\begin{itemize}
-			\item \underline{Gregory:} Refactorizamos nuestra implementación original de la serie que consistía en respetar el orden de los sumandos según el enunciado como las operaciones internas de cada uno de ellos. A continuación se detalla en lenguaje matemático los cambios realizados.
+			\item \underline{Gregory:} Refactorizamos nuestra implementación original de la serie que consistía en respetar el orden de los sumandos según el enunciado como las operaciones internas de cada uno de ellos. A continuación se detalla en lenguaje matemático los cambios realizados.\\
 							
-				$\sum_{n=0}^{\infty}\frac{(-1)^n}{2n+1} = \sum_{n \in \mathbb{N} / n\;mod(2)=0}^{\infty}\frac{1}{2n+1}-\sum_{n \in \mathbb{N} / n\;mod(2)=1}^{\infty}\frac{1}{2n+1}$
+				$\sum_{n=0}^{\infty}\frac{(-1)^n}{2n+1} = \sum_{n \in \mathbb{N} / n\;mod(2)=0}^{\infty}\frac{1}{2n+1}-\sum_{n \in \mathbb{N} / n\;mod(2)=1}^{\infty}\frac{1}{2n+1}$\\
 				
 				Al hacerlo de esta manera en la ejecución de cada iteración del algoritmo evitamos el cálculo de una potencia al costo de almacenar dos números que acumulan las sumas.
 				
