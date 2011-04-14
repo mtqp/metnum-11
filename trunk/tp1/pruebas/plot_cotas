@@ -11,8 +11,11 @@ set ylabel "Error relativo"
 set logscale y
 
 set output 'truncamiento/graficos/cotas.eps'
-plot	'truncamiento/data/gregory/cota_gregory.dat' using 1:(er($2)) title "Gregory",\
-		cota_gregory(x) title "Cota Gregory" linestyle 1 with lines
+plot	'truncamiento/data/gregory/cota_gregory.dat' using 1:(er($2)) title "Gregory" linestyle 1,\
+		cota_gregory(x) title "Cota Gregory" linestyle 1 with lines,\
+		'truncamiento/data/machin/cota_machin.dat' using 1:(er($2)) title "Machin" linestyle 2,\
+		cota_machin(x) title "Cota Machin" linestyle 2 with lines,\
+		'truncamiento/data/ramanujan/cota_ramanujan.dat' using 1:(er($2)) title "Ramanujan" linestyle 3
 
 #pongo la salida default para mostrar en pantalla
 set term pop
