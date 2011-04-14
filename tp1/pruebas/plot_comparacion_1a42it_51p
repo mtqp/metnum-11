@@ -8,6 +8,12 @@ set title "Error relativo en funcion la cantidad de terminos de la serie"
 set xlabel "Iteraciones"
 set ylabel "Error relativo"
 
+
+set output 'truncamiento/graficos/comparacion_greg-ram.eps'
+plot[3:12][-1e-4:1e-4]	'truncamiento/data/machin/machin_1a42it_51p.dat' using 1:(er($2)) title "Machin" linestyle 4,\
+						'truncamiento/data/ramanujan/ramanujan_1a42it_51p.dat' using 1:(er($2)) title "Ramanujan" linestyle 3,\
+						0 title "cero" linestyle 1
+
 set logscale y
 
 set output 'truncamiento/graficos/comparacion_1a42it_51p.eps'

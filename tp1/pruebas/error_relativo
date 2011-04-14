@@ -12,6 +12,7 @@ set key right box
 set style line 1 lt 1 pt 1 ps 1
 set style line 2 lt 2 pt 2 ps 1
 set style line 3 lt 3 pt 3 ps 1
+set style line 4 lt 2 pt 6 ps 2
 
 PI=3.14159265358979323846264338327950288419716939937510
 
