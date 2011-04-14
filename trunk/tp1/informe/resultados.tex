@@ -2,16 +2,35 @@
 
 	Para analizar las diferencias y/o similitudes en la aplicación práctica de los tres algoritmos implementados se generaron gráficos que pasan a detallarse a continuación. 
 		
-	El primero de ellos consiste en gráficar el error relativo en función de la cantidad de iteraciones para cada uno de los algoritmos. Se utilizó precisión fija de 51 bits, con truncamiento. En el eje $y$ del siguiente gráfico se utilizó escala logarítmica.
+	El primero de ellos consiste en gráficar el error relativo en función de la cantidad de iteraciones para cada uno de los algoritmos. Se utilizó precisión fija de 51 bits ya que por precondición la cantidad de dígitos de la mantisa debe ser menor a 52, es decir, con 51 dígitos minimizamos el error. Conseguimos la precisión deseada mediante truncamiento.
+	El eje del gráfico que corresponde al $error\;relativo$ está en escala logarítmica para poder apreciar mejor los valores correspondientes dado que estos decrecen exponencialmente.
+	
+	%\color{red}{Es verdad esto ultimo!!!}.
 
 	\gra{graficos/comparacion_1a42it_51p.pdf}
 
-	Los valores dados por los algoritmos de Machin y Ramanujan se asemejan a rectas con pendiente negativa con diferente constante multiplicativa, el gráfico a partir de la décima iteración no muestra de forma clara con respecto al valor del error de Machin. Gregory en cambio, el error de cada iteración disminuyen en forma logarítmica.
+	//OBVIEDAD A LO MARTINIANO!!!
+
+	Como esperabamos observarmos en el gráfico que a medida que la cantidad de términos de la serie (cualquiera de ellas) aumenta el error cometido en el cálculo de $\pi$ disminuye.\\
 	
-	Para poder observar el comportamiento del algoritmo de Machin vs. el de Ramanujan a continuación se adjunta el gráfico con los mismos parámetros utilizados anteriormente.
+	//DECIR ALGO DE GREGORY\\
+	
+	Creemos a partir del gráfico que el error relativo cometido al aproximar $\pi$ la fórmula de $Machin$ en función de la cantidad de iteraciones es una recta con pendiente negativa. Como la escala utilizada para representar dicho error es la logarítmica, podemos decir que el error decrece exponencialmente.
+	
+	Además observamos que a partir de la décima iteración el gráfico no muestra de forma clara lo que ocurre con el error en la fórmula de $Machin$. Suponemos que se debe al hecho de que los valores que representan a $Machin$ se superponen con los valores correspondientes a $Ramanujan$ para esa cantidad de iteraciones.
+	
+	Por otro lado, podemos apreciar que con pocas iteraciones la serie de $Ramanujan$ obtiene un error constante, lo que creemos que ocurre con $Machin$ recien en la iteración diez.\\
+	
+	Para poder observar el comportamiento del algoritmo de Machin vs. el de Ramanujan a continuación se adjunta el gráfico con los mismos parámetros (51 digitos de presición), el cual muestra el error relativo entre la iteración 3 y 12.
 
-	EL MISMO GRAFICO Q EL ANTERIOR PERO CON SOLO MACHIN Y RAMANUJAN
-
+	\gra{graficos/comparacion_greg-ram.pdf}
+	
+	Con este gráfico nos vemos tentados a validar lo supuesto en un principio, ya que se puede apreciar que entre estas iteraciones el error cometido por ambos métodos es el mismo. Más aun se podria concluir a partir del gráfico que el error es cero lo cual no es cierto, pero al ser un error tan chico el gráfico ayuda a la malinterpretación de los datos. Igualmente a pesar de seguir iterando no se podria obtener una mejor aproximación a $\pi$. El impedimento viene dado por la cantidad de digitos de presición utilizada.
+	A partir de esto, podemos concluir que al tratarse de magnitudes tan pequeñas los gráficos son informativos en rasgos generales y no en detalles.\\	
+	
+	//SEGUIR!!!!
+	
+	\VSP
 	El siguiente gráfico detalla el error relativo en función de la cantidad de bits de precisión, los tres algoritmos se incluyen bajo una escala logarítmica en $y$. 
 
 	\gra{graficos/comparacion_42it_1a51p.pdf}
