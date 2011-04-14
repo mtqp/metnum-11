@@ -2,21 +2,28 @@
 
 	Para analizar las diferencias y/o similitudes en la aplicación práctica de los tres algoritmos implementados se generaron gráficos que pasan a detallarse a continuación. 
 		
-	El primero de ellos consiste en gráficar el error relativo en función de la cantidad de iteraciones para cada uno de los algoritmos. Se utilizó precisión fija de 51 bits, con truncamiento. En el eje $y$ del siguiente gráfico se utilizó escala logarítmica (Figura \ref{fig:errorRelativo_elemSerie}).
+	El primero de ellos consiste en gráficar el error relativo en función de la cantidad de iteraciones para cada uno de los algoritmos. Se utilizó precisión fija de 51 bits, con truncamiento. En el eje $y$ del siguiente gráfico se utilizó escala logarítmica.
 
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.5]{graficos/comparacion_42it.eps}
-			\caption{Gráfico del error relativo en función de la cantidad de elementos en la serie}
-			\label{fig:errorRelativo_elemSerie}
-		\end{figure}
+	/graficos/PEGAR EL FUCKING GRAFICO!!!!!!
 
-	/graficos/comparacion_42it.eps PEGAR EL FUCKING GRAFICO!!!!!!
+	Los valores dados por los algoritmos de Machin y Ramanujan se asemejan a rectas con pendiente negativa con diferente constante multiplicativa, el gráfico a partir de la décima iteración no muestra de forma clara con respecto al valor del error de Machin. Gregory en cambio, el error de cada iteración disminuyen en forma logarítmica.
+	
+	Para poder observar el comportamiento del algoritmo de Machin vs. el de Ramanujan a continuación se adjunta el gráfico con los mismos parámetros utilizados anteriormente.
 
-	El error relativo del algoritmo de Gregory disminuye de forma logarítmica. Los dos algoritmos restantes, poseen pendiente negativa siendo la diferencia entre ellas, a priori, baja.
+	EL MISMO GRAFICO Q EL ANTERIOR PERO CON SOLO MACHIN Y RAMANUJAN
 
-	El siguiente gráfico SOIDAJFOIDSAJFOISADJOIFJSODIJ
+	El siguiente gráfico detalla el error relativo en función de la cantidad de bits de precisión, los tres algoritmos se incluyen bajo una escala logarítmica en $y$. 
 
-	Nota: No se utilizaron polinomios interpoladores para aproximar por la curva o recta que pase por todos los puntos correspondiente a una misma fuente de datos, estas conclusiones fueron sacadas utilizando experimentación empírica, suponiendo que el comportamiento cuando los valores del eje $x$ tienden a infinito se corresponden a los de los valores graficados.
+	PEGAR EL OTRO GRAFIQUITO EL CAMBIO DE BITS DE PRECISION
+
+	El error relativo del algoritmo de Gregory disminuye de forma logarítmica y parece estabilizarse en un valor cercano a la centésima de unidad. Los dos algoritmos restantes, poseen pendiente negativa siendo la diferencia entre ellas, a priori, baja.
+	
+	Haciendo foco en la información suministrada por el gráfico anterior, nos parece pertinente agregar un nuevo gráfico solamente con el error relativo en el algoritmo de Gregory.
+	
+	PARA VER Q CARAJO PASA Q SE ESTABILIZA!!!
+
+	NOTA: Vale aclarar que si el gráfico posee escala logarítmica en $y$, ver y/o deducir que un set de valores se asemeja a una recta, implica que la función tomando ahora escala NAUTRAL!?!?!? es exponencial. Si observamos una curva logarítmica, tomando los valores de $y$ ahora en NATURALES!?!?!?!?! corresponde a una recta.
+	
+	NOTA: No se utilizaron polinomios interpoladores para aproximar por la curva o recta que pase por todos los puntos correspondiente a una misma fuente de datos, estas conclusiones fueron sacadas utilizando experimentación empírica, suponiendo que el comportamiento cuando los valores del eje $x$ tienden a infinito se corresponden a los de los valores graficados.
 
 \end{section}
