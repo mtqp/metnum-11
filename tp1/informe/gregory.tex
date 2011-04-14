@@ -1,0 +1,53 @@
+\begin{section}{Serie de Gregory}
+
+	\large
+	
+	Definimos primero el error de un término de la serie de Gregory.\\
+
+	Dado $n \in \N$, sea $\funcFull{f(x,y)} {\frac{x}{y}}$, donde $x=1$ e $y=2n+1$.\\
+	
+	El error de $\func{f}{x,y}$ es el error de un término de la serie de Gregory ya que $x$ e $y$ son de tipo entero (exactos).\\
+	
+	\underline{Analicemos el error de $\func{f}{x,y}$:}\\
+	
+	$\funcFull{$\e{f}{x,y,:}$}{\frac{\frac{x}{y}\ev{x}}{f} + \frac{\frac{-xy}{y^2}\ev{y}}{f} + \er{:}{x,y}} = 
+	\frac{\frac{x}{y}\ev{x}}{\frac{x}{y}} + \frac{\frac{-x}{y}\ev{y}}{\frac{x}{y}} + \er{:}{x,y} =$\\
+	
+	$\ev{x} - \ev{y} + \er{:}{x,y}$\\
+	
+	Teniendo esta información, queremos realizar el análisis teórico sobre la serie de Gregory para los primeros tres términos. Para poder realizarlo, llamamos $a$ al primer término de la serie,
+	$b$ al segundo y $c$ al tercero (llamamos $k=a+c$).\\
+	
+	Sea $\funcFull{g(a,c)}{a+c}$\\
+	
+	$\e{g}{a,c,+} = \frac{a}{a+c}\ev{a} + \frac{c}{a+c}\ev{c} + \er{+}{a,c}$\\
+	
+	Sea $\funcFull{g'(k,b)}{k-b}$\\
+	
+	$\e{g'}{k,b,-} = \frac{k}{k-b}\ev{k} - \frac{b}{k-b}\ev{b} + \er{-}{k,b}$\\
+	
+	$\e{g}{a+c,b,+} = \frac{a+c}{a+c-b}(\frac{a}{a+c}\ev{a} + \frac{c}{a+c}\ev{c} + \er{+}{a,c}) - \frac{b}{a+c-b}\ev{b} + \er{-}{a+c,b} =$\\
+	
+	$\frac{a\ev{a} + c\ev{c} - b\ev{b} + (a+c)\er{+}{a,c}}{a-b+c} + \er{-}{a+c,b} = \ev{a+c-b} = \ev{\frac{\pi}{4}}$\\
+	
+	Entonces el error total ($\ev{\pi}$) es el siguiente:\\
+	
+	$\ev{4} + \ev{a+c-b} + \er{*}{4,a+c-b} =$\\
+	
+	$\ev{4} + \frac{a\ev{a} + c\ev{c} - b\ev{b} + (a+c)\er{+}{a,c}}{a-b+c} + \er{-}{a+c,b} + \er{*}{4,a+c-b}$\\
+	
+	Dado que $a=1$, $b=\frac{1}{3}$ y $c=\frac{1}{5}$. Reemplazando por los términos correspondientes obtenemos:\\
+	
+	$\ev{4} + \frac{\ev{1} - \ev{1} + \er{:}{1,1} - (\frac{1}{3})(\ev{1} - \ev{3} + \er{:}{1,3}) + (\frac{1}{5})(\ev{1} - \ev{5} + \er{:}{1,5}) + \frac{6}{5} \er{+}{1,\frac{1}{5}}}{\frac{13}{15}} + \er{-}{\frac{6}{5},\frac{1}{3}} + \er{*}{4,\frac{13}{15}}$\\
+	
+	Si bien no conocemos cuál es el error exacto que posee cada operación, podemos acotarlas por el error máximo de todas ellas, llamémoslo $k$. Por lo tanto el resultado obtenido es menor igual a:
+
+$k + \frac{k - (\frac{1}{3})k + (\frac{1}{5})k + \frac{6}{5}k}{\frac{13}{15}} + 2k = k + \frac{\frac{17}{15}k}{\frac{13}{15}} + 2k = k + \frac{17}{13}k + 2k = 3k + \frac{17}{13}k = \frac{56}{13}k < 5k $ \\
+
+	Sabiendo que la implementación de estos algoritmos será realizada en una máquina con arítmetica binarias, podemos inferir que el error en los cálculos se producirá a partir de cierto bit, al que llamaremos $t$. El error entonces depende de la conversión de los valores enteros a números con coma, así como también la presición que estemos utilizando. Tomamos de esta forma a $k=2^{1-t}$.
+	
+	Acotando el error de Gregory, tenemos que $\ev{\pi} < 5 2^{1-t}$
+	
+	NOTA: Este último resultado (el valor de $k$), aplica tanto como al análisis previamente realizado, como a los dos subsiguientes (algoritmo de Machin y Ramanujan). Para simplificar los cálculos, y disminuir la probabilidad de arrastrar errores de cuentas, se acotará por $k$ el que luego será reemplazado por $2^{1-t}$.
+	
+\end{section}

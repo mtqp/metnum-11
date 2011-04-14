@@ -1,0 +1,86 @@
+\begin{section}{Fórmula de Machin}
+
+	\large
+	
+	Definimos primero el error de calcular $arctan(k)$ con $|k|<1$. Para ello definimos el error de cada uno de los términos de la sumatoria.\\
+	
+	Dado $n \in \N$, sea $\funcFull{f(x,y)} {\frac{x}{y}}$, donde $x=k^{2n+1}$ e $y=2n+1$.\\
+	
+	\underline{Analicemos el error de $\func{f}{x,y}$:}\\
+	
+	$\funcFull{$\e{f}{x,y,:}$}{\frac{\frac{x}{y}\ev{x}}{f} + \frac{\frac{-xy}{y^2}\ev{y}}{f} + \er{:}{x,y}} = 
+	\frac{\frac{x}{y}\ev{x}}{\frac{x}{y}} + \frac{\frac{-x}{y}\ev{y}}{\frac{x}{y}} + \er{:}{x,y} =$\\
+	
+	$\ev{x} - \ev{y} + \er{:}{x,y}$ (1)\\
+	
+	Como $y$ es de tipo entero (exacto) resta calcular el error de $x$.\\
+	
+	\underline{Analicemos el error de $x=k^y$:}\\
+	
+	$\funcFull{$\ev{x}$}{\frac{yk^{y-1}y}{k^y}\ev{y} + \er{POT}{k,y}} = \frac{y^2}{k}\ev{y} + \er{POT}{k,y}$ (2)\\ 
+	
+	$\Rightarrow_{Reemplazando \; (2) \; en \; (1)} \frac{y^2}{k}\ev{y} + \er{POT}{k,y} - \ev{y} + \er{:}{x,y}$\\
+	
+	Teniendo esta información, queremos realizar el análisis teórico para los primeros tres términos de la sumatoria. Para poder realizarlo, llamamos $a$ al primer término,
+	$b$ al segundo y $c$ al tercero (llamamos $k=a+c$).\\
+	
+	Sea $\funcFull{g(a,c)}{a+c}$\\
+	
+	$\e{g}{a,c,+} = \frac{a}{a+c}\ev{a} + \frac{c}{a+c}\ev{c} + \er{+}{a,c}$\\
+	
+	Sea $\funcFull{g'(k,b)}{k-b}$\\
+	
+	$\e{g'}{k,b,-} = \frac{k}{k-b}\ev{k} - \frac{b}{k-b}\ev{b} + \er{-}{k,b}$\\
+	
+	$\e{g}{a+c,b,+} = \frac{a+c}{a+c-b}(\frac{a}{a+c}\ev{a} + \frac{c}{a+c}\ev{c} + \er{+}{a,c}) - \frac{b}{a+c-b}\ev{b} + \er{-}{a+c,b} =$\\
+	
+	$\frac{a\ev{a} + c\ev{c} - b\ev{b} + (a+c)\er{+}{a,c}}{a-b+c} + \er{-}{a+c,b} = \ev{a+c-b}$\\
+	
+	Para la fórmula de Machin se necesita calcular $arctan(\frac{1}{5})$ y $arctan(\frac{1}{239})$.\\
+	
+	$\Rightarrow \e{arctan}{\frac{1}{5}} =$\\
+	$\frac{\frac{1}{5}(5\ev{1} + \er{POT}{\frac{1}{5},1} - \ev{1} + \er{:}{\frac{1}{5},1}) + \frac{1}{5}^6(5^3\ev{5} + \er{POT}{\frac{1}{5},5} - \ev{5} + \er{:}{\frac{1}{5}^5,5}) - \frac{1}{5}^4(3^25\ev{3} + \er{POT}{\frac{1}{5},3} - \ev{3} + \er{:}{\frac{1}{5}^3,3}) + (\frac{1}{5}+\frac{1}{5}^6)\er{+}{\frac{1}{5},c}}{\frac{1}{5}-\frac{1}{5}^4+\frac{1}{5}^6} + \er{-}{\frac{1}{5}+\frac{1}{5}^6,\frac{1}{5}^4}$\\
+
+	$\Rightarrow \e{arctan}{\frac{1}{239}} =$\\
+	$\frac{\frac{1}{239}(239\ev{y} + \er{POT}{\frac{1}{239},1} - \ev{1} + \er{:}{\frac{1}{239},1}) + \frac{\frac{1}{239}^5}{5}(239*5^2\ev{5} + \er{POT}{\frac{1}{239},5} - \ev{5} + \er{:}{\frac{1}{239}^5,5}) - \frac{\frac{1}{239}^3}{3}(3^2239\ev{3} + \er{POT}{\frac{1}{239},3} - \ev{3} + \er{:}{\frac{1}{239}^3,3})}{\frac{1}{239}-\frac{\frac{1}{239}^3}{3}+\frac{\frac{1}{239}^5}{5}}  + \frac{(\frac{1}{239}+\frac{\frac{1}{239}^5}{5})\er{+}{\frac{1}{239},\frac{\frac{1}{239}^5}{5}}}{\frac{1}{239}-\frac{\frac{1}{239}^3}{3}+\frac{\frac{1}{239}^5}{5}} + \er{-}{\frac{1}{239}+\frac{\frac{1}{239}^5}{5},\frac{1}{239}^3}$\\
+	
+	Finalmente calculamos el error de la fórmula de Machin.\\
+	
+	Sea $\funcFull{f'}{z*4}$,\\
+	
+	$\e{f'}{z,4,*} = \ev{z} + \ev{4} + \er{*}{z,4}$ (3)\\
+	
+	Por otro lado calculamos el error de $z$ instanciando $g'$ con $k=4*arctan(\frac{1}{5})$ y $b=arctan(\frac{1}{239})$\\
+	
+	$\ev{z} = \frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{4*arctan(\frac{1}{5})} - \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{arctan(\frac{1}{239})} + \er{-}{\frac{1}{5},\frac{1}{239}} (4)$
+	
+	$\Rightarrow_{Reemplazando \; (4) \; en \; (3)}$\\
+	
+	$\frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{4*arctan(\frac{1}{5})} - \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{arctan(\frac{1}{239})} + \er{-}{\frac{1}{5}),\frac{1}{239})} + \ev{4} + \er{*}{4*arctan(\frac{1}{5}-arctan(\frac{1}{239},4}$\\
+	
+	$\Rightarrow$\\
+	
+	$\frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}(\ev{arctan(\frac{1}{5})}+\ev{4}+\er{*}{arctan(\frac{1}{5}),4}) - \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{arctan(\frac{1}{239})} + \er{-}{\frac{1}{5}),\frac{1}{239})} + \ev{4} + \er{*}{z,4} < $
+	
+	$\Rightarrow_{Acotando \; los \; errores \; por \; k, \; es \; menor \; a:}$\\
+	
+	$< \frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}3k - \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}k+3k $
+	
+	$\Rightarrow$\\
+	
+	$< \frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}3k + \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}3k+3k $
+	
+	$\Rightarrow$\\
+	
+	$< (\frac{4*arctan(\frac{1}{5})+arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})} + 1) 3k <  (\frac{5*arctan(\frac{1}{5})}{3*arctan(\frac{1}{239})} + 1)3k < $\\
+	
+	\color{red}{DESDE ACA}\\
+	
+	$< 48 7k = 336k = 2^{4}.3.7$
+	
+	Reemplazando $k=2^{1-t}$ nos queda que el error relativo del algoritmo de Machin:
+	
+		$\ev{\pi} < 2^{4} x 3 x 7 x 2^{1-t} = 3 x 7 x 2^{5-t}$
+	
+	
+\end{section}
