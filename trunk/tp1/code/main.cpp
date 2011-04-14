@@ -9,6 +9,10 @@
 	(-1)*Real+...
 */
 
+/*
+	el main esta buggeado, te pide los parametros SIEMPRE hay q arreglarlos!
+*/
+
 void out(SERIES*, char*, int, int, bool);
 void checkForHelp(char** argv);
 void usage();
@@ -21,6 +25,7 @@ int main(int argc, char** argv){
 	int t_digits = 51;
 	int  cantIt = 10;
 	bool truncate = true;
+
 /*
 	Real _1(1,atoi(argv[1]),false);
 	Real _2(2,atoi(argv[1]),false);
@@ -30,9 +35,12 @@ int main(int argc, char** argv){
 	res = (_1/_2)+ (_1/_3) + _3;
 	res.printReal();
 	cout << "filtrando presicion WOWOWOWOWOW" << endl;
+	res.filterPrecision();
+	cout << "FILTRADO" << endl;
+	res.printReal();
 		
-	return 0;*/
-
+	return 0;
+*/
 
 	switch(argc){
 		case 2:
