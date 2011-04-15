@@ -22,11 +22,13 @@ int main(int argc, char** argv){
 		exit(0);
 	}
 	else
+	{
 		if(!eligeModoUso(argv)){
 			checkForHelp(argv);
 			exit(0);
 		}
-
+	}
+	
 	switch(argc){
 		case 2:
 			checkForHelp(argv);
