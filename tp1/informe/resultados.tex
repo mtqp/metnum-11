@@ -44,8 +44,20 @@
 	\end{figure}
 	
 	NOTA: 
+	
 	Para hacer más simple el análisis de los gráficos, cada par de valores correspondientes a puntos consecutivos del eje $x$, se los unió mediante una recta, funcionalidad utilizada de GNUPLOT.
 	
-	No se utilizaron polinomios interpoladores para aproximar por la curva o recta que pase por todos los puntos correspondiente a una misma fuente de datos, estas conclusiones fueron sacadas utilizando experimentación empírica, suponiendo que el comportamiento cuando los valores del eje $x$ tienden a infinito se corresponden a los de los valores graficados.
+	No se utilizaron polinomios interpoladores para aproximar por la curva o recta que pase por todos los puntos correspondiente a una misma fuente de datos, estas conclusiones fueron sacadas utilizando experimentación empírica, suponiendo que el comportamiento cuando los valores del eje $x$ tienden a infinito se corresponden a los de los valores graficados.\\
+
+	El último gráfico corresponde al error relativo en función de la cantidad de dígitos, pero evaluando las cotas obtenidas en el análisis teórico con el error relativo de implementación.
+	
+	La información obtenida en este gráfico, nos ayudará a poder discernir cuál es la relación que existe entre estos dos mundos.
+	
+	\begin{figure}[H]
+	  \centering
+		\includegraphics[width=14cm]{graficos/cotas.pdf}
+	  \caption{Comparación del error relativo de las tres series y los errores teóricos en función de la cantidad de bits de mantisa.}
+	  \label{fig:cotas}
+	\end{figure}	
 
 \end{section}
