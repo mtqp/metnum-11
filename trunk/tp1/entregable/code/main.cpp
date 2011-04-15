@@ -54,9 +54,10 @@ int main(int argc, char** argv){
 		case 6:	
 			t_digits = (atoi(argv[3])<=51) ? atoi(argv[3]) : t_digits;
 			cantIt   = atoi(argv[4]);
-			if(!eligeModoTruncamiento(argc,argv)){
+			if(eligeModoTruncamiento(argc,argv)){
 				if (strcmp(argv[5],"-r")==0){
 					truncate = false;
+					cout << "Se ejecutará el algoritmo de redondeo el cual presenta inconsistencias, se les pide disculpas..." << endl << "Se les recomienda utilizar la opcion '-t'" << endl;
 				}
 			}
 			else
@@ -119,7 +120,7 @@ void out(SERIES* funcion, char* arg, int cantIt, int t_digits, bool truncate){
 
 bool eligeModoTruncamiento(int argc, char** argv){
 	if(argc>=6)
-		return strcmp(argv[5],"-t")!=0 || strcmp(argv[5],"-r")!=0;
+		return strcmp(argv[5],"-t")==0 || strcmp(argv[5],"-r")==0;
 	return false;
 }
 
