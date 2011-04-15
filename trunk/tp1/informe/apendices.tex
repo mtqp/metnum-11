@@ -2,6 +2,31 @@
 	\begin{subsection}{Apéndice A: Enunciado}
 		\input{enunciado.tex}
 	\end{subsection}
-	\begin{subsection}{Apéndice B: Códigos fuente}
+	\begin{subsection}{Apéndice B: Código fuente}
+		\begin{subsection}{PI: Modo de compilación}
+			Para compilar se hace uso de la herramienta Makefile.
+			
+			Abrir una terminal dentro la carpeta $code$ entregada y escribir el comando "make", pulsar enter.
+			
+			NOTA:
+			
+			PI fue programado en plataforma Linux.
+		\end{subsection}	
+		\begin{subsection}{PI: Modo de uso}
+			Una vez compilado escriba en la terminal (posicinado sobre la misma ruta en la que lo compiló) $./pi \; --help$ para recibir ayuda detalla sobre como utilizarlo o $./pi$ para un resumen de la misma.
+			
+			Recibe al menos dos parámetros para funcionar, el primero el cual selecciona cuál será el modo de uso y el segundo qué algoritmos utilizará. Llamándolo con estos únicos dos parámetros, mostrará los valores por defecto utilizados para ser los cálculos y realizará la ejecución, siendo estos modificables ingresándolos como parámetros de entrada.
+
+			A continuación se escribe el esquema sobre la utilización del programa, recordar que los primeros dos valores encerrados entre corchetes son obligatorios:\\
+			'./pi [modoUso] [metodo] [tdigitos] [cantidadIteraciones] [trunca?]'\\	
+					
+			Por defecto el programa imprime los resultados por la salida estándar, si se desea por ejemplo, guardar los resultados obtenidos en un archivo de texto puede escribir la siguiente sentencia.\\
+			
+			'./pi [modoUso] [metodo] [tdigitos] [cantidadIteraciones] [trunca?] $>>$ [ruta/nombreArchivo]'\\
+			NOTA:
+			
+			El operador $>>$ utilizado en la consola para redigir la salida estándar a un archivo, es un programa propio de Linux, no siendo este implementado por nosotros.
+			
+		\end{subsection}	
 	\end{subsection}	
 \end{section}
