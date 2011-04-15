@@ -1,4 +1,4 @@
-\begin{section}{Fórmula de Machin}
+\begin{subsection}{Fórmula de Machin}
 
 	\large
 	
@@ -17,9 +17,13 @@
 	
 	\underline{Analicemos el error de $x=k^y$:}\\
 	
-	$\funcFull{$\ev{x}$}{\frac{yk^{y-1}y}{k^y}\ev{y} + \er{POT}{k,y}} = \frac{y^2}{k}\ev{y} + \er{POT}{k,y}$ (2)\\ 
+	$\funcFull{$\ev{x}$}{\frac{yk^{y-1}k}{k^y}\ev{k}+\frac{k^y ln(k) y}{k^y}\ev{y} + \er{POT}{k,y}} = y\ev{k} + ln(k) y\ev{y} + \er{POT}{k,y}$ (2)\\ 
 	
-	$\Rightarrow_{Reemplazando \; (2) \; en \; (1)} \frac{y^2}{k}\ev{y} + \er{POT}{k,y} - \ev{y} + \er{:}{x,y}$\\
+	$\Rightarrow_{Reemplazando \; (2) \; en \; (1)}$\\
+	
+	que el error de un termino de la arco tangente es:\\
+	
+	$y\ev{k} + ln(k) y\ev{y} + \er{POT}{k,y} - \ev{y} + \er{:}{x,y}$\\
 	
 	Teniendo esta información, queremos realizar el análisis teórico para los primeros tres términos de la sumatoria. Para poder realizarlo, llamamos $a$ al primer término,
 	$b$ al segundo y $c$ al tercero (llamamos $k=a+c$).\\
@@ -39,10 +43,14 @@
 	Para la fórmula de Machin se necesita calcular $arctan(\frac{1}{5})$ y $arctan(\frac{1}{239})$.\\
 	
 	$\Rightarrow \e{arctan}{\frac{1}{5}} =$\\
-	$\frac{\frac{1}{5}(5\ev{1} + \er{POT}{\frac{1}{5},1} - \ev{1} + \er{:}{\frac{1}{5},1}) + \frac{1}{5}^6(5^3\ev{5} + \er{POT}{\frac{1}{5},5} - \ev{5} + \er{:}{\frac{1}{5}^5,5}) - \frac{1}{5}^4(3^25\ev{3} + \er{POT}{\frac{1}{5},3} - \ev{3} + \er{:}{\frac{1}{5}^3,3}) + (\frac{1}{5}+\frac{1}{5}^6)\er{+}{\frac{1}{5},c}}{\frac{1}{5}-\frac{1}{5}^4+\frac{1}{5}^6} + \er{-}{\frac{1}{5}+\frac{1}{5}^6,\frac{1}{5}^4}$\\
+	$\frac{\frac{1}{5}( \ev{\frac{1}{5}} + ln(\frac{1}{5}) \ev{1} + \er{POT}{\frac{1}{5},1} - \ev{1} + \er{:}{\frac{1}{5},1}) + (\frac{1}{5})^6( 5\ev{\frac{1}{5}} + ln(\frac{1}{5}) 5\ev{5} + \er{POT}{\frac{1}{5},5} - \ev{5} + \er{:}{(\frac{1}{5})^5,5}) }{\frac{1}{5}+(\frac{1}{5})^5-\frac{1}{3}(\frac{1}{5})^3} - $\\
+	
+	$\frac{\frac{1}{3}(\frac{1}{5})^3(3\ev{\frac{1}{5}} + ln(\frac{1}{5}) 3\ev{3} + \er{POT}{\frac{1}{5},3} - \ev{3} + \er{:}{(\frac{1}{5})^3,3}) + (\frac{1}{5}+(\frac{1}{5})^6)\er{+}{\frac{1}{5},(\frac{1}{5})^6}}{\frac{1}{5}+(\frac{1}{5})^6-\frac{1}{5}(\frac{1}{5})^3} + \er{-}{\frac{1}{5}+(\frac{1}{5})^6,\frac{1}{3}(\frac{1}{5})^3}$\\
 
 	$\Rightarrow \e{arctan}{\frac{1}{239}} =$\\
-	$\frac{\frac{1}{239}(239\ev{y} + \er{POT}{\frac{1}{239},1} - \ev{1} + \er{:}{\frac{1}{239},1}) + \frac{\frac{1}{239}^5}{5}(239*5^2\ev{5} + \er{POT}{\frac{1}{239},5} - \ev{5} + \er{:}{\frac{1}{239}^5,5}) - \frac{\frac{1}{239}^3}{3}(3^2239\ev{3} + \er{POT}{\frac{1}{239},3} - \ev{3} + \er{:}{\frac{1}{239}^3,3})}{\frac{1}{239}-\frac{\frac{1}{239}^3}{3}+\frac{\frac{1}{239}^5}{5}}  + \frac{(\frac{1}{239}+\frac{\frac{1}{239}^5}{5})\er{+}{\frac{1}{239},\frac{\frac{1}{239}^5}{5}}}{\frac{1}{239}-\frac{\frac{1}{239}^3}{3}+\frac{\frac{1}{239}^5}{5}} + \er{-}{\frac{1}{239}+\frac{\frac{1}{239}^5}{5},\frac{1}{239}^3}$\\
+	$\frac{\frac{1}{239}(\ev{\frac{1}{239}} + ln(\frac{1}{239}) \ev{1} + \er{POT}{\frac{1}{239},1} - \ev{1} + \er{:}{\frac{1}{239},1}) + \frac{(\frac{1}{239})^5}{5}(5\ev{\frac{1}{239}} + ln(\frac{1}{239}) 5\ev{5} + \er{POT}{\frac{1}{239},5} - \ev{5} + \er{:}{(\frac{1}{239})^5,5})}{\frac{1}{239}+\frac{1}{5}(\frac{1}{239})^5-\frac{1}{3}(\frac{1}{239})^3} -$ \\
+	
+	$\frac{\frac{(\frac{1}{239})^3}{3}(3\ev{\frac{1}{239}} + ln(\frac{1}{239}) 3\ev{\frac{1}{239}} + \er{POT}{\frac{1}{239},3} - \ev{3} + \er{:}{(\frac{1}{239})^3,3}) + (\frac{1}{239}+\frac{(\frac{1}{239})^5}{5})\er{+}{\frac{1}{239},\frac{(\frac{1}{239})^5}{5}}}{\frac{1}{239}+\frac{1}{5}((\frac{1}{239})^5-\frac{1}{3}(\frac{1}{239})^3}+\er{-}{\frac{1}{239}+\frac{(\frac{1}{239})^5}{5},(\frac{1}{239})^3}$\\
 	
 	Finalmente calculamos el error de la fórmula de Machin.\\
 	
@@ -56,7 +64,7 @@
 	
 	$\Rightarrow_{Reemplazando \; (4) \; en \; (3)}$\\
 	
-	$\frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{4*arctan(\frac{1}{5})} - \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{arctan(\frac{1}{239})} + \er{-}{\frac{1}{5}),\frac{1}{239})} + \ev{4} + \er{*}{4*arctan(\frac{1}{5}-arctan(\frac{1}{239},4}$\\
+	$\frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{4*arctan(\frac{1}{5})} - \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{arctan(\frac{1}{239})} + \er{-}{\frac{1}{5}),\frac{1}{239})} + \ev{4} + \er{*}{4*arctan(\frac{1}{5}-arctan(\frac{1}{239})),4}$\\
 	
 	$\Rightarrow$\\
 	
@@ -79,4 +87,4 @@
 		$\ev{\pi} < 240*2^{1-t}$
 	
 	
-\end{section}
+\end{subsection}
