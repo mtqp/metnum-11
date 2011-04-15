@@ -7,7 +7,6 @@ ullInt cleanSign(llInt number){
 	return (ullInt) number;	
 }
 
-/*lo ponemos como unsigned int el until?*/
 int placesToShift(ullInt number,int until){
 	int places = 0;
 	
@@ -38,7 +37,9 @@ ullInt cleanFirstNotZero(ullInt number, int shift){
 	return number;
 }
 
-
+/*
+	Funciones de reinterpretacion de la informacion
+*/
 ullInt doubleToInt(double value){
 	return *(ullInt*) &value;
 }
@@ -47,13 +48,4 @@ ullInt charToInt(char* value){
 	return *(ullInt*) value;
 }
 
-/*
-ullInt getRoundFactor(int places){	//QUIERO EVITAR USARLA!!!!!
-	ullInt exp = 1020ull;		//lo normaliza al desvio 1023
-	ullInt roundFactor = 1ull;
 
-	exp = exp << 52;
-	roundFactor =  roundFactor << places;
-	
-	return exp | roundFactor;
-}*/
