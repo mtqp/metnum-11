@@ -25,7 +25,7 @@
 	
 	Observamos al igual que en el gráfico anterior que el error cometido por $Machin$ con 51 dígitos de presición no aparece graficado mientras que con el resto de las precisiones si. Concluimos a partir de esto, que a pesar que el error cometido por ambas series ($Machin$ y $Ramanujan$) es similar con 42 iteraciones, se necesita la máxima presicion brindada para que se haga totalmente despreciable la diferencia, si existe.\\
 	
-	El último gráfico adjuntado, Figura:\ref{fig:5it}, plantea fijar la cantidad de iteraciones en un valor menor (cinco en este caso), y analizar si existe diferencias con respecto al anterior de 42.
+	En la Figura:\ref{fig:5it}, plantea fijar la cantidad de iteraciones en un valor menor (cinco en este caso), y analizar si existe diferencias con respecto al anterior de 42.
 	
 	Vemos que con poca presición los errores siguen siendo similares.
 	
@@ -33,5 +33,8 @@
 	
 	En el primer y segundo algoritmo, $Gregory$ y $Machin$, podemos inferir que existe una relación entre la cantidad de iteraciones de la serie la precisión utilizada, ahora al tener una cantidad inferior de iteraciones, el hecho que exista la posibilidad de calcular con precisión mayor a 30 bits (para $Machin$ por ejemplo) no aporta. Esto en cambio, no sucede tan notoriamente con $Ramanujan$. Si bien los tres algoritmos necesitan de realizar la sumatoria infinita para converger a la constante, dado un valor fijo para el cálculo de la sumatoria y/o bits fijos, su mejor aproximación vendrá dada por $Ramanujan$, seguido de $Machin$ y luego $Gregory$.
 	\\
-
+	
+	En el último gráfico adjuntado, Figura:\ref{cotas} vemos que un cierto una cierta cantidad de dígitos utilizada el análisis teórico ya no sirve como cota. Esto sucede cuando los errores cometidos se 'estabilizan' (a pesar de tener más bits de presición para operar el error disminuye imperceptiblemente).
+	Pensamos que el hecho de que en un momento la cota queda por debajo de los valores se debe a que restringimos a $tres$ la cantidad de términos de las series y la cota esta expresada en función a la cantidad de dígitos utilizados.
+	Por ese motivo podemos ver que $Ramanujan$ se mantiene siempre por debajo de la cota, es decir, lo hace porque a medida que trabaja con una mayor presición logra disminuir su error.
 \end{section}
