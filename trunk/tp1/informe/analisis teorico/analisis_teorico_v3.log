@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2011.3.28)  14 APR 2011 01:25
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2011.3.28)  14 APR 2011 02:06
 entering extended mode
  %&-line parsing enabled.
 **analisis_teorico_v3.tex
@@ -681,6 +681,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 73--74
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 75--76
+
+ []
+
 ) [6] (./ramanujan.tex
 Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
@@ -853,10 +858,10 @@ ML/cmm/m/it/14.4 "[]$
 
 ) [9] (./analisis_teorico_v3.aux) ) 
 Here is how much of TeX's memory you used:
- 2296 strings out of 95086
- 26099 string characters out of 1183255
+ 2293 strings out of 95086
+ 26063 string characters out of 1183255
  85788 words of memory out of 1500000
- 5447 multiletter control sequences out of 10000+50000
+ 5444 multiletter control sequences out of 10000+50000
  8293 words of font info for 34 fonts, out of 1200000 for 2000
  28 hyphenation exceptions out of 8191
  27i,7n,25p,659b,196s stack positions out of 5000i,500n,6000p,200000b,5000s
@@ -870,7 +875,7 @@ ive/fonts/type1/bluesky/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/blues
 ky/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmsy7.pfb></u
 sr/share/texmf-texlive/fonts/type1/bluesky/cm/cmtt12.pfb></usr/share/texmf-texl
 ive/fonts/type1/bluesky/ams/msbm10.pfb>
-Output written on analisis_teorico_v3.pdf (9 pages, 90314 bytes).
+Output written on analisis_teorico_v3.pdf (9 pages, 90134 bytes).
 PDF statistics:
  80 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
