@@ -30,8 +30,6 @@ class Real {
 		double convert() const;	
 		void save(double value);
 		
-		void filterPrecision();		//VA PRIVADA!
-
 		/*Funciones Stream*/
 		void printReal();
 		void printRealBits();
@@ -42,7 +40,7 @@ class Real {
 		int    getExp();	
 
 		/*Set Data*/
-		//void filterPrecision();		
+		void filterPrecision();		
 		void copyDoubleToArray(double number);
 		void copyDoubleToArray(ullInt sign, ullInt exp, ullInt mantissa);
 		void setMascara();

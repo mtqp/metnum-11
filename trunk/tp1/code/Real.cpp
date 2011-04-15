@@ -210,7 +210,7 @@ void Real :: filterPrecision(){
 
 	int exp = getExp();
 
-	if(!_truncates){
+	if(!_truncates){		//calculo con redondeo
 		double redondeo = doublePot(2.0,exp);
 		for(int i=0;i<_tdigits+4;i++){
 			redondeo /= 2.0;

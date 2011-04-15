@@ -10,12 +10,14 @@ Real Gregory(int t_digits, int cantIt, bool truncates){
 	
 	ullInt acumDenominador;
 	
+	/*Suma terminos pares*/
 	for(int i=0;i<cantIt;i+=2){
 		acumDenominador = 2*i+1;
 		Real denominador(acumDenominador, t_digits, truncates);
 		pi_par = pi_par + (_1/denominador);
 	}
 
+	/*Suma terminos impares*/
 	for(int i=1;i<cantIt;i+=2){
 		acumDenominador = 2*i+1;
 		Real denominador(acumDenominador, t_digits, truncates);

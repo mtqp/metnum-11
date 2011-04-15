@@ -1,13 +1,5 @@
 #include "decimalFuncs.h"
 
-double intToDouble(ullInt value){
-	return *(double*) &value;
-}
-
-double charToDouble(char* value){
-	return *(double*) value;
-}
-
 Real squareRoot(Real number){
 	double num_double = number.convert();
 
@@ -47,7 +39,7 @@ Real arctan(Real real, int cantIt){
 	return resATAN_par-resATAN_impar;
 }
 
-
+/*Exponenciación de reales*/
 Real pot(Real real, int exp){
 	double number = real.convert();
 	double fresh  = number;
@@ -77,6 +69,7 @@ Real pot(Real real, int exp){
 	return real;
 }
 
+/*Exponenciación de doubles sin utilizar POW de C++*/
 double doublePot(double num, int exp){
 	if(exp == 0){
 		return 1.0;
@@ -102,3 +95,17 @@ double doublePot(double num, int exp){
 	
 	return num;
 }
+
+/*
+	Funciones de reinterpretación de la información
+*/
+
+double intToDouble(ullInt value){
+	return *(double*) &value;
+}
+
+double charToDouble(char* value){
+	return *(double*) value;
+}
+
+
