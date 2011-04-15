@@ -4,15 +4,6 @@
 #include "Real.h"
 #include "algorithms.h"
 
-/*
-	tener en cuenta que hasta ahora la implementacion que tiene no soporta x ejemplo
-	(-1)*Real+...
-*/
-
-/*
-	el main esta buggeado, te pide los parametros SIEMPRE hay q arreglarlos!
-*/
-
 void out(SERIES*, char*, int, int, bool);
 void checkForHelp(char** argv);
 void usage();
