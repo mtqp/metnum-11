@@ -54,9 +54,16 @@ int main(int argc, char** argv){
 		case 6:	
 			t_digits = (atoi(argv[3])<=51) ? atoi(argv[3]) : t_digits;
 			cantIt   = atoi(argv[4]);
-			if(!eligeModoTruncamiento(argc,argv))
-				if (strcmp(argv[5],"-r")==0) 
+			if(!eligeModoTruncamiento(argc,argv)){
+				if (strcmp(argv[5],"-r")==0){
 					truncate = false;
+				}
+			}
+			else
+			{
+				usage();
+				exit(0);
+			}
 			break;
 		default:
 			usage();
