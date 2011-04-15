@@ -1,3 +1,20 @@
 \begin{section}{Conclusiones}
-	lalala
+	El cálculo sobre aritmética finita presenta un gran desafío para los desarrolladores, al intentar proponer nuevas maneras que minimicen esta pérdida de información, como para quienes utilizan estas herramienta para el cálculo. Si bien hasta el momento no hemos encontrado herramientas que puedan presentar un resultado exacto en todos los casos, conocer como acotar estos errores, nos da una ayuda extra para poder entender a qué corresponde los resultados en la experimentación.
+
+	Inclusive, sabiendo el error cometido en los cálculos, la representación de esta información tanto en gráficos, como en cualquier medio observable de datos, también agrega un margen de error que hay que ser muy precavido que existe, para no llegar a falsas conclusiones.
+	
+	Existe un factor dominante a la hora de implementar algoritmos o utilizarlos, que es el requerimiento de eficiencia. Los tres algoritmos muestran esta estrecha relación que hay entre precisión y eficiencia. Si bien el tercer algoritmo es el que más rápido aproxima, también su complejidad asíntotica es la mayor (se podría demostrar que es \Ode{n^2}), al igual que $Machin$ y complejidad lineal para $Gregory$. Dependiendo del contexto en el que se utilice, quizás la pérdida de precisión, se justifica por el orden de magnitud de diferencia en el cálculo.\\
+	
+	Deberíamos tener en cuenta también, que utilizamos como base, los tipos nativos de C++, si necesitamos por ejemplo, mayor precisión, agregamos un nuevo factor que es la cantidad de memoria utilizada, la cual en principio podría no ser acotada.
+	
+	Encontrar el balance entre estos tres problemas reales es muy complejo, pero herramientas como el cálculo del error relativo, nos ayudan a bislumbrar con mejor claridad, cuál es la mejor opción para cada contexto.\\
+	
+	Nos han surgido varias implementaciones alternativas, así como desiciones estructurales quizás mejores, equilibrando el tiempo disponible y la complejidad de llevarlas acabo, optamos por esta clase $Real$. Sin embargo, nos gustaría denotar algunas de esas ideas a continuación.
+	
+	Con respecto a la implementación de los algoritmos, existen funciones que podrían haber sido optimizadas, como el cálculo de la potencia el cual podría haberse implementado de forma mas inteligente utilizando programación dinámica, recordando los valores ya calculado para no repetirlos. Podría haberse evitado la generación de un objeto $Real$ por cada iteración de los algoritmos de aproximación a $\pi$.
+
+	Entre alguna de las ideas tratadas en el grupo, surgió lamentablemente cuando el trabajo ya estaba avanzado, la idea de trabajar con fracciones y no reales. Es decir, si consiguiéramos una representacion sin errores para el numerador y denominador (ejemplo, enteros de precisión arbitraria), podríamos realizar todas las cuentas evitando casi toda pérdida de presición (salvo la representación quizás por salida estándar). Si bien, nos interesó muchísimo esta idea, su implementación hubiera sido mucho más compleja, al no poder contar con los algoritmos ya existentes en $doubles$.
+	
+	La clase $Real$ se implementó de forma tal que acepte la realización de operaciones entre objetos con distinta precisión con el objeto de agregar a los resultados diferentes tests como por ejemplo, analizar el impacto de utilizar en el denominador presición mayor a la del numerador, etc. Se implementó además de forma tal que deje al usuario elegir entre truncamiento o redondeo a $t$ bits. Encontramos ciertos casos donde el redondeo no se porta de la forma esperada, y no pudimos corregirlo. Nos parece adecuado igual, dejarlo implementado, con el objeto tanto de presentar el concepto general del programa generado, como no producir quizás imperceptibles errores que compliquen la entrega del trabajo. 
+
 \end{section}
