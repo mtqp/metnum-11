@@ -17,7 +17,8 @@ set style line 4 lt 2 pt 6 ps 2
 PI=3.14159265358979323846264338327950288419716939937510
 
 cota_gregory(x) = 5*(2**(1-x))
-cota_machin(x) = 240*(2**(1-x))
+cota_machin(x) = 15*(2**(5-x))
+cota_ramanujan(x) = 3*(2**(2-x))
 
 #calcula el error relativo
 er(x)=abs((x-PI)/PI)

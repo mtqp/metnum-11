@@ -15,7 +15,8 @@ plot	'truncamiento/data/gregory/cota_gregory.dat' using 1:(er($2)) title "Gregor
 		cota_gregory(x) title "Cota Gregory" linestyle 1 with lines,\
 		'truncamiento/data/machin/cota_machin.dat' using 1:(er($2)) title "Machin" linestyle 2,\
 		cota_machin(x) title "Cota Machin" linestyle 2 with lines,\
-		'truncamiento/data/ramanujan/cota_ramanujan.dat' using 1:(er($2)) title "Ramanujan" linestyle 3
+		'truncamiento/data/ramanujan/cota_ramanujan.dat' using 1:(er($2)) title "Ramanujan" linestyle 3,\
+		cota_ramanujan(x) title "Cota Ramanujan" linestyle 3 with lines
 
 #pongo la salida default para mostrar en pantalla
 set term pop
