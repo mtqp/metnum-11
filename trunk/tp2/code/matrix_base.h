@@ -66,6 +66,7 @@ MatrixBase<T> :: MatrixBase(T** data, uInt dimFi, uInt dimCol){
 			_matrix[i][j] = data[i][j];	
 }
 
+///trae seg fault... no se xq, mirar dsp!
 template <typename T>
 MatrixBase<T> :: ~MatrixBase(){
 /*	for(int i=0;i<_dimFi; i++)
