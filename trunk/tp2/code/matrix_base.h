@@ -200,6 +200,17 @@ T MatrixBase<T> :: det(){
 template <typename T>
 ostream &operator<< (ostream &stream, MatrixBase<T> mb){
   stream << "IMPLEMENTACION TRIVIAL - pensar si hay alguna mejor" << endl;
+  stream << "Dimension Filas = " << mb._dimFi << endl;
+  stream << "Dimension Columnas = " << mb._dimCol << endl;
+  
+  for(int i=0; i<mb._dimFi; i++){
+  	stream << endl;
+  	for(int j=0; j<mb._dimCol; j++){
+  		stream << mb._matrix[i][j] << " ";
+  	}
+  }
+  
+  stream << endl;
   return stream; 
 }
 
