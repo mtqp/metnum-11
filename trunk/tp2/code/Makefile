@@ -1,5 +1,5 @@
-OBJS =  matrix_base.cpp
-OBJSo =  matrix_base.o
+OBJS =  matrix_exceptions.cpp
+OBJSo =  matrix_exceptions.o
 MATH = -lm
 CFLAGS = -ggdb 
 
