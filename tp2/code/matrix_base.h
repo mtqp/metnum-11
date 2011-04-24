@@ -7,6 +7,10 @@
 /*
 	Quien herede de MatrixBase deberá atrapar las excepciones lanzadas
 */
+template <class T>		//esto qdo asperisimo, pero sino revienta cuando quiere compilar
+class MatrixBase;		//aparentemente ve el friend primero q la definicion...
+template <typename T>
+ostream &operator<< (ostream &stream, MatrixBase<T> mb);
 
 template <class T>
 class MatrixBase{
@@ -18,7 +22,6 @@ class MatrixBase{
 		MatrixBase<T> operator+ (const MatrixBase<T> &mb);
 		MatrixBase<T> operator- (const MatrixBase<T> &mb);
 		MatrixBase<T> operator* (const MatrixBase<T> &mb);
-		//friend MatrixBase<T> operator* <T>(const T& value, const MatrixBase<T> &mb);
 		MatrixBase<T>& operator= (const MatrixBase<T> &mb);
 
 		void setValue(T value, uInt i, uInt j);
@@ -29,13 +32,13 @@ class MatrixBase{
 
 		virtual T det();	///Se calcula recursivamente -- NO triangula
 	
-		friend ostream &operator<< <T>(ostream &stream, MatrixBase<T> mb);
+		friend ostream &operator<< <>(ostream &stream, MatrixBase<T> mb);
 		
 		static MatrixBase<T> scalarMult(const T& value, /*const*/ MatrixBase<T> &mb);
 		
 	protected:
-		bool matchExactDimesions(MatrixBase<T> &mb);
-		bool matchMultDimesions(MatrixBase<T> &mb);
+		bool matchExactDimesions(const MatrixBase<T> &mb);
+		bool matchMultDimesions(const MatrixBase<T> &mb);
 		MatrixBase<T> deleteFi(uInt i);
 		MatrixBase<T> deleteCol(uInt j);
 		MatrixBase<T> deleteFiCol(uInt i, uInt j);
@@ -74,8 +77,8 @@ MatrixBase<T> :: ~MatrixBase(){
 
 template <typename T>
 MatrixBase<T> MatrixBase<T> :: operator+ (const MatrixBase<T> &mb){
-	if(!matchExactDimensions(mb))
-		throw new MatrixException("Suma de matrices de distinta dimension.");
+	if(!matchExactDimesions(mb))
+		;//throw new MatrixException("Suma de matrices de distinta dimension.");
 	
 	MatrixBase<T> resultSum(this->_dimFi,this->_dimCol);
 	
@@ -88,8 +91,8 @@ MatrixBase<T> MatrixBase<T> :: operator+ (const MatrixBase<T> &mb){
 
 template <typename T>
 MatrixBase<T> MatrixBase<T> :: operator- (const MatrixBase<T> &mb){
-	if(!matchExactDimensions(mb))
-		throw new MatrixException("Resta de matrices de distinta dimension.");
+	if(!matchExactDimesions(mb))
+		;//throw new MatrixException("Resta de matrices de distinta dimension.");
 	
 	MatrixBase<T> resultSub(this->_dimFi,this->_dimCol);
 	
@@ -102,8 +105,8 @@ MatrixBase<T> MatrixBase<T> :: operator- (const MatrixBase<T> &mb){
 
 template <typename T>
 MatrixBase<T> MatrixBase<T> :: operator* (const MatrixBase<T> &mb){
-	if(!matchMultDimensions(mb))
-		throw new MatrixException("Multiplicación con incorrecta dimensiones.");
+	if(!matchExactDimesions(mb))
+		;//throw new MatrixException("Multiplicación con incorrecta dimensiones.");
 	
 	MatrixBase<T> resultMult(this->_dimFi,mb._dimCol);	//esta bien no?
 	
@@ -123,8 +126,8 @@ MatrixBase<T> operator* (const T& value, /*const*/ MatrixBase<T> &mb){
 template <typename T>
 MatrixBase<T>& MatrixBase<T> :: operator= (const MatrixBase<T> &mb){
 	if(this!=&mb){
-		if(!matchExactDimensions(mb))
-			throw new MatrixException("Asignacion de matrices de distinta dimension");
+		if(!matchExactDimesions(mb))
+			;//throw new MatrixException("Asignacion de matrices de distinta dimension");
 	
 		for(int i=0; i<this->_dimFi; i++)
 			for(int j=0;j<_dimCol;j++)
@@ -153,9 +156,9 @@ void MatrixBase<T> :: setValue(T value, uInt i, uInt j){
 template <typename T>
 T& MatrixBase<T> :: getValue(uInt i, uInt j){
 	if(i==0 || i>_dimFi)
-		throw new MatrixException("GetValue --> fila cero o inexistente");
+		;//throw new MatrixException("GetValue --> fila cero o inexistente");
 	if(j==0 || j>_dimCol)
-		throw new MatrixException("GetValue --> columna cero o inexistente");
+		;//throw new MatrixException("GetValue --> columna cero o inexistente");
 		
 	return this->_matrix[i-1][j-1];
 }
@@ -174,7 +177,7 @@ bool MatrixBase<T> :: isSquare(){
 template <typename T>
 T MatrixBase<T> :: det(){
 	if(!isSquare())
-		throw new MatrixException("Calculo de determinante en matriz cuadrada.");
+		;//throw new MatrixException("Calculo de determinante en matriz cuadrada.");
 	
 	if(_dimFi==1)					//Caso base
 		return this->_matrix[0][0];
@@ -197,6 +200,7 @@ T MatrixBase<T> :: det(){
 	return determinante;
 }
 
+
 template <typename T>
 ostream &operator<< (ostream &stream, MatrixBase<T> mb){
   stream << "IMPLEMENTACION TRIVIAL - pensar si hay alguna mejor" << endl;
@@ -215,19 +219,19 @@ ostream &operator<< (ostream &stream, MatrixBase<T> mb){
 }
 
 template <typename T>
-bool MatrixBase<T> :: matchExactDimesions(MatrixBase<T> &mb){
+bool MatrixBase<T> :: matchExactDimesions(const MatrixBase<T> &mb){
 	return (this->_dimFi==mb._dimFi) && (this->_dimCol==mb._dimCol);
 }
 
 template <typename T>
-bool MatrixBase<T> :: matchMultDimesions(MatrixBase<T> &mb){
+bool MatrixBase<T> :: matchMultDimesions(const MatrixBase<T> &mb){
 	return this->_dimCol == mb._dimFi;
 }
 
 template <typename T>
 MatrixBase<T> MatrixBase<T> :: deleteFi(uInt fiElim){
 	if(fiElim==0 || fiElim>_dimFi)
-		throw new MatrixException("Se desea eliminar fila NO existente");
+		;//throw new MatrixException("Se desea eliminar fila NO existente");
 	
 	//QUE HACEMOS SI TIENE SOLO UNA FILA Y SE LA ELIMINA?
 	
@@ -236,13 +240,13 @@ MatrixBase<T> MatrixBase<T> :: deleteFi(uInt fiElim){
 	for(int i=0; i<deletedFi._dimFi; i++){
 		if(i<fiElim){
 			for(int j=0;j<_dimCol;j++){
-				deletedFi[i][j] = this->_matrix[i][j];
+				deletedFi._matrix[i][j] = this->_matrix[i][j];
 			}
 		}
 		else 
 		{
 			for(int j=0;j<_dimCol;j++){
-				deletedFi[i][j] = this->_matrix[i+1][j];
+				deletedFi._matrix[i][j] = this->_matrix[i+1][j];
 			}
 		}
 	}
@@ -253,7 +257,7 @@ MatrixBase<T> MatrixBase<T> :: deleteFi(uInt fiElim){
 template <typename T>
 MatrixBase<T> MatrixBase<T> :: deleteCol(uInt colElim){
 	if(colElim==0 || colElim>_dimCol)
-		throw new MatrixException("Se desea eliminar columna NO existente");
+		;//throw new MatrixException("Se desea eliminar columna NO existente");
 		
 	//QUE HACEMOS SI TIENE SOLO UNA COLUMNA Y SE LA ELIMINA?
 	
@@ -263,13 +267,13 @@ MatrixBase<T> MatrixBase<T> :: deleteCol(uInt colElim){
 	for(int j=0;j<deletedCol._dimCol;j++){
 		if(j<colElim){
 			for(int i=0; i<this->_dimFi; i++){
-				deletedCol[i][j] = this->_matrix[i][j];
+				deletedCol._matrix[i][j] = this->_matrix[i][j];
 			}
 		}
 		else 
 		{
 			for(int i=0; i<this->_dimFi; i++){
-				deletedCol[i][j] = this->_matrix[i][j+1];
+				deletedCol._matrix[i][j] = this->_matrix[i][j+1];
 			}
 		}
 	}
@@ -280,9 +284,9 @@ MatrixBase<T> MatrixBase<T> :: deleteCol(uInt colElim){
 template <typename T>
 MatrixBase<T> MatrixBase<T> :: deleteFiCol(uInt i, uInt j){
 	if(i==0 || i>_dimFi)
-		throw new MatrixException("Se desea eliminar fila NO existente");
+		;//throw new MatrixException("Se desea eliminar fila NO existente");
 	if(j==0 || j>_dimCol)
-		throw new MatrixException("Se desea eliminar columna NO existente");
+		;//throw new MatrixException("Se desea eliminar columna NO existente");
 
 	MatrixBase<T> delFi(_dimFi-1,_dimCol);
 	delFi = this->deleteFi(i);
@@ -299,7 +303,7 @@ void MatrixBase<T> :: setMatrix(uInt dimFi, uInt dimCol){
 	_dimCol= dimCol;
 	
 	if(_dimFi==0 || _dimCol==0)
-		throw new MatrixException("Las dimensiones de la matriz deben ser mayores a cero");
+		;//throw new MatrixException("Las dimensiones de la matriz deben ser mayores a cero");
 	
 	_matrix = new T* [_dimFi];
 
