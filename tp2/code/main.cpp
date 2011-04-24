@@ -1,25 +1,26 @@
 #include "includes.h"
 
 #include "matrix_base.h"		//se supone q dsp nadie la va a ver a esta clase
+#include "matrix_exceptions.h"
 
 int main(int argc, char** argv){
+	try
+	{
+		/*
+			AQUI VA EL PROGRAMA!
+		*/
+	}
+	catch (MatrixException& e)
+	{
+		e.show();
+		/*
+			Las excepciones se utilizan para no cortar con la ejecucion del programa,
+			se puede hacer un manejo mas inteligente de ser necesario, basta con agregar
+			funcionalidad al objeto MatrixException
+		*/
+	}
+
 	return 0;
 }
 
-
-/*
-using namespace std;
-
-int main () {
-  try
-  {
-    int* myarray= new int[1000];
-  }
-  catch (exception& e)
-  {
-    cout << "Standard exception: " << e.what() << endl;
-  }
-  return 0;
-}
-*/
 
