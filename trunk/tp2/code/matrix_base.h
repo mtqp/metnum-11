@@ -304,7 +304,7 @@ void MatrixBase<T> :: setMatrix(uInt dimFi, uInt dimCol){
 	
 	if(_dimFi==0 || _dimCol==0)
 		;//throw new MatrixException("Las dimensiones de la matriz deben ser mayores a cero");
-	
+		
 	_matrix = new T* [_dimFi];
 
     for (int i=0; i<_dimFi; i++)
