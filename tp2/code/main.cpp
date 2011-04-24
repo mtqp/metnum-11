@@ -8,6 +8,8 @@ int** initMatrix(int,int);
 int main(int argc, char** argv){
 	try
 	{
+		cout << "No se esta haciendo NINGUN FREE!!!!!!" << endl;
+		
 		if(argc < 3){
 			cout << "Te olvidaste de mandar los parámetros capo!" << endl;
 			return 0;
@@ -19,17 +21,16 @@ int main(int argc, char** argv){
 		
 		//int matrix[dimFi][dimCol];
 		int** matrix = initMatrix(dimFi,dimCol);
-		
-		int val = 1;
+		int val = 0;
 		for(int i=0; i<dimFi; i++)
-			for(int j=0;j<dimCol; j++)
-				matrix[i][j] = 1;
-		
-		//int** fuck=0;
+			for(int j=0;j<dimCol; j++){
+				val++;
+				matrix[i][j] = val;
+			}
 		
 		MatrixBase<int> mprueba(matrix,dimFi,dimCol);
 		
-//		cout << mprueba;
+		cout << mprueba;
 		
 		/*
 			AQUI VA EL PROGRAMA!
@@ -49,9 +50,9 @@ int main(int argc, char** argv){
 }
 
 int** initMatrix(int fi,int col){
-	int** res = (int**) malloc(sizeof(int**)* col);
-	for(int j=0;j<col;j++){
-		res[j] = (int*) malloc(sizeof(int*)*fi);
+	int** res = (int**) malloc(sizeof(int**)* fi);
+	for(int j=0;j<fi;j++){
+		res[j] = (int*) malloc(sizeof(int*)*col);
 	}
 	
 	return res;

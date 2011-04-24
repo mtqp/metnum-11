@@ -61,18 +61,17 @@ MatrixBase<T> :: MatrixBase(T** data, uInt dimFi, uInt dimCol){
 	setMatrix(dimFi,dimCol);
 	
 	///Copia la estructura en vez de hacer alias <==> T no genera alias en la asignacion
-	for(int i=0; i<this->_dimFi; i++)
+	for(int i=0; i<_dimFi; i++)
 		for(int j=0;j<_dimCol;j++)
-			this->_matrix[i][j] = data[i][j];	
-	
+			_matrix[i][j] = data[i][j];	
 }
 
 template <typename T>
 MatrixBase<T> :: ~MatrixBase(){
-	for(int i=0;i<_dimFi; i++)
+/*	for(int i=0;i<_dimFi; i++)
 		delete [] _matrix[i];
 		
-	delete [] _matrix;
+	delete [] _matrix;*/
 }
 
 template <typename T>
@@ -210,7 +209,7 @@ ostream &operator<< (ostream &stream, MatrixBase<T> mb){
   for(int i=0; i<mb._dimFi; i++){
   	stream << endl;
   	for(int j=0; j<mb._dimCol; j++){
-  		stream << mb._matrix[i][j] << " ";
+  		stream << mb._matrix[i][j] << "\t";
   	}
   }
   
