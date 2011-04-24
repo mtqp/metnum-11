@@ -8,6 +8,12 @@ int** initMatrix(int,int);
 int main(int argc, char** argv){
 	try
 	{
+		if(argc < 3){
+			cout << "Te olvidaste de mandar los parámetros capo!" << endl;
+			return 0;
+		}
+			
+	
 		int dimFi = atoi(argv[1]);
 		int dimCol= atoi(argv[2]);
 		
