@@ -21,16 +21,25 @@ int main(int argc, char** argv){
 		
 		//int matrix[dimFi][dimCol];
 		int** matrix = initMatrix(dimFi,dimCol);
+		int** mUno   = initMatrix(dimFi,dimCol);
 		int val = 0;
 		for(int i=0; i<dimFi; i++)
 			for(int j=0;j<dimCol; j++){
 				val++;
 				matrix[i][j] = val;
+				mUno[i][j] = 1;
 			}
 		
-		MatrixBase<int> mprueba(matrix,dimFi,dimCol);
-		
-		cout << mprueba;
+		MatrixBase<int> A(matrix,dimFi,dimCol);
+		MatrixBase<int> B(mUno,dimFi,dimCol);		
+		cout << "--> A" << endl;
+		cout << A;
+		cout << "-------------------" << endl;
+		cout << "--> B" << endl;
+		cout << B;
+		cout << "-------------------" << endl;
+		cout << "--> A+B" << endl;
+		cout << A+B;
 		
 		/*
 			AQUI VA EL PROGRAMA!
