@@ -17,6 +17,7 @@ class MatrixBase{
 
 		MatrixBase<T> operator+ (const MatrixBase<T> &mb);
 		MatrixBase<T> operator* (const MatrixBase<T> &mb);
+//		friend MatrixBase<T> operator* (const T value, MatrixBase<T> &mb);
 		MatrixBase<T>& operator= (const MatrixBase<T> &mb);
 
 		void setValue(T value, uInt i, uInt j);
@@ -25,7 +26,6 @@ class MatrixBase{
 		bool isSquare();
 
 		virtual int  det();	///Se calcula recursivamente -- NO triangula
-//		void inverse();
 	
 		friend ostream &operator<< <T>(ostream &stream, MatrixBase<T> mb);
 		
@@ -95,6 +95,16 @@ MatrixBase<T> MatrixBase<T> :: operator* (const MatrixBase<T> &mb){
 
 	return resultMult;
 }
+
+/*
+template <typename T>
+MatrixBase<T> MatrixBase<T> :: operator* (const T value, MatrixBase<T> &mb){
+	for(int i=0; i<this->_dimFi; i++)
+		for(int j=0;j<_dimCol;j++)
+			mb_matrix[i][j] = value * mb_matrix[i][j];
+			
+	return mb;	
+}*/
 
 ///NOTA: no se hace un memcpy xq generaria alias, y no se si es eso lo q buscamos.
 template <typename T>
