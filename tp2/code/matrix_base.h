@@ -122,6 +122,11 @@ MatrixBase<T> operator* (const T& value, /*const*/ MatrixBase<T> &mb){
 	return MatrixBase<T> :: scalarMult(value,mb);
 }
 
+template <typename T>
+MatrixBase<T> operator* (/*const*/ MatrixBase<T> &mb, const T& value){
+	return MatrixBase<T> :: scalarMult(value,mb);
+}
+
 ///NOTA: no se hace un memcpy xq generaria alias, y no se si es eso lo q buscamos.
 template <typename T>
 MatrixBase<T>& MatrixBase<T> :: operator= (const MatrixBase<T> &mb){
@@ -142,7 +147,7 @@ MatrixBase<T> MatrixBase<T> :: scalarMult(const T& value, /*const*/ MatrixBase<T
 	MatrixBase<T> scalarMultMatrix(mb._dimFi,mb._dimCol);
 
 	for(int i=0; i<mb._dimFi; i++)
-		for(int j=0;mb._dimCol;j++)
+		for(int j=0;j<mb._dimCol;j++)
 			scalarMultMatrix._matrix[i][j] = value * mb._matrix[i][j];
 
 	return scalarMultMatrix;	
