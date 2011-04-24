@@ -27,7 +27,7 @@ int main(int argc, char** argv){
 			for(int j=0;j<dimCol; j++){
 				val++;
 				matrix[i][j] = val;
-				mUno[i][j] = 1;
+				mUno[i][j] = 2;
 			}
 		
 		MatrixBase<int> A(matrix,dimFi,dimCol);
@@ -40,6 +40,13 @@ int main(int argc, char** argv){
 		cout << "-------------------" << endl;
 		cout << "--> A+B" << endl;
 		cout << A+B;
+		cout << "-------------------" << endl;
+		cout << "--> A*B" << endl;
+		cout << A*B;
+		cout << "-------------------" << endl;
+		cout << "--> B*3" << endl;
+		cout << B*3;
+		
 		
 		/*
 			AQUI VA EL PROGRAMA!
