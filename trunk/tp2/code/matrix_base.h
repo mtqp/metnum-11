@@ -28,6 +28,7 @@ class MatrixBase{
 		MatrixBase<T> operator- (const MatrixBase<T> &mb);
 		MatrixBase<T> operator* (const MatrixBase<T> &mb);
 		MatrixBase<T>& operator= (const MatrixBase<T> &mb);
+		bool operator==(const MatrixBase<T> &mb);
 
 		void setValue(T value, uInt i, uInt j);
 		T&   getValue(uInt i, uInt j);
@@ -133,6 +134,20 @@ MatrixBase<T> operator* (const T& value, /*const*/ MatrixBase<T> &mb){
 template <typename T>
 MatrixBase<T> operator* (/*const*/ MatrixBase<T> &mb, const T& value){
 	return MatrixBase<T> :: scalarMult(value,mb);
+}
+
+template <typename T>
+bool MatrixBase<T> :: operator==(const MatrixBase<T> &mb){
+	if(!matchExactDimension(mb))
+		return false;
+	
+	bool eq = true;
+
+	for(int i=0; i<this->_dimFi && eq; i++)
+		for(int j=0; j<this->_dimCol && eq; j++)
+			eq = this->_matrix[i][j] == mb._matrix[i][j];
+	
+	return eq;
 }
 
 ///NOTA: no se hace un memcpy xq generaria alias, y no se si es eso lo q buscamos.
