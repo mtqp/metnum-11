@@ -39,7 +39,8 @@ int main(int argc, char** argv){
 		
 
 		MatrixBase<int> A(matrix,dimFi,dimCol);
-		MatrixBase<int> B(mUno,dimCol,dimFi);		
+		//MatrixBase<int> B(mUno,dimCol,dimFi);		
+		MatrixBase<int> B(mUno,dimCol,1);
 		cout << "--> A" << endl;
 		cout << A;
 		cout << "-------------------" << endl;
