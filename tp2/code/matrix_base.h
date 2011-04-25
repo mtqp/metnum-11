@@ -5,6 +5,11 @@
 #include "matrix_exceptions.h"
 
 /*
+	PASAR TODO X REFERENCIA!!
+*/
+
+
+/*
 	Quien herede de MatrixBase deberá atrapar las excepciones lanzadas
 */
 template <class T>		//esto qdo asperisimo, pero sino revienta cuando quiere compilar
@@ -45,6 +50,7 @@ class MatrixBase{
 			
 	private:
 		void setMatrix(uInt dimFi, uInt dimCol);
+		void multiplyFiCol(int fiI, int colJ, MatrixBase<T> A, MatrixBase<T> B);
 		
 		uInt _dimFi;
 		uInt _dimCol;
@@ -78,7 +84,7 @@ MatrixBase<T> :: ~MatrixBase(){
 template <typename T>
 MatrixBase<T> MatrixBase<T> :: operator+ (const MatrixBase<T> &mb){
 	if(!matchExactDimesions(mb))
-		;//throw new MatrixException("Suma de matrices de distinta dimension.");
+		throw new MatrixException((char*)"Suma de matrices de distinta dimension.");
 	
 	MatrixBase<T> resultSum(this->_dimFi,this->_dimCol);
 	
@@ -92,7 +98,7 @@ MatrixBase<T> MatrixBase<T> :: operator+ (const MatrixBase<T> &mb){
 template <typename T>
 MatrixBase<T> MatrixBase<T> :: operator- (const MatrixBase<T> &mb){
 	if(!matchExactDimesions(mb))
-		;//throw new MatrixException("Resta de matrices de distinta dimension.");
+		throw new MatrixException((char*)"Resta de matrices de distinta dimension.");
 	
 	MatrixBase<T> resultSub(this->_dimFi,this->_dimCol);
 	
@@ -106,14 +112,16 @@ MatrixBase<T> MatrixBase<T> :: operator- (const MatrixBase<T> &mb){
 template <typename T>
 MatrixBase<T> MatrixBase<T> :: operator* (const MatrixBase<T> &mb){
 	if(!matchExactDimesions(mb))
-		;//throw new MatrixException("Multiplicación con incorrecta dimensiones.");
+		throw new MatrixException((char*)"Multiplicación con incorrecta dimensiones.");
 	
 	MatrixBase<T> resultMult(this->_dimFi,mb._dimCol);	//esta bien no?
-	
-	for(int i=0;i<_dimFi;i++)
-		for(int j=0;j<_dimCol;j++)	//creeria q el algo de multiplicacion esta bien, CHKear x las dudas
-			resultMult._matrix[i][j] = resultMult._matrix[i][j] + (this->_matrix[i][j] * mb._matrix[j][i]);
 
+	for(int i=0;i<this->_dimFi;i++){
+		for(int j=0;j<mb._dimCol;j++){
+			resultMult.multiplyFiCol(i,j,*this, mb);
+		}
+	}
+	
 	return resultMult;
 }
 
@@ -132,7 +140,7 @@ template <typename T>
 MatrixBase<T>& MatrixBase<T> :: operator= (const MatrixBase<T> &mb){
 	if(this!=&mb){
 		if(!matchExactDimesions(mb))
-			;//throw new MatrixException("Asignacion de matrices de distinta dimension");
+			throw new MatrixException((char*)"Asignacion de matrices de distinta dimension");
 	
 		for(int i=0; i<this->_dimFi; i++)
 			for(int j=0;j<_dimCol;j++)
@@ -161,17 +169,16 @@ void MatrixBase<T> :: setValue(T value, uInt i, uInt j){
 template <typename T>
 T& MatrixBase<T> :: getValue(uInt i, uInt j){
 	if(i==0 || i>_dimFi)
-		;//throw new MatrixException("GetValue --> fila cero o inexistente");
+		throw new MatrixException((char*)"GetValue --> fila cero o inexistente");
 	if(j==0 || j>_dimCol)
-		;//throw new MatrixException("GetValue --> columna cero o inexistente");
+		throw new MatrixException((char*)"GetValue --> columna cero o inexistente");
 		
 	return this->_matrix[i-1][j-1];
 }
 
-//se necesita comparar contra cero pero det() devuelve T... que hacmeos?
 template <typename T>
 bool MatrixBase<T> :: isInversible(){
-	return (int) det()!=0;	//ESTO ES BRUTAL, NO CREO Q ANDE NI EN PEDO
+	return det()!=0;	//T tiene q tener definido la desigualdad contra int!
 }
 
 template <typename T>
@@ -182,7 +189,7 @@ bool MatrixBase<T> :: isSquare(){
 template <typename T>
 T MatrixBase<T> :: det(){
 	if(!isSquare())
-		;//throw new MatrixException("Calculo de determinante en matriz cuadrada.");
+		throw new MatrixException((char*)"Calculo de determinante en matriz cuadrada.");
 	
 	if(_dimFi==1)					//Caso base
 		return this->_matrix[0][0];
@@ -236,7 +243,7 @@ bool MatrixBase<T> :: matchMultDimesions(const MatrixBase<T> &mb){
 template <typename T>
 MatrixBase<T> MatrixBase<T> :: deleteFi(uInt fiElim){
 	if(fiElim==0 || fiElim>_dimFi)
-		;//throw new MatrixException("Se desea eliminar fila NO existente");
+		throw new MatrixException((char*)"Se desea eliminar fila NO existente");
 	
 	//QUE HACEMOS SI TIENE SOLO UNA FILA Y SE LA ELIMINA?
 	
@@ -262,7 +269,7 @@ MatrixBase<T> MatrixBase<T> :: deleteFi(uInt fiElim){
 template <typename T>
 MatrixBase<T> MatrixBase<T> :: deleteCol(uInt colElim){
 	if(colElim==0 || colElim>_dimCol)
-		;//throw new MatrixException("Se desea eliminar columna NO existente");
+		throw new MatrixException((char*)"Se desea eliminar columna NO existente");
 		
 	//QUE HACEMOS SI TIENE SOLO UNA COLUMNA Y SE LA ELIMINA?
 	
@@ -289,9 +296,9 @@ MatrixBase<T> MatrixBase<T> :: deleteCol(uInt colElim){
 template <typename T>
 MatrixBase<T> MatrixBase<T> :: deleteFiCol(uInt i, uInt j){
 	if(i==0 || i>_dimFi)
-		;//throw new MatrixException("Se desea eliminar fila NO existente");
+		throw new MatrixException((char*)"Se desea eliminar fila NO existente");
 	if(j==0 || j>_dimCol)
-		;//throw new MatrixException("Se desea eliminar columna NO existente");
+		throw new MatrixException((char*)"Se desea eliminar columna NO existente");
 
 	MatrixBase<T> delFi(_dimFi-1,_dimCol);
 	delFi = this->deleteFi(i);
@@ -308,12 +315,23 @@ void MatrixBase<T> :: setMatrix(uInt dimFi, uInt dimCol){
 	_dimCol= dimCol;
 	
 	if(_dimFi==0 || _dimCol==0)
-		;//throw new MatrixException("Las dimensiones de la matriz deben ser mayores a cero");
-		
+		throw new MatrixException((char*)"Las dimensiones de la matriz deben ser mayores a cero");
+	
 	_matrix = new T* [_dimFi];
 
-    for (int i=0; i<_dimFi; i++)
-      _matrix[i] = new T [_dimCol];
+    for (int i=0; i<_dimFi; i++){
+      	_matrix[i] = new T [_dimCol];
+     	for(int j=0; j<_dimCol; j++){
+     		memset((void*) &_matrix[i][j],0,sizeof(T));
+     	}
+     }
+}
+
+template <typename T>
+void MatrixBase<T> :: multiplyFiCol(int fiI, int colJ, MatrixBase<T> A, MatrixBase<T> B){
+	for(int i=0; i<A._dimCol; i++){
+		this->_matrix[fiI][colJ] = this->_matrix[fiI][colJ] + (A._matrix[fiI][i] * B._matrix[i][colJ]);
+	}
 }
 
 #endif
