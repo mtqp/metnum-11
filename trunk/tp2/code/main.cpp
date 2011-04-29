@@ -22,12 +22,12 @@ int main(int argc, char** argv){
 		//int matrix[dimFi][dimCol];
 		int** matrix = initMatrix(dimFi,dimCol);
 		int** mUno   = initMatrix(dimCol,dimFi);
-		int val = 0;
+		int val = 1;
 		for(int i=0; i<dimFi; i++)
 			for(int j=0;j<dimCol; j++){
 				val++;
 				matrix[i][j] = val;
-			//	mUno[i][j] = 2;
+				//matrix[i][j] = 1;
 			}
 		
 		val = 10;
@@ -43,27 +43,35 @@ int main(int argc, char** argv){
 		MatrixBase<int> B(mUno,dimCol,1);
 		cout << "--> A" << endl;
 		cout << A;
+/*		cout << "A -C3" << endl;
+		cout << A.deleteCol(3);
+/*		cout << "A -F2" << endl;
+		cout << A.deleteFi(2);
+/*		cout << "A -F2 -C3" << endl;
+		cout << A.deleteFiCol(2,3);
+		
+	
 		cout << "-------------------" << endl;
 		cout << "--> B" << endl;
 		cout << B;
-/*		cout << "-------------------" << endl;
+		cout << "-------------------" << endl;
 		cout << "--> A+B" << endl;
 		cout << A+B;
 		cout << "-------------------" << endl;
-*/		cout << "--> A*B" << endl;
+/*		cout << "--> A*B" << endl;
 		cout << A*B;
-/*		cout << "-------------------" << endl;
+		cout << "-------------------" << endl;
 		cout << "--> B*3" << endl;
 		cout << B*3;
 	*/	
-		
+		cout << "det A = " << A.det() << endl;
 		/*
 			AQUI VA EL PROGRAMA!
 		*/
 	}
-	catch (MatrixException& e)
+	catch (MatrixException& e) //HACER ANDAR BIEN!
 	{
-		e.show();
+		cout << "MatrixException: " << e.what() << endl;
 		/*
 			Las excepciones se utilizan para no cortar con la ejecucion del programa,
 			se puede hacer un manejo mas inteligente de ser necesario, basta con agregar
