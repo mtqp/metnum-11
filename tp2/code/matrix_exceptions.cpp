@@ -4,9 +4,6 @@ MatrixException :: MatrixException(char* exception){
 	message = exception;
 }
 
-MatrixException :: ~MatrixException(){}
-
-void MatrixException :: show(){
-	cout << "MatrixException: " << message << endl;
+const char* MatrixException :: what() const throw(){
+	return message;
 }
-

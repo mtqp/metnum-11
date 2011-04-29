@@ -3,11 +3,11 @@
 
 #include "includes.h"
 
-class MatrixException{
+class MatrixException : public exception{
 	public:
 		MatrixException(char*);
-		~MatrixException();
 
+		const char* what() const throw(); 
 		void show();
 	private:
 		char* message;
