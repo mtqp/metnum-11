@@ -44,6 +44,8 @@ class MatrixBase{
 		static MatrixBase<T> scalarMult(const T& value, /*const*/ MatrixBase<T> &mb);
 		
 	protected:
+		int  getFiDimension() const;
+		int  getColDimension() const;
 		bool matchExactDimesions(const MatrixBase<T> &mb);
 		bool matchMultDimesions(const MatrixBase<T> &mb);
 		MatrixBase<T> deleteFi(uInt i);
@@ -245,6 +247,17 @@ ostream &operator<< (ostream &stream, MatrixBase<T> mb){
   stream << endl;
   return stream; 
 }
+
+template <typename T>
+int  MatrixBase<T> :: getFiDimension() const {
+	return _dimFi;
+}
+
+template <typename T>
+int  MatrixBase<T> :: getColDimension() const {
+	return _dimCol;
+}
+
 
 template <typename T>
 bool MatrixBase<T> :: matchExactDimesions(const MatrixBase<T> &mb){
