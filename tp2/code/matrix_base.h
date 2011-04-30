@@ -28,7 +28,7 @@ class MatrixBase{
 
 		MatrixBase<T> traspuesta();
 
-		void setValue(T& value, uInt i, uInt j);
+		void setValue(T value, uInt i, uInt j);
 		T&   getValue(uInt i, uInt j);
 
 		bool isInversible();
@@ -190,8 +190,11 @@ MatrixBase<T> MatrixBase<T> :: scalarMult(const T& value, MatrixBase<T> &mb){
 }
 
 template <typename T>
-void MatrixBase<T> :: setValue(T& value, uInt i, uInt j){
-	_matrix[i][j] = value;
+void MatrixBase<T> :: setValue(T value, uInt i, uInt j){
+	if(i<0 || i>_dimFi || j<0 || j>_dimCol)
+		throw MatrixException((char*)"SetValue -->Asignacion de valor en posicion inexistente");
+
+	_matrix[i-1][j-1] = value;
 }
 
 template <typename T>
