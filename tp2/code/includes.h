@@ -9,6 +9,8 @@
 #include <exception>
 #include <fstream>
 
+#include "aux.h"
+
 using namespace std;
 
 #define ullInt unsigned long long

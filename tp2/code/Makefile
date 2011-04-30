@@ -5,7 +5,7 @@ CFLAGS = -ggdb
 
 all: matrix tp2
 
-matrix: main.cpp $(OBJSo) 
+matrix: main.cpp $(OBJSo) *.h 
 	g++ -o matrix $(CFLAGS) $(MATH) main.cpp $(OBJSo) 
 
 tp2: tp2.cpp
