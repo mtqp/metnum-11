@@ -46,7 +46,8 @@ Vector<T> :: ~Vector(){}
 
 template <typename T>
 uInt Vector<T> :: dimension(){
-	if(_traspuesta)
+	cout << "im being called" << endl;
+	if(!_traspuesta)
 		return MatrixBase<T>::getColDimension();
 	else
 		return MatrixBase<T>::getFiDimension();
@@ -55,7 +56,7 @@ uInt Vector<T> :: dimension(){
 template <typename T>
 T Vector<T> :: getValue(uInt i){
 	if(i==0 || i>dimension());
-		throw MatrixException((char*)"GetValue --> fila cero o inexistente.");
+		throw MatrixException((char*)"VectorGetValue --> fila cero o inexistente.");
 
 	if(_traspuesta)
 		return MatrixBase<T> :: getValue(i,1);
@@ -65,13 +66,14 @@ T Vector<T> :: getValue(uInt i){
 
 template <typename T>
 void Vector<T> :: setValue(T value, uInt i){
-	if(i==0 || i>dimension());
-		throw MatrixException((char*)"SetValue --> fila cero o inexistente.");
+	cout << "i=" << i << "\t dimesion=" << dimension() << endl;
+	if((i==0) || (i>dimension()));
+		throw MatrixException((char*)"VectorSetValue --> fila cero o inexistente.");
 
 	if(_traspuesta)
-		MatrixBase<T> :: setValue(i,1);
+		MatrixBase<T> :: setValue(value,i,1);
 	else
-		MatrixBase<T> :: setValue(1,i);
+		MatrixBase<T> :: setValue(value,1,i);
 }
 
 template <typename T>
@@ -85,13 +87,13 @@ template <typename T>
 T Vector<T> :: normaUno(){
 	uInt dim = dimension();
 	
-	T nUno = this->getValue(1);
+	T nUno = module(this->getValue(1));
 	
 	if(dim==1)
 		return nUno;
 	
 	for(int i=2;i<=dim;i++){
-		nUno += this->getValue(i);	//ESTO ES EN NORMA, SI ES NEGATIVO SE ROMPE TODO
+		nUno += module(this->getValue(i));
 	}
 	
 	return nUno;
@@ -99,21 +101,32 @@ T Vector<T> :: normaUno(){
 
 template <typename T>
 T Vector<T> :: normaDos(){
-	throw MatrixException((char*)"TODAVIA NO IMPLEMENTADO");
+	uInt dim = dimension();
+	
+	T nDos = this->getValue(1);
+	
+	if(dim==1)
+		return squareRoot(nDos*nDos);
+	
+	for(int i=2;i<=dim;i++){
+		nDos += this->getValue(i)*this->getValue(i);
+	}
+	
+	return nDos;	
 }
 
 template <typename T>
 T Vector<T> :: normaInf(){
 	uInt dim = dimension();
 	
-	T nMax = this->getValue(1);
+	T nMax = module(this->getValue(1));
 	
 	if(dim==1)
 		return nMax;
 
-	for(int i=2;i<=dim;i++){		//ESTO ES EN NORMA, SI ES NEGATIVO SE ROMPE TODO
-		if(this->getValue(i) > nMax);
-			nMax = this->getValue(i);
+	for(int i=2;i<=dim;i++){
+		if(module(this->getValue(i)) > nMax);
+			nMax = module(this->getValue(i));
 	}
 	
 	return nMax;

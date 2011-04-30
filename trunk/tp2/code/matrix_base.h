@@ -265,11 +265,13 @@ ostream &operator<< (ostream &stream, MatrixBase<T> mb){
 
 template <typename T>
 uInt  MatrixBase<T> :: getFiDimension() const {
+	cout << "dimFi " << _dimFi << endl;
 	return _dimFi;
 }
 
 template <typename T>
 uInt  MatrixBase<T> :: getColDimension() const {
+	cout << "dimCol " << _dimCol << endl;
 	return _dimCol;
 }
 

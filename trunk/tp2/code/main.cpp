@@ -13,12 +13,24 @@ int main(int argc, char** argv){
 	{
 		cout << "No se esta haciendo NINGUN FREE!!!!!!" << endl;
 		
-		if(argc < 3){
+		if(argc < 2){
 			cout << "Te olvidaste de mandar los parámetros capo!" << endl;
 			return 0;
 		}
 			
-	
+		int dim = atoi(argv[1]);
+		Vector<int> x(dim);
+		for(int i=1;i<=dim;i++){
+			x.setValue(i,i);
+		}
+		
+		cout << "X con dimension = " << x.dimension() << endl;
+		cout << x;
+/*		cout << "X^t" << endl;
+		cout << x.traspuesta;
+*/		cout << "norma1=" << x.normaUno() << "\tnorma2=" << x.normaDos() << "\tnormaInf=" << x.normaInf() << endl;
+
+/*	
 		int dimFi = atoi(argv[1]);
 		int dimCol= atoi(argv[2]);
 		
