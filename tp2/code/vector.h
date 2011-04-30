@@ -46,7 +46,6 @@ Vector<T> :: ~Vector(){}
 
 template <typename T>
 uInt Vector<T> :: dimension(){
-	cout << "im being called" << endl;
 	if(!_traspuesta)
 		return MatrixBase<T>::getColDimension();
 	else
@@ -55,7 +54,7 @@ uInt Vector<T> :: dimension(){
 
 template <typename T>
 T Vector<T> :: getValue(uInt i){
-	if(i==0 || i>dimension());
+	if(i==0 || i>dimension())
 		throw MatrixException((char*)"VectorGetValue --> fila cero o inexistente.");
 
 	if(_traspuesta)
@@ -66,8 +65,7 @@ T Vector<T> :: getValue(uInt i){
 
 template <typename T>
 void Vector<T> :: setValue(T value, uInt i){
-	cout << "i=" << i << "\t dimesion=" << dimension() << endl;
-	if((i==0) || (i>dimension()));
+	if((i==0) || (i>dimension()))
 		throw MatrixException((char*)"VectorSetValue --> fila cero o inexistente.");
 
 	if(_traspuesta)
@@ -112,7 +110,7 @@ T Vector<T> :: normaDos(){
 		nDos += this->getValue(i)*this->getValue(i);
 	}
 	
-	return nDos;	
+	return squareRoot(nDos);	
 }
 
 template <typename T>
@@ -125,7 +123,7 @@ T Vector<T> :: normaInf(){
 		return nMax;
 
 	for(int i=2;i<=dim;i++){
-		if(module(this->getValue(i)) > nMax);
+		if(module(this->getValue(i)) > nMax)
 			nMax = module(this->getValue(i));
 	}
 	
