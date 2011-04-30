@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "includes.h"
 
 using namespace std;
@@ -9,20 +10,38 @@ int main(int argc, char** argv){
 		exit(0);
 	}
 	
-	/* Leo el archivo posicion */
-	uInt time;
-	cin >> time;
+	/* Abro los archivos */
+	ifstream posicion(argv[1]);
+	ofstream salida(argv[2]);
 	
-	uInt dimension;
-	cin >> dimension;
+	if(posicion && salida){					//da cero si hay algun error
+		uInt time;
+		posicion >> time;
+		cout << time << endl;
+		
+		uInt dimension;
+		posicion >> dimension;
+		cout << dimension << endl;
+		
+		double position[dimension];
+		forn(i,dimension){
+			posicion >> position[i];
+			cout << position[i] << endl;
+		}
+		
+		/* Si no es el primer turno */
+		if(argc==5){
+			ifstream ultimo(argv[3]);
+			ultimo >> time;
+			cout << time << endl;
+			ultimo.close();
+		}
+	}
+	else
+		cout << "Error al abrir los archivos"
 	
-	double position[dimension];
-	forn(i,dimension)
-		cin >> position[i];
-		
-	/* Si no es el primer turno */
-	if(argc==5)
-		cin >> time;
-		
+	posicion.close();
+	salida.close();
+	
 	return 0;
 }
