@@ -43,6 +43,11 @@ int main(int argc, char** argv){
 		MatrixBase<int> B(mUno,dimCol,1);
 		cout << "--> A" << endl;
 		cout << A;
+		cout << "swap fi 2 4" << endl;
+		cout << A.swapFi(2,4);
+		cout << "swap col 3 1" << endl;
+		cout << A.swapCol(3,1) << endl;
+
 /*		cout << "A -C3" << endl;
 		cout << A.deleteCol(3);
 /*		cout << "A -F2" << endl;
@@ -64,7 +69,7 @@ int main(int argc, char** argv){
 		cout << "--> B*3" << endl;
 		cout << B*3;
 	*/	
-		cout << "det A = " << A.det() << endl;
+		//cout << "det A = " << A.det() << endl;
 		/*
 			AQUI VA EL PROGRAMA!
 		*/

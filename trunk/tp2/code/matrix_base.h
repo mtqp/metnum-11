@@ -9,7 +9,6 @@
 	PASAR TODO X REFERENCIA!!
 */
 
-
 /*
 	Quien herede de MatrixBase deberá atrapar las excepciones lanzadas
 */
@@ -51,6 +50,8 @@ class MatrixBase{
 		MatrixBase<T> deleteFi(uInt i);
 		MatrixBase<T> deleteCol(uInt j);
 		MatrixBase<T> deleteFiCol(uInt i, uInt j);
+		MatrixBase<T> swapFi(uInt i, uInt i2);
+		MatrixBase<T> swapCol(uInt j, uInt j2);
 			
 	private:
 		void setMatrix(uInt dimFi, uInt dimCol);
@@ -341,6 +342,45 @@ MatrixBase<T> MatrixBase<T> :: deleteFiCol(uInt i, uInt j){
 	
 	return delCol;
 }
+
+template <typename T>	//genera aliasing
+MatrixBase<T> MatrixBase<T> :: swapFi(uInt i, uInt i2){
+	if(i==0 || i>_dimFi || i2==0 || i2>_dimFi)
+		throw MatrixException((char*)"Swap filas con posiciones no existentes");	
+		
+	if(i==i2)	//pequeña optimizacion
+		return *this;
+	
+	T swapElem;//no hay q llamar al constructor?
+	
+	for(int h=0;h<_dimCol;h++){
+		swapElem = _matrix[i2-1][h];
+		_matrix[i2-1][h] = _matrix[i-1][h];
+		_matrix[i-1][h] = swapElem;	
+	}
+	
+	return *this;
+}
+
+template <typename T>	//genera aliasing
+MatrixBase<T> MatrixBase<T> :: swapCol(uInt j, uInt j2){
+	if(j==0 || j>_dimCol || j2==0 || j2>_dimCol)
+		throw MatrixException((char*)"Swap columnas con posiciones no existentes");	
+
+	if(j==j2)
+		return *this;
+	
+	T swapElem;//no hay q llamar al constructor?
+
+	for(int h=0;h<_dimFi;h++){
+		swapElem = _matrix[h][j2-1];
+		_matrix[h][j2-1] = _matrix[h][j-1];
+		_matrix[h][j-1] = swapElem;
+	}
+
+	return *this;
+}
+
 
 template <typename T>
 void MatrixBase<T> :: setMatrix(uInt dimFi, uInt dimCol){
