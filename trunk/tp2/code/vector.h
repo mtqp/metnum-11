@@ -76,9 +76,10 @@ void Vector<T> :: setValue(T value, uInt i){
 
 template <typename T>
 Vector<T> Vector<T> :: traspuesta(){
-	_traspuesta = !_traspuesta;
+/*	_traspuesta = !_traspuesta;
 	
-	return MatrixBase<T> :: traspuesta();
+	return MatrixBase<T> :: traspuesta();*/
+	return NULL;
 }
 
 template <typename T>
