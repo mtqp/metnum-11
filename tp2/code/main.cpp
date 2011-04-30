@@ -4,6 +4,7 @@
 #include "matrix_exceptions.h"
 //#include "saving_data.h"		//no esta completo.
 
+#include "vector.h"
 
 int** initMatrix(int,int);
 
