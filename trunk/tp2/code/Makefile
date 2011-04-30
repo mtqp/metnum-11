@@ -3,6 +3,8 @@ OBJSo =  matrix_exceptions.o
 MATH = -lm
 CFLAGS = -ggdb 
 
+all: matrix tp2
+
 matrix: main.cpp $(OBJSo) 
 	g++ -o matrix $(CFLAGS) $(MATH) main.cpp $(OBJSo) 
 
