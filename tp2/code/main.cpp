@@ -17,7 +17,8 @@ int main(int argc, char** argv){
 			cout << "Te olvidaste de mandar los parámetros capo!" << endl;
 			return 0;
 		}
-			
+
+/*			
 		int dim = atoi(argv[1]);
 		Vector<int> x(dim);
 		for(int i=1;i<=dim;i++){
@@ -26,9 +27,9 @@ int main(int argc, char** argv){
 		
 		cout << "X con dimension = " << x.dimension() << endl;
 		cout << x;
-/*		cout << "X^t" << endl;
-		cout << x.traspuesta;
-*/		cout << "norma1=" << x.normaUno() << "\tnorma2=" << x.normaDos() << "\tnormaInf=" << x.normaInf() << endl;
+		cout << "X^t" << endl;
+		cout << x.traspuesta();
+		cout << "norma1=" << x.normaUno() << "\tnorma2=" << x.normaDos() << "\tnormaInf=" << x.normaInf() << endl;
 
 /*	
 		int dimFi = atoi(argv[1]);
