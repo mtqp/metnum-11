@@ -25,7 +25,7 @@ class SavingData{
 		SavingData(char* path, StreamType type, int valueLength);
 		~SavingData();
 	
-		void append(T data);
+		void append(T& data);
 		void newLine();
 		//void eof();
 		
@@ -60,7 +60,7 @@ SavingData<T> :: ~SavingData(){	//lo cierro aca o con el eof?
 }
 
 template <typename T>						
-void SavingData<T> :: append(T data) {	//NOTA: T debe implementar '>>'
+void SavingData<T> :: append(T& data) {	//NOTA: T debe implementar '>>'
 	if(_type==r)
 		throw StreamException((char*)"Intento de escribir en un archivo de solo lectura");
 	
@@ -72,7 +72,7 @@ void SavingData<T> :: newLine(){
 	if(_type==r)
 		throw StreamException((char*)"Intento de escribir en un archivo de solo lectura");
 	
-	_stream >> endl;	
+//	_stream >> "";	
 }
 
 /*
