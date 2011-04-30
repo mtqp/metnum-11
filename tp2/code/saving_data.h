@@ -34,7 +34,7 @@ class SavingData{
 		bool isEof();
 	
 	private:
-		setSavingData(char* path, StreamType type, int valueLength);
+		void setSavingData(char* path, StreamType type, int valueLength);
 		
 		fstream _stream;
 		StreamType _type;
@@ -84,6 +84,10 @@ void SavingData<T> :: eof(){
 template <typename T>
 T SavingData<T> :: getValue(){
 	char value[_valueLength]; 
+	
+	_stream.get(value,_valueLength," ");
+	
+	return (T) value;
 }
 
 template <typename T>
@@ -114,7 +118,7 @@ void SavingData<T> :: setSavingData(char* path, StreamType type, int valueLength
 			_stream(path,ios::in|ios::out);
 			break;
 		default:
-			throw StreamException((char*)"Tipo de stream no contemplado.";
+			throw StreamException((char*)"Tipo de stream no contemplado.");
 	}
 
 }
