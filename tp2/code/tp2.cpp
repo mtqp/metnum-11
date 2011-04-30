@@ -50,14 +50,14 @@ int main(int argc, char** argv){
 				cout << "d " << d[i] << endl;
 			}
 			
+			double elem;
 			MatrixBase<double> A(dimension,dimension);
-			
-			/*double A[dimension][dimension];
 			forn(i,dimension)
 				forn(j,dimension){
-					ultimo >> A[i][j];
-					cout << "A" << i+1 << j+1 << " " << A[i][j] << endl;
-				}*/
+					ultimo >> elem;
+					A.setValue(elem,i+1,j+1);
+					cout << "A" << i+1 << j+1 << " " << A.getValue(i+1,j+1) << endl;
+				}
 
 			ultimo.close();
 		}
