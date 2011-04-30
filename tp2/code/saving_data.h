@@ -72,7 +72,7 @@ void SavingData<T> :: newLine(){
 	if(_type==r)
 		throw StreamException((char*)"Intento de escribir en un archivo de solo lectura");
 	
-//	_stream >> "";	
+	_stream >> "\n";	
 }
 
 /*
