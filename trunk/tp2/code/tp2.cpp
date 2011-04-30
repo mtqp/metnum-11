@@ -11,14 +11,15 @@ int main(int argc, char** argv){
 		exit(0);
 	}
 	
-	uInt time = 1;
-	
 	/* Abro los archivos */
 	ifstream posicion(argv[1]);
 	ofstream salida(argv[2]);
 	
 	if(posicion && salida){					//da cero si hay algun error
-		posicion.ignore(1);					//ignoro el primer dato, un cero
+		uInt time;
+		posicion >> time;					
+		time++;								//turno actual, primer turno (si no es el primer turno se setea despues)
+		cout << "time" << time << endl;
 		
 		uInt dimension;
 		posicion >> dimension;
@@ -35,6 +36,7 @@ int main(int argc, char** argv){
 			ifstream ultimo(argv[3]);
 			
 			ultimo >> time;
+			time++;							//turno actual, ultimo turno + 1
 			cout << "time " << time << endl;
 			
 			uInt aux;
@@ -61,6 +63,13 @@ int main(int argc, char** argv){
 
 			ultimo.close();
 		}
+		
+		salida << time << endl;
+		salida << dimension << endl;
+		
+		/* Llamada a la funcion principal */
+		
+		/* Guardar el vector y la matriz del turno actual */
 	}
 	else
 		cout << "Error al abrir los archivos";
