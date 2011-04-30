@@ -4,6 +4,8 @@
 #include "includes.h"
 #include "matrix_exceptions.h"
 
+//no hay q chequear x menor a 0!!!
+
 /*
 	Quien herede de MatrixBase deberá atrapar las excepciones lanzadas
 */
@@ -41,8 +43,8 @@ class MatrixBase{
 		static MatrixBase<T> scalarMult(const T& value, MatrixBase<T> &mb);
 		
 	protected:
-		int  getFiDimension() const;
-		int  getColDimension() const;
+		uInt  getFiDimension() const;
+		uInt  getColDimension() const;
 		bool matchExactDimesions(const MatrixBase<T> &mb);
 		bool matchMultDimesions(const MatrixBase<T> &mb);
 		MatrixBase<T> deleteFi(uInt i);
@@ -262,12 +264,12 @@ ostream &operator<< (ostream &stream, MatrixBase<T> mb){
 }
 
 template <typename T>
-int  MatrixBase<T> :: getFiDimension() const {
+uInt  MatrixBase<T> :: getFiDimension() const {
 	return _dimFi;
 }
 
 template <typename T>
-int  MatrixBase<T> :: getColDimension() const {
+uInt  MatrixBase<T> :: getColDimension() const {
 	return _dimCol;
 }
 
