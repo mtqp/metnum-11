@@ -2,7 +2,7 @@
 
 #include "matrix_base.h"		//se supone q dsp nadie la va a ver a esta clase
 #include "matrix_exceptions.h"
-#include "saving_data.h"
+//#include "saving_data.h"		//no esta completo.
 
 
 int** initMatrix(int,int);
@@ -45,6 +45,11 @@ int main(int argc, char** argv){
 		MatrixBase<int> B(mUno,dimCol,1);
 		cout << "--> A" << endl;
 		cout << A;
+		cout << "A traspuesta" << endl;
+		cout << A.traspuesta();
+		
+//		A + A * A;
+		
 /*		cout << "swap fi 2 4" << endl;
 		cout << A.swapFi(2,4);
 		cout << "swap col 3 1" << endl;

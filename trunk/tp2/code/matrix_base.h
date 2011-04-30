@@ -4,14 +4,10 @@
 #include "includes.h"
 #include "matrix_exceptions.h"
 
-
-/*
-	PASAR TODO X REFERENCIA!!
-*/
-
 /*
 	Quien herede de MatrixBase deberá atrapar las excepciones lanzadas
 */
+
 template <class T>		//esto qdo asperisimo, pero sino revienta cuando quiere compilar
 class MatrixBase;		//aparentemente ve el friend primero q la definicion...
 template <typename T>
@@ -30,7 +26,9 @@ class MatrixBase{
 		MatrixBase<T>& operator= (const MatrixBase<T> &mb);
 		bool operator==(const MatrixBase<T> &mb);
 
-		void setValue(T value, uInt i, uInt j);
+		MatrixBase<T> traspuesta();
+
+		void setValue(T& value, uInt i, uInt j);
 		T&   getValue(uInt i, uInt j);
 
 		bool isInversible();
@@ -40,7 +38,7 @@ class MatrixBase{
 	
 		friend ostream &operator<< <>(ostream &stream, MatrixBase<T> mb);
 		
-		static MatrixBase<T> scalarMult(const T& value, /*const*/ MatrixBase<T> &mb);
+		static MatrixBase<T> scalarMult(const T& value, MatrixBase<T> &mb);
 		
 	protected:
 		int  getFiDimension() const;
@@ -170,7 +168,18 @@ MatrixBase<T>& MatrixBase<T> :: operator= (const MatrixBase<T> &mb){
 }
 
 template <typename T>
-MatrixBase<T> MatrixBase<T> :: scalarMult(const T& value, /*const*/ MatrixBase<T> &mb){
+MatrixBase<T> MatrixBase<T> :: traspuesta(){
+	MatrixBase<T> mt(this->_dimCol,this->_dimFi);
+	for(int i=0; i<mt._dimFi; i++)
+		for(int j=0;j<mt._dimCol;j++)
+			mt._matrix[i][j] = this->_matrix[j][i];
+	
+	return mt;
+}
+
+
+template <typename T>
+MatrixBase<T> MatrixBase<T> :: scalarMult(const T& value, MatrixBase<T> &mb){
 	MatrixBase<T> scalarMultMatrix(mb._dimFi,mb._dimCol);
 
 	for(int i=0; i<mb._dimFi; i++)
@@ -181,7 +190,7 @@ MatrixBase<T> MatrixBase<T> :: scalarMult(const T& value, /*const*/ MatrixBase<T
 }
 
 template <typename T>
-void MatrixBase<T> :: setValue(T value, uInt i, uInt j){
+void MatrixBase<T> :: setValue(T& value, uInt i, uInt j){
 	_matrix[i][j] = value;
 }
 
