@@ -31,7 +31,7 @@ class MatrixBase{
 		MatrixBase<T> traspuesta();
 
 		void setValue(T value, uInt i, uInt j);
-		T&   getValue(uInt i, uInt j);
+		T    getValue(uInt i, uInt j);
 
 		bool isInversible();
 		bool isSquare();
@@ -200,7 +200,7 @@ void MatrixBase<T> :: setValue(T value, uInt i, uInt j){
 }
 
 template <typename T>
-T& MatrixBase<T> :: getValue(uInt i, uInt j){
+T MatrixBase<T> :: getValue(uInt i, uInt j){
 	if(i==0 || i>_dimFi)
 		throw MatrixException((char*)"GetValue --> fila cero o inexistente");
 	if(j==0 || j>_dimCol)

@@ -20,9 +20,9 @@ class Vector : public MatrixBase<T>{
 	
 		Vector<T> traspuesta();
 	
-		T normaUno();
-		T normaDos();
-		T normaInf();
+		T normUno();
+		T normDos();
+		T normInf();
 
 	private:
 		bool _traspuesta;
@@ -83,7 +83,7 @@ Vector<T> Vector<T> :: traspuesta(){
 }
 
 template <typename T>
-T Vector<T> :: normaUno(){
+T Vector<T> :: normUno(){
 	uInt dim = dimension();
 	
 	T nUno = module(this->getValue(1));
@@ -99,7 +99,7 @@ T Vector<T> :: normaUno(){
 }
 
 template <typename T>
-T Vector<T> :: normaDos(){
+T Vector<T> :: normDos(){
 	uInt dim = dimension();
 	
 	T nDos = this->getValue(1);
@@ -115,7 +115,7 @@ T Vector<T> :: normaDos(){
 }
 
 template <typename T>
-T Vector<T> :: normaInf(){
+T Vector<T> :: normInf(){
 	uInt dim = dimension();
 	
 	T nMax = module(this->getValue(1));
