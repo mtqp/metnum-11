@@ -47,7 +47,8 @@ int main(int argc, char** argv){
 		cout << A;
 		cout << "A traspuesta" << endl;
 		cout << A.traspuesta();
-		
+		A.setValue(300,1,1);
+		cout << A;
 //		A + A * A;
 		
 /*		cout << "swap fi 2 4" << endl;
