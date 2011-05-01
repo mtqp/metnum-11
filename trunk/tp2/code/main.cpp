@@ -5,6 +5,7 @@
 //#include "saving_data.h"		//no esta completo.
 
 #include "vector.h"
+#include "matrix_c.h"
 
 int** initMatrix(int,int);
 
@@ -18,6 +19,29 @@ int main(int argc, char** argv){
 			return 0;
 		}
 
+		int dim = atoi(argv[1]);
+		Matrix<int> A(dim,dim);
+		for(int i=1;i<=dim;i++){
+			for(int j=1;j<=i;j++){
+				A.setValue(i,i,j);
+			}
+		}
+		cout << "A" << endl;
+		A.print();
+		bool t = A.isTriang(false);
+		if(t) cout << "true" << endl;
+		else cout << "false" << endl;
+		Matrix<int> B(dim,dim);
+		for(int i=1;i<=dim;i++){
+			for(int j=i+1;j<=dim;j++){
+				B.setValue(i,i,j);
+			}
+		}
+		cout << "B" << endl;
+		B.print();
+		t = B.isTriang(true);
+		if(t) cout << "true" << endl;
+		else cout << "false" << endl;
 /*			
 		int dim = atoi(argv[1]);
 		Vector<int> x(dim);

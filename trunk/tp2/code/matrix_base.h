@@ -42,6 +42,8 @@ class MatrixBase{
 		
 		static MatrixBase<T> scalarMult(const T& value, MatrixBase<T> &mb);
 		
+		void print();
+		
 	protected:
 		uInt  getFiDimension() const;
 		uInt  getColDimension() const;
@@ -418,6 +420,16 @@ template <typename T>
 void MatrixBase<T> :: multiplyFiCol(int fiI, int colJ, MatrixBase<T> A, MatrixBase<T> B){
 	for(int i=0; i<A._dimCol; i++){
 		this->_matrix[fiI][colJ] = this->_matrix[fiI][colJ] + (A._matrix[fiI][i] * B._matrix[i][colJ]);
+	}
+}
+
+template <typename T>
+void MatrixBase<T> :: print(){
+	for(int i=0; i<_dimFi; i++){
+		for(int j=0; j<_dimCol; j++){
+			cout << _matrix[i][j] << " ";
+		}
+		cout << endl;
 	}
 }
 
