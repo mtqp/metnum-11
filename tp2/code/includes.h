@@ -17,5 +17,6 @@ using namespace std;
 #define llInt  long long
 #define uInt   unsigned int
 #define forn(i,n) for(int i=0;i<n;i++)
+#define form(i,n) for(int i=1;i<=n;i++)
 
 #endif

@@ -38,14 +38,13 @@ class Matrix : public MatrixBase<T>{
 		bool isId();
 		
 		T K();	//numero de condicion
-		
+	
 	private:
 		void putZero(uInt i, uInt j, uInt pivot);	//pone el cero en esa posicion
 		bool zeroDiag(uInt i);						//si la posicion ii tiene un cero
 		uInt maxUnderDiag(uInt j); 					//estrategia de pivoteo parcial
-		
-		T    normInf();
-		T  	 normF();
+	
+		T  	 normF();	
 };
 
 template <typename T>
@@ -65,21 +64,51 @@ Matrix<T> :: ~Matrix(){}
 template <typename T>
 bool Matrix<T> :: isTriang(bool superior){
 	bool res = true;
-	uInt dimFi = MatrixBase<T> :: getFiDimension(); 
+	uInt dimFi = MatrixBase<T> :: getFiDimension();
+	
 	if(superior){
-		for(int i=2; i<=dimFi; i++){
+		for(int i=2; i<=dimFi; i++)
 			for(int j=1; j<i; j++)
 				res &= this->getValue(i,j)==0;
-		}
 	}
 	else{
 		uInt dimCol = MatrixBase<T> :: getColDimension(); 
-		for(int i=1; i<dimFi; i++){
+		for(int i=1; i<dimFi; i++)
 			for(int j=i+1; j<=dimCol; j++)
 				res &= this->getValue(i,j)==0;
-		}
 	}
+	
 	return res;
+}
+
+template <typename T>
+bool Matrix<T> :: isId(){
+	bool res = true;
+	uInt dimFi = MatrixBase<T> :: getFiDimension();
+	uInt dimCol = MatrixBase<T> :: getColDimension();
+	
+	for(int i=1; i<=dimFi; i++)
+		for(int j=1; j<=dimCol; j++)
+			res &= (i==j && this->getValue(i,j)==1) || (i!=j && this->getValue(i,j)==0);
+			
+	return res;
+}
+
+template <typename T>
+T Matrix<T> :: normF(){
+	T normF = this->getValue(1,1);
+	
+	uInt dimFi = MatrixBase<T> :: getFiDimension();
+	uInt dimCol = MatrixBase<T> :: getColDimension();
+	
+	if(dimFi==1 && dimCol==1) return normF;
+
+	for(int i=1; i<=dimFi; i++)
+		for(int j=1; j<=dimCol; j++)
+			normF += this->getValue(i,j)*this->getValue(i,j);
+	
+	normF -= this->getValue(1,1);
+	return squareRoot(normF);
 }
 
 #endif

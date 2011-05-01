@@ -19,31 +19,18 @@ int main(int argc, char** argv){
 			return 0;
 		}
 
-/*		int dim = atoi(argv[1]);
+		int dim = atoi(argv[1]);
 		Matrix<int> A(dim,dim);
 		for(int i=1;i<=dim;i++){
 			for(int j=1;j<=i;j++){
-				A.setValue(i,i,j);
+				if(i==j) A.setValue(2,i,j);
+				else A.setValue(0,i,j);
 			}
 		}
-		cout << "A" << endl;
 		A.print();
-		bool t = A.isTriang(false);
-		if(t) cout << "true" << endl;
-		else cout << "false" << endl;
-		Matrix<int> B(dim,dim);
-		for(int i=1;i<=dim;i++){
-			for(int j=i+1;j<=dim;j++){
-				B.setValue(i,i,j);
-			}
-		}
-		cout << "B" << endl;
-		B.print();
-		t = B.isTriang(true);
-		if(t) cout << "true" << endl;
-		else cout << "false" << endl;
-			
-*/		int dim = atoi(argv[1]);
+		cout << A.normF() << endl;
+/*			
+		int dim = atoi(argv[1]);
 		Vector<int> x(dim);
 		for(int i=1;i<=dim;i++){
 			x.setValue(i,i);
