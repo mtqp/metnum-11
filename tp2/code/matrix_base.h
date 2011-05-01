@@ -166,6 +166,9 @@ MatrixBase<T>& MatrixBase<T> :: operator= (const MatrixBase<T> &mb){
 		for(int i=0; i<this->_dimFi; i++)
 			for(int j=0;j<_dimCol;j++)
 				this->_matrix[i][j] = mb._matrix[i][j];	
+				
+		this->_dimFi = mb._dimFi;
+		this->_dimCol= mb._dimCol;
 	}
 	
 	return *this;

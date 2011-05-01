@@ -19,7 +19,7 @@ int main(int argc, char** argv){
 			return 0;
 		}
 
-		int dim = atoi(argv[1]);
+/*		int dim = atoi(argv[1]);
 		Matrix<int> A(dim,dim);
 		for(int i=1;i<=dim;i++){
 			for(int j=1;j<=i;j++){
@@ -42,18 +42,19 @@ int main(int argc, char** argv){
 		t = B.isTriang(true);
 		if(t) cout << "true" << endl;
 		else cout << "false" << endl;
-/*			
-		int dim = atoi(argv[1]);
+			
+*/		int dim = atoi(argv[1]);
 		Vector<int> x(dim);
 		for(int i=1;i<=dim;i++){
 			x.setValue(i,i);
 		}
 		
-		cout << "X con dimension = " << x.dimension() << endl;
+		cout << "X CON DIMENSION = " << x.dimension() << "	pointer=" << (int) &x << endl;
 		cout << x;
-		cout << "X^t" << endl;
+		cout << "X traspuesta();" << endl;
 		cout << x.traspuesta();
-		cout << "norma1=" << x.normaUno() << "\tnorma2=" << x.normaDos() << "\tnormaInf=" << x.normaInf() << endl;
+		cout << "X^TRASPUESTA pointer=" << (int) &x << endl;
+//		cout << "norma1=" << x.normaUno() << "\tnorma2=" << x.normaDos() << "\tnormaInf=" << x.normaInf() << endl;
 
 /*	
 		int dimFi = atoi(argv[1]);
