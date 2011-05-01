@@ -91,6 +91,23 @@ bool Matrix<T> :: isId(){
 }
 
 template <typename T>
+uInt Matrix<T> :: maxUnderDiag(uInt j){
+	uInt dimFi = MatrixBase<T> :: getFiDimension();
+	
+	T pivot = this->getValue(j,j);
+	uInt pivot_pos = j;
+	
+	for(int i=j+1; i<=dimFi; i++){
+		T elem = this->getValue(i,j);
+		if(elem>pivot){
+			pivot = elem;
+			pivot_pos=i;
+		}
+	}
+	return pivot_pos;
+}
+
+template <typename T>
 T Matrix<T> :: normF(){
 	T normF = this->getValue(1,1);
 	

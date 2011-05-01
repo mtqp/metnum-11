@@ -27,8 +27,11 @@ int main(int argc, char** argv){
 				else A.setValue(0,i,j);
 			}
 		}
+		A.setValue(5,3,2);
 		A.print();
-		cout << A.normF() << endl;
+		cout << endl;
+		cout << A.maxUnderDiag(2) << endl;
+		
 /*			
 		int dim = atoi(argv[1]);
 		Vector<int> x(dim);
