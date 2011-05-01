@@ -32,7 +32,7 @@ class Matrix : public MatrixBase<T>{
 		Matrix<T> gaussianElim();
 		Matrix<T> LU(); //o QR no sabemos
 		Matrix<T> inverse();
-		T det();
+		//T det();
 		
 		bool isTriang(bool superior);
 		bool isId();
@@ -42,7 +42,7 @@ class Matrix : public MatrixBase<T>{
 	private:
 		void putZero(uInt i, uInt j, uInt pivot);	//pone el cero en esa posicion
 		bool zeroDiag(uInt i);						//si la posicion ii tiene un cero
-		uInt maxUnderDiag(uInt j) 					//estrategia de pivoteo parcial
+		uInt maxUnderDiag(uInt j); 					//estrategia de pivoteo parcial
 		
 		T    normInf();
 		T  	 normF();
@@ -61,5 +61,25 @@ Matrix<T> :: Matrix(uInt dimFi, uInt dimCol, MatrixType type) : MatrixBase<T>(di
 
 template <typename T>
 Matrix<T> :: ~Matrix(){}
+
+template <typename T>
+bool Matrix<T> :: isTriang(bool superior){
+	bool res = true;
+	uInt dimFi = MatrixBase<T> :: getFiDimension(); 
+	if(superior){
+		for(int i=2; i<=dimFi; i++){
+			for(int j=1; j<i; j++)
+				res &= this->getValue(i,j)==0;
+		}
+	}
+	else{
+		uInt dimCol = MatrixBase<T> :: getColDimension(); 
+		for(int i=1; i<dimFi; i++){
+			for(int j=i+1; j<=dimCol; j++)
+				res &= this->getValue(i,j)==0;
+		}
+	}
+	return res;
+}
 
 #endif
