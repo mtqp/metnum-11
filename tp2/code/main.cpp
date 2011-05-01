@@ -19,18 +19,9 @@ int main(int argc, char** argv){
 			return 0;
 		}
 
-		int dim = atoi(argv[1]);
-		Matrix<int> A(dim,dim);
-		for(int i=1;i<=dim;i++){
-			for(int j=1;j<=i;j++){
-				if(i==j) A.setValue(2,i,j);
-				else A.setValue(0,i,j);
-			}
-		}
-		A.setValue(5,3,2);
-		A.print();
-		cout << endl;
-		cout << A.maxUnderDiag(2) << endl;
+
+		Matrix<int> A(3,3);
+		
 		
 /*			
 		int dim = atoi(argv[1]);

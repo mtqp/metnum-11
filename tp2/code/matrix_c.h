@@ -38,12 +38,12 @@ class Matrix : public MatrixBase<T>{
 		bool isId();
 		
 		T K();	//numero de condicion
-	
-		uInt maxUnderDiag(uInt j); 					//estrategia de pivoteo parcial
+		
 	private:
-		void putZero(uInt i, uInt j, uInt pivot);	//pone el cero en esa posicion
+		void putZero(uInt i, uInt j);				//pone el cero en esa posicion
 		bool zeroDiag(uInt i);						//si la posicion ii tiene un cero
-	
+		uInt maxUnderDiag(uInt j); 					//estrategia de pivoteo parcial
+		
 		T  	 normF();	
 };
 
@@ -95,8 +95,31 @@ bool Matrix<T> :: isId(){
 }
 
 template <typename T>
+void Matrix<T> :: putZero(uInt i, uInt j){
+	T pivot = this->getValue(j,j);
+	if(pivot==0)
+		throw MatrixException((char*)"El pivot es cero.");
+	
+	pivot = this->getValue(i,j)/pivot;
+	
+	cout << "pivot" << pivot << endl;
+	
+	uInt dimCol = MatrixBase<T> :: getColDimension();
+	
+	for(int k=j; k<=dimCol; k++){
+		T elem = this->getValue(i,k)-pivot*this->getValue(j,k);
+		this->setValue(elem,i,k);
+	}
+	
+}
+
+template <typename T>
 uInt Matrix<T> :: maxUnderDiag(uInt j){
 	uInt dimFi = MatrixBase<T> :: getFiDimension();
+	uInt dimCol = MatrixBase<T> :: getColDimension();
+	
+	if(j==0 || j>dimFi || j>dimCol)
+		throw MatrixException((char*)"El indice no pertenece a la diagonal, no esta en rango.");
 	
 	T pivot = this->getValue(j,j);
 	uInt pivot_pos = j;
