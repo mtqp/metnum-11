@@ -42,8 +42,6 @@ class MatrixBase{
 		
 		static MatrixBase<T> scalarMult(const T& value, MatrixBase<T> &mb);
 		
-		void print();
-		
 	protected:
 		uInt  getFiDimension() const;
 		uInt  getColDimension() const;
@@ -64,8 +62,11 @@ class MatrixBase{
 		T** _matrix;
 };
 
+int asd = 0;
 template <typename T>
 MatrixBase<T> :: MatrixBase(uInt dimFi, uInt dimCol){
+	asd++;
+	cout << asd << "constructor dos parametros" << endl;
 	setMatrix(dimFi,dimCol);
 }
 
@@ -79,13 +80,14 @@ MatrixBase<T> :: MatrixBase(T** data, uInt dimFi, uInt dimCol){
 			_matrix[i][j] = data[i][j];	
 }
 
-///trae seg fault... no se xq, mirar dsp!
 template <typename T>
 MatrixBase<T> :: ~MatrixBase(){
-/*	for(int i=0;i<_dimFi; i++)
-		delete [] _matrix[i];
+	cout << "who the fuck is calling me? " << (int) this << endl;
+	
+	for(int j=0;j<_dimFi; j++)
+		delete [] _matrix[j];
 		
-	delete [] _matrix;*/
+	delete [] _matrix;
 }
 
 template <typename T>
@@ -94,7 +96,7 @@ MatrixBase<T> MatrixBase<T> :: operator+ (const MatrixBase<T> &mb){
 		throw MatrixException((char*)"Suma de matrices de distinta dimension.");
 	
 	MatrixBase<T> resultSum(this->_dimFi,this->_dimCol);
-	
+	cout << "resultsum = " << (int) &resultSum << endl;
 	for(int i=0;i<_dimFi;i++)
 		for(int j=0;j<_dimCol;j++)
 			resultSum._matrix[i][j] = this->_matrix[i][j] + mb._matrix[i][j];
@@ -108,6 +110,7 @@ MatrixBase<T> MatrixBase<T> :: operator- (const MatrixBase<T> &mb){
 		throw MatrixException((char*)"Resta de matrices de distinta dimension.");
 	
 	MatrixBase<T> resultSub(this->_dimFi,this->_dimCol);
+	cout << "resultsub = " << (int) &resultSub << endl;	
 	
 	for(int i=0;i<_dimFi;i++)
 		for(int j=0;j<_dimCol;j++)
@@ -118,10 +121,11 @@ MatrixBase<T> MatrixBase<T> :: operator- (const MatrixBase<T> &mb){
 
 template <typename T>
 MatrixBase<T> MatrixBase<T> :: operator* (const MatrixBase<T> &mb){
-	if(!matchExactDimesions(mb))
+	if(!matchMultDimesions(mb))
 		throw MatrixException((char*)"Multiplicación con incorrecta dimensiones.");
 	
 	MatrixBase<T> resultMult(this->_dimFi,mb._dimCol);	//esta bien no?
+	cout << "res mult = " << (int) &resultMult << endl;
 
 	for(int i=0;i<this->_dimFi;i++){
 		for(int j=0;j<mb._dimCol;j++){
@@ -160,15 +164,13 @@ bool MatrixBase<T> :: operator==(const MatrixBase<T> &mb){
 template <typename T>
 MatrixBase<T>& MatrixBase<T> :: operator= (const MatrixBase<T> &mb){
 	if(this!=&mb){
+		cout << "WTF IS PASSING???" << endl;
 		if(!matchExactDimesions(mb))
 			throw MatrixException((char*)"Asignacion de matrices de distinta dimension");
 	
-		for(int i=0; i<this->_dimFi; i++)
-			for(int j=0;j<_dimCol;j++)
+		for(int i=0; i<mb._dimFi; i++)
+			for(int j=0;j<mb._dimCol;j++)
 				this->_matrix[i][j] = mb._matrix[i][j];	
-				
-		this->_dimFi = mb._dimFi;
-		this->_dimCol= mb._dimCol;
 	}
 	
 	return *this;
@@ -423,16 +425,6 @@ template <typename T>
 void MatrixBase<T> :: multiplyFiCol(int fiI, int colJ, MatrixBase<T> A, MatrixBase<T> B){
 	for(int i=0; i<A._dimCol; i++){
 		this->_matrix[fiI][colJ] = this->_matrix[fiI][colJ] + (A._matrix[fiI][i] * B._matrix[i][colJ]);
-	}
-}
-
-template <typename T>
-void MatrixBase<T> :: print(){
-	for(int i=0; i<_dimFi; i++){
-		for(int j=0; j<_dimCol; j++){
-			cout << _matrix[i][j] << " ";
-		}
-		cout << endl;
 	}
 }
 
