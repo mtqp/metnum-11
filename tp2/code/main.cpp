@@ -35,10 +35,16 @@ int main(int argc, char** argv){
 		cout << "B after  assignement " << (int)&B << endl;		
 		
 //	B = A*B;
-/**/		cout << B;
+/**/		
+		A = A * A;
+		A = A + A;
+		A = A - A;
+		A == B;
+		B.traspuesta();
+		cout << B;
 		cout << B.traspuesta();
 /*/		
-/*			
+			
 		int dim = atoi(argv[1]);
 		Vector<int> x(dim);
 		for(int i=1;i<=dim;i++){
@@ -48,7 +54,8 @@ int main(int argc, char** argv){
 		cout << "X CON DIMENSION = " << x.dimension() << "	pointer=" << (int) &x << endl;
 		cout << x;
 		cout << "X traspuesta();" << endl;
-		cout << x.traspuesta();
+//		cout << x.traspuesta();
+		x.traspuesta();
 		cout << "X^TRASPUESTA pointer=" << (int) &x << endl;
 //		cout << "norma1=" << x.normaUno() << "\tnorma2=" << x.normaDos() << "\tnormaInf=" << x.normaInf() << endl;
 
