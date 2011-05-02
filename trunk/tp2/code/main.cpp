@@ -40,10 +40,15 @@ int main(int argc, char** argv){
 		A = A + A;
 		A = A - A;
 		A == B;
+		A !=B;
 		B.traspuesta();
+		2*B;
+		B*2;
+		B.swapFi(1,2);
+		B.swapCol(1,2);
 		cout << B;
 		cout << B.traspuesta();
-/*/		
+//		
 			
 		int dim = atoi(argv[1]);
 		Vector<int> x(dim);
@@ -55,7 +60,7 @@ int main(int argc, char** argv){
 		cout << x;
 		cout << "X traspuesta();" << endl;
 //		cout << x.traspuesta();
-		x.traspuesta();
+/*		x.traspuesta();
 		cout << "X^TRASPUESTA pointer=" << (int) &x << endl;
 //		cout << "norma1=" << x.normaUno() << "\tnorma2=" << x.normaDos() << "\tnormaInf=" << x.normaInf() << endl;
 

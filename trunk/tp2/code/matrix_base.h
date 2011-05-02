@@ -4,6 +4,8 @@
 #include "includes.h"
 #include "matrix_exceptions.h"
 
+#define protected public
+
 /*
 	Quien herede de MatrixBase deberá atrapar las excepciones lanzadas
 */
@@ -18,7 +20,6 @@ class MatrixBase{
 	public:
 		MatrixBase(uInt dimFi, uInt dimCol);
 		MatrixBase(T** data, uInt dimFi, uInt dimCol); 
-		//MatrixBase(MatrixBase<T> mb);
 		~MatrixBase();
 
 		MatrixBase<T> operator+ (const MatrixBase<T> &mb) const;
@@ -26,6 +27,7 @@ class MatrixBase{
 		MatrixBase<T> operator* (const MatrixBase<T> &mb) const;
 		MatrixBase<T>& operator= (const MatrixBase<T> &mb);
 		bool operator==(const MatrixBase<T> &mb) const;
+		bool operator!=(const MatrixBase<T> &mb) const;
 
 		MatrixBase<T> traspuesta() const;
 
@@ -39,18 +41,18 @@ class MatrixBase{
 	
 		friend ostream &operator<< <>(ostream &stream, const MatrixBase<T>& mb);
 		
-		static MatrixBase<T> scalarMult(const T& value, MatrixBase<T> &mb);
+		static MatrixBase<T> scalarMult(const T& value, const MatrixBase<T> &mb);
 		
 	protected:
-		uInt  getFiDimension() const;
+		uInt  getFiDimension()  const;
 		uInt  getColDimension() const;
 		bool matchExactDimesions(const MatrixBase<T> &mb) const;
 		bool matchMultDimesions(const MatrixBase<T> &mb)  const;
 		MatrixBase<T> deleteFi(uInt i) const;
 		MatrixBase<T> deleteCol(uInt j)const;
 		MatrixBase<T> deleteFiCol(uInt i, uInt j) const;
-		MatrixBase<T> swapFi(uInt i, uInt i2);
-		MatrixBase<T> swapCol(uInt j, uInt j2);
+		MatrixBase<T>& swapFi(uInt i, uInt i2);
+		MatrixBase<T>& swapCol(uInt j, uInt j2);
 			
 	private:
 		void setMatrix(uInt dimFi, uInt dimCol);
@@ -65,14 +67,6 @@ template <typename T>
 MatrixBase<T> :: MatrixBase(uInt dimFi, uInt dimCol){
 	setMatrix(dimFi,dimCol);
 }
-
-/*
-template <typename T>
-MatrixBase<T> :: MatrixBase(MatrixBase<T> mb){
-	setMatrix(mb._dimFi, mb._dimCol);
-	throw MatrixException((char*) "alguien necesita este puto constructor?");
-	//COMPLETAR
-}*/
 
 template <typename T>
 MatrixBase<T> :: MatrixBase(T** data, uInt dimFi, uInt dimCol){
@@ -160,6 +154,12 @@ bool MatrixBase<T> :: operator==(const MatrixBase<T> &mb) const {
 	return eq;
 }
 
+template <typename T>
+bool MatrixBase<T> :: operator!=(const MatrixBase<T> &mb) const {
+	return !(*this==mb);
+}
+
+
 ///NOTA: no se hace un memcpy xq generaria alias, y no se si es eso lo q buscamos.
 template <typename T>
 MatrixBase<T>& MatrixBase<T> :: operator= (const MatrixBase<T> &mb){
@@ -187,7 +187,7 @@ MatrixBase<T> MatrixBase<T> :: traspuesta() const {
 
 
 template <typename T>
-MatrixBase<T> MatrixBase<T> :: scalarMult(const T& value, MatrixBase<T> &mb){
+MatrixBase<T> MatrixBase<T> :: scalarMult(const T& value, const MatrixBase<T> &mb){
 	MatrixBase<T> scalarMultMatrix(mb._dimFi,mb._dimCol);
 
 	for(int i=0; i<mb._dimFi; i++)
@@ -360,7 +360,7 @@ MatrixBase<T> MatrixBase<T> :: deleteFiCol(uInt i, uInt j) const {
 }
 
 template <typename T>	//genera aliasing
-MatrixBase<T> MatrixBase<T> :: swapFi(uInt i, uInt i2){
+MatrixBase<T>& MatrixBase<T> :: swapFi(uInt i, uInt i2){
 	if(i==0 || i>_dimFi || i2==0 || i2>_dimFi)
 		throw MatrixException((char*)"Swap filas con posiciones no existentes");	
 		
@@ -379,7 +379,7 @@ MatrixBase<T> MatrixBase<T> :: swapFi(uInt i, uInt i2){
 }
 
 template <typename T>	//genera aliasing
-MatrixBase<T> MatrixBase<T> :: swapCol(uInt j, uInt j2){
+MatrixBase<T>& MatrixBase<T> :: swapCol(uInt j, uInt j2){
 	if(j==0 || j>_dimCol || j2==0 || j2>_dimCol)
 		throw MatrixException((char*)"Swap columnas con posiciones no existentes");	
 

@@ -13,16 +13,16 @@ class Vector : public MatrixBase<T>{
 		Vector(uInt dim, bool traspuesta);
 		~Vector();
 	
-		uInt dimension();
+		uInt dimension() const;
 	
-		T getValue(uInt i);
+		T getValue(uInt i) const;
 		void setValue(T value, uInt i);
 	
-		Vector<T> traspuesta();
+		Vector<T> traspuesta() const;
 	
-		T normUno();
-		T normDos();
-		T normInf();
+		T normUno() const;	//no devuelve doubles o algo asi?
+		T normDos() const;
+		T normInf() const;
 
 	private:
 		bool _traspuesta;
@@ -45,7 +45,7 @@ template <typename T>
 Vector<T> :: ~Vector(){}
 
 template <typename T>
-uInt Vector<T> :: dimension(){
+uInt Vector<T> :: dimension() const {
 	if(!_traspuesta)
 		return MatrixBase<T>::getColDimension();
 	else
@@ -53,7 +53,7 @@ uInt Vector<T> :: dimension(){
 }
 
 template <typename T>
-T Vector<T> :: getValue(uInt i){
+T Vector<T> :: getValue(uInt i) const {
 	if(i==0 || i>dimension())
 		throw MatrixException((char*)"VectorGetValue --> fila cero o inexistente.");
 
@@ -75,7 +75,7 @@ void Vector<T> :: setValue(T value, uInt i){
 }
 
 template <typename T>
-Vector<T> Vector<T> :: traspuesta(){
+Vector<T> Vector<T> :: traspuesta() const {
 	MatrixBase<T> mb = MatrixBase<T> :: traspuesta();
 
 	Vector<T>* vt = static_cast<Vector<T>*>(&mb);
@@ -87,7 +87,7 @@ Vector<T> Vector<T> :: traspuesta(){
 }
 
 template <typename T>
-T Vector<T> :: normUno(){
+T Vector<T> :: normUno() const {
 	uInt dim = dimension();
 	
 	T nUno = module(this->getValue(1));
@@ -103,7 +103,7 @@ T Vector<T> :: normUno(){
 }
 
 template <typename T>
-T Vector<T> :: normDos(){
+T Vector<T> :: normDos() const {
 	uInt dim = dimension();
 	
 	T nDos = this->getValue(1);
@@ -119,7 +119,7 @@ T Vector<T> :: normDos(){
 }
 
 template <typename T>
-T Vector<T> :: normInf(){
+T Vector<T> :: normInf() const {
 	uInt dim = dimension();
 	
 	T nMax = module(this->getValue(1));
