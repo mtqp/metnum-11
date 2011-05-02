@@ -4,8 +4,6 @@
 #include "includes.h"
 #include "matrix_exceptions.h"
 
-//no hay q chequear x menor a 0!!!
-
 /*
 	Quien herede de MatrixBase deberá atrapar las excepciones lanzadas
 */
@@ -13,7 +11,7 @@
 template <class T>		//esto qdo asperisimo, pero sino revienta cuando quiere compilar
 class MatrixBase;		//aparentemente ve el friend primero q la definicion...
 template <typename T>
-ostream &operator<< (ostream &stream, MatrixBase<T>& mb);
+ostream &operator<< (ostream &stream,const MatrixBase<T>& mb);
 
 template <class T>
 class MatrixBase{
@@ -39,7 +37,7 @@ class MatrixBase{
 
 		virtual T det();	///Se calcula recursivamente -- NO triangula
 	
-		friend ostream &operator<< <>(ostream &stream, MatrixBase<T>& mb);
+		friend ostream &operator<< <>(ostream &stream, const MatrixBase<T>& mb);
 		
 		static MatrixBase<T> scalarMult(const T& value, MatrixBase<T> &mb);
 		
@@ -63,11 +61,8 @@ class MatrixBase{
 		T** _matrix;
 };
 
-int asd = 0;
 template <typename T>
 MatrixBase<T> :: MatrixBase(uInt dimFi, uInt dimCol){
-	asd++;
-	cout << asd << "constructor dos parametros" << endl;
 	setMatrix(dimFi,dimCol);
 }
 
@@ -91,8 +86,6 @@ MatrixBase<T> :: MatrixBase(T** data, uInt dimFi, uInt dimCol){
 
 template <typename T>
 MatrixBase<T> :: ~MatrixBase(){
-	cout << "who the fuck is calling me? " << (int) this << endl;
-	
 	for(int j=0;j<_dimFi; j++)
 		delete [] _matrix[j];
 		
@@ -105,7 +98,7 @@ MatrixBase<T> MatrixBase<T> :: operator+ (const MatrixBase<T> &mb){
 		throw MatrixException((char*)"Suma de matrices de distinta dimension.");
 	
 	MatrixBase<T> resultSum(this->_dimFi,this->_dimCol);
-	cout << "resultsum = " << (int) &resultSum << endl;
+
 	for(int i=0;i<_dimFi;i++)
 		for(int j=0;j<_dimCol;j++)
 			resultSum._matrix[i][j] = this->_matrix[i][j] + mb._matrix[i][j];
@@ -119,7 +112,6 @@ MatrixBase<T> MatrixBase<T> :: operator- (const MatrixBase<T> &mb){
 		throw MatrixException((char*)"Resta de matrices de distinta dimension.");
 	
 	MatrixBase<T> resultSub(this->_dimFi,this->_dimCol);
-	cout << "resultsub = " << (int) &resultSub << endl;	
 	
 	for(int i=0;i<_dimFi;i++)
 		for(int j=0;j<_dimCol;j++)
@@ -134,7 +126,6 @@ MatrixBase<T> MatrixBase<T> :: operator* (const MatrixBase<T> &mb){
 		throw MatrixException((char*)"Multiplicación con incorrecta dimensiones.");
 	
 	MatrixBase<T> resultMult(this->_dimFi,mb._dimCol);
-	cout << "res mult = " << (int) &resultMult << endl;
 
 	for(int i=0;i<this->_dimFi;i++){
 		for(int j=0;j<mb._dimCol;j++){
@@ -173,7 +164,6 @@ bool MatrixBase<T> :: operator==(const MatrixBase<T> &mb){
 template <typename T>
 MatrixBase<T>& MatrixBase<T> :: operator= (const MatrixBase<T> &mb){
 	if(this!=&mb){
-		cout << "WTF IS PASSING???" << endl;
 		if(!matchExactDimesions(mb))
 			throw MatrixException((char*)"Asignacion de matrices de distinta dimension");
 	
@@ -209,7 +199,7 @@ MatrixBase<T> MatrixBase<T> :: scalarMult(const T& value, MatrixBase<T> &mb){
 
 template <typename T>
 void MatrixBase<T> :: setValue(T value, uInt i, uInt j){
-	if(i<0 || i>_dimFi || j<0 || j>_dimCol)
+	if(i==0 || i>_dimFi || j==0 || j>_dimCol)
 		throw MatrixException((char*)"SetValue -->Asignacion de valor en posicion inexistente");
 
 	_matrix[i-1][j-1] = value;
@@ -263,7 +253,7 @@ T MatrixBase<T> :: det(){
 
 
 template <typename T>
-ostream &operator<< (ostream &stream, MatrixBase<T>& mb){
+ostream &operator<< (ostream &stream, const MatrixBase<T>& mb){
   stream << "IMPLEMENTACION TRIVIAL - pensar si hay alguna mejor" << endl;
   stream << "Dimension Filas = " << mb._dimFi << endl;
   stream << "Dimension Columnas = " << mb._dimCol << endl;
@@ -377,7 +367,7 @@ MatrixBase<T> MatrixBase<T> :: swapFi(uInt i, uInt i2){
 	if(i==i2)	//pequeña optimizacion
 		return *this;
 	
-	T swapElem;//no hay q llamar al constructor?
+	T swapElem;
 	
 	for(int h=0;h<_dimCol;h++){
 		swapElem = _matrix[i2-1][h];
@@ -396,7 +386,7 @@ MatrixBase<T> MatrixBase<T> :: swapCol(uInt j, uInt j2){
 	if(j==j2)
 		return *this;
 	
-	T swapElem;//no hay q llamar al constructor?
+	T swapElem;
 
 	for(int h=0;h<_dimFi;h++){
 		swapElem = _matrix[h][j2-1];
