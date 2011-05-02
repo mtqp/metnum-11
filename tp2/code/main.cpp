@@ -36,7 +36,7 @@ int main(int argc, char** argv){
 		
 //	B = A*B;
 /**/		cout << B;
-//		cout << B+A;//B.traspuesta();
+		cout << B.traspuesta();
 /*/		
 /*			
 		int dim = atoi(argv[1]);
