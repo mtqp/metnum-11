@@ -25,30 +25,38 @@ template <class T>
 class Matrix : public MatrixBase<T>{
 	public:
 		Matrix(uInt dimFi, uInt dimCol);
+		Matrix(const Matrix<T>& mCopy);						//IMPLEMENTAR
 		Matrix(T** data, uInt dimFi, uInt dimCol);
-		Matrix(uInt dimFi, uInt dimCol, MatrixType type);
+		Matrix(uInt dimFi, uInt dimCol, MatrixType type);	//IMPLEMENTAR
 		~Matrix();
 		
-		Matrix<T> gaussianElim();
-		Matrix<T> LU(); //o QR no sabemos
-		Matrix<T> inverse();
-		//T det() const;
+		Matrix<T> gaussianElim() const;						//IMPLEMENTAR
+		Matrix<T> LU() 		const; //o QR no sabemos		//IMPLEMENTAR
+		Matrix<T> inverse() const;							//IMPLEMENTAR
+		T det() const;										//IMPLEMENTAR
 		
-		bool isTriang(bool superior);
-		bool isId();
+		bool isTriang(bool superior) const;
+		bool isId() const;
 		
-		T K();	//numero de condicion //no deberia devolver doubles?
+		T K();	//no deberia devolver doubles?				//IMPLEMENTAR
+		
+		Matrix<T>& operator= (const MatrixBase<T> &mb);
 		
 	private:
 		void putZero(uInt i, uInt j);				//pone el cero en esa posicion
 		bool zeroDiag(uInt i);						//si la posicion ii tiene un cero
 		uInt maxUnderDiag(uInt j); 					//estrategia de pivoteo parcial
 		
-		T  	 normF();	//no deberia devolver doubles?
+		T  	 normF() const;	//no deberia devolver doubles?
 };
 
 template <typename T>
 Matrix<T> :: Matrix(uInt dimFi, uInt dimCol) : MatrixBase<T>(dimFi,dimCol){}
+
+template <typename T>
+Matrix<T> :: Matrix(const Matrix<T>& mCopy){
+	throw MatrixException((char*)"Generador NO implementado");
+}
 
 template <typename T>
 Matrix<T> :: Matrix(T** data, uInt dimFi, uInt dimCol) : MatrixBase<T>(data,dimFi,dimCol) {} 
@@ -62,7 +70,27 @@ template <typename T>
 Matrix<T> :: ~Matrix(){}
 
 template <typename T>
-bool Matrix<T> :: isTriang(bool superior){
+Matrix<T> Matrix<T> :: gaussianElim() const {
+	throw MatrixException((char*)"Eliminacion gaussiana no implementada");
+}
+
+template <typename T>
+Matrix<T> Matrix<T> :: LU() const{
+	throw MatrixException((char*)"Factorizacion LU no implementada");
+}
+
+template <typename T>
+Matrix<T> Matrix<T> :: inverse() const{
+	throw MatrixException((char*)"Inversa no implementada");
+}
+
+template <typename T>
+T Matrix<T> :: det() const{
+	throw MatrixException((char*)"DET no recursivo no implementado");
+}
+
+template <typename T>
+bool Matrix<T> :: isTriang(bool superior) const {
 	bool res = true;
 	uInt dimFi = MatrixBase<T> :: getFiDimension();
 	
@@ -82,7 +110,7 @@ bool Matrix<T> :: isTriang(bool superior){
 }
 
 template <typename T>
-bool Matrix<T> :: isId(){
+bool Matrix<T> :: isId() const {
 	bool res = true;
 	uInt dimFi = MatrixBase<T> :: getFiDimension();
 	uInt dimCol = MatrixBase<T> :: getColDimension();
@@ -92,6 +120,27 @@ bool Matrix<T> :: isId(){
 			res &= (i==j && this->getValue(i,j)==1) || (i!=j && this->getValue(i,j)==0);
 			
 	return res;
+}
+
+
+template <typename T>
+T Matrix<T> :: K(){
+	throw MatrixException((char*)"nro condicion no implementado");
+}
+
+template <typename T>
+Matrix<T>& Matrix<T> :: operator= (const MatrixBase<T> &mb){
+	if(!this->matchExactDimesions(mb))
+		throw MatrixException((char*)"Asignacion de matrices de diferente dimension)");
+
+	uInt dimFi = this->getFiDimension();
+	uInt dimCol= this->getColDimension();
+
+	for(int i=1; i<=dimFi; i++)
+		for(int j=1;j<=dimCol;j++)
+			this->setValue(mb.getValue(i,j),i,j);
+	
+	return *this;
 }
 
 template <typename T>
@@ -136,7 +185,7 @@ uInt Matrix<T> :: maxUnderDiag(uInt j){
 }
 
 template <typename T>
-T Matrix<T> :: normF(){
+T Matrix<T> :: normF() const {
 	uInt dimFi = MatrixBase<T> :: getFiDimension();
 	uInt dimCol = MatrixBase<T> :: getColDimension();
 	
