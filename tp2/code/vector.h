@@ -19,7 +19,7 @@ class Vector : public MatrixBase<T>{
 		T getValue(uInt i) const;
 		void setValue(T value, uInt i);
 	
-		Vector<T>& traspuesta() const;
+		Vector<T> traspuesta() const;
 	
 		T normUno() const;	//no devuelve doubles o algo asi?
 		T normDos() const;
@@ -36,8 +36,13 @@ Vector<T> :: Vector(uInt dim) : MatrixBase<T>(1,dim){
 
 /*
 template <typename T>
-Vector<T> :: Vector(Vector<T> v){
+Vector<T> :: Vector(const Vector<T>& v){
 	this->_traspuesta = v._traspuesta;
+	
+	uInt pres = v.dimension();
+	
+	for(int i=1;i<=pres;i++)
+		this->setValue(v.getValue(i),i);
 }*/
 
 template <typename T>
@@ -84,7 +89,7 @@ void Vector<T> :: setValue(T value, uInt i){
 }
 
 template <typename T>
-Vector<T>& Vector<T> :: traspuesta() const {
+Vector<T> Vector<T> :: traspuesta() const {
 /*	MatrixBase<T> mb = MatrixBase<T> :: traspuesta();
 	Vector<T> vt(dimension(),!_traspuesta);
 	&vt = static_cast<Vector<T>*>(&mb);

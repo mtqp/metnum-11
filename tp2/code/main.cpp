@@ -55,13 +55,17 @@ int main(int argc, char** argv){
 		for(int i=1;i<=dim;i++){
 			x.setValue(i,i);
 		}
+		
+//		Vector<int> y(x);
 /*		
 
 		cout << "X CON DIMENSION = " << x.dimension() << "	pointer=" << (int) &x << endl;
 		cout << x;
 		cout << "X traspuesta();" << endl;
 //		cout << x.traspuesta();
-*/		cout << x.traspuesta();
+c
+*/
+cout << "x!!!" << x;		cout << x.traspuesta();
 		cout << "do we get here??" << endl;
 //		x.getValue(1);
 //		cout << "X^TRASPUESTA pointer=" << (int) &x << endl;
