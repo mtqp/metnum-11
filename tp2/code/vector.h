@@ -10,6 +10,7 @@ template <class T>
 class Vector : public MatrixBase<T>{
 	public:
 		Vector(uInt dim);
+		//Vector(const Vector<T>& v);
 		Vector(uInt dim, bool traspuesta);
 		~Vector();
 	
@@ -18,7 +19,7 @@ class Vector : public MatrixBase<T>{
 		T getValue(uInt i) const;
 		void setValue(T value, uInt i);
 	
-		Vector<T> traspuesta() const;
+		Vector<T>& traspuesta() const;
 	
 		T normUno() const;	//no devuelve doubles o algo asi?
 		T normDos() const;
@@ -33,6 +34,12 @@ Vector<T> :: Vector(uInt dim) : MatrixBase<T>(1,dim){
 	_traspuesta = false;
 }
 
+/*
+template <typename T>
+Vector<T> :: Vector(Vector<T> v){
+	this->_traspuesta = v._traspuesta;
+}*/
+
 template <typename T>
 Vector<T> :: Vector(uInt dim, bool traspuesta) : MatrixBase<T>(1,dim){
 	_traspuesta = traspuesta;
@@ -42,7 +49,9 @@ Vector<T> :: Vector(uInt dim, bool traspuesta) : MatrixBase<T>(1,dim){
 }
 
 template <typename T>
-Vector<T> :: ~Vector(){}
+Vector<T> :: ~Vector(){
+	cout << "destructor vector = " << (int) this << endl;
+}
 
 template <typename T>
 uInt Vector<T> :: dimension() const {
@@ -75,15 +84,17 @@ void Vector<T> :: setValue(T value, uInt i){
 }
 
 template <typename T>
-Vector<T> Vector<T> :: traspuesta() const {
-	MatrixBase<T> mb = MatrixBase<T> :: traspuesta();
-
+Vector<T>& Vector<T> :: traspuesta() const {
+/*	MatrixBase<T> mb = MatrixBase<T> :: traspuesta();
+	Vector<T> vt(dimension(),!_traspuesta);
+	&vt = static_cast<Vector<T>*>(&mb);
+	return vt;*/
+	
+	MatrixBase<T> mb(MatrixBase<T> :: traspuesta());
+	cout << "pasa paso uno" << endl;
 	Vector<T>* vt = static_cast<Vector<T>*>(&mb);
-	// ­Heredada* h = static_cast<Heredada*>(&base);
-
-	vt->_traspuesta = !_traspuesta;
-
-	return *vt;
+	cout << "pasa paso dos | returnin =" << (int) vt << endl;
+	return *vt;	
 }
 
 template <typename T>

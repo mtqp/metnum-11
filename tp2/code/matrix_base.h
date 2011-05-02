@@ -20,6 +20,7 @@ class MatrixBase{
 	public:
 		MatrixBase(uInt dimFi, uInt dimCol);
 		MatrixBase(T** data, uInt dimFi, uInt dimCol); 
+		MatrixBase(const MatrixBase<T>& mb);
 		~MatrixBase();
 
 		MatrixBase<T> operator+ (const MatrixBase<T> &mb) const;
@@ -69,6 +70,15 @@ MatrixBase<T> :: MatrixBase(uInt dimFi, uInt dimCol){
 }
 
 template <typename T>
+MatrixBase<T> :: MatrixBase(const MatrixBase<T>& mb){
+	setMatrix(mb._dimFi,mb._dimCol);
+
+	for(int i=0; i<this->_dimFi; i++)
+		for(int j=0;j<this->_dimCol;j++)
+			this->_matrix[i][j] = mb._matrix[i][j];	
+}
+
+template <typename T>
 MatrixBase<T> :: MatrixBase(T** data, uInt dimFi, uInt dimCol){
 	setMatrix(dimFi,dimCol);
 	
@@ -80,6 +90,7 @@ MatrixBase<T> :: MatrixBase(T** data, uInt dimFi, uInt dimCol){
 
 template <typename T>
 MatrixBase<T> :: ~MatrixBase(){
+	cout << "destroyer matrixbase = " << (int) this << endl;
 	for(int j=0;j<_dimFi; j++)
 		delete [] _matrix[j];
 		

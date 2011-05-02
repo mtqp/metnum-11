@@ -21,7 +21,7 @@ int main(int argc, char** argv){
 		int dimFi = atoi(argv[1]);
 		int dimCol= atoi(argv[2]);
 		
-		MatrixBase<int> B(dimFi, dimCol);
+/*		MatrixBase<int> B(dimFi, dimCol);
 		
 		cout << "B" << (int)&B << endl;
 		MatrixBase<int> A(dimCol,dimFi);
@@ -35,7 +35,7 @@ int main(int argc, char** argv){
 		cout << "B after  assignement " << (int)&B << endl;		
 		
 //	B = A*B;
-/**/		
+/*		
 		A = A * A;
 		A = A + A;
 		A = A - A;
@@ -49,19 +49,22 @@ int main(int argc, char** argv){
 		cout << B;
 		cout << B.traspuesta();
 //		
-			
+*/			
 		int dim = atoi(argv[1]);
 		Vector<int> x(dim);
 		for(int i=1;i<=dim;i++){
 			x.setValue(i,i);
 		}
-		
+/*		
+
 		cout << "X CON DIMENSION = " << x.dimension() << "	pointer=" << (int) &x << endl;
 		cout << x;
 		cout << "X traspuesta();" << endl;
 //		cout << x.traspuesta();
-/*		x.traspuesta();
-		cout << "X^TRASPUESTA pointer=" << (int) &x << endl;
+*/		cout << x.traspuesta();
+		cout << "do we get here??" << endl;
+//		x.getValue(1);
+//		cout << "X^TRASPUESTA pointer=" << (int) &x << endl;
 //		cout << "norma1=" << x.normaUno() << "\tnorma2=" << x.normaDos() << "\tnormaInf=" << x.normaInf() << endl;
 
 /*	
