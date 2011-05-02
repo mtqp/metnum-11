@@ -3,8 +3,7 @@
 
 #include "includes.h"
 #include "matrix_exceptions.h"
-
-//#define MatrixBase<T> base.
+#include "matrix_base.h"
 
 template <class T>
 class Vector : public MatrixBase<T>{

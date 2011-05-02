@@ -4,6 +4,7 @@
 #include "includes.h"
 #include "matrix_exceptions.h"
 
+
 #define protected public
 
 /*
