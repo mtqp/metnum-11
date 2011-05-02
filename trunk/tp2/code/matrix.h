@@ -32,19 +32,19 @@ class Matrix : public MatrixBase<T>{
 		Matrix<T> gaussianElim();
 		Matrix<T> LU(); //o QR no sabemos
 		Matrix<T> inverse();
-		//T det();
+		//T det() const;
 		
 		bool isTriang(bool superior);
 		bool isId();
 		
-		T K();	//numero de condicion
+		T K();	//numero de condicion //no deberia devolver doubles?
 		
 	private:
 		void putZero(uInt i, uInt j);				//pone el cero en esa posicion
 		bool zeroDiag(uInt i);						//si la posicion ii tiene un cero
 		uInt maxUnderDiag(uInt j); 					//estrategia de pivoteo parcial
 		
-		T  	 normF();	
+		T  	 normF();	//no deberia devolver doubles?
 };
 
 template <typename T>
