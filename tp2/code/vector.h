@@ -24,7 +24,10 @@ class Vector : public MatrixBase<T>{
 		T normUno() const;	//no devuelve doubles o algo asi?
 		T normDos() const;
 		T normInf() const;
-
+		
+		/*para hacer anda la herencia*/
+		Vector<T>& operator= (const MatrixBase<T> &mb);
+		
 	private:
 		bool _traspuesta;
 };
@@ -55,7 +58,6 @@ Vector<T> :: Vector(uInt dim, bool traspuesta) : MatrixBase<T>(1,dim){
 
 template <typename T>
 Vector<T> :: ~Vector(){
-	cout << "destructor vector = " << (int) this << endl;
 }
 
 template <typename T>
@@ -90,16 +92,36 @@ void Vector<T> :: setValue(T value, uInt i){
 
 template <typename T>
 Vector<T> Vector<T> :: traspuesta() const {
-/*	MatrixBase<T> mb = MatrixBase<T> :: traspuesta();
-	Vector<T> vt(dimension(),!_traspuesta);
-	&vt = static_cast<Vector<T>*>(&mb);
-	return vt;*/
-	
 	MatrixBase<T> mb(MatrixBase<T> :: traspuesta());
-	cout << "pasa paso uno" << endl;
 	Vector<T>* vt = static_cast<Vector<T>*>(&mb);
-	cout << "pasa paso dos | returnin =" << (int) vt << endl;
+
 	return *vt;	
+}
+
+template <typename T>
+Vector<T>& Vector<T> :: operator= (const MatrixBase<T> &mb){
+	uInt dimFi = mb.getFiDimension();
+	uInt dimCol= mb.getColDimension();
+	uInt vDim = this->dimension();
+	
+	bool validDer = (dimFi==1 && dimCol>1 && dimCol==vDim);
+	bool validTrasp=(dimCol==1 && dimFi>1 && dimFi==vDim);
+	
+	if(!validDer && !validTrasp)
+		throw MatrixException((char*)"Asignacion entre vectores y matrices invalida");
+
+	this->_traspuesta = validTrasp;
+
+	if(this->_traspuesta){
+		for(int i=1;i<=vDim;i++)
+			this->setValue(mb.getValue(i,1),i);		
+	}
+	else {
+		for(int i=1;i<=vDim;i++)
+			this->setValue(mb.getValue(1,i),i);
+	}
+
+	return *this;
 }
 
 template <typename T>
@@ -150,29 +172,5 @@ T Vector<T> :: normInf() const {
 	
 	return nMax;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #endif
