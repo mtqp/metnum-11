@@ -21,40 +21,33 @@ int main(int argc, char** argv){
 		int dimFi = atoi(argv[1]);
 		int dimCol= atoi(argv[2]);
 		
-/*		MatrixBase<int> B(dimFi, dimCol);
+		MatrixBase<int> A(dimFi, dimCol);
 		
-		cout << "B" << (int)&B << endl;
-		MatrixBase<int> A(dimCol,dimFi);
-		cout << "A" << (int)&A << endl;
-/*		if(true){
-//			MatrixBase<int> A(dimFi,dimCol);
-			cout << "A before assignement " << (int)&A << endl;
-			B = A;	
-		}
+		for(int i=1; i<=dimFi; i++)
+			for(int j=1;j<=dimCol; j++){
+				A.setValue(i+j, i, j);
+			}
 		
-		cout << "B after  assignement " << (int)&B << endl;		
-		
-//	B = A*B;
-/*		
-		A = A * A;
-		A = A + A;
-		A = A - A;
-		A == B;
-		A !=B;
-		B.traspuesta();
-		2*B;
-		B*2;
-		B.swapFi(1,2);
-		B.swapCol(1,2);
-		cout << B;
-		cout << B.traspuesta();
-//		
-*/			
 		int dim = atoi(argv[1]);
 		Vector<int> x(dim);
 		for(int i=1;i<=dim;i++){
 			x.setValue(i,i);
 		}
+		
+		cout << "A" << endl;
+		cout << A;
+/*		cout << "xtrasp" << endl;
+		cout << x.traspuesta();
+*/		
+		cout << "x" << endl;
+		cout << x;
+		cout << "A * x " << endl;
+		cout << x*A;
+		
+		Vector<int> y(dim);
+		y = x*A;
+		cout << "y" << endl;
+		cout << y;
 		
 //		Vector<int> y(x);
 /*		
@@ -64,7 +57,7 @@ int main(int argc, char** argv){
 		cout << "X traspuesta();" << endl;
 //		cout << x.traspuesta();
 c
-*/
+
 cout << "x!!!" << x;		cout << x.traspuesta();
 		cout << "do we get here??" << endl;
 //		x.getValue(1);
@@ -94,44 +87,6 @@ cout << "x!!!" << x;		cout << x.traspuesta();
 			}
 		
 
-		MatrixBase<int> A(matrix,dimFi,dimCol);
-		//MatrixBase<int> B(mUno,dimCol,dimFi);		
-		MatrixBase<int> B(mUno,dimCol,1);
-		cout << "--> A" << endl;
-		cout << A;
-		cout << "A traspuesta" << endl;
-		cout << A.traspuesta();
-		A.setValue(300,1,1);
-		cout << A;
-//		A + A * A;
-		
-/*		cout << "swap fi 2 4" << endl;
-		cout << A.swapFi(2,4);
-		cout << "swap col 3 1" << endl;
-		cout << A.swapCol(3,1) << endl;
-
-/*		cout << "A -C3" << endl;
-		cout << A.deleteCol(3);
-/*		cout << "A -F2" << endl;
-		cout << A.deleteFi(2);
-/*		cout << "A -F2 -C3" << endl;
-		cout << A.deleteFiCol(2,3);
-		
-	
-		cout << "-------------------" << endl;
-		cout << "--> B" << endl;
-		cout << B;
-		cout << "-------------------" << endl;
-		cout << "--> A+B" << endl;
-		cout << A+B;
-		cout << "-------------------" << endl;
-/*		cout << "--> A*B" << endl;
-		cout << A*B;
-		cout << "-------------------" << endl;
-		cout << "--> B*3" << endl;
-		cout << B*3;
-	*/	
-		//cout << "det A = " << A.det() << endl;
 		/*
 			AQUI VA EL PROGRAMA!
 		*/

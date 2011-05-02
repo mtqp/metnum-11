@@ -90,7 +90,6 @@ MatrixBase<T> :: MatrixBase(T** data, uInt dimFi, uInt dimCol){
 
 template <typename T>
 MatrixBase<T> :: ~MatrixBase(){
-	cout << "destroyer matrixbase = " << (int) this << endl;
 	for(int j=0;j<_dimFi; j++)
 		delete [] _matrix[j];
 		
