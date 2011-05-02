@@ -12,17 +12,32 @@ int** initMatrix(int,int);
 int main(int argc, char** argv){
 	try
 	{
-		cout << "No se esta haciendo NINGUN FREE!!!!!!" << endl;
-		
-		if(argc < 2){
+
+		if(argc < 3){
 			cout << "Te olvidaste de mandar los parámetros capo!" << endl;
 			return 0;
 		}
 
 
-		Matrix<int> A(3,3);
+		int dimFi = atoi(argv[1]);
+		int dimCol= atoi(argv[2]);
 		
+		MatrixBase<int> B(dimFi, dimCol);
 		
+		cout << "B" << (int)&B << endl;
+		MatrixBase<int> A(dimCol,dimFi);
+		cout << "A" << (int)&A << endl;
+/*		if(true){
+//			MatrixBase<int> A(dimFi,dimCol);
+			cout << "A before assignement " << (int)&A << endl;
+			B = A;	
+		}
+		
+		cout << "B after  assignement " << (int)&B << endl;		
+		
+/**/	B = A*B;
+//		cout << B;
+/*/		
 /*			
 		int dim = atoi(argv[1]);
 		Vector<int> x(dim);

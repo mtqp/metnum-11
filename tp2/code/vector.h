@@ -76,7 +76,6 @@ void Vector<T> :: setValue(T value, uInt i){
 
 template <typename T>
 Vector<T> Vector<T> :: traspuesta(){
-//	_traspuesta = !_traspuesta;
 	MatrixBase<T> mb = MatrixBase<T> :: traspuesta();
 
 	Vector<T>* vt = static_cast<Vector<T>*>(&mb);
