@@ -2,10 +2,9 @@
 
 #include "matrix_base.h"		//se supone q dsp nadie la va a ver a esta clase
 #include "matrix_exceptions.h"
-//#include "saving_data.h"		//no esta completo.
 
 #include "vector.h"
-#include "matrix_c.h"
+//#include "matrix_c.h"
 
 int** initMatrix(int,int);
 
@@ -35,8 +34,9 @@ int main(int argc, char** argv){
 		
 		cout << "B after  assignement " << (int)&B << endl;		
 		
-/**/	B = A*B;
-//		cout << B;
+//	B = A*B;
+/**/		cout << B;
+//		cout << B+A;//B.traspuesta();
 /*/		
 /*			
 		int dim = atoi(argv[1]);
