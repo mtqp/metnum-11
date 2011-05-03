@@ -2,6 +2,7 @@
 #define __MATRIX_H__
 
 #include "includes.h"
+#include "matrix_base.h"
 #include "matrix_exceptions.h"
 
 enum MatrixType{
@@ -25,9 +26,9 @@ template <class T>
 class Matrix : public MatrixBase<T>{
 	public:
 		Matrix(uInt dimFi, uInt dimCol);
-		Matrix(const Matrix<T>& mCopy);						//IMPLEMENTAR
+		Matrix(const Matrix<T>& mCopy);
 		Matrix(T** data, uInt dimFi, uInt dimCol);
-		Matrix(uInt dimFi, uInt dimCol, MatrixType type);	//IMPLEMENTAR
+		Matrix(uInt dimFi, uInt dimCol, MatrixType type);	//IMPLEMENTAR (Mañana lo hago!)
 		~Matrix();
 		
 		Matrix<T> gaussianElim() const;						//IMPLEMENTAR
@@ -54,8 +55,7 @@ template <typename T>
 Matrix<T> :: Matrix(uInt dimFi, uInt dimCol) : MatrixBase<T>(dimFi,dimCol){}
 
 template <typename T>
-Matrix<T> :: Matrix(const Matrix<T>& mCopy){
-	throw MatrixException((char*)"Generador NO implementado");
+Matrix<T> :: Matrix(const Matrix<T>& mCopy) : MatrixBase<T>(mCopy){
 }
 
 template <typename T>
