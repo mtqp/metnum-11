@@ -255,6 +255,7 @@ template <typename T>
 void Matrix<T> :: createId(uInt dim){
 	for(int i=1;i<=dim;i++)
 		this->setValue((T) 1, i,i);
+	/*no lo commitea el gil1!*/
 }
 
 #endif
