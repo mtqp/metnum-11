@@ -31,10 +31,10 @@ class Matrix : public MatrixBase<T>{
 		Matrix(uInt dimFi, uInt dimCol, MatrixType type);	//IMPLEMENTAR (Mañana lo hago!)
 		~Matrix();
 		
-		Matrix<T> gaussianElim() const;						//IMPLEMENTAR
-		Matrix<T> LU() 		const; //o QR no sabemos		//IMPLEMENTAR
+		Matrix<T> gaussianElim() const;						
+		Matrix<T> LU() 		const; //o QR no sabemos		
 		Matrix<T> inverse() const;							//IMPLEMENTAR
-		T det() const;										//IMPLEMENTAR
+		T det() const;										
 		
 		bool isTriang(bool superior) const;
 		bool isId() const;
@@ -44,8 +44,7 @@ class Matrix : public MatrixBase<T>{
 		Matrix<T>& operator= (const MatrixBase<T> &mb);
 		
 	private:
-		void putZero(uInt i, uInt j);				//pone el cero en esa posicion
-		bool zeroDiag(uInt i);						//si la posicion ii tiene un cero
+		T putZero(uInt i, uInt j);					//pone el cero en esa posicion
 		uInt maxUnderDiag(uInt j); 					//estrategia de pivoteo parcial
 		T  	 normF() const;	//no deberia devolver doubles?
 };
@@ -87,9 +86,27 @@ Matrix<T> Matrix<T> :: gaussianElim() const {
 	return copy;
 }
 
+/*	Devuelve una matriz la cual se interpreta: L abajo de la diagonal, U arriba de la diagonal y la diagonal */
 template <typename T>
 Matrix<T> Matrix<T> :: LU() const{
-	throw MatrixException((char*)"Factorizacion LU no implementada");
+	Matrix<T> copy(*this);
+	uInt dimFi = MatrixBase<T> :: getFiDimension(); 
+	uInt dimCol = MatrixBase<T> :: getColDimension(); 
+	uInt maxCol=0;
+	T elem;
+	
+	for(int j=1; j<=dimCol; j++){
+		maxCol = copy.maxUnderDiag(j);
+		if(copy.getValue(maxCol,j)!=0){
+			copy.swapFi(j,maxCol);
+			for(int i=j+1; i<=dimFi; i++){
+				elem = copy.putZero(i,j);
+				copy.setValue(elem,i,j);
+			}
+		}
+	}
+	
+	return copy;
 }
 
 template <typename T>
@@ -168,7 +185,7 @@ Matrix<T>& Matrix<T> :: operator= (const MatrixBase<T> &mb){
 }
 
 template <typename T>
-void Matrix<T> :: putZero(uInt i, uInt j){
+T Matrix<T> :: putZero(uInt i, uInt j){
 	T pivot = this->getValue(j,j);
 	if(pivot==0)
 		throw MatrixException((char*)"El pivot es cero.");
@@ -182,6 +199,8 @@ void Matrix<T> :: putZero(uInt i, uInt j){
 		elem = this->getValue(i,k) - elem; 
 		this->setValue(elem,i,k);
 	}
+	
+	return pivot;
 }
 
 template <typename T>
