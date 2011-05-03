@@ -23,6 +23,9 @@ int main(int argc, char** argv){
 		cout << B << endl;
 		cout << B.det() << endl;
 		
+		Matrix<int> C(4,4,ID);
+		cout << C;
+		
 	}
 	catch (MatrixException& e) //HACER ANDAR BIEN!
 	{

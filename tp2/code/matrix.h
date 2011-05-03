@@ -49,6 +49,8 @@ class Matrix : public MatrixBase<T>{
 		void putZero(uInt i, uInt j, T coefficient);		//pone el cero en esa posicion
 		uInt maxUnderDiag(uInt j) const;			//estrategia de pivoteo parcial
 		T  	 normF() const;							//no deberia devolver doubles?
+		
+		void createId(uInt dimFi);
 };
 
 template <typename T>
@@ -63,7 +65,15 @@ Matrix<T> :: Matrix(T** data, uInt dimFi, uInt dimCol) : MatrixBase<T>(data,dimF
 
 template <typename T>
 Matrix<T> :: Matrix(uInt dimFi, uInt dimCol, MatrixType type) : MatrixBase<T>(dimFi, dimCol){
-	throw MatrixException((char*)"Generador NO implementado");
+	switch(type){
+		case(ID):
+			if(dimFi!=dimCol)
+				throw MatrixException((char*) "Matriz ID NO cuadrada");
+			createId(dimFi);
+			break;
+		default:
+			throw MatrixException((char*)"No implementadas... HACERLAS!");
+	}
 }
 
 template <typename T>
@@ -239,6 +249,12 @@ T Matrix<T> :: normF() const {
 	
 	normF -= this->getValue(1,1);
 	return sqrt(normF);
+}
+
+template <typename T>
+void Matrix<T> :: createId(uInt dim){
+	for(int i=1;i<=dim;i++)
+		this->setValue((T) 1, i,i);
 }
 
 #endif
