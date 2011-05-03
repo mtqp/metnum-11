@@ -1,5 +1,5 @@
 #include "includes.h"
-#include "matrix_c.h"
+#include "matrix.h"
 #include "vector.h"
 #include "matrix_exceptions.h"
 
