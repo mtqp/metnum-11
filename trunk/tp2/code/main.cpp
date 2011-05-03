@@ -7,6 +7,9 @@
 int main(int argc, char** argv){
 	try
 	{
+		/*Matrix<int>A(1,1);
+		Matrix<int>B(A);*/
+		
 		/*
 			AQUI VA EL PROGRAMA!
 		*/
