@@ -39,14 +39,16 @@ class Matrix : public MatrixBase<T>{
 		bool isTriang(bool superior) const;
 		bool isId() const;
 		
-		T K();	//no deberia devolver doubles?				//IMPLEMENTAR
+		T K() const;	//no deberia devolver doubles?				//IMPLEMENTAR
 		
 		Matrix<T>& operator= (const MatrixBase<T> &mb);
 		
 	private:
-		T putZero(uInt i, uInt j);					//pone el cero en esa posicion
-		uInt maxUnderDiag(uInt j); 					//estrategia de pivoteo parcial
-		T  	 normF() const;	//no deberia devolver doubles?
+		void Gauss_LU(bool L);
+		T coefficient(uInt i, uInt j);
+		void putZero(uInt i, uInt j, T coefficient);		//pone el cero en esa posicion
+		uInt maxUnderDiag(uInt j) const;			//estrategia de pivoteo parcial
+		T  	 normF() const;							//no deberia devolver doubles?
 };
 
 template <typename T>
@@ -70,19 +72,7 @@ Matrix<T> :: ~Matrix(){}
 template <typename T>
 Matrix<T> Matrix<T> :: gaussianElim() const {
 	Matrix<T> copy(*this);
-	uInt dimFi = MatrixBase<T> :: getFiDimension(); 
-	uInt dimCol = MatrixBase<T> :: getColDimension(); 
-	uInt maxCol=0;
-	
-	for(int j=1; j<=dimCol; j++){
-		maxCol = copy.maxUnderDiag(j);
-		if(copy.getValue(maxCol,j)!=0){
-			copy.swapFi(j,maxCol);
-			for(int i=j+1; i<=dimFi; i++){
-				copy.putZero(i,j);
-			}
-		}
-	}
+	copy.Gauss_LU(false);
 	return copy;
 }
 
@@ -90,22 +80,7 @@ Matrix<T> Matrix<T> :: gaussianElim() const {
 template <typename T>
 Matrix<T> Matrix<T> :: LU() const{
 	Matrix<T> copy(*this);
-	uInt dimFi = MatrixBase<T> :: getFiDimension(); 
-	uInt dimCol = MatrixBase<T> :: getColDimension(); 
-	uInt maxCol=0;
-	T elem;
-	
-	for(int j=1; j<=dimCol; j++){
-		maxCol = copy.maxUnderDiag(j);
-		if(copy.getValue(maxCol,j)!=0){
-			copy.swapFi(j,maxCol);
-			for(int i=j+1; i<=dimFi; i++){
-				elem = copy.putZero(i,j);
-				copy.setValue(elem,i,j);
-			}
-		}
-	}
-	
+	copy.Gauss_LU(true);
 	return copy;
 }
 
@@ -165,7 +140,7 @@ bool Matrix<T> :: isId() const {
 
 
 template <typename T>
-T Matrix<T> :: K(){
+T Matrix<T> :: K() const{
 	throw MatrixException((char*)"nro condicion no implementado");
 }
 
@@ -185,26 +160,50 @@ Matrix<T>& Matrix<T> :: operator= (const MatrixBase<T> &mb){
 }
 
 template <typename T>
-T Matrix<T> :: putZero(uInt i, uInt j){
+void Matrix<T> :: Gauss_LU(bool L){
+	uInt dimFi = MatrixBase<T> :: getFiDimension(); 
+	uInt dimCol = MatrixBase<T> :: getColDimension(); 
+	uInt maxCol=0;
+	T coefficient;
+	
+	for(int j=1; j<=dimCol; j++){
+		maxCol = this->maxUnderDiag(j);
+		if(this->getValue(maxCol,j)!=0){			//si es cero se pasa a la otra columna, ya esta lo que queremos
+			this->swapFi(j,maxCol);
+			for(int i=j+1; i<=dimFi; i++){
+				coefficient = this->coefficient(i,j);
+				this->putZero(i,j,coefficient);
+				if(L) setValue(coefficient, i, j);
+			}
+		}
+	}
+}
+
+template <typename T>
+T Matrix<T> :: coefficient(uInt i, uInt j){
 	T pivot = this->getValue(j,j);
 	if(pivot==0)
 		throw MatrixException((char*)"El pivot es cero.");
 	
 	pivot = this->getValue(i,j)/pivot;
 	
-	uInt dimCol = MatrixBase<T> :: getColDimension();
-	T elem;
-	for(int k=j; k<=dimCol; k++){
-		elem = pivot*this->getValue(j,k);
-		elem = this->getValue(i,k) - elem; 
-		this->setValue(elem,i,k);
-	}
-	
 	return pivot;
 }
 
 template <typename T>
-uInt Matrix<T> :: maxUnderDiag(uInt j){
+void Matrix<T> :: putZero(uInt i, uInt j, T coefficient){
+	uInt dimCol = MatrixBase<T> :: getColDimension();
+	T elem;
+	
+	for(int k=j; k<=dimCol; k++){
+		elem = coefficient*this->getValue(j,k);
+		elem = this->getValue(i,k) - elem; 
+		this->setValue(elem,i,k);
+	}
+}
+
+template <typename T>
+uInt Matrix<T> :: maxUnderDiag(uInt j) const{
 	uInt dimFi = MatrixBase<T> :: getFiDimension();
 	uInt dimCol = MatrixBase<T> :: getColDimension();
 	
