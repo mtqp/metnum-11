@@ -1,5 +1,5 @@
 #include "includes.h"
-#include "matrix.h"
+#include "matrix_c.h"
 #include "vector.h"
 #include "matrix_exceptions.h"
 
@@ -19,7 +19,7 @@ int main(int argc, char** argv){
 		A.setValue(3,2,2);
 		cout << A << endl;
 		Matrix<double> B(2,2);
-		B=A.gaussianElim();
+		B=A.inverse();
 		cout << B << endl;
 		cout << B.det() << endl;
 		
