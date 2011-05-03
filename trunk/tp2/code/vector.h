@@ -146,13 +146,13 @@ T Vector<T> :: normDos() const {
 	T nDos = this->getValue(1);
 	
 	if(dim==1)
-		return squareRoot(nDos*nDos);
+		return sqrt(nDos*nDos);
 	
 	for(int i=2;i<=dim;i++){
 		nDos += this->getValue(i)*this->getValue(i);
 	}
 	
-	return squareRoot(nDos);	
+	return sqrt(nDos);	
 }
 
 template <typename T>
