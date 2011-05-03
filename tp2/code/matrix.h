@@ -47,7 +47,6 @@ class Matrix : public MatrixBase<T>{
 		void putZero(uInt i, uInt j);				//pone el cero en esa posicion
 		bool zeroDiag(uInt i);						//si la posicion ii tiene un cero
 		uInt maxUnderDiag(uInt j); 					//estrategia de pivoteo parcial
-		
 		T  	 normF() const;	//no deberia devolver doubles?
 };
 
@@ -71,7 +70,21 @@ Matrix<T> :: ~Matrix(){}
 
 template <typename T>
 Matrix<T> Matrix<T> :: gaussianElim() const {
-	throw MatrixException((char*)"Eliminacion gaussiana no implementada");
+	Matrix<T> copy(*this);
+	uInt dimFi = MatrixBase<T> :: getFiDimension(); 
+	uInt dimCol = MatrixBase<T> :: getColDimension(); 
+	uInt maxCol=0;
+	
+	for(int j=1; j<=dimCol; j++){
+		maxCol = copy.maxUnderDiag(j);
+		if(copy.getValue(maxCol,j)!=0){
+			copy.swapFi(j,maxCol);
+			for(int i=j+1; i<=dimFi; i++){
+				copy.putZero(i,j);
+			}
+		}
+	}
+	return copy;
 }
 
 template <typename T>
@@ -86,7 +99,18 @@ Matrix<T> Matrix<T> :: inverse() const{
 
 template <typename T>
 T Matrix<T> :: det() const{
-	throw MatrixException((char*)"DET no recursivo no implementado");
+	Matrix<T> copy(*this);
+	
+	if(!this->isTriang(true) && !this->isTriang(false)){
+		copy = this->gaussianElim();
+	}
+	
+	uInt dimFi = copy.getFiDimension();
+	T det = copy.getValue(1,1);
+	for(int i=2; i<=dimFi; i++)
+		det *= copy.getValue(i,i);
+		
+	return det;
 }
 
 template <typename T>
@@ -151,15 +175,13 @@ void Matrix<T> :: putZero(uInt i, uInt j){
 	
 	pivot = this->getValue(i,j)/pivot;
 	
-	cout << "pivot" << pivot << endl;
-	
 	uInt dimCol = MatrixBase<T> :: getColDimension();
-	
+	T elem;
 	for(int k=j; k<=dimCol; k++){
-		T elem = this->getValue(i,k)-pivot*this->getValue(j,k);
+		elem = pivot*this->getValue(j,k);
+		elem = this->getValue(i,k) - elem; 
 		this->setValue(elem,i,k);
 	}
-	
 }
 
 template <typename T>
@@ -170,11 +192,11 @@ uInt Matrix<T> :: maxUnderDiag(uInt j){
 	if(j==0 || j>dimFi || j>dimCol)
 		throw MatrixException((char*)"El indice no pertenece a la diagonal, no esta en rango.");
 	
-	T pivot = this->getValue(j,j);
+	T pivot = abs(this->getValue(j,j));
 	uInt pivot_pos = j;
 	
 	for(int i=j+1; i<=dimFi; i++){
-		T elem = this->getValue(i,j);
+		T elem = abs(this->getValue(i,j));
 		if(elem>pivot){
 			pivot = elem;
 			pivot_pos=i;
@@ -198,7 +220,7 @@ T Matrix<T> :: normF() const {
 			normF += this->getValue(i,j)*this->getValue(i,j);
 	
 	normF -= this->getValue(1,1);
-	return squareRoot(normF);
+	return sqrt(normF);
 }
 
 #endif
