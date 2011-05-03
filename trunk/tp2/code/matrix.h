@@ -25,10 +25,10 @@ enum MatrixType{
 template <class T>
 class Matrix : public MatrixBase<T>{
 	public:
-		Matrix(uInt dimFi, uInt dimCol);
+		Matrix(uInt dim);
 		Matrix(const Matrix<T>& mCopy);
-		Matrix(T** data, uInt dimFi, uInt dimCol);
-		Matrix(uInt dimFi, uInt dimCol, MatrixType type);	//IMPLEMENTAR (Mañana lo hago!)
+		Matrix(T** data, uInt dim);
+		Matrix(uInt dim, MatrixType type);	//IMPLEMENTAR (Mañana lo hago!)
 		~Matrix();
 		
 		Matrix<T> gaussianElim() const;						
@@ -50,26 +50,24 @@ class Matrix : public MatrixBase<T>{
 		uInt maxUnderDiag(uInt j) const;			//estrategia de pivoteo parcial
 		T  	 normF() const;							//no deberia devolver doubles?
 		
-		void createId(uInt dimFi);
+		void createId(uInt dim);
 };
 
 template <typename T>
-Matrix<T> :: Matrix(uInt dimFi, uInt dimCol) : MatrixBase<T>(dimFi,dimCol){}
+Matrix<T> :: Matrix(uInt dim) : MatrixBase<T>(dim,dim){}
 
 template <typename T>
 Matrix<T> :: Matrix(const Matrix<T>& mCopy) : MatrixBase<T>(mCopy){
 }
 
 template <typename T>
-Matrix<T> :: Matrix(T** data, uInt dimFi, uInt dimCol) : MatrixBase<T>(data,dimFi,dimCol) {} 
+Matrix<T> :: Matrix(T** data, uInt dim) : MatrixBase<T>(data,dim,dim) {} 
 
 template <typename T>
-Matrix<T> :: Matrix(uInt dimFi, uInt dimCol, MatrixType type) : MatrixBase<T>(dimFi, dimCol){
+Matrix<T> :: Matrix(uInt dim, MatrixType type) : MatrixBase<T>(dim, dim){
 	switch(type){
 		case(ID):
-			if(dimFi!=dimCol)
-				throw MatrixException((char*) "Matriz ID NO cuadrada");
-			createId(dimFi);
+			createId(dim);
 			break;
 		default:
 			throw MatrixException((char*)"No implementadas... HACERLAS!");
@@ -118,17 +116,16 @@ T Matrix<T> :: det() const{
 template <typename T>
 bool Matrix<T> :: isTriang(bool superior) const {
 	bool res = true;
-	uInt dimFi = MatrixBase<T> :: getFiDimension();
+	uInt dim = MatrixBase<T> :: getFiDimension();
 	
 	if(superior){
-		for(int i=2; i<=dimFi; i++)
+		for(int i=2; i<=dim; i++)
 			for(int j=1; j<i; j++)
 				res &= this->getValue(i,j)==0;
 	}
 	else{
-		uInt dimCol = MatrixBase<T> :: getColDimension(); 
-		for(int i=1; i<dimFi; i++)
-			for(int j=i+1; j<=dimCol; j++)
+		for(int i=1; i<dim; i++)
+			for(int j=i+1; j<=dim; j++)
 				res &= this->getValue(i,j)==0;
 	}
 	
@@ -138,11 +135,10 @@ bool Matrix<T> :: isTriang(bool superior) const {
 template <typename T>
 bool Matrix<T> :: isId() const {
 	bool res = true;
-	uInt dimFi = MatrixBase<T> :: getFiDimension();
-	uInt dimCol = MatrixBase<T> :: getColDimension();
+	uInt dim = MatrixBase<T> :: getFiDimension();
 	
-	for(int i=1; i<=dimFi; i++)
-		for(int j=1; j<=dimCol; j++)
+	for(int i=1; i<=dim; i++)
+		for(int j=1; j<=dim; j++)
 			res &= (i==j && this->getValue(i,j)==1) || (i!=j && this->getValue(i,j)==0);
 			
 	return res;
@@ -159,11 +155,10 @@ Matrix<T>& Matrix<T> :: operator= (const MatrixBase<T> &mb){
 	if(!this->matchExactDimesions(mb))
 		throw MatrixException((char*)"Asignacion de matrices de diferente dimension)");
 
-	uInt dimFi = this->getFiDimension();
-	uInt dimCol= this->getColDimension();
+	uInt dim = this->getFiDimension();
 
-	for(int i=1; i<=dimFi; i++)
-		for(int j=1;j<=dimCol;j++)
+	for(int i=1; i<=dim; i++)
+		for(int j=1;j<=dim;j++)
 			this->setValue(mb.getValue(i,j),i,j);
 	
 	return *this;
@@ -171,16 +166,15 @@ Matrix<T>& Matrix<T> :: operator= (const MatrixBase<T> &mb){
 
 template <typename T>
 void Matrix<T> :: Gauss_LU(bool L){
-	uInt dimFi = MatrixBase<T> :: getFiDimension(); 
-	uInt dimCol = MatrixBase<T> :: getColDimension(); 
+	uInt dim = MatrixBase<T> :: getFiDimension(); 
 	uInt maxCol=0;
 	T coefficient;
 	
-	for(int j=1; j<=dimCol; j++){
+	for(int j=1; j<=dim; j++){
 		maxCol = this->maxUnderDiag(j);
 		if(this->getValue(maxCol,j)!=0){			//si es cero se pasa a la otra columna, ya esta lo que queremos
 			this->swapFi(j,maxCol);
-			for(int i=j+1; i<=dimFi; i++){
+			for(int i=j+1; i<=dim; i++){
 				coefficient = this->coefficient(i,j);
 				this->putZero(i,j,coefficient);
 				if(L) setValue(coefficient, i, j);
@@ -214,16 +208,15 @@ void Matrix<T> :: putZero(uInt i, uInt j, T coefficient){
 
 template <typename T>
 uInt Matrix<T> :: maxUnderDiag(uInt j) const{
-	uInt dimFi = MatrixBase<T> :: getFiDimension();
-	uInt dimCol = MatrixBase<T> :: getColDimension();
+	uInt dim = MatrixBase<T> :: getFiDimension();
 	
-	if(j==0 || j>dimFi || j>dimCol)
+	if(j==0 || j>dim)
 		throw MatrixException((char*)"El indice no pertenece a la diagonal, no esta en rango.");
 	
 	T pivot = abs(this->getValue(j,j));
 	uInt pivot_pos = j;
 	
-	for(int i=j+1; i<=dimFi; i++){
+	for(int i=j+1; i<=dim; i++){
 		T elem = abs(this->getValue(i,j));
 		if(elem>pivot){
 			pivot = elem;
@@ -236,15 +229,14 @@ uInt Matrix<T> :: maxUnderDiag(uInt j) const{
 
 template <typename T>
 T Matrix<T> :: normF() const {
-	uInt dimFi = MatrixBase<T> :: getFiDimension();
-	uInt dimCol = MatrixBase<T> :: getColDimension();
+	uInt dim = MatrixBase<T> :: getFiDimension();
 	
 	T normF = this->getValue(1,1);
 	
-	if(dimFi==1 && dimCol==1) return normF;
+	if(dim==1) return normF;
 
-	for(int i=1; i<=dimFi; i++)
-		for(int j=1; j<=dimCol; j++)
+	for(int i=1; i<=dim; i++)
+		for(int j=1; j<=dim; j++)
 			normF += this->getValue(i,j)*this->getValue(i,j);
 	
 	normF -= this->getValue(1,1);

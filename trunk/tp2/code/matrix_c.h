@@ -70,7 +70,7 @@ template <typename T>
 Matrix<T> :: ~Matrix(){}
 
 template <typename T>
-Matrix<T> Matrix<T> :: gaussianElim() const {
+Matrix<T> Matrix<T> :: gaussianElim() const{
 	Matrix<T> copy(*this);
 	copy.Gauss_LU(false);
 	return copy;
@@ -86,7 +86,7 @@ Matrix<T> Matrix<T> :: LU() const{
 
 template <typename T>
 Matrix<T> Matrix<T> :: inverse() const{
-	throw MatrixException((char*)"Inversa no implementada");
+	if(!this->isInversible()) throw MatrixException((char*)"Inversa no implementada");
 }
 
 template <typename T>
