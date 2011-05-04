@@ -2,6 +2,7 @@
 #define __MATRIX_H__
 
 #include "includes.h"
+#include "vector.h"
 #include "matrix_base.h"
 #include "matrix_exceptions.h"
 
@@ -47,8 +48,8 @@ class Matrix : public MatrixBase<T>{
 		void Gauss_LU(bool L);
 		T coefficient(uInt i, uInt j);
 		void putZero(uInt i, uInt j, T coefficient);		//pone el cero en esa posicion
-		uInt maxUnderDiag(uInt j) const;			//estrategia de pivoteo parcial
-		T  	 normF() const;							//no deberia devolver doubles?
+		uInt maxUnderDiag(uInt j) const;					//estrategia de pivoteo parcial
+		T  	 normF() const;									//no deberia devolver doubles?
 		
 		void createId(uInt dim);
 		void createBadK();
@@ -97,18 +98,79 @@ Matrix<T> Matrix<T> :: LU() const{
 	return copy;
 }
 
+/* OJO!!! Anda si no necesita permutar!!! */
 template <typename T>
 Matrix<T> Matrix<T> :: inverse() const{
-	if(!this->isInversible()) throw MatrixException((char*)"No existe la inversa");
+	uInt dim = this->getFiDimension();
 	
 	Matrix<T> copy(*this);
-	uInt dim = copy.getFiDimension();
+	copy = copy.LU();
+	
+	if(copy.det()==0) throw MatrixException((char*)"No existe la inversa");
 	
 	Matrix<T> id(dim,ID);
+	
+	T coefficient;
 
+	for(int j=1; j<dim; j++){
+		for(int i=j+1; i<=dim; i++){
+			coefficient = copy.getValue(i,j);
+			copy.setValue(0,i,j);
+			id.putZero(i,j,coefficient);
+		}
+	}
 	
+	/* Giro las matrices para poder usar las funciones implementadas */
+	copy = copy.traspuesta();
+	id = id.traspuesta();
+	T elem1;
+	T elem2;
+	for(int i=1; i<=dim/2; i++){
+		elem1 = copy.getValue(i,i);
+		elem2 = copy.getValue(dim+1-i,dim+1-i);
+		copy.setValue(elem1,dim+1-i,dim+1-i);
+		copy.setValue(elem2,i,i);
+		
+		elem1 = id.getValue(i,i);
+		elem2 = id.getValue(dim+1-i,dim+1-i);
+		id.setValue(elem1,dim+1-i,dim+1-i);
+		id.setValue(elem2,i,i);
+	}
 	
-	return copy;
+	copy = copy.LU();
+	
+	for(int j=1; j<dim; j++){
+		for(int i=j+1; i<=dim; i++){
+			coefficient = copy.getValue(i,j);
+			copy.setValue(0,i,j);
+			id.putZero(i,j,coefficient);
+		}
+	}
+	
+	T elemDiag;
+	T elem;
+	
+	/*Pone unos en la diagonal para llegar a la identidad, modifica solo la matriz resultante*/
+	for(int i=1; i<=dim; i++){
+		elemDiag = copy.getValue(i,i);
+		for(int j=1; j<=dim; j++){
+			elem = id.getValue(i,j);
+			elem /= elemDiag;
+			id.setValue(elem,i,j);
+		}
+	}
+	
+	/* La vuelvo a girar */
+	
+	id = id.traspuesta();
+	for(int i=1; i<=dim/2; i++){
+		elem1 = id.getValue(i,i);
+		elem2 = id.getValue(dim+1-i,dim+1-i);
+		id.setValue(elem1,dim+1-i,dim+1-i);
+		id.setValue(elem2,i,i);
+	}
+
+	return id;
 }
 
 template <typename T>
