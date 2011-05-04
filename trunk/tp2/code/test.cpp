@@ -13,17 +13,22 @@ int main(int argc, char** argv){
 			AQUI VA EL PROGRAMA!
 		*/
 		Matrix<double> A(2);
-		A.setValue(5,1,1);
-		A.setValue(3,2,1);
-		A.setValue(2,1,2);
-		A.setValue(3,2,2);
+		A.setValue(3,1,1);
+		A.setValue(2,2,1);
+		A.setValue(1,1,2);
+		A.setValue(2,2,2);
+
+		cout << "A" << endl;
 		cout << A << endl;
-		Matrix<double> B(2);
-		B=A.LU();
-		cout << B << endl;
+
+		Matrix<double> B(2);		
+		B=A.inverse();
 		
-		Matrix<int> C(4,ID);
-		cout << C;
+		Matrix<double> C(2);
+		C=A*B;
+		
+		cout << "C" << endl;
+		cout << C << endl;
 		
 	}
 	catch (MatrixException& e) //HACER ANDAR BIEN!
