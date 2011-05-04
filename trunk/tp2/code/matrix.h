@@ -94,7 +94,16 @@ Matrix<T> Matrix<T> :: LU() const{
 
 template <typename T>
 Matrix<T> Matrix<T> :: inverse() const{
-	throw MatrixException((char*)"Inversa no implementada");
+	if(!this->isInversible()) throw MatrixException((char*)"No existe la inversa");
+	
+	Matrix<T> copy(*this);
+	uInt dim = copy.getFiDimension();
+	
+	Matrix<T> id(dim,ID);
+
+	
+	
+	return copy;
 }
 
 template <typename T>
@@ -105,11 +114,11 @@ T Matrix<T> :: det() const{
 		copy = this->gaussianElim();
 	}
 	
-	uInt dimFi = copy.getFiDimension();
+	uInt dim = copy.getFiDimension();
 	T det = copy.getValue(1,1);
-	for(int i=2; i<=dimFi; i++)
+	for(int i=2; i<=dim; i++)
 		det *= copy.getValue(i,i);
-		
+	
 	return det;
 }
 
