@@ -48,28 +48,44 @@ class Matrix : public MatrixBase<T>{
 		void Gauss_LU(bool L);
 		T coefficient(uInt i, uInt j);
 		void putZero(uInt i, uInt j, T coefficient);		//pone el cero en esa posicion
+		uInt maxUpDiag(uInt j) const;					//estrategia de pivoteo parcial
 		uInt maxUnderDiag(uInt j) const;					//estrategia de pivoteo parcial
 		T  	 normF() const;									//no deberia devolver doubles?
 		
 		void createId(uInt dim);
 		void createBadK();
 		void hilbertMatrix(T rMult);
+		
+		void setP(uInt dim);
+		int* P;
 };
 
 template <typename T>
-Matrix<T> :: Matrix(uInt dim) : MatrixBase<T>(dim,dim){}
-
-template <typename T>
-Matrix<T> :: Matrix(const Matrix<T>& mCopy) : MatrixBase<T>(mCopy){
+Matrix<T> :: Matrix(uInt dim) : MatrixBase<T>(dim,dim){
+	setP(dim);
 }
 
 template <typename T>
-Matrix<T> :: Matrix(T** data, uInt dim) : MatrixBase<T>(data,dim,dim) {} 
+Matrix<T> :: Matrix(const Matrix<T>& mCopy) : MatrixBase<T>(mCopy){
+	uInt dim = this->getFiDimension();
+	
+	P = new int[dim];
+	
+	for(int i=0; i<dim; i++){
+			this->P[i] = mCopy.P[i];
+	}
+}
+
+template <typename T>
+Matrix<T> :: Matrix(T** data, uInt dim) : MatrixBase<T>(data,dim,dim){
+	setP(dim);
+} 
 
 template <typename T>
 Matrix<T> :: Matrix(uInt dim, MatrixType type) : MatrixBase<T>(dim, dim){
 	switch(type){
 		case(ID):
+			setP(dim);
 			createId(dim);
 			break;
 		/*case(BadK):
@@ -101,49 +117,41 @@ Matrix<T> Matrix<T> :: LU() const{
 /* OJO!!! Anda si no necesita permutar!!! */
 template <typename T>
 Matrix<T> Matrix<T> :: inverse() const{
+	if(!this->isInversible()) throw MatrixException((char*)"No existe la inversa");
+	
 	uInt dim = this->getFiDimension();
-	
 	Matrix<T> copy(*this);
-	copy = copy.LU();
-	
-	if(copy.det()==0) throw MatrixException((char*)"No existe la inversa");
-	
 	Matrix<T> id(dim,ID);
-	
+	uInt maxCol;
 	T coefficient;
-
-	for(int j=1; j<dim; j++){
-		for(int i=j+1; i<=dim; i++){
-			coefficient = copy.getValue(i,j);
-			copy.setValue(0,i,j);
-			id.putZero(i,j,coefficient);
+	
+	for(int j=1; j<=dim; j++){
+		maxCol = copy.maxUnderDiag(j);
+		if(copy.getValue(maxCol,j)!=0){			//si es cero se pasa a la otra columna, ya esta lo que queremos
+			copy.swapFi(j,maxCol);
+			id.swapFi(j,maxCol);
+			swap(copy.P[j-1],copy.P[maxCol-1]);
+			swap(id.P[j-1],id.P[maxCol-1]);
+			for(int i=j+1; i<=dim; i++){
+				coefficient = copy.coefficient(i,j);
+				copy.putZero(i,j,coefficient);
+				id.putZero(i,j,coefficient);
+			}
 		}
 	}
 	
-	/* Giro las matrices para poder usar las funciones implementadas */
-	copy = copy.traspuesta();
-	id = id.traspuesta();
-	T elem1;
-	T elem2;
-	for(int i=1; i<=dim/2; i++){
-		elem1 = copy.getValue(i,i);
-		elem2 = copy.getValue(dim+1-i,dim+1-i);
-		copy.setValue(elem1,dim+1-i,dim+1-i);
-		copy.setValue(elem2,i,i);
-		
-		elem1 = id.getValue(i,i);
-		elem2 = id.getValue(dim+1-i,dim+1-i);
-		id.setValue(elem1,dim+1-i,dim+1-i);
-		id.setValue(elem2,i,i);
-	}
-	
-	copy = copy.LU();
-	
-	for(int j=1; j<dim; j++){
-		for(int i=j+1; i<=dim; i++){
-			coefficient = copy.getValue(i,j);
-			copy.setValue(0,i,j);
-			id.putZero(i,j,coefficient);
+	for(int j=dim; j>1; j--){
+		maxCol = this->maxUpDiag(j);
+		if(this->getValue(maxCol,j)!=0){			//si es cero se pasa a la otra columna, ya esta lo que queremos
+			copy.swapFi(j,maxCol);
+			id.swapFi(j,maxCol);
+			swap(copy.P[j-1],copy.P[maxCol-1]);
+			swap(id.P[j-1],id.P[maxCol-1]);
+			for(int i=1; i<j; i++){
+				coefficient = copy.coefficient(i,j);
+				copy.putZero(i,j,coefficient);
+				id.putZero(i,j,coefficient);
+			}
 		}
 	}
 	
@@ -160,16 +168,19 @@ Matrix<T> Matrix<T> :: inverse() const{
 		}
 	}
 	
-	/* La vuelvo a girar */
+	cout << "copy" << endl;
+	cout << copy << endl;
 	
-	id = id.traspuesta();
-	for(int i=1; i<=dim/2; i++){
-		elem1 = id.getValue(i,i);
-		elem2 = id.getValue(dim+1-i,dim+1-i);
-		id.setValue(elem1,dim+1-i,dim+1-i);
-		id.setValue(elem2,i,i);
-	}
+	cout << "ID" << endl;
+	cout << id << endl;
 
+	cout << "P copy" << endl;
+	for(int i=0; i<dim; i++)
+		cout << copy.P[i] << ", ";
+	cout << endl;
+
+	
+	
 	return id;
 }
 
@@ -250,10 +261,11 @@ void Matrix<T> :: Gauss_LU(bool L){
 		maxCol = this->maxUnderDiag(j);
 		if(this->getValue(maxCol,j)!=0){			//si es cero se pasa a la otra columna, ya esta lo que queremos
 			this->swapFi(j,maxCol);
+			swap(this->P[j-1],this->P[maxCol-1]);
 			for(int i=j+1; i<=dim; i++){
 				coefficient = this->coefficient(i,j);
 				this->putZero(i,j,coefficient);
-				if(L) setValue(coefficient, i, j);
+				if(L) setValue(coefficient,i,j);
 			}
 		}
 	}
@@ -280,6 +292,27 @@ void Matrix<T> :: putZero(uInt i, uInt j, T coefficient){
 		elem = this->getValue(i,k) - elem; 
 		this->setValue(elem,i,k);
 	}
+}
+
+template <typename T>
+uInt Matrix<T> :: maxUpDiag(uInt j) const{
+	uInt dim = MatrixBase<T> :: getFiDimension();
+	
+	if(j==0 || j>dim)
+		throw MatrixException((char*)"El indice no pertenece a la diagonal, no esta en rango.");
+	
+	T pivot = abs(this->getValue(j,j));
+	uInt pivot_pos = j;
+	
+	for(int i=j-1; i>=1; i--){
+		T elem = abs(this->getValue(i,j));
+		if(elem>pivot){
+			pivot = elem;
+			pivot_pos=i;
+		}
+	}
+
+	return pivot_pos;
 }
 
 template <typename T>
@@ -354,4 +387,12 @@ void Matrix<T> :: hilbertMatrix(T rMult){
 		}
 }
 */
+
+template <typename T>
+void Matrix<T> :: setP(uInt dim){
+	P = new int[dim];
+	for(int i=0; i<dim; i++)
+		P[i]=i+1;
+}
+
 #endif
