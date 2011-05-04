@@ -51,6 +51,8 @@ class Matrix : public MatrixBase<T>{
 		T  	 normF() const;							//no deberia devolver doubles?
 		
 		void createId(uInt dim);
+		void createBadK();
+		void hilbertMatrix(T rMult);
 };
 
 template <typename T>
@@ -69,6 +71,9 @@ Matrix<T> :: Matrix(uInt dim, MatrixType type) : MatrixBase<T>(dim, dim){
 		case(ID):
 			createId(dim);
 			break;
+		/*case(BadK):
+			createBadK();
+			break;*/
 		default:
 			throw MatrixException((char*)"No implementadas... HACERLAS!");
 	}
@@ -256,7 +261,35 @@ template <typename T>
 void Matrix<T> :: createId(uInt dim){
 	for(int i=1;i<=dim;i++)
 		this->setValue((T) 1, i,i);
-	/*no lo commitea el gil1!*/
 }
 
+/*
+template <typename T>
+void Matrix<T> :: createBadK(){
+	srand(time(NULL));
+	
+	uInt randomSelector = 0;// rand()%3;
+	
+	switch(randomSelector){
+		case(0):
+			T rMul = (T) (rand()%100);
+			hilbertMatrix(rMul);
+			break;
+		default:
+			throw MatrixException((char*)"Not implemented BAD K");
+	}
+}
+
+template <typename T>
+void Matrix<T> :: hilbertMatrix(T rMult){
+	T uno = (T) 1;
+	T den = (T) uno;
+
+	for(int i=1;i<=getFiDimension();i++)
+		for(int j=1;j<=getColDimension();j++){
+			setValue(rMult*(uno/den),i,j);
+			den = den + 1;
+		}
+}
+*/
 #endif
