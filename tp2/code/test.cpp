@@ -21,15 +21,25 @@ int main(int argc, char** argv){
 
 		cout << "A" << endl;
 		cout << A << endl;
+		
+		cout << "Norma de A: " << A.normF() << endl;
 
 		Matrix<double> B(2);		
 		B=A.inverse();
+		
+		cout << "B" << endl;
+		cout << B << endl;
+	
+		cout << "Norma de B: " << B.normF() << endl;
 		
 		Matrix<double> C(2);
 		C=A*B;
 		
 		cout << "C" << endl;
 		cout << C << endl;
+	
+		cout << "K" << endl;
+		cout << A.K() << endl;
 	}
 	catch (MatrixException& e) //HACER ANDAR BIEN!
 	{

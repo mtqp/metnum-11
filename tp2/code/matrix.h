@@ -43,6 +43,7 @@ class Matrix : public MatrixBase<T>{
 		T K() const;	//no deberia devolver doubles?				//IMPLEMENTAR
 		
 		Matrix<T>& operator= (const MatrixBase<T> &mb);
+		T  	 normF() const;									//no deberia devolver doubles?
 		
 	private:
 		void Gauss_LU(bool L);
@@ -50,7 +51,7 @@ class Matrix : public MatrixBase<T>{
 		void putZero(uInt i, uInt j, T coefficient);		//pone el cero en esa posicion
 		uInt maxUpDiag(uInt j) const;					//estrategia de pivoteo parcial
 		uInt maxUnderDiag(uInt j) const;					//estrategia de pivoteo parcial
-		T  	 normF() const;									//no deberia devolver doubles?
+		
 		
 		void createId(uInt dim);
 		void createBadK();
@@ -202,7 +203,12 @@ bool Matrix<T> :: isId() const {
 
 template <typename T>
 T Matrix<T> :: K() const{
-	throw MatrixException((char*)"nro condicion no implementado");
+	uInt dim = this->getFiDimension();
+	Matrix<T> Inverse(dim);
+	Inverse = this->inverse();
+	T k = Inverse.normF();
+	k *= this->normF();
+	return k;
 }
 
 template <typename T>
