@@ -43,14 +43,14 @@ class Matrix : public MatrixBase<T>{
 		T K() const;	//no deberia devolver doubles?				//IMPLEMENTAR
 		
 		Matrix<T>& operator= (const MatrixBase<T> &mb);
-		T  	 normF() const;									//no deberia devolver doubles?
 		
 	private:
 		void Gauss_LU(bool L);
 		T coefficient(uInt i, uInt j);
 		void putZero(uInt i, uInt j, T coefficient);		//pone el cero en esa posicion
-		uInt maxUpDiag(uInt j) const;					//estrategia de pivoteo parcial
+		uInt maxUpDiag(uInt j) const;						//estrategia de pivoteo parcial
 		uInt maxUnderDiag(uInt j) const;					//estrategia de pivoteo parcial
+		T  	 normF() const;									//no deberia devolver doubles?
 		
 		
 		void createId(uInt dim);
