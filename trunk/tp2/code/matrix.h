@@ -48,14 +48,11 @@ class Matrix : public MatrixBase<T>{
 		void Gauss_LU(bool L);
 		T coefficient(uInt i, uInt j);
 		void putZero(uInt i, uInt j, T coefficient);		//pone el cero en esa posicion
-		uInt maxUpDiag(uInt j) const;						//estrategia de pivoteo parcial
 		uInt maxUnderDiag(uInt j) const;					//estrategia de pivoteo parcial
 		T  	 normF() const;									//no deberia devolver doubles?
 		
-		
 		void createId(uInt dim);
-		void createBadK();
-		void hilbertMatrix(T rMult);
+		void createBadK(uInt dim);
 };
 
 template <typename T>
@@ -73,9 +70,9 @@ Matrix<T> :: Matrix(uInt dim, MatrixType type) : MatrixBase<T>(dim, dim){
 		case(ID):
 			createId(dim);
 			break;
-		/*case(BadK):
-			createBadK();
-			break;*/
+		case(BadK):
+			createBadK(dim);
+			break;
 		default:
 			throw MatrixException((char*)"No implementadas... HACERLAS!");
 	}
@@ -124,16 +121,13 @@ Matrix<T> Matrix<T> :: inverse() const{
 		}
 	}
 	
+	/* Aca no hay ceros en la diagonal, sino la matriz no seria inversible. No uso pivoteo parcial para no arruinar los ceros que ya consegui abajo de la diagonal */
 	for(int j=dim; j>1; j--){
-		maxCol = copy.maxUpDiag(j);
-		if(this->getValue(maxCol,j)!=0){			//si es cero se pasa a la otra columna, ya esta lo que queremos
-			copy.swapFi(j,maxCol);
-			I.swapFi(j,maxCol);
-			for(int i=1; i<j; i++){
-				coefficient = copy.coefficient(i,j);
-				copy.putZero(i,j,coefficient);
-				I.putZero(i,j,coefficient);
-			}
+		if(copy.getValue(j,j)==0) throw MatrixException((char*)"Error no deberia haber ceros en la diagonal");
+		for(int i=1; i<j; i++){
+			coefficient = copy.coefficient(i,j);
+			copy.putZero(i,j,coefficient);
+			I.putZero(i,j,coefficient);
 		}
 	}
 	
@@ -149,7 +143,7 @@ Matrix<T> Matrix<T> :: inverse() const{
 			I.setValue(elem,i,j);
 		}
 	}
-		
+			
 	return I;
 }
 
@@ -269,27 +263,6 @@ void Matrix<T> :: putZero(uInt i, uInt j, T coefficient){
 }
 
 template <typename T>
-uInt Matrix<T> :: maxUpDiag(uInt j) const{	
-	uInt dim = MatrixBase<T> :: getFiDimension();
-	
-	if(j==0 || j>dim)
-		throw MatrixException((char*)"El indice no pertenece a la diagonal, no esta en rango.");
-	
-	T pivot = abs(this->getValue(j,j));
-	uInt pivot_pos = j;
-	
-	for(int i=j-1; i>=1; i--){
-		T elem = abs(this->getValue(i,j));
-		if(elem>pivot){
-			pivot = elem;
-			pivot_pos=i;
-		}
-	}
-
-	return pivot_pos;
-}
-
-template <typename T>
 uInt Matrix<T> :: maxUnderDiag(uInt j) const{
 	uInt dim = MatrixBase<T> :: getFiDimension();
 	
@@ -332,34 +305,16 @@ void Matrix<T> :: createId(uInt dim){
 		this->setValue((T) 1, i,i);
 }
 
-/*
+/* Matriz de Hilbert de orden dim */
 template <typename T>
-void Matrix<T> :: createBadK(){
-	srand(time(NULL));
-	
-	uInt randomSelector = 0;// rand()%3;
-	
-	switch(randomSelector){
-		case(0):
-			T rMul = (T) (rand()%100);
-			hilbertMatrix(rMul);
-			break;
-		default:
-			throw MatrixException((char*)"Not implemented BAD K");
-	}
-}
-
-template <typename T>
-void Matrix<T> :: hilbertMatrix(T rMult){
-	T uno = (T) 1;
-	T den = (T) uno;
-
-	for(int i=1;i<=getFiDimension();i++)
-		for(int j=1;j<=getColDimension();j++){
-			setValue(rMult*(uno/den),i,j);
-			den = den + 1;
+void Matrix<T> :: createBadK(uInt dim){
+	T elem;
+	for(int i=1; i<=dim; i++)
+		for(int j=1; j<=dim; j++){
+			elem = 1;
+			elem /= (i+j-1);
+			this->setValue(elem,i,j);
 		}
 }
-*/
 
 #endif
