@@ -118,42 +118,56 @@ Matrix<T> Matrix<T> :: LU() const{
 template <typename T>
 Matrix<T> Matrix<T> :: inverse() const{
 	if(!this->isInversible()) throw MatrixException((char*)"No existe la inversa");
+
+	Matrix<T> copy(*this);
+	cout << "Copy" << endl;
+	cout << copy << endl;
 	
 	uInt dim = this->getFiDimension();
-	Matrix<T> copy(*this);
-	Matrix<T> id(dim,ID);
+	Matrix<T> I(dim,ID);
+	
 	uInt maxCol;
 	T coefficient;
 	
-	for(int j=1; j<=dim; j++){
-		maxCol = copy.maxUnderDiag(j);
+	for(int j=1; j<dim; j++){
+		/*maxCol = copy.maxUnderDiag(j);
 		if(copy.getValue(maxCol,j)!=0){			//si es cero se pasa a la otra columna, ya esta lo que queremos
 			copy.swapFi(j,maxCol);
 			id.swapFi(j,maxCol);
 			swap(copy.P[j-1],copy.P[maxCol-1]);
-			swap(id.P[j-1],id.P[maxCol-1]);
+			swap(id.P[j-1],id.P[maxCol-1]);*/
 			for(int i=j+1; i<=dim; i++){
 				coefficient = copy.coefficient(i,j);
 				copy.putZero(i,j,coefficient);
-				id.putZero(i,j,coefficient);
+				I.putZero(i,j,coefficient);
 			}
 		}
-	}
+		
+	cout << "Copy" << endl;
+	cout << copy << endl;
+	
+	cout << "I" << endl;
+	cout << I << endl;
 	
 	for(int j=dim; j>1; j--){
-		maxCol = this->maxUpDiag(j);
+		/*maxCol = this->maxUpDiag(j);
 		if(this->getValue(maxCol,j)!=0){			//si es cero se pasa a la otra columna, ya esta lo que queremos
 			copy.swapFi(j,maxCol);
 			id.swapFi(j,maxCol);
 			swap(copy.P[j-1],copy.P[maxCol-1]);
-			swap(id.P[j-1],id.P[maxCol-1]);
+			swap(id.P[j-1],id.P[maxCol-1]);*/
 			for(int i=1; i<j; i++){
 				coefficient = copy.coefficient(i,j);
 				copy.putZero(i,j,coefficient);
-				id.putZero(i,j,coefficient);
+				I.putZero(i,j,coefficient);
 			}
 		}
-	}
+		
+	cout << "Copy" << endl;
+	cout << copy << endl;
+	
+	cout << "I" << endl;
+	cout << I << endl;
 	
 	T elemDiag;
 	T elem;
@@ -162,26 +176,16 @@ Matrix<T> Matrix<T> :: inverse() const{
 	for(int i=1; i<=dim; i++){
 		elemDiag = copy.getValue(i,i);
 		for(int j=1; j<=dim; j++){
-			elem = id.getValue(i,j);
+			elem = I.getValue(i,j);
 			elem /= elemDiag;
-			id.setValue(elem,i,j);
+			I.setValue(elem,i,j);
 		}
 	}
-	
-	cout << "copy" << endl;
-	cout << copy << endl;
-	
-	cout << "ID" << endl;
-	cout << id << endl;
 
-	cout << "P copy" << endl;
-	for(int i=0; i<dim; i++)
-		cout << copy.P[i] << ", ";
-	cout << endl;
-
-	
-	
-	return id;
+	cout << "I" << endl;
+	cout << I << endl;
+		
+	return I;
 }
 
 template <typename T>
@@ -282,12 +286,13 @@ T Matrix<T> :: coefficient(uInt i, uInt j){
 	return pivot;
 }
 
+/* Esta funcion afecta toda la fila de la matriz donde se quiere poner el cero para que sirva tanto para triangular abajo como arriba de la diagonal, funciona siempre y cuando los ceros se vayan poniendo en orden */
 template <typename T>
 void Matrix<T> :: putZero(uInt i, uInt j, T coefficient){
 	uInt dimCol = MatrixBase<T> :: getColDimension();
 	T elem;
 	
-	for(int k=j; k<=dimCol; k++){
+	for(int k=1; k<=dimCol; k++){
 		elem = coefficient*this->getValue(j,k);
 		elem = this->getValue(i,k) - elem; 
 		this->setValue(elem,i,k);
