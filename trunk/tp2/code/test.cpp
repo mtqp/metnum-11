@@ -14,10 +14,10 @@ int main(int argc, char** argv){
 		*/
 		
 		Matrix<double> A(2);
-		A.setValue(4,1,1);
-		A.setValue(3,2,1);
-		A.setValue(3,1,2);
-		A.setValue(3,2,2);
+		A.setValue(1,1,1);
+		A.setValue(2,2,1);
+		A.setValue(2,1,2);
+		A.setValue(1,2,2);
 
 		cout << "A" << endl;
 		cout << A << endl;
