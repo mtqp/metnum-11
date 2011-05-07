@@ -9,7 +9,7 @@ template <class T>
 class Vector : public MatrixBase<T>{
 	public:
 		Vector(uInt dim);
-		//Vector(const Vector<T>& v);
+		Vector(const Vector<T>& v);
 		Vector(uInt dim, bool traspuesta);
 		~Vector();
 	
@@ -36,16 +36,17 @@ Vector<T> :: Vector(uInt dim) : MatrixBase<T>(1,dim){
 	_traspuesta = false;
 }
 
-/*
 template <typename T>
 Vector<T> :: Vector(const Vector<T>& v){
+	throw MatrixException((char*)"ARREGLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR");
+
 	this->_traspuesta = v._traspuesta;
 	
 	uInt pres = v.dimension();
 	
 	for(int i=1;i<=pres;i++)
 		this->setValue(v.getValue(i),i);
-}*/
+}
 
 template <typename T>
 Vector<T> :: Vector(uInt dim, bool traspuesta) : MatrixBase<T>(1,dim){

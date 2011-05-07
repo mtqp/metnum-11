@@ -29,6 +29,7 @@ class Matrix : public MatrixBase<T>{
 		Matrix(uInt dim);
 		Matrix(const Matrix<T>& mCopy);
 		Matrix(T** data, uInt dim);
+		Matrix(const T* data, uInt dim);
 		Matrix(uInt dim, MatrixType type);	//IMPLEMENTAR (Mañana lo hago!)
 		~Matrix();
 		
@@ -63,6 +64,17 @@ Matrix<T> :: Matrix(const Matrix<T>& mCopy) : MatrixBase<T>(mCopy){}
 
 template <typename T>
 Matrix<T> :: Matrix(T** data, uInt dim) : MatrixBase<T>(data,dim,dim){} 
+
+template <typename T>
+Matrix<T> :: Matrix(const T* data, uInt dim) : MatrixBase<T>(dim,dim) {
+	int h = 0;
+
+	for(int i=1;i<=dim;i++)
+		for(int j=1;i<=dim;j++){
+			this->setValue(data[h],i,j);
+			h++;
+		}
+}
 
 template <typename T>
 Matrix<T> :: Matrix(uInt dim, MatrixType type) : MatrixBase<T>(dim, dim){
@@ -156,9 +168,13 @@ T Matrix<T> :: det() const{
 	}
 	
 	uInt dim = copy.getFiDimension();
-	T det = copy.getValue(1,1);
-	for(int i=2; i<=dim; i++)
-		det *= copy.getValue(i,i);
+	T aux;
+	T det = 1;
+	for(int i=1; i<=dim; i++){
+		aux = copy.getValue(i,i);
+		if(aux==0) return 0;
+		det *= aux;
+	}
 	
 	return det;
 }
@@ -276,7 +292,7 @@ uInt Matrix<T> :: maxUnderDiag(uInt j) const{
 		T elem = abs(this->getValue(i,j));
 		if(elem>pivot){
 			pivot = elem;
-			pivot_pos=i;
+			pivot_pos = i;
 		}
 	}
 
