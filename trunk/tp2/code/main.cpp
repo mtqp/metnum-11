@@ -4,6 +4,7 @@
 #include "structs.h"
 #include "matrix.h"
 #include "vector.h"
+#include "warp_cannon.h"
 
 using namespace std;
 
@@ -71,13 +72,16 @@ int main(int argc, char** argv){
 		wd.threshold = default_threshold;
 		wd.failedAttack = false;			//por ahora lo seteo en falso pero vamos a tener que leerlo de algun lado
 		
+		/**************************************************************
+		 * Falta leer de algun archivo temporal nuestro los 'd' 
+		 * anteriores con el numero de condicion de 'A' y llenar el 
+		 * vector 'previous'
+		 * ************************************************************/
+		
 		out << time << endl;
 		out << dimension << endl;
 		
 		/* Llamada a la funcion principal */
-		
-		/* Guardar el vector y la matriz del turno actual */
-
 	}
 	else
 		cout << "Error al abrir los archivos";

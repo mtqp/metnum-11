@@ -15,7 +15,7 @@ struct warpData {
 	/* Si es el primer turno quedan con ceros */
 	Matrix<double> A;
 	Vector<double> d;
-	warpData(uInt dim) : A(dim), d(dim), position(dim){}
+	warpData(uInt dim) : position(dim), A(dim), d(dim){}
 	pair<Vector<double>,double> previous_d[];
 };
 
