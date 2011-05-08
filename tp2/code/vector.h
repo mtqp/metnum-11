@@ -19,6 +19,7 @@ class Vector : public MatrixBase<T>{
 		void setValue(T value, uInt i);
 	
 		Vector<T> traspuesta() const;
+		bool isTraspuesta() const;
 	
 		T normUno() const;	//no devuelve doubles o algo asi?
 		T normDos() const;
@@ -37,15 +38,17 @@ Vector<T> :: Vector(uInt dim) : MatrixBase<T>(1,dim){
 }
 
 template <typename T>
-Vector<T> :: Vector(const Vector<T>& v){
-	throw MatrixException((char*)"ARREGLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR");
-
-	this->_traspuesta = v._traspuesta;
+Vector<T> :: Vector(const Vector<T>& v) : MatrixBase<T>(v.getFiDimension(),v.getColDimension()) {
+	this->_traspuesta = !((v.getFiDimension()==1) && (v.getColDimension()>1));
 	
-	uInt pres = v.dimension();
+	Vector<T>* ref = const_cast<Vector<T>*> (&v);	//tenemos q hacer eso, por si se llama a traspuesta
+	ref->_traspuesta = !((v.getFiDimension()==1) && (v.getColDimension()>1));
 	
-	for(int i=1;i<=pres;i++)
+	uInt pres = this->dimension();
+	
+	for(int i=1;i<=pres;i++){
 		this->setValue(v.getValue(i),i);
+	}
 }
 
 template <typename T>
@@ -96,6 +99,11 @@ Vector<T> Vector<T> :: traspuesta() const {
 	Vector<T>* vt = static_cast<Vector<T>*>(&mb);
 
 	return *vt;	
+}
+
+template <typename T>
+bool Vector<T> :: isTraspuesta() const {
+	return _traspuesta;
 }
 
 template <typename T>
