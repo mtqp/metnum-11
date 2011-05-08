@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include "includes.h"
-#include "matrix_base.h"
+#include "structs.h"
+#include "matrix.h"
+#include "vector.h"
 
 using namespace std;
 
@@ -12,23 +14,26 @@ int main(int argc, char** argv){
 	}
 	
 	/* Abro los archivos */
-	ifstream posicion(argv[1]);
-	ofstream salida(argv[2]);
+	ifstream position(argv[1]);
+	ofstream out(argv[2]);
 	
-	if(posicion && salida){					//da cero si hay algun error
+	if(position && out){					//da cero si hay algun error
+		double tmp;							//variable de lectura, guarda los datos temporalmente
+	
 		uInt time;
-		posicion >> time;					
-		time++;								//turno actual, primer turno (si no es el primer turno se setea despues)
-		cout << "time" << time << endl;
+		position >> time;					
+		time++;								//turno actual = primer turno (si no es el primer turno se setea despues)
 		
 		uInt dimension;
-		posicion >> dimension;
-		cout << "dim " << dimension << endl;
+		position >> dimension;
 		
-		double position[dimension];
-		forn(i,dimension){
-			posicion >> position[i];
-			cout << "pos " << position[i] << endl;
+		/* Creo la estructura */
+		warpData wd(dimension);
+		
+		/* Seteo nuestra posicion en la estructura */
+		for(int i=1;i<=dimension;i++){
+			position >> tmp;
+			(wd.position).setValue(tmp,i);
 		}
 		
 		/* Si no es el primer turno */
@@ -36,8 +41,7 @@ int main(int argc, char** argv){
 			ifstream ultimo(argv[3]);
 			
 			ultimo >> time;
-			time++;							//turno actual, ultimo turno + 1
-			cout << "time " << time << endl;
+			time++;							//turno actual = ultimo turno + 1
 			
 			uInt aux;
 			ultimo >> aux;
@@ -46,36 +50,40 @@ int main(int argc, char** argv){
 				exit(0);
 			}
 			
-			double d[dimension];
-			forn(i,dimension){
-				ultimo >> d[i];
-				cout << "d " << d[i] << endl;
+			/* Seteo en la estructura el vector a donde impacto el ataque del enemigo en el turno anterior*/
+			for(int i=1;i<=dimension;i++){
+				ultimo >> tmp;
+				(wd.d).setValue(tmp,i);
 			}
 			
-			double elem;
-			MatrixBase<double> A(dimension,dimension);
-			forn(i,dimension)
-				forn(j,dimension){
-					ultimo >> elem;
-					A.setValue(elem,i+1,j+1);
-					cout << "A" << i+1 << j+1 << " " << A.getValue(i+1,j+1) << endl;
+			/* Seteo en la estructura la matriz que uso el enemigo para atacar en el turno anterior*/
+			for(int i=1;i<=dimension;i++)
+				for(int j=1;j<=dimension;j++){
+					ultimo >> tmp;
+					(wd.A).setValue(tmp,i,j);
 				}
 
 			ultimo.close();
 		}
 		
-		salida << time << endl;
-		salida << dimension << endl;
+		/* Seteo el turno actual en la estructura */
+		wd.turn = time;
+		wd.threshold = default_threshold;
+		wd.failedAttack = false;			//por ahora lo seteo en falso pero vamos a tener que leerlo de algun lado
+		
+		out << time << endl;
+		out << dimension << endl;
 		
 		/* Llamada a la funcion principal */
 		
 		/* Guardar el vector y la matriz del turno actual */
+
 	}
 	else
 		cout << "Error al abrir los archivos";
 	
-	posicion.close();
-	salida.close();
+	position.close();
+	out.close();
 	
 	return 0;
 }
