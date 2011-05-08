@@ -39,7 +39,7 @@ class MatrixBase{
 		bool isInversible() const;
 		bool isSquare() const;
 
-		virtual T det() const;	///Se calcula recursivamente -- NO triangula
+		virtual T det() const;	///Se calcula recursivamente -- NO triangula (arreglar!!!!)
 	
 		friend ostream &operator<< <>(ostream &stream, const MatrixBase<T>& mb);
 		
@@ -171,7 +171,6 @@ bool MatrixBase<T> :: operator!=(const MatrixBase<T> &mb) const {
 }
 
 
-///NOTA: no se hace un memcpy xq generaria alias, y no se si es eso lo q buscamos.
 template <typename T>
 MatrixBase<T>& MatrixBase<T> :: operator= (const MatrixBase<T> &mb){
 	if(this!=&mb){
@@ -249,15 +248,29 @@ T MatrixBase<T> :: det() const {
 	}
 
 	int determinante = 0;
+	int i = 1;
 
-	for(int i=1;i<=_dimFi;i++)		//Caso recursivo
+	//for(int i=1;i<=_dimFi;i++)	{	//Caso recursivo
 		for(int j=1;j<=_dimCol;j++){
 			MatrixBase<T> subMatrix(this->_dimFi-1,this->_dimCol-1);
 			subMatrix = this->deleteFiCol(i,j);
-
+/*			cout << "----------------------------" << endl;
+			if((i+j)%2 == 0)	//1^(i+j)
+				cout << "SUMA" << endl;
+			else
+				cout << "resta!" << endl;
+*/
 			T subDet = this->_matrix[i-1][j-1] * subMatrix.det();
-			determinante = determinante + subDet;
+/*			cout << "elem a_I_J = " << this->_matrix[i-1][j-1] << endl;
+			cout << "sub matrix i = " << i << " j = " << j << endl << subMatrix << "subDet = " << subDet << endl;;
+			cout << "----------------------------" << endl;
+*/
+			if((i+j)%2 == 0)	//1^(i+j)
+				determinante = determinante + subDet;
+			else
+				determinante = determinante - subDet;
 		}
+	//}
 	
 	return determinante;
 }
