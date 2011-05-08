@@ -1,14 +1,14 @@
-OBJS =  matrix_exceptions.cpp
-OBJSo =  matrix_exceptions.o
+OBJS =  matrix_exceptions.cpp warp_cannon.cpp
+OBJSo =  matrix_exceptions.o warp_cannon.o
 MATH = -lm
 CFLAGS = -ggdb 
 
 all: test tp2
 
-tp2: main.cpp 
+tp2: main.cpp $(OBJSo)
 	g++ -o tp2 $(CFLAGS) $(MATH) main.cpp $(OBJSo) 
 
-test: test.cpp $(OBJSo) *.h 
+test: test.cpp $(OBJSo) *.h
 	g++ -o test $(CFLAGS) $(MATH) test.cpp $(OBJSo)
 	
 %.o: %.cpp

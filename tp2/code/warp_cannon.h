@@ -2,30 +2,32 @@
 #define __WARP_CANNON_H__
 
 #include "includes.h"
-#include "vector.h"
+#include "structs.h"
 #include "matrix.h"
+#include "vector.h"
 
 class WarpCannon{
 	public:
-		WarpCannon(warpData wp);
+		WarpCannon(warpData wd, uInt dim);
 		~WarpCannon();
 	
-		attackData attack();	//genera matrix mal condicionada y multiplicar x vector
+		//attackData attack();	//genera matrix mal condicionada y multiplicar x vector
 
 	private:
 		Strategy setStrategy();
-		Vector<double> getAimPosition();
-		Matrix<double> getMatrixAttack();
-		Matrix<double> getBadKMatrix();
+		//Vector<double> getAimPosition();
+		//Matrix<double> getMatrixAttack();
+		//Matrix<double> getBadKMatrix();
 	
+		uInt  _turn;
+		Vector<double> _position;
+		double _threshold;
+		bool _failedAttack;
+		
+		/* Si es el primer turno quedan con ceros */
 		Matrix<double> _A;
 		Vector<double> _d;
-		Vector<double> _position;
-		Vector<double> _previous_d[];
-		uInt  	_turn; 
-		double  _threshold; 	
-		bool    _faiedAttack;
+		//pair<Vector<double>,double> _previous_d[];
 };
 
 #endif
-
