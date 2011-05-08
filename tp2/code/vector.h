@@ -21,7 +21,7 @@ class Vector : public MatrixBase<T>{
 		Vector<T> traspuesta() const;
 		bool isTraspuesta() const;
 	
-		T normUno() const;	//no devuelve doubles o algo asi?
+		T normUno() const;
 		T normDos() const;
 		T normInf() const;
 		

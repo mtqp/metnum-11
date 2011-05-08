@@ -11,8 +11,8 @@
 	Quien herede de MatrixBase deberá atrapar las excepciones lanzadas
 */
 
-template <class T>		//esto qdo asperisimo, pero sino revienta cuando quiere compilar
-class MatrixBase;		//aparentemente ve el friend primero q la definicion...
+template <class T>
+class MatrixBase;
 template <typename T>
 ostream &operator<< (ostream &stream,const MatrixBase<T>& mb);
 
@@ -39,7 +39,7 @@ class MatrixBase{
 		bool isInversible() const;
 		bool isSquare() const;
 
-		virtual T det() const;	///Se calcula recursivamente -- NO triangula (arreglar!!!!)
+		virtual T det() const;	///Se calcula recursivamente -- NO triangula
 	
 		friend ostream &operator<< <>(ostream &stream, const MatrixBase<T>& mb);
 		
@@ -250,27 +250,17 @@ T MatrixBase<T> :: det() const {
 	int determinante = 0;
 	int i = 1;
 
-	//for(int i=1;i<=_dimFi;i++)	{	//Caso recursivo
-		for(int j=1;j<=_dimCol;j++){
-			MatrixBase<T> subMatrix(this->_dimFi-1,this->_dimCol-1);
-			subMatrix = this->deleteFiCol(i,j);
-/*			cout << "----------------------------" << endl;
-			if((i+j)%2 == 0)	//1^(i+j)
-				cout << "SUMA" << endl;
-			else
-				cout << "resta!" << endl;
-*/
-			T subDet = this->_matrix[i-1][j-1] * subMatrix.det();
-/*			cout << "elem a_I_J = " << this->_matrix[i-1][j-1] << endl;
-			cout << "sub matrix i = " << i << " j = " << j << endl << subMatrix << "subDet = " << subDet << endl;;
-			cout << "----------------------------" << endl;
-*/
-			if((i+j)%2 == 0)	//1^(i+j)
-				determinante = determinante + subDet;
-			else
-				determinante = determinante - subDet;
-		}
-	//}
+	for(int j=1;j<=_dimCol;j++){	//Caso Recursivo
+		MatrixBase<T> subMatrix(this->_dimFi-1,this->_dimCol-1);
+		subMatrix = this->deleteFiCol(i,j);
+
+		T subDet = this->_matrix[i-1][j-1] * subMatrix.det();
+
+		if((i+j)%2 == 0)	//1^(i+j)
+			determinante = determinante + subDet;
+		else
+			determinante = determinante - subDet;
+	}
 	
 	return determinante;
 }
@@ -278,7 +268,6 @@ T MatrixBase<T> :: det() const {
 
 template <typename T>
 ostream &operator<< (ostream &stream, const MatrixBase<T>& mb){
-///  stream << "IMPLEMENTACION TRIVIAL - pensar si hay alguna mejor" << endl;
   stream << "Dimension Filas = " << mb._dimFi << endl;
   stream << "Dimension Columnas = " << mb._dimCol << endl;
   
@@ -349,7 +338,6 @@ MatrixBase<T> MatrixBase<T> :: deleteCol(uInt colElim) const {
 	
 	colElim--;	//Recordar que los arreglos son [0,...n-1], nosotros pasamos [1,...,n]
 	
-	//se itera por columna, es mucho menos eficiente, importa?
 	for(int j=0;j<deletedCol._dimCol;j++){
 		if(j<colElim){
 			for(int i=0; i<this->_dimFi; i++){

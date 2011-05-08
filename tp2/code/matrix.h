@@ -30,18 +30,18 @@ class Matrix : public MatrixBase<T>{
 		Matrix(const Matrix<T>& mCopy);
 		Matrix(T** data, uInt dim);
 		Matrix(const T* data, uInt dim);
-		Matrix(uInt dim, MatrixType type);	//IMPLEMENTAR (Mañana lo hago!)
+		Matrix(uInt dim, MatrixType type);
 		~Matrix();
 		
 		Matrix<T> gaussianElim() const;						
-		Matrix<T> LU() 		const; //o QR no sabemos		
-		Matrix<T> inverse() const;							//IMPLEMENTAR
+		Matrix<T> LU() 		const;		
+		Matrix<T> inverse() const;							
 		T det() const;										
 		
 		bool isTriang(bool superior) const;
 		bool isId() const;
 		
-		T K() const;	//no deberia devolver doubles?				//IMPLEMENTAR
+		T K() const;
 		
 		Matrix<T>& operator= (const MatrixBase<T> &mb);
 		
@@ -50,7 +50,7 @@ class Matrix : public MatrixBase<T>{
 		T coefficient(uInt i, uInt j);
 		void putZero(uInt i, uInt j, T coefficient);		//pone el cero en esa posicion
 		uInt maxUnderDiag(uInt j) const;					//estrategia de pivoteo parcial
-		T  	 normF() const;									//no deberia devolver doubles?
+		T  	 normF() const;
 		
 		void createId(uInt dim);
 		void createBadK(uInt dim);
@@ -78,6 +78,7 @@ Matrix<T> :: Matrix(const T* data, uInt dim) : MatrixBase<T>(dim,dim) {
 
 template <typename T>
 Matrix<T> :: Matrix(uInt dim, MatrixType type) : MatrixBase<T>(dim, dim){
+	throw MatrixException((char*)"No implementadas... HACERLAS!");
 	switch(type){
 		case(ID):
 			createId(dim);
