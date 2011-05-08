@@ -78,8 +78,8 @@ int main(int argc, char** argv){
 			previous >> tmp;
 			if(j!=dimension+1)
 				cout << j << endl;
-				(((wd.previous_d)[i]).first).setValue(tmp,i);
-			((wd.previous_d)[i]).second = tmp;
+				(((wd.previous_y)[i]).first).setValue(tmp,i);
+			((wd.previous_y)[i]).second = tmp;
 		}
 	previous.close();*/
 	
