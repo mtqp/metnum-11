@@ -6,8 +6,8 @@
 #include "matrix.h"
 #include "vector.h"
 
-struct warpData {
-	uInt  turn;
+struct warpData{
+	uInt turn;
 	Vector<double> position;
 	double threshold;
 	bool failedAttack;
@@ -15,8 +15,13 @@ struct warpData {
 	/* Si es el primer turno quedan con ceros */
 	Matrix<double> A;
 	Vector<double> d;
-	warpData(uInt dim) : position(dim), A(dim), d(dim){}
-	pair<Vector<double>,double> previous_d[];
+	pair<Vector<double>,double>* previous_d;
+	warpData(uInt dim) : position(dim), A(dim), d(dim){
+		/*previous_d = new pair<Vector<double>,double>* [dim];
+		for(int i=0; i<dim; i++){
+			previous_d[i]->first;
+		}*/
+	}
 };
 
 struct attackData{
