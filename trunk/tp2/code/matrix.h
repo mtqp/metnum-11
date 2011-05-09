@@ -78,7 +78,6 @@ Matrix<T> :: Matrix(const T* data, uInt dim) : MatrixBase<T>(dim,dim) {
 
 template <typename T>
 Matrix<T> :: Matrix(uInt dim, MatrixType type) : MatrixBase<T>(dim, dim){
-	throw MatrixException((char*)"No implementadas... HACERLAS!");
 	switch(type){
 		case(ID):
 			createId(dim);
@@ -326,6 +325,7 @@ void Matrix<T> :: createId(uInt dim){
 template <typename T>
 void Matrix<T> :: createBadK(uInt dim){
 	T elem;
+	
 	for(int i=1; i<=dim; i++)
 		for(int j=1; j<=dim; j++){
 			elem = 1;
