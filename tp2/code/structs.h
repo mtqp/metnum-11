@@ -15,13 +15,8 @@ struct warpData{
 	/* Si es el primer turno quedan con ceros */
 	Matrix<double> A;
 	Vector<double> d;
-	pair<Vector<double>,double>* previous_y;
-	warpData(uInt dim) : position(dim), A(dim), d(dim){
-		/*previous_y = new pair<Vector<double>,double>* [dim];
-		for(int i=0; i<dim; i++){
-			previous_y[i]->first;
-		}*/
-	}
+	pair<Vector<double>*,double>* previous_y;
+	warpData(uInt dim) : position(dim), A(dim), d(dim){}
 };
 
 struct attackData{

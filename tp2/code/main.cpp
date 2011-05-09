@@ -34,7 +34,7 @@ int main(int argc, char** argv){
 	/* Seteo nuestra posicion en la estructura */
 	for(int i=1;i<=dimension;i++){
 		position >> tmp;
-		(wd.position).setValue(tmp,i);
+		wd.position.setValue(tmp,i);
 	}
 	
 	position.close();
@@ -56,14 +56,14 @@ int main(int argc, char** argv){
 		/* Seteo en la estructura el vector a donde impacto el ataque del enemigo en el turno anterior*/
 		for(int i=1;i<=dimension;i++){
 			ultimo >> tmp;
-			(wd.d).setValue(tmp,i);
+			wd.d.setValue(tmp,i);
 		}
 		
 		/* Seteo en la estructura la matriz que uso el enemigo para atacar en el turno anterior*/
 		for(int i=1;i<=dimension;i++)
 			for(int j=1;j<=dimension;j++){
 				ultimo >> tmp;
-				(wd.A).setValue(tmp,i,j);
+				wd.A.setValue(tmp,i,j);
 			}
 
 		ultimo.close();
@@ -74,16 +74,37 @@ int main(int argc, char** argv){
 	wd.threshold = default_threshold;
 	wd.failedAttack = false;			//por ahora lo seteo en falso pero vamos a tener que leerlo de algun lado
 	
-	/*ifstream previous("previous");
-	for(int i=0; i<time/2; i++)
+	/* Leo los datos de las posiciones del enemigo calculadas anteriormente */
+	fstream previous_y("previous", ios_base::in | ios_base::out);
+	
+	uInt prev_data_amount = time/2 - 1; 
+	wd.previous_y = new pair<Vector<double>*,double> [prev_data_amount + 1];			//creo uno de mas para el ataque recibido del turno anterior
+	
+	/* Voy a cagar solo los que tengo en el archivo, que no incluyen al ultimo ataque recibido */
+	for(int i=0; i<prev_data_amount; i++){
+		wd.previous_y[i].first = new Vector<double>(dimension);
 		for(int j=1; j<=dimension+1; j++){
-			previous >> tmp;
+			previous_y >> tmp;
 			if(j!=dimension+1)
-				cout << j << endl;
-				(((wd.previous_y)[i]).first).setValue(tmp,i);
-			((wd.previous_y)[i]).second = tmp;
+				(*wd.previous_y[i].first).setValue(tmp,j);
+			else
+				wd.previous_y[i].second = tmp;
 		}
-	previous.close();*/
+	}
+	
+	/* Guardo en el archivo el punto donde impacto el ultimo ataque recibido */
+	for(int j=1; j<=dimension+1; j++){
+		if(j!=dimension+1){
+			previous_y << wd.d.getValue(j) << " ";
+		}
+		else{
+			previous_y << wd.A.K() << endl;
+		}
+	}
+	previous_y.close();
+	
+	/* Seteo el punto donde impacto el ultimo ataque recibido */
+	wd.previous_y[prev_data_amount].first = new Vector<double>(wd.d);
 	
 	ofstream out(argv[2]);
 	out << time << endl;
