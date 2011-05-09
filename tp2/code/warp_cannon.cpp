@@ -11,7 +11,7 @@ WarpCannon :: WarpCannon(warpData wd, uInt dim) : _position(dim), _A(dim), _d(di
 	/* Si es el primer turno quedan con ceros */
 	_A = wd.A;
 	_d = wd.d;
-	//_previous_d = previous_d;
+	//_previous_y = previous_y;
 }
 
 WarpCannon :: ~WarpCannon(){}
@@ -63,13 +63,13 @@ Matrix<double> WarpCannon :: getMatrixAttack(){}
 */
 int asd = 0;
 Matrix<double> WarpCannon :: getBadKMatrix() {
+	Matrix<double> res(_d.dimension());
 	if(rand()%2){
 		//matrix de hilbert por un coef
 		double randomCoef = rand()%10;//ajustar ese modulo
 
 		Matrix<double> bad_conditioned(_d.dimension(), BadK);
 	
-		Matrix<double> res(_d.dimension());
 		res = randomCoef * bad_conditioned;	
 	}
 	else 
@@ -79,7 +79,6 @@ Matrix<double> WarpCannon :: getBadKMatrix() {
 	
 		Vector<double> randomV(createRandomVector());
 	
-		Matrix<double> res(_d.dimension());
 		for(int i=1;i<=_d.dimension();i++)
 			for(int j=1;j<=_d.dimension();j++){
 				res.setValue(/*seed+j*/randomV.getValue(j),i,j);

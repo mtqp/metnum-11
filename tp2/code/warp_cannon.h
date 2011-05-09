@@ -28,7 +28,7 @@ class WarpCannon{
 		/* Si es el primer turno quedan con ceros */
 		Matrix<double> _A;
 		Vector<double> _d;
-		//pair<Vector<double>,double> _previous_d[];
+		//pair<Vector<double>,double> _previous_y[];
 };
 
 #endif

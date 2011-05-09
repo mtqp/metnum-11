@@ -18,6 +18,7 @@ int main(int argc, char** argv){
 	
 	/* Abro los archivos */
 	ifstream position(argv[1]);
+	if(!position.is_open()) cout << "No se puedo abrir el archivo: " << argv[1] << endl;
 	
 	double tmp;							//variable de lectura, guarda los datos temporalmente
 
@@ -42,6 +43,7 @@ int main(int argc, char** argv){
 	/* Si no es el primer turno */
 	if(argc==5){
 		ifstream ultimo(argv[3]);
+		if(!ultimo.is_open()) cout << "No se puedo abrir el archivo: " << argv[3] << endl;
 		
 		ultimo >> time;
 		time++;							//turno actual = ultimo turno + 1
@@ -76,6 +78,18 @@ int main(int argc, char** argv){
 	
 	/* Leo los datos de las posiciones del enemigo calculadas anteriormente */
 	fstream previous_y("previous", ios_base::in | ios_base::out);
+	if(!previous_y.is_open()) cout << "No se puedo abrir el archivo 'previous'" << endl;
+	previous_y.seekp(0,ios_base::end);
+	
+	/* Guardo en el archivo el punto donde impacto el ultimo ataque recibido */
+	for(int j=1; j<=dimension+1; j++){
+		if(j!=dimension+1){
+			previous_y << wd.d.getValue(j) << " ";
+		}
+		else{
+			previous_y << wd.A.K() << endl;
+		}
+	}
 	
 	uInt prev_data_amount = time/2 - 1; 
 	wd.previous_y = new pair<Vector<double>*,double> [prev_data_amount + 1];			//creo uno de mas para el ataque recibido del turno anterior
@@ -92,21 +106,13 @@ int main(int argc, char** argv){
 		}
 	}
 	
-	/* Guardo en el archivo el punto donde impacto el ultimo ataque recibido */
-	for(int j=1; j<=dimension+1; j++){
-		if(j!=dimension+1){
-			previous_y << wd.d.getValue(j) << " ";
-		}
-		else{
-			previous_y << wd.A.K() << endl;
-		}
-	}
 	previous_y.close();
 	
 	/* Seteo el punto donde impacto el ultimo ataque recibido */
 	wd.previous_y[prev_data_amount].first = new Vector<double>(wd.d);
 	
 	ofstream out(argv[2]);
+	if(!out.is_open()) cout << "No se puedo abrir el archivo: " << argv[2] << endl;
 	out << time << endl;
 	out << dimension << endl;
 	
