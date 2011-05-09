@@ -1,9 +1,9 @@
-#include "includes.h"
-//#include "matrix.h"
-#include "matrix_base.h"
-#include "vector.h"
-#include "matrix_exceptions.h"
 
+#include "includes.h"
+#include "structs.h"
+#include "matrix.h"
+#include "vector.h"
+#include "warp_cannon.h"
 //#include "structs.h"
 //#include "warp_cannon.h"
 
@@ -18,12 +18,45 @@
 int main(int argc, char** argv){
 	try
 	{
+		srand(time(NULL));
+		cout.precision(6);
 		/*Matrix<int>A(1,1);
 		Matrix<int>B(A);*/
 		
 		/*
 			AQUI VA EL PROGRAMA!
 		*/
+		int dim = 4;
+		
+		warpData wd(dim);
+	
+		WarpCannon wp(wd,dim);
+		for(int i=0;i<20;i++)
+			cout << wp.createRandomVector();
+/*		cout << "mal condicionada hilberiana" << endl;
+		//for(int i=0;i<2;i++){
+		Matrix<double> A(wp.getBadKMatrix(1.0));
+			cout << "isInversible? = " << A.isInversible() << endl;
+			cout << "det value = "  << A.det() << endl;
+			cout << "nro condicion = " << A.K() << endl;
+			cout << A;
+			cout << "inversa de A" << endl;
+			cout << A.inverse();
+			cout << "id???" << endl;
+			cout << A * A.inverse();
+			cout << "---------------------------" << endl;
+			
+		Matrix<double> B(wp.getBadKMatrix(50.0));
+			cout << "isInversible? = " << B.isInversible() << endl;
+			cout << "det value = "  << B.det() << endl;
+			cout << "nro condicion = " << B.K() << endl;
+			cout << B;
+			cout << "inversa de B" << endl;
+			cout << B.inverse();
+			cout << "id???" << endl;
+			cout << B * B.inverse();
+			cout << "---------------------------" << endl;
+		//}
 	
 /*		Vector<double> v(10);
 		for(int i=1;i<=10;i++)
@@ -46,7 +79,7 @@ int main(int argc, char** argv){
 /*		Vector<double> copy(v.traspuesta());
 		cout << "v tras copy" << endl << copy;
 		
-/**/		MatrixBase<double> A(3,3);
+/*		MatrixBase<double> A(3,3);
 		A.setValue(2,1,1);
 		A.setValue(-2,1,2);
 		A.setValue(1,1,3);
