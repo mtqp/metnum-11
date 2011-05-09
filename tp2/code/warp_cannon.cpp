@@ -62,41 +62,32 @@ Vector<double> WarpCannon :: getAimPosition(){}
 Matrix<double> WarpCannon :: getMatrixAttack(){}
 */
 int asd = 0;
-Matrix<double> WarpCannon :: getBadKMatrix(double seed) {
-/*	double randomCoef;
-	if(asd == 0){
-		randomCoef = 8;//rand()%10;	//ajustar ese modulo
-	}
-	else {
-		randomCoef = 4;
-	}
-	asd++;
+Matrix<double> WarpCannon :: getBadKMatrix() {
+	if(rand()%2){
+		//matrix de hilbert por un coef
+		double randomCoef = rand()%10;//ajustar ese modulo
 
-	cout << "random coef" << randomCoef << endl;
-
-	Matrix<double> bad_conditioned(_d.dimension(), BadK);
+		Matrix<double> bad_conditioned(_d.dimension(), BadK);
 	
-	Matrix<double> res(_d.dimension());
-	res = randomCoef * bad_conditioned;*/
+		Matrix<double> res(_d.dimension());
+		res = randomCoef * bad_conditioned;	
+	}
+	else 
+	{
+		//matriz con casi filas ld
+		double epsilon = 1.0/1000.0;
 	
-	double epsilon = 1.0/1000.0;
+		Vector<double> randomV(createRandomVector());
 	
-	//srand(time(NULL));
-	
-	double randAD[_d.dimension()];
-	
-	for(int i=0;i<_d.dimension();i++)
-		randAD[i] = rand()%1000;
-	
-	Matrix<double> res(_d.dimension());
-	for(int i=1;i<=_d.dimension();i++)
-		for(int j=1;j<=_d.dimension();j++){
-			res.setValue(/*seed+j*/randAD[j-1],i,j);
-			if(i==j){
-				res.setValue(/*seed+j*/randAD[j-1]+epsilon,i,j);	
+		Matrix<double> res(_d.dimension());
+		for(int i=1;i<=_d.dimension();i++)
+			for(int j=1;j<=_d.dimension();j++){
+				res.setValue(/*seed+j*/randomV.getValue(j),i,j);
+				if(i==j){
+					res.setValue(/*seed+j*/randomV.getValue(j)+epsilon,i,j);	
+				}
 			}
-		}
-	
+	}
 	return res;
 }
 

@@ -31,11 +31,11 @@ int main(int argc, char** argv){
 		warpData wd(dim);
 	
 		WarpCannon wp(wd,dim);
-		for(int i=0;i<20;i++)
+/*		for(int i=0;i<20;i++)
 			cout << wp.createRandomVector();
-/*		cout << "mal condicionada hilberiana" << endl;
+*/		cout << "mal condicionada hilberiana" << endl;
 		//for(int i=0;i<2;i++){
-		Matrix<double> A(wp.getBadKMatrix(1.0));
+		Matrix<double> A(wp.getBadKMatrix());
 			cout << "isInversible? = " << A.isInversible() << endl;
 			cout << "det value = "  << A.det() << endl;
 			cout << "nro condicion = " << A.K() << endl;
@@ -46,7 +46,7 @@ int main(int argc, char** argv){
 			cout << A * A.inverse();
 			cout << "---------------------------" << endl;
 			
-		Matrix<double> B(wp.getBadKMatrix(50.0));
+		Matrix<double> B(wp.getBadKMatrix());
 			cout << "isInversible? = " << B.isInversible() << endl;
 			cout << "det value = "  << B.det() << endl;
 			cout << "nro condicion = " << B.K() << endl;

@@ -17,7 +17,7 @@ class WarpCannon{
 		Strategy setStrategy();
 		//Vector<double> getAimPosition();
 		//Matrix<double> getMatrixAttack();
-		Matrix<double> getBadKMatrix(double seed);
+		Matrix<double> getBadKMatrix();
 		Vector<double> createRandomVector();
 	
 		uInt  _turn;
