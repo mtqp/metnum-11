@@ -9,6 +9,8 @@
 using namespace std;
 
 int main(int argc, char** argv){
+	srand(time(NULL));	//POR FAVOR NO BORRAR, ES PARA Q ANDE EL GENERADOR DE BADK'S
+	
 	if(argc!=3 && argc!=5){
 		cout << "Error en el pasaje de parámetros" << endl;
 		exit(0);
