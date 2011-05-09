@@ -16,10 +16,11 @@ class WarpCannon{
 //	private:
 		Strategy setStrategy();
 		//Vector<double> getAimPosition();
-		//Matrix<double> getMatrixAttack();
+		Matrix<double> getMatrixAttack(Vector<double> attack_point);
 		Matrix<double> getBadKMatrix();
 		Vector<double> createRandomVector();
 	
+		uInt _dim;
 		uInt  _turn;
 		Vector<double> _position;
 		double _threshold;
