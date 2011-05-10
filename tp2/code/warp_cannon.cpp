@@ -73,17 +73,18 @@ Matrix<double> WarpCannon :: getMatrixAttack(Vector<double> attack_point){
 		col = i;
 		zero = _position.getValue(col)==0;
 	}
-
 	if(!zero){
-		uInt acum = 0;
-		double value = 0;
+		double acum;
+		double value;
 		for(int i=1; i<=_dim; i++){
+			acum = 0;
 			for(int j=1; j<=_dim; j++){
 				if(j!=col){
 					acum += attack_A.getValue(i,j)*_position.getValue(j);
 				}
 			}
-			value = attack_point.getValue(col) - acum;
+			value = attack_point.getValue(i);
+			value -= acum;
 			value /= _position.getValue(col);
 			attack_A.setValue(value,i,col);
 		}

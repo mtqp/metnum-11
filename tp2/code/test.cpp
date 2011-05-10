@@ -1,4 +1,3 @@
-
 #include "includes.h"
 #include "structs.h"
 #include "matrix.h"
@@ -29,11 +28,23 @@ int main(int argc, char** argv){
 		int dim = 4;
 		
 		warpData wd(dim);
+		wd.d.setValue(1,1);
+		wd.d.setValue(2,2);
+		wd.d.setValue(3,3);
+		wd.d.setValue(4,4);
+		wd.position.setValue(10,1);
+		wd.position.setValue(5,2);
+		wd.position.setValue(5,3);
+		wd.position.setValue(1,4);
 	
 		WarpCannon wp(wd,dim);
+		Matrix<double> B(wp.getMatrixAttack(wd.d));
+		cout << "resultado: " << endl;
+		cout << B << endl;
+		
 /*		for(int i=0;i<20;i++)
 			cout << wp.createRandomVector();
-*/		cout << "mal condicionada hilberiana" << endl;
+		cout << "mal condicionada hilberiana" << endl;
 		//for(int i=0;i<2;i++){
 		Matrix<double> A(wp.getBadKMatrix());
 			cout << "isInversible? = " << A.isInversible() << endl;
