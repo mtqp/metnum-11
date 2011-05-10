@@ -25,22 +25,25 @@ int main(int argc, char** argv){
 		/*
 			AQUI VA EL PROGRAMA!
 		*/
-		int dim = 4;
+		int dim = 10;
 		
 		warpData wd(dim);
 		wd.d.setValue(1,1);
 		wd.d.setValue(2,2);
 		wd.d.setValue(3,3);
-		wd.d.setValue(4,4);
+		wd.d.setValue(4,4);		
 		wd.position.setValue(10,1);
 		wd.position.setValue(5,2);
 		wd.position.setValue(5,3);
 		wd.position.setValue(1,4);
 	
+		Matrix<double> C(dim,BadK);
+		cout << C.K() << endl;
+	
 		WarpCannon wp(wd,dim);
 		Matrix<double> B(wp.getMatrixAttack(wd.d));
 		cout << "resultado: " << endl;
-		cout << B << endl;
+		cout << B.K() << endl;
 		
 /*		for(int i=0;i<20;i++)
 			cout << wp.createRandomVector();

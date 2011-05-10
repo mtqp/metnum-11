@@ -18,7 +18,6 @@ class WarpCannon{
 		//Vector<double> getAimPosition();
 		Matrix<double> getMatrixAttack(Vector<double> attack_point);
 		Matrix<double> getBadKMatrix();
-		Vector<double> createRandomVector();
 	
 		uInt _dim;
 		uInt  _turn;

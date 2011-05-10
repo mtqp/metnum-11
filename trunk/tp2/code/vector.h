@@ -28,6 +28,7 @@ class Vector : public MatrixBase<T>{
 		/*para hacer anda la herencia*/
 		Vector<T>& operator= (const MatrixBase<T> &mb);
 		
+		void createRandomVector();
 	private:
 		bool _traspuesta;
 };
@@ -179,6 +180,16 @@ T Vector<T> :: normInf() const {
 	}
 	
 	return nMax;
+}
+
+template <typename T>
+void Vector<T> :: createRandomVector(){	
+	uInt dim = dimension();
+	double den;
+	for(int i=1;i<=dim;i++){
+	//	den = (rand()%2*_dim)+1; //EL MODULO DE ESTO Q ES!?!?!?
+		this->setValue((rand()%dim)/*/den*/,i);
+	}
 }
 
 #endif

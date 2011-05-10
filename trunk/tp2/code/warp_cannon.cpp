@@ -64,7 +64,7 @@ Matrix<double> WarpCannon :: getMatrixAttack(Vector<double> attack_point){
 	 * Tengo _dim ecuaciones y _dim*_dim incognitas por lo que dim*dim-dim coeficientes de A estan libres*/
 	
 	/* Empiezo con una matriz mal condicionada */
-	Matrix<double> attack_A(getBadKMatrix());
+	Matrix<double> attack_A(_dim,BadK);
 	
 	/* Seteo una columna (elegida tal que en esa posicion el vector _position sea distinto de cero) con los valores tal que al multiplicarla por _position de attack_point */
 	uInt col = 1;
@@ -92,45 +92,3 @@ Matrix<double> WarpCannon :: getMatrixAttack(Vector<double> attack_point){
 	
 	return attack_A;
 }
-
-int asd = 0;
-Matrix<double> WarpCannon :: getBadKMatrix() {
-	Matrix<double> res(_dim);
-	if(rand()%2){
-		//matrix de hilbert por un coef
-		double randomCoef = rand()%10;//ajustar ese modulo
-
-		Matrix<double> bad_conditioned(_dim, BadK);
-	
-		res = randomCoef * bad_conditioned;	
-	}
-	else 
-	{
-		//matriz con casi filas ld
-		double epsilon = 1.0/1000.0;
-	
-		Vector<double> randomV(createRandomVector());
-	
-		for(int i=1;i<=_dim;i++)
-			for(int j=1;j<=_dim;j++){
-				res.setValue(/*seed+j*/randomV.getValue(j),i,j);
-				if(i==j){
-					res.setValue(/*seed+j*/randomV.getValue(j)+epsilon,i,j);	
-				}
-			}
-	}
-	return res;
-}
-
-Vector<double> WarpCannon :: createRandomVector(){
-	Vector<double> randV(_dim);
-	
-	double den;
-	for(int i=1;i<=_dim;i++){
-	//	den = (rand()%2*_dim)+1; //EL MODULO DE ESTO Q ES!?!?!?
-		randV.setValue((rand()%_dim)/*/den*/,i);
-	}
-	
-	return randV;
-}
-

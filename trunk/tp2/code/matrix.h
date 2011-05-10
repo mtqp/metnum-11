@@ -13,7 +13,8 @@ enum MatrixType{
 	Nula,
 	Diag,
 	Rand,
-	BadK	
+	BadK,
+	Hilbert
 };
 
 /*
@@ -54,6 +55,7 @@ class Matrix : public MatrixBase<T>{
 		
 		void createId(uInt dim);
 		void createBadK(uInt dim);
+		void createHilbertMatrix(uInt dim);
 };
 
 template <typename T>
@@ -84,6 +86,9 @@ Matrix<T> :: Matrix(uInt dim, MatrixType type) : MatrixBase<T>(dim, dim){
 			break;
 		case(BadK):
 			createBadK(dim);
+			break;
+		case(Hilbert):
+			createHilbertMatrix(dim);
 			break;
 		default:
 			throw MatrixException((char*)"No implementadas... HACERLAS!");
@@ -321,9 +326,35 @@ void Matrix<T> :: createId(uInt dim){
 		this->setValue((T) 1, i,i);
 }
 
+template <typename T>
+void Matrix<T> :: createBadK(uInt dim) {
+	if(rand()%2){
+		//matrix de hilbert por un coef
+		double randomCoef = rand()%10;//ajustar ese modulo
+		Matrix<double> bad_conditioned(dim, Hilbert);
+		randomCoef * bad_conditioned;
+	}
+	else 
+	{
+		//matriz con casi filas ld
+		double epsilon = 1.0/1000.0;
+	
+		Vector<T> randomV(dim);
+		randomV.createRandomVector();
+	
+		for(int i=1;i<=dim;i++)
+			for(int j=1;j<=dim;j++){
+				this->setValue(/*seed+j*/randomV.getValue(j),i,j);
+				if(i==j){
+					this->setValue(/*seed+j*/randomV.getValue(j)+epsilon,i,j);	
+				}
+			}
+	}
+}
+
 /* Matriz de Hilbert de orden dim */
 template <typename T>
-void Matrix<T> :: createBadK(uInt dim){
+void Matrix<T> :: createHilbertMatrix(uInt dim){
 	T elem;
 	
 	for(int i=1; i<=dim; i++)
