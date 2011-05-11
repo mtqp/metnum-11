@@ -34,9 +34,9 @@ class Matrix : public MatrixBase<T>{
 		Matrix(uInt dim, MatrixType type);
 		~Matrix();
 		
-		Matrix<T> gaussianElim() const;						
-		Matrix<T> LU() 		const;		
-		Matrix<T> inverse() const;							
+		Matrix<T> gaussianElim(bool pivot) const;			
+		Matrix<T> LU() const;
+		Matrix<T> inverse() const;						
 		T det() const;										
 		
 		bool isTriang(bool superior) const;
@@ -47,7 +47,7 @@ class Matrix : public MatrixBase<T>{
 		Matrix<T>& operator= (const MatrixBase<T> &mb);
 		
 	private:
-		void Gauss_LU(bool L);
+		void Gauss_LU(bool pivot, bool L);
 		T coefficient(uInt i, uInt j);
 		void putZero(uInt i, uInt j, T coefficient);		//pone el cero en esa posicion
 		uInt maxUnderDiag(uInt j) const;					//estrategia de pivoteo parcial
@@ -99,9 +99,9 @@ template <typename T>
 Matrix<T> :: ~Matrix(){}
 
 template <typename T>
-Matrix<T> Matrix<T> :: gaussianElim() const {
+Matrix<T> Matrix<T> :: gaussianElim(bool pivot) const {
 	Matrix<T> copy(*this);
-	copy.Gauss_LU(false);
+	copy.Gauss_LU(pivot,false);
 	return copy;
 }
 
@@ -109,7 +109,7 @@ Matrix<T> Matrix<T> :: gaussianElim() const {
 template <typename T>
 Matrix<T> Matrix<T> :: LU() const{
 	Matrix<T> copy(*this);
-	copy.Gauss_LU(true);
+	copy.Gauss_LU(true,true);
 	return copy;
 }
 
@@ -168,8 +168,11 @@ template <typename T>
 T Matrix<T> :: det() const{
 	Matrix<T> copy(*this);
 	
+	cout << copy << endl;
+	
 	if(!this->isTriang(true) && !this->isTriang(false)){
-		copy = this->gaussianElim();
+		copy = this->gaussianElim(false);
+		cout << copy << endl;
 	}
 	
 	uInt dim = copy.getFiDimension();
@@ -241,15 +244,17 @@ Matrix<T>& Matrix<T> :: operator= (const MatrixBase<T> &mb){
 }
 
 template <typename T>
-void Matrix<T> :: Gauss_LU(bool L){
+void Matrix<T> :: Gauss_LU(bool pivot, bool L){
 	uInt dim = MatrixBase<T> :: getFiDimension(); 
 	uInt maxCol=0;
 	T coefficient;
 	
 	for(int j=1; j<=dim; j++){
-		maxCol = this->maxUnderDiag(j);
-		if(this->getValue(maxCol,j)!=0){			//si es cero se pasa a la otra columna, ya esta lo que queremos
+		if(pivot){
+			maxCol = this->maxUnderDiag(j);
 			this->swapFi(j,maxCol);
+		}
+		if(this->getValue(j,j)!=0){			//si es cero se pasa a la otra columna, ya esta lo que queremos
 			for(int i=j+1; i<=dim; i++){
 				coefficient = this->coefficient(i,j);
 				this->putZero(i,j,coefficient);

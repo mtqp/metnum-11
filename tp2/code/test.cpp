@@ -17,14 +17,23 @@
 int main(int argc, char** argv){
 	try
 	{
-		srand(time(NULL));
+		Matrix<double> A(3);
+		A.setValue(2,1,1);
+		A.setValue(1,1,2);
+		A.setValue(1,1,3);
+		A.setValue(-1,2,1);
+		A.setValue(1,2,2);
+		A.setValue(1,2,3);
+		A.setValue(-1,3,1);
+		A.setValue(3,3,2);
+		A.setValue(5,3,3);
+		
+		cout << A.det() << endl;
+/*		srand(time(NULL));
 		cout.precision(6);
 		/*Matrix<int>A(1,1);
-		Matrix<int>B(A);*/
+		Matrix<int>B(A);
 		
-		/*
-			AQUI VA EL PROGRAMA!
-		*/
 		int dim = 10;
 		
 		warpData wd(dim);
@@ -44,7 +53,7 @@ int main(int argc, char** argv){
 		Matrix<double> B(wp.getMatrixAttack(wd.d));
 		cout << "resultado: " << endl;
 		cout << B.K() << endl;
-		
+*/		
 /*		for(int i=0;i<20;i++)
 			cout << wp.createRandomVector();
 		cout << "mal condicionada hilberiana" << endl;
