@@ -74,7 +74,6 @@ int main(int argc, char** argv){
 	/* Seteo el turno actual, el umbral y si fallamos en el ataque en la estructura */
 	wd.turn = time;
 	wd.threshold = default_threshold;
-	wd.failedAttack = false;			//por ahora lo seteo en falso pero vamos a tener que leerlo de algun lado
 	
 	/* Leo los datos de las posiciones del enemigo calculadas anteriormente */
 	fstream position_enemy("posicion_enemiga", ios_base::in | ios_base::out);
