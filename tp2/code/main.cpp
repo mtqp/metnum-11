@@ -77,39 +77,45 @@ int main(int argc, char** argv){
 	wd.failedAttack = false;			//por ahora lo seteo en falso pero vamos a tener que leerlo de algun lado
 	
 	/* Leo los datos de las posiciones del enemigo calculadas anteriormente */
-	fstream previous_y("previous", ios_base::in | ios_base::out);
-	if(!previous_y.is_open()) cout << "No se puedo abrir el archivo 'previous'" << endl;
-	previous_y.seekp(0,ios_base::end);
+	fstream position_enemy("posicion_enemiga", ios_base::in | ios_base::out);
+	if(!position_enemy.is_open()) cout << "No se puedo abrir el archivo 'position_enemy'" << endl;
+	
+	uInt data_amount = time/2; 
+	wd.position_enemy = new pair<Vector<double>*,double> [data_amount];			//creo uno de mas para el ataque recibido del turno anterior
+	
+	/* Voy a cagar solo los que tengo en el archivo, que no incluyen al ultimo ataque recibido */
+	for(int i=0; i<data_amount-1; i++){
+		wd.position_enemy[i].first = new Vector<double>(dimension);
+		for(int j=1; j<=dimension+1; j++){
+			position_enemy >> tmp;
+			if(j!=dimension+1)
+				(*wd.position_enemy[i].first).setValue(tmp,j);
+			else
+				wd.position_enemy[i].second = tmp;
+		}
+		cout << endl;
+	}
+	
+	double cond_number = wd.A.K();
+	
+	/* Seteo el punto donde impacto el ultimo ataque recibido */
+    wd.position_enemy[data_amount-1].first = new Vector<double>(wd.d);
+    wd.position_enemy[data_amount-1].second = cond_number;
+	
+	/* Me posiciono al final del archivo */
+	position_enemy.seekp(0,ios_base::end);
 	
 	/* Guardo en el archivo el punto donde impacto el ultimo ataque recibido */
 	for(int j=1; j<=dimension+1; j++){
 		if(j!=dimension+1){
-			previous_y << wd.d.getValue(j) << " ";
+			position_enemy << wd.d.getValue(j) << " ";
 		}
 		else{
-			previous_y << wd.A.K() << endl;
+			position_enemy << cond_number << endl;
 		}
 	}
 	
-	uInt prev_data_amount = time/2 - 1; 
-	wd.previous_y = new pair<Vector<double>*,double> [prev_data_amount + 1];			//creo uno de mas para el ataque recibido del turno anterior
-	
-	/* Voy a cagar solo los que tengo en el archivo, que no incluyen al ultimo ataque recibido */
-	for(int i=0; i<prev_data_amount; i++){
-		wd.previous_y[i].first = new Vector<double>(dimension);
-		for(int j=1; j<=dimension+1; j++){
-			previous_y >> tmp;
-			if(j!=dimension+1)
-				(*wd.previous_y[i].first).setValue(tmp,j);
-			else
-				wd.previous_y[i].second = tmp;
-		}
-	}
-	
-	previous_y.close();
-	
-	/* Seteo el punto donde impacto el ultimo ataque recibido */
-	wd.previous_y[prev_data_amount].first = new Vector<double>(wd.d);
+	position_enemy.close();
 	
 	ofstream out(argv[2]);
 	if(!out.is_open()) cout << "No se puedo abrir el archivo: " << argv[2] << endl;
@@ -117,6 +123,23 @@ int main(int argc, char** argv){
 	out << dimension << endl;
 	
 	/* Llamada a la funcion principal */
+	
+	
+	WarpCannon wp(wd,dimension);
+	attackData wa(dimension);
+	wa = wp.attack();
+
+	/* Guardo en el archivo de salida el vector y la matriz */
+	for(int i=1; i<=dimension; i++)
+		out << wa.d.getValue(i) << " ";
+	out << endl;
+	
+	for(int i=1; i<=dimension; i++){
+		for(int j=1; j<=dimension; j++)
+			out << wa.A.getValue(i,j) << " ";
+		out << endl;
+	}
+	
 	
 	out.close();
 	

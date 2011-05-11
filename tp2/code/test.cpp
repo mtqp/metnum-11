@@ -18,17 +18,10 @@ int main(int argc, char** argv){
 	try
 	{
 		Matrix<double> A(3);
-		A.setValue(2,1,1);
-		A.setValue(1,1,2);
-		A.setValue(1,1,3);
-		A.setValue(-1,2,1);
-		A.setValue(1,2,2);
-		A.setValue(1,2,3);
-		A.setValue(-1,3,1);
-		A.setValue(3,3,2);
-		A.setValue(5,3,3);
-		
-		cout << A.det() << endl;
+		A.createBadK(3);
+		cout << "Bad " << endl;
+		cout << A << endl;
+		cout << A.K() << endl;
 /*		srand(time(NULL));
 		cout.precision(6);
 		/*Matrix<int>A(1,1);
