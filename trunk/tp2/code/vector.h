@@ -184,6 +184,7 @@ T Vector<T> :: normInf() const {
 
 template <typename T>
 void Vector<T> :: createRandomVector(){	
+	srand(time(NULL));
 	uInt dim = dimension();
 	double den;
 	for(int i=1;i<=dim;i++){

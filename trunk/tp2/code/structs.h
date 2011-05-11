@@ -15,7 +15,7 @@ struct warpData{
 	/* Si es el primer turno quedan con ceros */
 	Matrix<double> A;
 	Vector<double> d;
-	pair<Vector<double>*,double>* previous_y;
+	pair<Vector<double>*,double>* position_enemy;
 	warpData(uInt dim) : position(dim), A(dim), d(dim){}
 };
 
@@ -25,10 +25,11 @@ struct attackData{
 	attackData(uInt dim) : A(dim), d(dim){}
 };
 
+/*
 enum Strategy{
 	attack,
 	disguise,
 	fail
-};
+};*/
 
 #endif

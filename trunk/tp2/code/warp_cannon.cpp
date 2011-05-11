@@ -11,41 +11,22 @@ WarpCannon :: WarpCannon(warpData wd, uInt dim) : _position(dim), _A(dim), _d(di
 	/* Si es el primer turno quedan con ceros */
 	_A = wd.A;
 	_d = wd.d;
-	//_previous_y = previous_y;
+	_position_enemy = wd.position_enemy;
 }
 
 WarpCannon :: ~WarpCannon(){}
-/*
+
 attackData WarpCannon :: attack(){
-	Vector<double> attack_point;
-	Matrix<double> attack_A;
+	Vector<double> attack_point(getAimPosition());
+	Matrix<double> attack_A(getMatrixAttack(attack_point));
 	attackData ad(_dim);
-
-	if (setStrategy() == attack){
-		//atacar
-		attack_point(getAimPosition());
-		attack_A(getMatrixAttack(attack_point));
-	}
-	else
-	{
-		if(setStrategy() == disguise){
-			//despistar
-			A(getBadKMatrix());
-			d(A*_position);
-			
-		}
-		else
-		{
-			//fallamos en el ataque, nueva estrategia
-			//POR AHORA NO LE DAMOS PELOTA A ESTO.
-		}
-	}
-	
-	return ad; //hay q devolver la struct!!!!
-}*/
+	ad.A=attack_A;
+	ad.d=attack_point;
+	return ad;
+}
 
 
-Strategy WarpCannon :: setStrategy(){
+/*Strategy WarpCannon :: setStrategy(){
 	if(_failedAttack)
 		return fail;
 
@@ -54,11 +35,30 @@ Strategy WarpCannon :: setStrategy(){
 		return attack;
 		
 	return disguise;
-}
+}*/
  
-/*
-Vector<double> WarpCannon :: getAimPosition(){}
-*/
+
+Vector<double> WarpCannon :: getAimPosition(){
+	Vector<double> average(_dim);
+
+	uInt data_amount = _turn/2;
+	double average_coordinate;
+	for(int i=0; i<=data_amount; i++){
+		for(int j=1; j<=_dim; j++){
+			if(i!=data_amount){
+				average_coordinate = (*_position_enemy[i].first).getValue(j) + average.getValue(j);
+			}
+			else
+			{
+				average_coordinate = average.getValue(j)/data_amount;
+			}
+			average.setValue(average_coordinate,j);	
+		}
+	}
+	
+	return average;
+}
+
 Matrix<double> WarpCannon :: getMatrixAttack(Vector<double> attack_point){
 	/* Quiero A tal que A*_position=attack_point 	*
 	 * Tengo _dim ecuaciones y _dim*_dim incognitas por lo que dim*dim-dim coeficientes de A estan libres*/

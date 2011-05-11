@@ -45,7 +45,7 @@ class Matrix : public MatrixBase<T>{
 		T K() const;
 		
 		Matrix<T>& operator= (const MatrixBase<T> &mb);
-		
+		void createBadK(uInt dim);
 	private:
 		void Gauss_LU(bool pivot, bool L);
 		T coefficient(uInt i, uInt j);
@@ -54,8 +54,8 @@ class Matrix : public MatrixBase<T>{
 		T  	 normF() const;
 		
 		void createId(uInt dim);
-		void createBadK(uInt dim);
 		void createHilbertMatrix(uInt dim);
+		
 };
 
 template <typename T>
@@ -168,11 +168,8 @@ template <typename T>
 T Matrix<T> :: det() const{
 	Matrix<T> copy(*this);
 	
-	cout << copy << endl;
-	
 	if(!this->isTriang(true) && !this->isTriang(false)){
 		copy = this->gaussianElim(false);
-		cout << copy << endl;
 	}
 	
 	uInt dim = copy.getFiDimension();
@@ -333,11 +330,13 @@ void Matrix<T> :: createId(uInt dim){
 
 template <typename T>
 void Matrix<T> :: createBadK(uInt dim) {
-	if(rand()%2){
+	srand(time(NULL));
+	uInt mode = rand()%10;
+	if(mode==0){
 		//matrix de hilbert por un coef
-		double randomCoef = rand()%10;//ajustar ese modulo
+		double randomCoef = rand()%100;//ajustar ese modulo
 		Matrix<double> bad_conditioned(dim, Hilbert);
-		randomCoef * bad_conditioned;
+		*this = randomCoef * bad_conditioned;
 	}
 	else 
 	{
