@@ -22,7 +22,6 @@ class WarpCannon{
 		uInt  _turn;
 		Vector<double> _position;
 		double _threshold;
-		bool _failedAttack;
 		
 		/* Si es el primer turno quedan con ceros */
 		Matrix<double> _A;

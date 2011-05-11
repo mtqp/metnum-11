@@ -6,7 +6,6 @@ WarpCannon :: WarpCannon(warpData wd, uInt dim) : _position(dim), _A(dim), _d(di
 	_turn = wd.turn;
 	_position = wd.position;
 	_threshold = wd.threshold;
-	_failedAttack = wd.failedAttack;
 	
 	/* Si es el primer turno quedan con ceros */
 	_A = wd.A;
