@@ -1,0 +1,13 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Introducci\IeC {\'o}n te\IeC {\'o}rica}{2}
+\contentsline {section}{\numberline {2}Desarrollo}{3}
+\contentsline {subsection}{\numberline {2.1}Implementaci\IeC {\'o}n}{3}
+\contentsline {section}{\numberline {3}Resultados}{4}
+\contentsline {section}{\numberline {4}Discusi\IeC {\'o}n}{5}
+\contentsline {section}{\numberline {5}Conclusiones}{6}
+\contentsline {section}{\numberline {6}Ap\IeC {\'e}ndices}{7}
+\contentsline {subsection}{\numberline {6.1}Ap\IeC {\'e}ndice A: Enunciado}{7}
+\contentsline {subsection}{\numberline {6.2}Ap\IeC {\'e}ndice B: C\IeC {\'o}digo fuente}{12}
+\contentsline {subsection}{\numberline {6.3}Modo de compilaci\IeC {\'o}n}{12}
+\contentsline {subsection}{\numberline {6.4}Modo de uso}{12}
+\contentsline {section}{\numberline {7}Referencias}{13}

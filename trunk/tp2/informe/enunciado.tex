@@ -1,0 +1,207 @@
+\parindent = 0 pt
+\parskip = 11 pt
+\pagestyle{empty}
+
+\newcommand{\real}{\ensuremath{\mathbb{R}}}
+
+%\begin{document}
+
+\begin{centering}
+\bf Laboratorio de M\'etodos Num\'ericos - Primer cuatrimestre 2011 \\
+Trabajo Pr\'actico N\'umero 2: La Guerra Lineal, Episodio 5 ... \\
+\end{centering}
+
+\vskip 25pt
+\hrule
+\vskip 11pt
+
+{\bf Introducci\'on}
+
+Corr\'ia el a\~no 4957 de la era de paz iniciada luego de la expulsi\'on de los mutantes invasores
+en el sistema solar de la estrella HAL-9000 cuando los sistemas de defensa alertaron a la comandancia 
+por la intrusi\'on de naves esp\'ias provenientes de lejanas galaxias dominadas por especies hostiles.
+Luego de estas primeras incursiones comenzaron los devastadores ataques alien\'igenas. Las fuerzas de 
+dicho sistema solar se enfrentaban al ataque de un enemigo muy superior, que amenazaba con
+conquistar a todos los planetas del sistema y comenzar as\'i una avanzada sobre la Rep\'ublica
+Gal\'actica.
+
+Los sistemas de defensa convencionales pronto fueron insuficientes para resistir el ataque y, adem\'as, 
+las inspecciones telem\'etricas dieron cuenta de que, fuera de los l\'imites del sistema solar, el
+enemigo estaba ensamblando un Ca\~n\'on Warp, el arma m\'as devastadora jam\'as construida por seres
+inteligentes. Los registros de la Rep\'ublica solamente consignaban cuatro ataques previos por
+medio de este tipo de armas: en el primer ataque al sistema Z-80\footnote{La Guerra Lineal, 
+Episodio 1: TP1 del segundo cuatrimestre de 2000.}, en la batalla de la estrella 80286\footnote
+{La Guerra Lineal, Episodio 2: TP2 del primer cuatrimestre de 2001.}, en las guerras de los clones 
+de PCs\footnote{La Guerra Lineal, Episodio 3: TP2 del primer cuatrimestre de 2005.}, y en el segundo 
+ataque al sistema Z-80\footnote{La Guerra Lineal, Episodio 4: TP2 del segundo cuatrimestre de 2008.}.
+La \'unica resistencia posible contra un Ca\~n\'on Warp es utilizar otro Ca\~n\'on Warp, con lo
+cual se hizo un llamado desesperado a las fuerzas de l\'inea de la Rep\'ublica para responder a
+este ataque. En menos de dos semanas el Ca\~n\'on Warp del Ej\'ercito de la Rep\'ublica estaba
+preparado para dar batalla, y el combate decisivo estaba por comenzar...
+
+{\bf La Guerra Lineal}
+
+La batalla entre dos Ca\~nones Warp no es un combate entre bandoleros espaciales, sino una
+caballerosa justa algebraica entre dos naves que respetan ciertas reglas. Para
+no ser directamente visible, cada nave se sit\'ua en un punto del hiperespacio de $n$ dimensiones.
+Llamemos $x \in \real^n$ e $y \in \real^n$ a los puntos donde se ubican la primera y la 
+segunda nave, respectivamente.
+
+A intervalos regulares, cada nave realiza un disparo de su Ca\~n\'on Warp con el objetivo de
+desintegrar al enemigo. Debido a que nos encontramos en el hiperespacio, la \'unica forma de
+dirigir el disparo hacia la posici\'on de la nave enemiga es mediante una transformaci\'on del
+espacio--tiempo, llamada \emph{transformaci\'on warp}. Esta transformaci\'on modifica el espacio--tiempo 
+de manera tal que la bomba lanzada por la nave en la posici\'on $x$ y sometida a la transformaci\'on warp $A$ ``explotar\'a'' en la posici\'on 
+$d = A x$ luego del disparo. Una transformaci\'on warp est\'a dada, entonces, por una matriz \emph{inversible}
+$A \in \real^{n \times n}$. La nave enemiga es destruida si y solo si 
+$\left\| d - y \right\|_2  \leq 1$. 
+
+Ahora bien, supongamos que la nave $y$ no es destruida. Esta nave puede ver el punto $d$ donde
+se produjo la explosi\'on y, analizando las distorsiones del espacio--tiempo sobre el fondo de 
+estrellas fijas, tambi\'en puede deducir la transformaci\'on warp $A$ que us\'o el enemigo. 
+Entonces, al menos en teor\'ia, puede resolver el sistema $A x = d$ para averiguar la posici\'on 
+$x$ del enemigo y eliminarlo en su siguiente disparo. Aqu\'i entra en juego la habilidad de cada 
+contendiente para evitar ser f\'acilmente descubierto luego de cada disparo propio, y para descubrir 
+la ubicaci\'on del rival luego de cada disparo enemigo.
+
+La Guerra Lineal consiste en una sucesi\'on de disparos simult\'aneos de cada contendiente,
+hasta que uno de ellos es destruido (o ambos son destruidos al mismo tiempo). Luego de cada
+disparo, cada nave recibe la informaci\'on telem\'etrica de la posici\'on del disparo enemigo y la transformaci\'on
+warp que us\'o el adversario, con lo cual podr\'a ajustar su siguiente disparo para acercarse m\'as
+a la nave enemiga.
+
+{\bf Detalles y requerimientos}
+
+El objetivo del trabajo pr\'actico es implementar un Control de Ca\~n\'on Warp: un programa que desarrolle autom\'aticamente
+una batalla de la Guerra Lineal contra el programa de otro grupo, de acuerdo con las siguientes
+especificaciones. 
+
+Cada ejecuci\'on del programa corresponde a un disparo del ca\~n\'on. Cada programa se ejecuta por l\'inea de comandos y toma
+como par\'ametros los nombres de varios archivos. Algunos archivos contienen
+la posici\'on de la nave y los disparos enemigos, y otro archivo contendr\'a la salida del programa.
+
+Una vez le\'ido el o los archivos de entrada el programa debe seleccionar una transformaci\'on warp $A \in 
+\real^{n \times n}$ y realizar un disparo $d = A x$. A partir del segundo turno el programa contar\'a 
+con informaci\'on que le permitir\'a inferir la posici\'on del oponente y podr\'a elegir una transformaci\'on
+de manera que el disparo se acerque a la nave enemiga. Una vez decidida la transformaci\'on y calculado el disparo
+el programa debe informar los mismos en el archivo de salida.
+
+Luego de escribir este archivo, el programa debe detener su ejecuci\'on y ser\'a vuelto a ejecutar
+cuando llegue el momento de realizar un nuevo disparo (en el siguiente turno). 
+Este proceso contin\'ua hasta que alguno de los dos contendientes es eliminado.
+Cualquier
+informaci\'on que sea necesario registrar entre disparos se debe almacenar en archivos auxiliares (en el ``directorio actual''),
+a criterio del grupo. 
+
+Los programas ser\'an invocados en el primer turno con la siguiente l\'inea de comandos:
+
+\verb|<programa> <posicion> <salida>|
+
+y del segundo turno en adelante, una vez que se cuenta con los datos que gener\'o el programa
+rival, ser\'an invocados con la siguiente l\'inea de comandos:
+
+\verb|<programa> <posicion> <salida> <ultimo> <anteriores>|
+
+Por ejemplo:
+
+\verb|lineal.exe datos.txt disparo.txt d001.txt otros.txt|
+
+De acuerdo a los siguientes detalles:
+\begin{enumerate}
+ \item[programa] Es el programa de cada grupo.
+ \item[posicion] Es un archivo con el siguiente formato:
+\begin{itemize}
+    \item La primera l\'inea contiene un cero\footnote{Por razones hist\'oricas.}.
+    \item La segunda l\'inea contiene el valor de $n$, especificando la cantidad de dimensiones del
+    espacio en el que se juega.
+    \item La tercera l\'inea contiene la posici\'on del jugador, especificada por $n$ valores separados
+    por espacios.
+\end{itemize}
+Por ejemplo, el siguiente es un archivo v\'alido de entrada:
+\begin{verbatim}
+0
+2
+-9.51013587206640810000e+001 3.17965084444715660000e+001
+\end{verbatim}
+\item[salida] Es el archivo que debe generar el programa, conteniendo la transformaci\'on warp elegida y el disparo resultante. Su formato debe ser el siguiente:
+\begin{itemize}
+    \item La primera l\'inea debe contener el n\'umero del turno en que se efectu\'o el disparo 
+    (el primer turno es el n\'umero 1).
+    \item La segunda l\'inea debe contener la dimensi\'on $n$ (este valor ya es conocido, pero se incluye
+    en el archivo para verificar que no haya inconsistencias).
+    \item La tercera l\'inea debe contener las $n$ coordenadas del vector $d$, separadas por espacios.
+    \item Las siguientes $n$ l\'ineas contienen los coeficientes de la matriz $A$, ubicando en cada
+    l\'inea una fila completa de la matriz (con los coeficientes separados por espacios).
+\end{itemize}
+\item[ultimo] Contiene el disparo generado por el programa oponente en el turno anterior, con el formato descripto anteriormente.
+\item[anteriores] Es una concatenaci\'on de todos los archivos de disparos del oponente, salvo el \'ultimo. En el segundo turno es un archivo vac\'io. En el tercer turno contiene el disparo del turno 1, en el cuarto turno contiene el disparo del turno 1 seguido del disparo del turno 2, etc.
+\end{enumerate}
+
+
+
+En todo momento el combate estar\'a supervisado por un programa que oficiar\'a de \'arbitro entre
+los dos programas en juego (por razones hist\'oricas, este \'arbitro ser\'a llamado La Fuerza),
+que se encarga de ejecutar ambos programas y de pasarles como par\'ametros los archivos
+que correspondan en cada caso. 
+
+Para asegurar el desarrollo normal de la competencia, el
+programa jugador se debe implementar bajo el sistema operativo Windows, de manera 
+que sea posible su ejecuci\'on en las m\'aquinas del Laboratorio~6.
+
+El combate debe desarrollarse en aritm\'etica de punto flotante de doble precisi\'on (8 bytes,
+correspondiente al tipo de datos \verb|double|). La Fuerza tomar\'a los datos como \verb|doubles|, con lo
+cual es importante tomar los recaudos necesarios para la lectura y escritura de los archivos. Todos los archivos generados, tanto por La Fuerza como por los
+contrincantes, ser\'an archivos ASCII conteniendo s\'olo n\'umeros, espacios y fin de
+l\'inea. Todos los n\'umeros de punto flotante ser\'an escritos usando 20 d\'igitos y
+notaci\'on cient\'ifica\footnote{Una opci\'on es \texttt{precision(20)} y
+\texttt{setf(std::ios\_base::scientific,std::ios\_base::floatfield)} de
+\texttt{std::ostream}. Ejemplo: -1.64741740540787990000e+002 .}, para evitar errores
+de representaci\'on.
+
+
+{\bf Comentarios destacables}
+
+Es importante que el programa implementado cuente con estrategias inteligentes de defensa,
+que no le permitan al enemigo deducir f\'acilmente nuestra posici\'on. Por ejemplo, no ser\'ia
+muy inteligente utilizar como transformaci\'on warp una matriz diagonal, dado que en este caso el
+enemigo puede encontrar nuestra posici\'on con mucha precisi\'on. El informe debe contener
+todas las alternativas que el grupo haya considerado con relaci\'on a este punto, junto con una
+discusi\'on que justifique la opci\'on finalmente adoptada.
+Adem\'as, el informe debe justificar que la matriz generada en cada turno es inversible.
+Tambi\'en es importante que el programa est\'e preparado para actuar ante las posibles estrategias de defensa del enemigo. El programa debe contemplar que el enemigo puede estar
+generando transformaciones warp que dificulten nuestro an\'alisis de su posici\'on, y debe implementar
+alg\'un mecanismo que intente manejar esta situaci\'on.
+No
+se aceptar\'an transformaciones warp que no sean inversibles, disparos que est\'an mal calculados,
+o el uso indebido de espadas l\'aser entre los contrincantes. Recuerden que la Guerra Lineal es
+un combate entre caballeros.
+
+\vskip 15pt
+\hrule
+\vskip 11pt
+
+{\bf Entregas parciales}
+\vspace{-15pt}
+\begin{description}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+ \item[6 de mayo:] Implementaci\'on del (o de los) m\'etodo(s) de resoluci\'on de sistemas de ecuaciones.
+ \item[13 de mayo:] Implementaci\'on completa y casos de prueba.
+\end{description}
+
+{\bf Entrega Final}
+\vspace{-15pt}
+\begin{description}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+ \item[Formato Electr\'onico:] 19 de mayo de 2011, hasta las 23:59 hs, a la direcci\'on: 
+
+  {\emph{metnum.lab2011@gmail.com}}
+ \item[Formato f\'isico:] 20 de mayo de 2011, de 17 a 21 hs.
+\item[Batalla lineal entre grupos:] 20 de mayo de 2011, de 20 a 21 hs.
+\end{description}
+
+%\end{document}
+
