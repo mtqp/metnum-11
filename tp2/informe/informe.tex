@@ -1,0 +1,77 @@
+\documentclass[12pt,titlepage]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{graphicx} % para insertar imagenes
+\usepackage{caratulaMetNum}
+\usepackage{verbatim}
+\usepackage{float}
+
+
+\newcommand{\func}[2]{\texttt{#1}(#2)}
+\newcommand{\funcFull}[2]{\texttt{#1}=#2}
+\newcommand{\tab}{\hspace*{2em}}
+\newcommand{\FOR}{\textbf{for }}
+\newcommand{\END}{\textbf{end }}
+\newcommand{\TO}{\textbf{ to }}
+\newcommand{\IF}{\textbf{if }}
+\newcommand{\WHILE}{\textbf{while }}
+\newcommand{\THEN}{\textbf{then }}
+\newcommand{\ELSE}{\textbf{else }}
+\newcommand{\RET}{\textbf{return }}
+\newcommand{\MOD}{\textbf{ \% }}
+\newcommand{\OR}{\textbf{ or }}
+\newcommand{\AND}{\textbf{ and }}
+\newcommand{\tOde}[1]{\tab \small{O($#1$)}}
+\newcommand{\Ode}[1]{O($#1$)}
+\newcommand{\Thetade}[1]{{\small$\Theta$($#1$)}}
+\newcommand{\Omegade}[1]{{\small$\Omega$($#1$)}}
+\newcommand{\VSP}{\vspace*{3em}}
+\newcommand{\pa}{\vspace{5mm}}
+\newcommand{\e}[2]{\varepsilon  _{#1}({#2})}
+\newcommand{\er}[2]{\varepsilon _{({#1})}^{({#2})}}
+\newcommand{\ev}[1]{\varepsilon _{#1}}
+\newcommand{\N}{\mathbb{N}}
+\newenvironment{pseudo}{\begin{tabular}{p{11cm}l}}{\end{tabular}\VSP}
+
+
+\newcommand{\gra}[1]{{\noindent\centering\includegraphics[width=14cm]{#1}}\\}
+
+\begin{document}
+
+\materia{Métodos Numéricos}
+\titulo{Trabajo Práctico Nº2}
+\subtitulo{Guerra lineal}
+\integrante{Carla Livorno}{424/08}{carlalivorno@hotmail.com}
+\integrante{Mariano De Sousa Bispo}{389/08}{marian\_sabianaa@hotmail.com}
+
+\abstracto{
+	bla bla bla bla bla bla bla bla bla bla bla bla
+}
+
+\palabraClave{Sistemas lineales}
+\palabraClave{}
+\palabraClave{}
+
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+\tableofcontents
+\newpage
+	\input{teoria.tex}
+	\newpage
+	\input{desarrollo.tex}
+	\newpage
+	\input{resultados.tex}
+	\newpage
+	\input{discusion.tex}
+	\newpage
+	\input{conclusiones.tex}
+	\newpage
+	\input{apendices.tex}
+	\newpage
+	\input{referencias.tex}
+\end{document}
