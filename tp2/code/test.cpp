@@ -18,10 +18,20 @@ int main(int argc, char** argv){
 	try
 	{
 		Matrix<double> A(3);
-		A.createBadK(3);
-		cout << "Bad " << endl;
+		A.setValue(1,1,1);
+		A.setValue(0,1,2);
+		A.setValue(2,1,3);
+		A.setValue(1,2,1);
+		A.setValue(0,2,2);
+		A.setValue(2,2,3);
+		A.setValue(1,3,1);
+		A.setValue(2,3,2);
+		A.setValue(1,3,3);
+		Matrix<double> B(3);
+		cout << "A" << endl;
 		cout << A << endl;
-		cout << A.K() << endl;
+		B = A.gaussianElim(false);
+		cout << B << endl;
 /*		srand(time(NULL));
 		cout.precision(6);
 		/*Matrix<int>A(1,1);

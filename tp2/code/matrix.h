@@ -45,7 +45,6 @@ class Matrix : public MatrixBase<T>{
 		T K() const;
 		
 		Matrix<T>& operator= (const MatrixBase<T> &mb);
-		void createBadK(uInt dim);
 	private:
 		void Gauss_LU(bool pivot, bool L);
 		T coefficient(uInt i, uInt j);
@@ -54,6 +53,7 @@ class Matrix : public MatrixBase<T>{
 		T  	 normF() const;
 		
 		void createId(uInt dim);
+		void createBadK(uInt dim);
 		void createHilbertMatrix(uInt dim);
 		
 };
