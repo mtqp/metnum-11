@@ -22,7 +22,7 @@ int main(int argc, char** argv){
 		A.setValue(0,1,2);
 		A.setValue(2,1,3);
 		A.setValue(1,2,1);
-		A.setValue(0,2,2);
+		A.setValue(4,2,2);
 		A.setValue(2,2,3);
 		A.setValue(1,3,1);
 		A.setValue(2,3,2);
@@ -30,7 +30,7 @@ int main(int argc, char** argv){
 		Matrix<double> B(3);
 		cout << "A" << endl;
 		cout << A << endl;
-		B = A.gaussianElim(false);
+		B = A.gaussianElim();
 		cout << B << endl;
 /*		srand(time(NULL));
 		cout.precision(6);

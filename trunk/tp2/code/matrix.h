@@ -34,10 +34,9 @@ class Matrix : public MatrixBase<T>{
 		Matrix(uInt dim, MatrixType type);
 		~Matrix();
 		
-		Matrix<T> gaussianElim(bool pivot) const;			
+		Matrix<T> gaussianElim() const;			
 		Matrix<T> LU() const;
 		Matrix<T> inverse() const;						
-		T det() const;										
 		
 		bool isTriang(bool superior) const;
 		bool isId() const;
@@ -46,7 +45,8 @@ class Matrix : public MatrixBase<T>{
 		
 		Matrix<T>& operator= (const MatrixBase<T> &mb);
 	private:
-		void Gauss_LU(bool pivot, bool L);
+		T det() const;										//determinante en valor absouto, porque usa permutaciones que pueden cambiar el signo
+		void Gauss_LU(bool L);
 		T coefficient(uInt i, uInt j);
 		void putZero(uInt i, uInt j, T coefficient);		//pone el cero en esa posicion
 		uInt maxUnderDiag(uInt j) const;					//estrategia de pivoteo parcial
@@ -99,9 +99,9 @@ template <typename T>
 Matrix<T> :: ~Matrix(){}
 
 template <typename T>
-Matrix<T> Matrix<T> :: gaussianElim(bool pivot) const {
+Matrix<T> Matrix<T> :: gaussianElim() const {
 	Matrix<T> copy(*this);
-	copy.Gauss_LU(pivot,false);
+	copy.Gauss_LU(false);
 	return copy;
 }
 
@@ -109,7 +109,7 @@ Matrix<T> Matrix<T> :: gaussianElim(bool pivot) const {
 template <typename T>
 Matrix<T> Matrix<T> :: LU() const{
 	Matrix<T> copy(*this);
-	copy.Gauss_LU(true,true);
+	copy.Gauss_LU(true);
 	return copy;
 }
 
@@ -162,26 +162,6 @@ Matrix<T> Matrix<T> :: inverse() const{
 	}
 			
 	return I;
-}
-
-template <typename T>
-T Matrix<T> :: det() const{
-	Matrix<T> copy(*this);
-	
-	if(!this->isTriang(true) && !this->isTriang(false)){
-		copy = this->gaussianElim(false);
-	}
-	
-	uInt dim = copy.getFiDimension();
-	T aux;
-	T det = 1;
-	for(int i=1; i<=dim; i++){
-		aux = copy.getValue(i,i);
-		if(aux==0) return 0;
-		det *= aux;
-	}
-	
-	return det;
 }
 
 template <typename T>
@@ -241,16 +221,34 @@ Matrix<T>& Matrix<T> :: operator= (const MatrixBase<T> &mb){
 }
 
 template <typename T>
-void Matrix<T> :: Gauss_LU(bool pivot, bool L){
+T Matrix<T> :: det() const{
+	Matrix<T> copy(*this);
+	
+	if(!this->isTriang(true) && !this->isTriang(false)){
+		copy = this->gaussianElim();
+	}
+	
+	uInt dim = copy.getFiDimension();
+	T aux;
+	T det = 1;
+	for(int i=1; i<=dim; i++){
+		aux = copy.getValue(i,i);
+		if(aux==0) return 0;
+		det *= aux;
+	}
+	
+	return abs(det);
+}
+
+template <typename T>
+void Matrix<T> :: Gauss_LU(bool L){
 	uInt dim = MatrixBase<T> :: getFiDimension(); 
 	uInt maxCol=0;
 	T coefficient;
 	
 	for(int j=1; j<=dim; j++){
-		if(pivot){
-			maxCol = this->maxUnderDiag(j);
-			this->swapFi(j,maxCol);
-		}
+		maxCol = this->maxUnderDiag(j);
+		this->swapFi(j,maxCol);
 		if(this->getValue(j,j)!=0){			//si es cero se pasa a la otra columna, ya esta lo que queremos
 			for(int i=j+1; i<=dim; i++){
 				coefficient = this->coefficient(i,j);
