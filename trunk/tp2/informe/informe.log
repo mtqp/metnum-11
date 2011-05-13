@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  12 MAY 2011 02:37
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  13 MAY 2011 14:46
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
@@ -417,23 +417,29 @@ LaTeX Font Info:    ... okay on input line 43.
 \MPnumerator=\count108
 \everyMPtoPDFconversion=\toks31
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 60.
+LaTeX Font Info:    Try loading font information for U+msa on input line 63.
  (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 60.
+LaTeX Font Info:    Try loading font information for U+msb on input line 63.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-) [1
+)
+Overfull \hbox (61.84195pt too wide) in paragraph at lines 63--63
+ [][] 
+ []
+
+[1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./informe.toc)
 \tf@toc=\write3
 \openout3 = `informe.toc'.
 
- [1] (./teoria.tex) [2]
-(./desarrollo.tex) [3] (./resultados.tex) [4] (./discusion.tex) [5]
-(./conclusiones.tex) [6] (./apendices.tex (./enunciado.tex [7] [8] [9] [10]
+ [1]
+(./teoria.tex) [2] (./desarrollo.tex) [3] (./resultados.tex) [4]
+(./discusion.tex) [5] (./conclusiones.tex) [6] (./apendices.tex
+(./enunciado.tex [7] [8] [9] [10]
 Overfull \hbox (64.14026pt too wide) in paragraph at lines 158--158
 [][]\OT1/cmr/m/n/10 Una op-ci^^Son es \OT1/cmtt/m/n/10 precision(20) \OT1/cmr/m
 /n/10 y \OT1/cmtt/m/n/10 setf(std::ios[]base::scientific,std::ios[]base::floatf
@@ -454,7 +460,7 @@ Here is how much of TeX's memory you used:
  5962 multiletter control sequences out of 15000+50000
  14039 words of font info for 55 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 27i,8n,27p,362b,346s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,8n,27p,640b,346s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive
 /fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type
 1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/am
@@ -468,7 +474,7 @@ ic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
 fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/sh
 are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf-t
 exlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on informe.pdf (14 pages, 169541 bytes).
+Output written on informe.pdf (14 pages, 173899 bytes).
 PDF statistics:
  104 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
