@@ -1,4 +1,16 @@
 \begin{section}{Desarrollo}
+	\begin{subsection}{Explicación}
+		La guerra lineal consiste en dos naves situadas en el hiperespacio de $n$ dimensiones con el objetivo de desintegrarse mutuamente mediante disparos de cañones $Warp$. Un disparo con este cañón es una trasformación espacio-tiempo, llamada trasformacion Warp. Dicha trasformación es la resolución de un sistema de ecuaciones lineales ($Ax=d$). Es decir, la trasformacion consiste en encontrar una matriz $A$ tal que al multiplicarla por nuestra posición $x$ resulte en un impacto en la posición $d$, donde se supone está el enemigo.
+		
+		Cada turno consiste en la resolución de dos sitemas de ecuaciones.
+		
+		Primero nos proveen la matriz $A'$ usada por el oponente para atacarnos y el punto $d'$ donde impactó el proyectil. Con esa información debemos intentar descubrir la posición $y$ donde se encuentra situada la nave enemiga, es decir, resolver el sistema $A'y=d'$. Para resolverlo necesitamos conocer la inversa de la matriz $A'$ (existe porque es parte de las reglas de la batalla), la exactitud con la que la calculemos depende del número de condición de esta, y de este calculo depende la exactitud con la que calculemos la posición enemiga y a su vez la exactitud de nuestro disparo.
+		
+		Como creemos que el adversario va a utilizar matrices mal condicionadas para atacarnos, en cada turno estariamos calculando una posición errada de donde se encuentra. Por este motivo, decidimos usar la estrategia de disparar en el punto promedio de todos las posiciones calculadas hasta el momento de donde se situa. Esperamos de esta manera ir obteniendo cada vez mejores aproximaciones a donde se encuentra realmente.
+		
+		Una vez que tenemos la posición a la que pretendemos disparar ($d$) tenemos que conseguir una matriz $A$ tal que $Ax=d$ donde $x$ es nuestra posición. Como debemos proveer al adversario de la matriz $A$ tenemos que idear una estrategia para que nuestra posición no sea descubierta en el siguiente turno. La estrategia consiste en generar matrices mal condicionadas que a su vez sean inversibles.
+		
+	\end{subsection}
 	\begin{subsection}{Implementación}
 
 	\end{subsection}

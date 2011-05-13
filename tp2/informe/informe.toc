@@ -1,7 +1,8 @@
 \select@language {spanish}
-\contentsline {section}{\numberline {1}Introducci\IeC {\'o}n te\IeC {\'o}rica}{2}
+\contentsline {section}{\numberline {1}Introducci\IeC {\'o}n}{2}
 \contentsline {section}{\numberline {2}Desarrollo}{3}
-\contentsline {subsection}{\numberline {2.1}Implementaci\IeC {\'o}n}{3}
+\contentsline {subsection}{\numberline {2.1}Explicaci\IeC {\'o}n}{3}
+\contentsline {subsection}{\numberline {2.2}Implementaci\IeC {\'o}n}{3}
 \contentsline {section}{\numberline {3}Resultados}{4}
 \contentsline {section}{\numberline {4}Discusi\IeC {\'o}n}{5}
 \contentsline {section}{\numberline {5}Conclusiones}{6}
