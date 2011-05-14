@@ -9,7 +9,6 @@
 struct warpData{
 	uInt turn;
 	Vector<double> position;
-	double threshold;
 	
 	/* Si es el primer turno quedan con ceros */
 	Matrix<double> A;
