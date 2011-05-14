@@ -6,7 +6,7 @@ WarpCannon :: WarpCannon(warpData wd, uInt dim) : _position(dim), _A(dim), _d(di
 	_turn = wd.turn;
 	_position = wd.position;
 	_threshold = wd.threshold;
-	
+
 	/* Si es el primer turno quedan con ceros */
 	_A = wd.A;
 	_d = wd.d;
@@ -32,14 +32,14 @@ attackData WarpCannon :: attack(){
 	double condition_number = _A.K();
 	if(_turn==8 || condition_number<=_threshold)
 		return attack;
-		
+
 	return disguise;
 }*/
- 
+
 
 Vector<double> WarpCannon :: getAimPosition(){
 	Vector<double> average(_dim);
-
+//CAMBIAR _TURN/2 POR _TURN
 	uInt data_amount = _turn/2;
 	double average_coordinate;
 	for(int i=0; i<=data_amount; i++){
@@ -51,20 +51,20 @@ Vector<double> WarpCannon :: getAimPosition(){
 			{
 				average_coordinate = average.getValue(j)/data_amount;
 			}
-			average.setValue(average_coordinate,j);	
+			average.setValue(average_coordinate,j);
 		}
 	}
-	
+
 	return average;
 }
 
 Matrix<double> WarpCannon :: getMatrixAttack(Vector<double> attack_point){
 	/* Quiero A tal que A*_position=attack_point 	*
 	 * Tengo _dim ecuaciones y _dim*_dim incognitas por lo que dim*dim-dim coeficientes de A estan libres*/
-	
+
 	/* Empiezo con una matriz mal condicionada */
 	Matrix<double> attack_A(_dim,BadK);
-	
+
 	/* Seteo una columna (elegida tal que en esa posicion el vector _position sea distinto de cero) con los valores tal que al multiplicarla por _position de attack_point */
 	uInt col = 1;
 	bool zero = _position.getValue(col)==0;
@@ -88,6 +88,6 @@ Matrix<double> WarpCannon :: getMatrixAttack(Vector<double> attack_point){
 			attack_A.setValue(value,i,col);
 		}
 	}
-	
+
 	return attack_A;
 }
