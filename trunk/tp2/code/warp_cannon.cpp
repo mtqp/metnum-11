@@ -5,7 +5,6 @@ WarpCannon :: WarpCannon(warpData wd, uInt dim) : _position(dim), _A(dim), _d(di
 	_dim = dim;
 	_turn = wd.turn;
 	_position = wd.position;
-	_threshold = wd.threshold;
 
 	/* Si es el primer turno quedan con ceros */
 	_A = wd.A;
@@ -16,11 +15,24 @@ WarpCannon :: WarpCannon(warpData wd, uInt dim) : _position(dim), _A(dim), _d(di
 WarpCannon :: ~WarpCannon(){}
 
 attackData WarpCannon :: attack(){
-	Vector<double> attack_point(getAimPosition());
-	Matrix<double> attack_A(getMatrixAttack(attack_point));
+	Matrix<double> attack_A(_dim);
+	Vector<double> attack_point(_dim);
+	if(_turn==1){
+		/* Empiezo con una matriz mal condicionada */
+		Matrix<double> Bad(_dim,BadK);
+		attack_A = Bad;
+		attack_point = attack_A*_position;
+	}
+	else
+	{
+		attack_point = getAimPosition();
+		attack_A = getMatrixAttack(attack_point);
+	}
+	
 	attackData ad(_dim);
 	ad.A=attack_A;
 	ad.d=attack_point;
+	
 	return ad;
 }
 
@@ -39,9 +51,9 @@ attackData WarpCannon :: attack(){
 
 Vector<double> WarpCannon :: getAimPosition(){
 	Vector<double> average(_dim);
-//CAMBIAR _TURN/2 POR _TURN
-	uInt data_amount = _turn/2;
+	uInt data_amount = _turn-1;
 	double average_coordinate;
+	
 	for(int i=0; i<=data_amount; i++){
 		for(int j=1; j<=_dim; j++){
 			if(i!=data_amount){

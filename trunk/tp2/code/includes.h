@@ -15,6 +15,5 @@ using namespace std;
 #define ullInt unsigned long long
 #define llInt  long long
 #define uInt   unsigned int
-#define default_threshold 1000
 
 #endif

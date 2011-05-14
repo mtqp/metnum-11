@@ -9,7 +9,7 @@
 using namespace std;
 
 int main(int argc, char** argv){
-	srand(time(NULL));	//POR FAVOR NO BORRAR, ES PARA Q ANDE EL GENERADOR DE BADK'S
+	srand(time(NULL));
 
 	if(argc!=3 && argc!=5){
 		cout << "Error en el pasaje de parámetros" << endl;
@@ -31,6 +31,9 @@ int main(int argc, char** argv){
 
 	/* Creo la estructura */
 	warpData wd(dimension);
+	
+	/* Seteo el turno actual */
+	wd.turn = time;
 
 	/* Seteo nuestra posicion en la estructura */
 	for(int i=1;i<=dimension;i++){
@@ -47,6 +50,9 @@ int main(int argc, char** argv){
 
 		ultimo >> time;
 		time++;							//turno actual = ultimo turno + 1
+		
+		/* Seteo el turno actual */
+		wd.turn = time;
 
 		uInt aux;
 		ultimo >> aux;
@@ -69,62 +75,61 @@ int main(int argc, char** argv){
 			}
 
 		ultimo.close();
-	}
+		
+		/* Leo los datos de las posiciones del enemigo calculadas anteriormente */
+		fstream position_enemy("posicion_enemiga", ios_base::in | ios_base::out);
+		if(!position_enemy.is_open()) cout << "No se puedo abrir el archivo 'position_enemy'" << endl;
 
-	/* Seteo el turno actual, el umbral y si fallamos en el ataque en la estructura */
-	wd.turn = time;
-	wd.threshold = default_threshold;
+		uInt data_amount = time - 1;
+		wd.position_enemy = new pair<Vector<double>*,double> [data_amount];			//creo uno de mas para el ataque recibido del turno anterior
 
-	/* Leo los datos de las posiciones del enemigo calculadas anteriormente */
-	fstream position_enemy("posicion_enemiga", ios_base::in | ios_base::out);
-	if(!position_enemy.is_open()) cout << "No se puedo abrir el archivo 'position_enemy'" << endl;
+		/* Voy a cagar solo los que tengo en el archivo, que no incluyen al ultimo ataque recibido */
+		for(int i=0; i<data_amount-1; i++){
+			wd.position_enemy[i].first = new Vector<double>(dimension);
+			for(int j=1; j<=dimension+1; j++){
+				position_enemy >> tmp;
+				if(j!=dimension+1)
+					(*wd.position_enemy[i].first).setValue(tmp,j);
+				else
+					wd.position_enemy[i].second = tmp;
+			}
+			cout << endl;
+		}
 
-	uInt data_amount = time/2;
-	wd.position_enemy = new pair<Vector<double>*,double> [data_amount];			//creo uno de mas para el ataque recibido del turno anterior
+		/* Seteo el punto donde supuestamente esta la nave enemiga segun el ultimo ataque recibido */
+		double cond_number = wd.A.K();												//dato para la segunda coordenada de la tupla
+		Matrix<double> A_inverse(wd.A.inverse());
+		Vector<double> y(dimension);
+		y = A_inverse*wd.d;															//posicion del enemigo
+		wd.position_enemy[data_amount-1].first = new Vector<double>(y);
+		wd.position_enemy[data_amount-1].second = cond_number;
 
-	/* Voy a cagar solo los que tengo en el archivo, que no incluyen al ultimo ataque recibido */
-	for(int i=0; i<data_amount-1; i++){
-		wd.position_enemy[i].first = new Vector<double>(dimension);
+		/* Me posiciono al final del archivo */
+		position_enemy.seekp(0,ios_base::end);
+
+		/* Guardo en el archivo el punto donde supuestamente esta la nave enemiga segun el ultimo ataque recibido */
 		for(int j=1; j<=dimension+1; j++){
-			position_enemy >> tmp;
-			if(j!=dimension+1)
-				(*wd.position_enemy[i].first).setValue(tmp,j);
-			else
-				wd.position_enemy[i].second = tmp;
+			if(j!=dimension+1){
+				position_enemy << wd.d.getValue(j) << " ";
+			}
+			else{
+				position_enemy << cond_number << endl;
+			}
 		}
-		cout << endl;
+
+		position_enemy.close();
+		
 	}
-
-	double cond_number = wd.A.K();
-
-	/* Seteo el punto donde impacto el ultimo ataque recibido */
-    wd.position_enemy[data_amount-1].first = new Vector<double>(wd.d);
-    wd.position_enemy[data_amount-1].second = cond_number;
-
-	/* Me posiciono al final del archivo */
-	position_enemy.seekp(0,ios_base::end);
-
-	/* Guardo en el archivo el punto donde impacto el ultimo ataque recibido */
-	for(int j=1; j<=dimension+1; j++){
-		if(j!=dimension+1){
-			position_enemy << wd.d.getValue(j) << " ";
-		}
-		else{
-			position_enemy << cond_number << endl;
-		}
-	}
-
-	position_enemy.close();
+	
+	/* Llamada a la funcion principal */
+	WarpCannon wp(wd,dimension);
+	attackData wa(dimension);
+	wa = wp.attack();
 
 	ofstream out(argv[2]);
 	if(!out.is_open()) cout << "No se puedo abrir el archivo: " << argv[2] << endl;
 	out << time << endl;
 	out << dimension << endl;
-
-	/* Llamada a la funcion principal */
-	WarpCannon wp(wd,dimension);
-	attackData wa(dimension);
-	wa = wp.attack();
 
 	/* Guardo en el archivo de salida el vector y la matriz */
 	for(int i=1; i<=dimension; i++)
