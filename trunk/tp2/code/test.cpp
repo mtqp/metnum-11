@@ -17,21 +17,29 @@
 int main(int argc, char** argv){
 	try
 	{
-		Matrix<double> A(3);
+		Matrix<double> A(4);
 		A.setValue(1,1,1);
-		A.setValue(0,1,2);
-		A.setValue(2,1,3);
-		A.setValue(1,2,1);
-		A.setValue(4,2,2);
-		A.setValue(2,2,3);
-		A.setValue(1,3,1);
-		A.setValue(2,3,2);
-		A.setValue(1,3,3);
-		Matrix<double> B(3);
+		A.setValue(1,1,2);
+		A.setValue(0,1,3);
+		A.setValue(3,1,4);
+		A.setValue(2,2,1);
+		A.setValue(1,2,2);
+		A.setValue(-1,2,3);
+		A.setValue(1,2,4);
+		A.setValue(3,3,1);
+		A.setValue(-1,3,2);
+		A.setValue(-1,3,3);
+		A.setValue(2,3,4);
+		A.setValue(-1,4,1);
+		A.setValue(2,4,2);
+		A.setValue(3,4,3);
+		A.setValue(-1,4,4);
+		
 		cout << "A" << endl;
-		cout << A << endl;
-		B = A.gaussianElim();
-		cout << B << endl;
+		cout << A;
+		Matrix<double> B(4);
+		B = A.inverse();
+		cout << B;
 /*		srand(time(NULL));
 		cout.precision(6);
 		/*Matrix<int>A(1,1);
