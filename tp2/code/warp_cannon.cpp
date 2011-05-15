@@ -21,7 +21,7 @@ attackData WarpCannon :: attack(){
 		/* Empiezo con una matriz mal condicionada */
 		Matrix<double> Bad(_dim,BadK);
 		attack_A = Bad;
-		attack_point = attack_A*_position;
+		attack_point = (attack_A*_position.traspuesta()).traspuesta();
 	}
 	else
 	{

@@ -10,6 +10,9 @@ using namespace std;
 
 int main(int argc, char** argv){
 	srand(time(NULL));
+	
+	cout.precision(20);
+	cout.setf(ios::scientific,ios::floatfield);
 
 	if(argc!=3 && argc!=5){
 		cout << "Error en el pasaje de parámetros" << endl;
@@ -79,12 +82,15 @@ int main(int argc, char** argv){
 		/* Leo los datos de las posiciones del enemigo calculadas anteriormente */
 		fstream position_enemy("posicion_enemiga", ios_base::in | ios_base::out);
 		if(!position_enemy.is_open()) cout << "No se puedo abrir el archivo 'position_enemy'" << endl;
+		position_enemy.precision(20);
+		position_enemy.setf(ios::scientific,ios::floatfield);
 
 		uInt data_amount = time - 1;
 		wd.position_enemy = new pair<Vector<double>*,double> [data_amount];			//creo uno de mas para el ataque recibido del turno anterior
 
 		/* Voy a cagar solo los que tengo en el archivo, que no incluyen al ultimo ataque recibido */
 		for(int i=0; i<data_amount-1; i++){
+			cout << "aca no llego!" << endl;
 			wd.position_enemy[i].first = new Vector<double>(dimension);
 			for(int j=1; j<=dimension+1; j++){
 				position_enemy >> tmp;
@@ -100,7 +106,7 @@ int main(int argc, char** argv){
 		double cond_number = wd.A.K();												//dato para la segunda coordenada de la tupla
 		Matrix<double> A_inverse(wd.A.inverse());
 		Vector<double> y(dimension);
-		y = A_inverse*wd.d;															//posicion del enemigo
+		y = (A_inverse*wd.d.traspuesta()).traspuesta();								//posicion del enemigo
 		wd.position_enemy[data_amount-1].first = new Vector<double>(y);
 		wd.position_enemy[data_amount-1].second = cond_number;
 
@@ -110,7 +116,7 @@ int main(int argc, char** argv){
 		/* Guardo en el archivo el punto donde supuestamente esta la nave enemiga segun el ultimo ataque recibido */
 		for(int j=1; j<=dimension+1; j++){
 			if(j!=dimension+1){
-				position_enemy << wd.d.getValue(j) << " ";
+				position_enemy << (*wd.position_enemy[data_amount-1].first).getValue(j) << " ";
 			}
 			else{
 				position_enemy << cond_number << endl;
@@ -128,6 +134,8 @@ int main(int argc, char** argv){
 
 	ofstream out(argv[2]);
 	if(!out.is_open()) cout << "No se puedo abrir el archivo: " << argv[2] << endl;
+	out.precision(20);
+	out.setf(ios::scientific,ios::floatfield);
 	out << time << endl;
 	out << dimension << endl;
 
@@ -141,8 +149,24 @@ int main(int argc, char** argv){
 			out << wa.A.getValue(i,j) << " ";
 		out << endl;
 	}
-
+	
 	out.close();
-
+	
+	/******************************************************************/
+	/******************** Para testear!!!! ****************************/
+	/******************************************************************/
+	/*cout << "K " << wa.A.K() << endl;
+	if( wa.A.isInversible()){
+		cout << "det: " << endl;
+		cout << wa.A.det() << endl;
+		Matrix<double> B(dimension);
+		B = wa.A.inverse();
+		cout << "det de la inversa: " << endl;
+		cout << B.det() << endl;
+	}
+	else{
+			cout << "La matriz generada para el ataque no es inversible!" << endl;
+	}*/
+	
 	return 0;
 }
