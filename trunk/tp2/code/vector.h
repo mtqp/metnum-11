@@ -186,11 +186,8 @@ template <typename T>
 void Vector<T> :: createRandomVector(){
 	uInt dim = dimension();
 	double den;
-	//double AOD;
 	for(int i=1;i<=dim;i++){
-		//den = (rand()%2*_dim)+1; //EL MODULO DE ESTO Q ES!?!?!?
-		//AOD = ((T)rand()/(RAND_MAX+1));
-		this->setValue(rand()%dim/*/den*/,i);
+		this->setValue(rand()%1000000/*/den*/,i);
 	}
 }
 

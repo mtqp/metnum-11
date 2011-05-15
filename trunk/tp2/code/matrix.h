@@ -44,8 +44,8 @@ class Matrix : public MatrixBase<T>{
 		T K() const;
 
 		Matrix<T>& operator= (const MatrixBase<T> &mb);
-	private:
 		T det() const;										//determinante en valor absouto, porque usa permutaciones que pueden cambiar el signo
+	private:
 		void Gauss_LU(bool L);
 		T coefficient(uInt i, uInt j);
 		void putZero(uInt i, uInt j, T coefficient);		//pone el cero en esa posicion
