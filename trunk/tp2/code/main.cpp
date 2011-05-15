@@ -90,7 +90,6 @@ int main(int argc, char** argv){
 
 		/* Voy a cagar solo los que tengo en el archivo, que no incluyen al ultimo ataque recibido */
 		for(int i=0; i<data_amount-1; i++){
-			cout << "aca no llego!" << endl;
 			wd.position_enemy[i].first = new Vector<double>(dimension);
 			for(int j=1; j<=dimension+1; j++){
 				position_enemy >> tmp;
