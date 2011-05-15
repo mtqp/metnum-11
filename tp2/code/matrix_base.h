@@ -6,8 +6,6 @@
 
 extern const double EPSILON_ERROR;
 
-#define protected public		//----> DSP BORRAR ESTA LINEA!!!!!!!!!!
-
 /*
 	Quien herede de MatrixBase deberá atrapar las excepciones lanzadas
 */
