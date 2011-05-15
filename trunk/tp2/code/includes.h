@@ -15,6 +15,7 @@ using namespace std;
 #define ullInt unsigned long long
 #define llInt  long long
 #define uInt   unsigned int
+
 const static double EPSILON_ERROR = 1.0/1000000.0;
 
 #endif
