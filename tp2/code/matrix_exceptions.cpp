@@ -8,3 +8,7 @@ MatrixException :: MatrixException(char* exception, MatrixExceptionType type){
 const char* MatrixException :: what() const throw(){
 	return message;
 }
+
+const MatrixExceptionType MatrixException :: type() const {
+	return _type;
+}

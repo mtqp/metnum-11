@@ -14,6 +14,7 @@ class MatrixException : public exception{
 		MatrixException(char*,MatrixExceptionType);
 
 		const char* what() const throw(); 
+		const MatrixExceptionType type() const;
 		void show();
 	private:
 		char* message;
