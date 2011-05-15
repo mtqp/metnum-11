@@ -44,9 +44,9 @@ class MatrixBase{
 		
 		static MatrixBase<T> scalarMult(const T& value, const MatrixBase<T> &mb);
 		
-	protected:
 		uInt  getFiDimension()  const;
 		uInt  getColDimension() const;
+	protected:
 		bool matchExactDimesions(const MatrixBase<T> &mb) const;
 		bool matchMultDimesions(const MatrixBase<T> &mb)  const;
 		MatrixBase<T> deleteFi(uInt i) const;
