@@ -81,7 +81,7 @@ int main(int argc, char** argv){
 		
 		/* Leo los datos de las posiciones del enemigo calculadas anteriormente */
 		fstream position_enemy("posicion_enemiga", ios_base::in | ios_base::out);
-		if(!position_enemy.is_open()) cout << "No se puedo abrir el archivo 'position_enemy'" << endl;
+		if(!position_enemy.is_open()) cout << "No se puedo abrir el archivo 'posicion enemiga'" << endl;
 		position_enemy.precision(20);
 		position_enemy.setf(ios::scientific,ios::floatfield);
 
@@ -154,18 +154,10 @@ int main(int argc, char** argv){
 	/******************************************************************/
 	/******************** Para testear!!!! ****************************/
 	/******************************************************************/
-	/*cout << "K " << wa.A.K() << endl;
-	if( wa.A.isInversible()){
-		cout << "det: " << endl;
-		cout << wa.A.det() << endl;
-		Matrix<double> B(dimension);
-		B = wa.A.inverse();
-		cout << "det de la inversa: " << endl;
-		cout << B.det() << endl;
-	}
-	else{
+	cout << "K " << wa.A.K() << endl;
+	if( !wa.A.isInversible()){
 			cout << "La matriz generada para el ataque no es inversible!" << endl;
-	}*/
+	}
 	
 	return 0;
 }

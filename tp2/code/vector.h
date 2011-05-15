@@ -185,9 +185,13 @@ T Vector<T> :: normInf() const {
 template <typename T>
 void Vector<T> :: createRandomVector(){
 	uInt dim = dimension();
-	double den;
+	T den;
 	for(int i=1;i<=dim;i++){
-		this->setValue(rand()%1000000/*/den*/,i);
+		den = rand()%dim+1;
+		cout << "den elegido -->" << den << endl;
+		den = 1/den;
+		this->setValue(rand()%1000000000/den,i);
+		cout << "Generando vector aleatorio ... elem" << i << " --> " << this->getValue(i) << endl;
 	}
 }
 

@@ -329,25 +329,30 @@ void Matrix<T> :: createId(uInt dim){
 template <typename T>
 void Matrix<T> :: createBadK(uInt dim) {
 	uInt mode = rand()%10;
-	if(mode==0){
+	if(mode==0 && dim>4){							//para matrices chicas el num de cond de Hilbert no es tan malo
+		cout << "Esta vez Hilbert!!!" << endl;
 		//matrix de hilbert por un coef
-		double randomCoef = rand()%100;//ajustar ese modulo
+		T randomCoef = rand()%100;
 		Matrix<double> bad_conditioned(dim, Hilbert);
+		cout << bad_conditioned << endl;
 		*this = randomCoef * bad_conditioned;
+		cout << "El coeficiente usado es: " << randomCoef << endl;
+		cout << *this << endl;
 	}
 	else
 	{
-		//matriz con casi filas ld
-		double epsilon = 1.0/1000.0;
+		cout << "Esta vez random!!!" << endl;
+		//matriz con filas casi ld
+		T epsilon = 1.0/1000.0;
 
 		Vector<T> randomV(dim);
 		randomV.createRandomVector();
 
 		for(int i=1;i<=dim;i++)
 			for(int j=1;j<=dim;j++){
-				this->setValue(/*seed+j*/randomV.getValue(j),i,j);
+				this->setValue(randomV.getValue(j),i,j);
 				if(i==j){
-					this->setValue(/*seed+j*/randomV.getValue(j)+epsilon,i,j);
+					this->setValue(randomV.getValue(j)+epsilon,i,j);
 				}
 			}
 	}
@@ -357,7 +362,6 @@ void Matrix<T> :: createBadK(uInt dim) {
 template <typename T>
 void Matrix<T> :: createHilbertMatrix(uInt dim){
 	T elem;
-
 	for(int i=1; i<=dim; i++)
 		for(int j=1; j<=dim; j++){
 			elem = 1;
