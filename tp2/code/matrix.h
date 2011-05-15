@@ -140,7 +140,7 @@ Matrix<T> Matrix<T> :: inverse() const{
 
 	/* Aca no hay ceros en la diagonal, sino la matriz no seria inversible. No uso pivoteo parcial para no arruinar los ceros que ya consegui abajo de la diagonal */
 	for(int j=dim; j>1; j--){
-		if(copy.getValue(j,j)==0) throw MatrixException((char*)"Error no deberia haber ceros en la diagonal", Default);
+		if(abs(copy.getValue(j,j))<EPSILON_ERROR) throw MatrixException((char*)"Error no deberia haber ceros en la diagonal", Default);
 		for(int i=1; i<j; i++){
 			coefficient = copy.coefficient(i,j);
 			copy.putZero(i,j,coefficient);
@@ -172,12 +172,12 @@ bool Matrix<T> :: isTriang(bool superior) const {
 	if(superior){
 		for(int i=2; i<=dim; i++)
 			for(int j=1; j<i; j++)
-				res &= this->getValue(i,j)==0;
+				res &= (abs(this->getValue(i,j))<EPSILON_ERROR);
 	}
 	else{
 		for(int i=1; i<dim; i++)
 			for(int j=i+1; j<=dim; j++)
-				res &= this->getValue(i,j)==0;
+				res &= (abs(this->getValue(i,j))<EPSILON_ERROR);
 	}
 
 	return res;
@@ -190,7 +190,7 @@ bool Matrix<T> :: isId() const {
 
 	for(int i=1; i<=dim; i++)
 		for(int j=1; j<=dim; j++)
-			res &= (i==j && this->getValue(i,j)==1) || (i!=j && this->getValue(i,j)==0);
+			res &= (i==j && (abs(this->getValue(i,j)-1)<EPSILON_ERROR)) || (i!=j && (abs(this->getValue(i,j))<EPSILON_ERROR));
 
 	return res;
 }

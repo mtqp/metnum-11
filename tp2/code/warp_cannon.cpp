@@ -79,10 +79,10 @@ Matrix<double> WarpCannon :: getMatrixAttack(Vector<double> attack_point){
 
 	/* Seteo una columna (elegida tal que en esa posicion el vector _position sea distinto de cero) con los valores tal que al multiplicarla por _position de attack_point */
 	uInt col = 1;
-	bool zero = _position.getValue(col)==0;
+	bool zero = abs(_position.getValue(col))<EPSILON_ERROR;
 	for(int i=2; i<=_dim && zero; i++){
 		col = i;
-		zero = _position.getValue(col)==0;
+		zero = abs(_position.getValue(col))<EPSILON_ERROR;
 	}
 	if(!zero){
 		double acum;
