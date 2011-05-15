@@ -91,7 +91,7 @@ Matrix<T> :: Matrix(uInt dim, MatrixType type) : MatrixBase<T>(dim, dim){
 			createHilbertMatrix(dim);
 			break;
 		default:
-			throw MatrixException((char*)"No implementadas... HACERLAS!");
+			throw MatrixException((char*)"No implementadas... HACERLAS!", Default);
 	}
 }
 
@@ -115,7 +115,7 @@ Matrix<T> Matrix<T> :: LU() const{
 
 template <typename T>
 Matrix<T> Matrix<T> :: inverse() const{
-	if(!this->isInversible()) throw MatrixException((char*)"No existe la inversa");
+	if(!this->isInversible()) throw MatrixException((char*)"No existe la inversa", NotInversible);
 
 	Matrix<T> copy(*this);
 
@@ -140,7 +140,7 @@ Matrix<T> Matrix<T> :: inverse() const{
 
 	/* Aca no hay ceros en la diagonal, sino la matriz no seria inversible. No uso pivoteo parcial para no arruinar los ceros que ya consegui abajo de la diagonal */
 	for(int j=dim; j>1; j--){
-		if(copy.getValue(j,j)==0) throw MatrixException((char*)"Error no deberia haber ceros en la diagonal");
+		if(copy.getValue(j,j)==0) throw MatrixException((char*)"Error no deberia haber ceros en la diagonal", Default);
 		for(int i=1; i<j; i++){
 			coefficient = copy.coefficient(i,j);
 			copy.putZero(i,j,coefficient);
@@ -209,7 +209,7 @@ T Matrix<T> :: K() const{
 template <typename T>
 Matrix<T>& Matrix<T> :: operator= (const MatrixBase<T> &mb){
 	if(!this->matchExactDimesions(mb))
-		throw MatrixException((char*)"Asignacion de matrices de diferente dimension)");
+		throw MatrixException((char*)"Asignacion de matrices de diferente dimension)", Default);
 
 	uInt dim = this->getFiDimension();
 
@@ -263,7 +263,7 @@ template <typename T>
 T Matrix<T> :: coefficient(uInt i, uInt j){
 	T pivot = this->getValue(j,j);
 	if(pivot==0)
-		throw MatrixException((char*)"El pivot es cero.");
+		throw MatrixException((char*)"El pivot es cero.", Default);
 
 	pivot = this->getValue(i,j)/pivot;
 
@@ -288,7 +288,7 @@ uInt Matrix<T> :: maxUnderDiag(uInt j) const{
 	uInt dim = MatrixBase<T> :: getFiDimension();
 
 	if(j==0 || j>dim)
-		throw MatrixException((char*)"El indice no pertenece a la diagonal, no esta en rango.");
+		throw MatrixException((char*)"El indice no pertenece a la diagonal, no esta en rango.", Default);
 
 	T pivot = abs(this->getValue(j,j));
 	uInt pivot_pos = j;

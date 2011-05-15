@@ -75,7 +75,7 @@ uInt Vector<T> :: dimension() const {
 template <typename T>
 T Vector<T> :: getValue(uInt i) const {
 	if(i==0 || i>dimension())
-		throw MatrixException((char*)"VectorGetValue --> fila cero o inexistente.");
+		throw MatrixException((char*)"VectorGetValue --> fila cero o inexistente.", Default);
 
 	if(_traspuesta)
 		return MatrixBase<T> :: getValue(i,1);
@@ -86,7 +86,7 @@ T Vector<T> :: getValue(uInt i) const {
 template <typename T>
 void Vector<T> :: setValue(T value, uInt i){
 	if((i==0) || (i>dimension()))
-		throw MatrixException((char*)"VectorSetValue --> fila cero o inexistente.");
+		throw MatrixException((char*)"VectorSetValue --> fila cero o inexistente.", Default);
 
 	if(_traspuesta)
 		MatrixBase<T> :: setValue(value,i,1);
@@ -117,7 +117,7 @@ Vector<T>& Vector<T> :: operator= (const MatrixBase<T> &mb){
 	bool validTrasp=(dimCol==1 && dimFi>1 && dimFi==vDim);
 	
 	if(!validDer && !validTrasp)
-		throw MatrixException((char*)"Asignacion entre vectores y matrices invalida");
+		throw MatrixException((char*)"Asignacion entre vectores y matrices invalida", Default);
 
 	this->_traspuesta = validTrasp;
 
