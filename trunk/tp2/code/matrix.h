@@ -21,7 +21,6 @@ enum MatrixType{
 	NOTA:
 		- Utilizar try catch para manejar casos bordes
 		- Si se acude a metodos auxiliares, mientras no este implementado tirar excepcion de no implementado
-
 */
 
 template <class T>
@@ -44,8 +43,9 @@ class Matrix : public MatrixBase<T>{
 		T K() const;
 
 		Matrix<T>& operator= (const MatrixBase<T> &mb);
-		T det() const;										//determinante en valor absouto, porque usa permutaciones que pueden cambiar el signo
+	
 	private:
+		T det() const;										//determinante en valor absouto, porque usa permutaciones que pueden cambiar el signo
 		void Gauss_LU(bool L);
 		T coefficient(uInt i, uInt j);
 		void putZero(uInt i, uInt j, T coefficient);		//pone el cero en esa posicion
@@ -233,7 +233,7 @@ T Matrix<T> :: det() const{
 	T det = 1;
 	for(int i=1; i<=dim; i++){
 		aux = copy.getValue(i,i);
-		if(aux==0) return 0;
+		if(abs(aux) < EPSILON_ERROR) return 0;							//si es menor al epsilon lo considero cero
 		det *= aux;
 	}
 
@@ -262,7 +262,7 @@ void Matrix<T> :: Gauss_LU(bool L){
 template <typename T>
 T Matrix<T> :: coefficient(uInt i, uInt j){
 	T pivot = this->getValue(j,j);
-	if(pivot==0)
+	if(abs(pivot)<EPSILON_ERROR)
 		throw MatrixException((char*)"El pivot es cero.", Default);
 
 	pivot = this->getValue(i,j)/pivot;
