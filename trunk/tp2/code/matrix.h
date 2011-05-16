@@ -108,6 +108,7 @@ Matrix<T> Matrix<T> :: gaussianElim() const {
 /*	Devuelve una matriz la cual se interpreta: L abajo de la diagonal, U arriba de la diagonal y la diagonal */
 template <typename T>
 Matrix<T> Matrix<T> :: LU() const{
+	if(this->isTriang(true)) return *this;
 	Matrix<T> copy(*this);
 	copy.Gauss_LU(true);
 	return copy;
@@ -330,18 +331,14 @@ template <typename T>
 void Matrix<T> :: createBadK(uInt dim) {
 	uInt mode = rand()%10;
 	if(mode==0 && dim>4){							//para matrices chicas el num de cond de Hilbert no es tan malo
-		cout << "Esta vez Hilbert!!!" << endl;
 		//matrix de hilbert por un coef
 		T randomCoef = rand()%100;
 		Matrix<double> bad_conditioned(dim, Hilbert);
 		cout << bad_conditioned << endl;
 		*this = randomCoef * bad_conditioned;
-		cout << "El coeficiente usado es: " << randomCoef << endl;
-		cout << *this << endl;
 	}
 	else
 	{
-		cout << "Esta vez random!!!" << endl;
 		//matriz con filas casi ld
 		T epsilon = 1.0/1000.0;
 

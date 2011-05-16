@@ -5,6 +5,7 @@
 #include "matrix.h"
 #include "vector.h"
 #include "warp_cannon.h"
+#include "linearSystem.h"
 
 using namespace std;
 
@@ -102,11 +103,9 @@ int main(int argc, char** argv){
 		}
 
 		/* Seteo el punto donde supuestamente esta la nave enemiga segun el ultimo ataque recibido */
+		linearSystem ls(wd.A,wd.d);
+		wd.position_enemy[data_amount-1].first = new Vector<double>(ls.usingInverse());
 		double cond_number = wd.A.K();												//dato para la segunda coordenada de la tupla
-		Matrix<double> A_inverse(wd.A.inverse());
-		Vector<double> y(dimension);
-		y = (A_inverse*wd.d.traspuesta()).traspuesta();								//posicion del enemigo
-		wd.position_enemy[data_amount-1].first = new Vector<double>(y);
 		wd.position_enemy[data_amount-1].second = cond_number;
 
 		/* Me posiciono al final del archivo */
@@ -154,10 +153,8 @@ int main(int argc, char** argv){
 	/******************************************************************/
 	/******************** Para testear!!!! ****************************/
 	/******************************************************************/
-	cout << "K " << wa.A.K() << endl;
-	if( !wa.A.isInversible()){
+	if( !wa.A.isInversible())
 			cout << "La matriz generada para el ataque no es inversible!" << endl;
-	}
 	
 	return 0;
 }

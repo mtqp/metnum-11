@@ -187,11 +187,10 @@ void Vector<T> :: createRandomVector(){
 	uInt dim = dimension();
 	T den;
 	for(int i=1;i<=dim;i++){
-		den = rand()%dim+1;
-		cout << "den elegido -->" << den << endl;
+		den = (T)rand();
+		den = den / RAND_MAX;
 		den = 1/den;
-		this->setValue(rand()%1000000000/den,i);
-		cout << "Generando vector aleatorio ... elem" << i << " --> " << this->getValue(i) << endl;
+		this->setValue(rand()/den,i);
 	}
 }
 
