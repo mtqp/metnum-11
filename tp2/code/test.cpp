@@ -15,31 +15,31 @@
 
 
 int main(int argc, char** argv){
+	cout.precision(20);
+	cout.setf(ios::scientific,ios::floatfield);
+
 	try
 	{
-		Matrix<double> A(4);
-		A.setValue(1,1,1);
-		A.setValue(1,1,2);
-		A.setValue(0,1,3);
-		A.setValue(3,1,4);
-		A.setValue(2,2,1);
-		A.setValue(1,2,2);
-		A.setValue(-1,2,3);
-		A.setValue(1,2,4);
-		A.setValue(3,3,1);
-		A.setValue(-1,3,2);
-		A.setValue(-1,3,3);
-		A.setValue(2,3,4);
-		A.setValue(-1,4,1);
-		A.setValue(2,4,2);
-		A.setValue(3,4,3);
-		A.setValue(-1,4,4);
-		
+		Matrix<double> A(10,Hilbert);
+		cout << "A --->" << endl;
 		cout << "A" << endl;
 		cout << A;
-		Matrix<double> B(4);
-		B = A.inverse();
-		cout << B;
+		Vector<double> pos(10);
+		pos.setValue(1,1);
+		pos.setValue(1,2);
+		pos.setValue(1,3);
+		pos.setValue(1,4);
+		pos.setValue(1,5);
+		pos.setValue(1,6);
+		pos.setValue(1,7);
+		pos.setValue(1,8);
+		pos.setValue(1,9);
+		pos.setValue(1,10);
+		Vector<double> d(10);
+		d = (A*pos.traspuesta()).traspuesta();
+		cout << "d --->" << endl;
+		cout << d << endl;
+		
 /*		srand(time(NULL));
 		cout.precision(6);
 		/*Matrix<int>A(1,1);
