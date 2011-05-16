@@ -13,8 +13,22 @@ Vector<double> linearSystem::usingInverse(){
 }
 
 Vector<double> linearSystem::usingLU(){
-	Matrix<double> lu(_A.LU());
-	linearSystem ls(lu,_d);									//LUx=d
+	PLU<double> plu(_dim);
+	plu = _A.LU();
+	cout << "P --> " << endl;
+	cout << plu.P;
+	Matrix<double> perm(_dim);
+	for(uInt i=1; i<=_dim; i++){
+		for(uInt j=1; j<=_dim; j++){
+			if(j==plu.P.getValue(i))
+				perm.setValue(1,i,j);
+			else 
+				perm.setValue(0,i,j);
+		}
+	}
+	Vector<double> d_perm(_dim);
+	d_perm = (perm*_d.traspuesta()).traspuesta();
+	linearSystem ls(plu.LU,d_perm);								//LUx=d
 	Vector<double> z(ls.forwardSub());						//Ux=z
 	ls._d=z;
 	Vector<double> x(ls.backSub());							//Ux=z

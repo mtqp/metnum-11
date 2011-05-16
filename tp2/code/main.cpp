@@ -156,5 +156,11 @@ int main(int argc, char** argv){
 	if( !wa.A.isInversible())
 			cout << "La matriz generada para el ataque no es inversible!" << endl;
 	
+	//elimino la struct loca de carla
+	for(int i=0; i<time-1; i++){
+		delete wd.position_enemy[i].first;
+	}
+	delete [] wd.position_enemy;
+	
 	return 0;
 }
