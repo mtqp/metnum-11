@@ -46,6 +46,7 @@ class MatrixBase{
 		
 		uInt  getFiDimension()  const;
 		uInt  getColDimension() const;
+		
 	protected:
 		bool matchExactDimesions(const MatrixBase<T> &mb) const;
 		bool matchMultDimesions(const MatrixBase<T> &mb)  const;

@@ -17,6 +17,16 @@ enum MatrixType{
 	Hilbert
 };
 
+template <class T>
+class Matrix;
+
+template <class T>
+struct PLU{
+	Matrix<T> LU;
+	Vector<uInt> P;
+	PLU<T>(uInt dim) : LU(dim), P(dim){}
+};
+
 /*
 	NOTA:
 		- Utilizar try catch para manejar casos bordes
@@ -34,7 +44,7 @@ class Matrix : public MatrixBase<T>{
 		~Matrix();
 
 		Matrix<T> gaussianElim() const;
-		Matrix<T> LU() const;
+		PLU<T> LU() const;
 		Matrix<T> inverse() const;
 
 		bool isTriang(bool superior) const;
@@ -45,33 +55,47 @@ class Matrix : public MatrixBase<T>{
 		Matrix<T>& operator= (const MatrixBase<T> &mb);
 	
 	private:
-		T det() const;										//determinante en valor absouto, porque usa permutaciones que pueden cambiar el signo
+		T det() const;													//determinante en valor absouto, porque usa permutaciones que pueden cambiar el signo
 		void Gauss_LU(bool L);
 		T coefficient(uInt i, uInt j);
 		void putZero(uInt i, uInt j, T coefficient, bool from_j);		//pone el cero en esa posicion
-		uInt maxUnderDiag(uInt j) const;					//estrategia de pivoteo parcial
+		uInt maxUnderDiag(uInt j) const;								//estrategia de pivoteo parcial
 		T  	 normF() const;
-
+		
 		void createId(uInt dim);
 		void createBadK(uInt dim);
 		void createHilbertMatrix(uInt dim);
+		
+		uInt _dim;
+		Vector<uInt>* _P;
 };
 
 template <typename T>
-Matrix<T> :: Matrix(uInt dim) : MatrixBase<T>(dim,dim){}
+Matrix<T> :: Matrix(uInt dim) : MatrixBase<T>(dim,dim){
+	_dim = dim;
+	_P = new Vector<uInt>(dim);
+}
 
 template <typename T>
-Matrix<T> :: Matrix(const Matrix<T>& mCopy) : MatrixBase<T>(mCopy){}
+Matrix<T> :: Matrix(const Matrix<T>& mCopy) : MatrixBase<T>(mCopy){
+	_dim = mCopy.getFiDimension();
+	_P = new Vector<uInt>(_dim);
+}
 
 template <typename T>
-Matrix<T> :: Matrix(T** data, uInt dim) : MatrixBase<T>(data,dim,dim){}
+Matrix<T> :: Matrix(T** data, uInt dim) : MatrixBase<T>(data,dim,dim){
+	_dim = dim;
+	_P = new Vector<uInt>(dim);
+}
 
 template <typename T>
 Matrix<T> :: Matrix(const T* data, uInt dim) : MatrixBase<T>(dim,dim) {
-	int h = 0;
+	_dim = dim;
+	_P = new Vector<uInt>(dim);
+	uInt h = 0;
 
-	for(int i=1;i<=dim;i++)
-		for(int j=1;i<=dim;j++){
+	for(uInt i=1;i<=dim;i++)
+		for(uInt j=1;i<=dim;j++){
 			this->setValue(data[h],i,j);
 			h++;
 		}
@@ -79,6 +103,7 @@ Matrix<T> :: Matrix(const T* data, uInt dim) : MatrixBase<T>(dim,dim) {
 
 template <typename T>
 Matrix<T> :: Matrix(uInt dim, MatrixType type) : MatrixBase<T>(dim, dim){
+	_dim = dim;
 	switch(type){
 		case(ID):
 			createId(dim);
@@ -90,12 +115,14 @@ Matrix<T> :: Matrix(uInt dim, MatrixType type) : MatrixBase<T>(dim, dim){
 			createHilbertMatrix(dim);
 			break;
 		default:
-			throw MatrixException((char*)"No implementadas... HACERLAS!", Default);
+			throw MatrixException((char*)"Generador no implementado.", Default);
 	}
 }
 
 template <typename T>
-Matrix<T> :: ~Matrix(){}
+Matrix<T> :: ~Matrix(){
+	//delete _P;
+}
 
 template <typename T>
 Matrix<T> Matrix<T> :: gaussianElim() const {
@@ -106,11 +133,13 @@ Matrix<T> Matrix<T> :: gaussianElim() const {
 
 /*	Devuelve una matriz la cual se interpreta: L abajo de la diagonal, U arriba de la diagonal y la diagonal */
 template <typename T>
-Matrix<T> Matrix<T> :: LU() const{
-	if(this->isTriang(true)) return *this;
+PLU<T> Matrix<T> :: LU() const{
+	PLU<T> plu(_dim);
 	Matrix<T> copy(*this);
 	copy.Gauss_LU(true);
-	return copy;
+	plu.LU = copy;
+	plu.P = *copy._P;
+	return plu;
 }
 
 template <typename T>
@@ -118,20 +147,18 @@ Matrix<T> Matrix<T> :: inverse() const{
 	if(!this->isInversible()) throw MatrixException((char*)"No existe la inversa", NotInversible);
 
 	Matrix<T> copy(*this);
-
-	uInt dim = this->getFiDimension();
-	Matrix<T> I(dim,ID);
+	Matrix<T> I(_dim,ID);
 
 	uInt maxCol;
 	T coefficient;
 	
 	/* Triangulo inferiormente */
-	for(int j=1; j<dim; j++){
+	for(uInt j=1; j<_dim; j++){
 		maxCol = copy.maxUnderDiag(j);
 		if(abs(copy.getValue(maxCol,j))>EPSILON_ERROR){			//si es cero se pasa a la otra columna, ya esta lo que queremos
 			copy.swapFi(j,maxCol);
 			I.swapFi(j,maxCol);
-			for(int i=j+1; i<=dim; i++){
+			for(uInt i=j+1; i<=_dim; i++){
 				coefficient = copy.coefficient(i,j);
 				copy.putZero(i,j,coefficient,false);
 				I.putZero(i,j,coefficient,false	);
@@ -140,9 +167,9 @@ Matrix<T> Matrix<T> :: inverse() const{
 	}
 	
 	/* Triangulo superiormente -- Aca no hay ceros en la diagonal, sino la matriz no seria inversible. No uso pivoteo parcial para no arruinar los ceros que ya consegui abajo de la diagonal */
-	for(int j=dim; j>1; j--){
+	for(uInt j=_dim; j>1; j--){
 		if(abs(copy.getValue(j,j))<EPSILON_ERROR) throw MatrixException((char*)"Error no deberia haber ceros en la diagonal", Default);
-		for(int i=1; i<j; i++){
+		for(uInt i=1; i<j; i++){
 			coefficient = copy.coefficient(i,j);
 			copy.putZero(i,j,coefficient,false);
 			I.putZero(i,j,coefficient,false);
@@ -153,9 +180,9 @@ Matrix<T> Matrix<T> :: inverse() const{
 	T elem;
 
 	/*Pone unos en la diagonal para llegar a la identidad, modifica solo la matriz resultante*/
-	for(int i=1; i<=dim; i++){
+	for(uInt i=1; i<=_dim; i++){
 		elemDiag = copy.getValue(i,i);
-		for(int j=1; j<=dim; j++){
+		for(uInt j=1; j<=_dim; j++){
 			elem = I.getValue(i,j);
 			elem /= elemDiag;
 			I.setValue(elem,i,j);
@@ -168,16 +195,15 @@ Matrix<T> Matrix<T> :: inverse() const{
 template <typename T>
 bool Matrix<T> :: isTriang(bool superior) const {
 	bool res = true;
-	uInt dim = MatrixBase<T> :: getFiDimension();
-
+	
 	if(superior){
-		for(int i=2; i<=dim; i++)
-			for(int j=1; j<i; j++)
+		for(uInt i=2; i<=_dim; i++)
+			for(uInt j=1; j<i; j++)
 				res &= (abs(this->getValue(i,j))<EPSILON_ERROR);
 	}
 	else{
-		for(int i=1; i<dim; i++)
-			for(int j=i+1; j<=dim; j++)
+		for(uInt i=1; i<_dim; i++)
+			for(uInt j=i+1; j<=_dim; j++)
 				res &= (abs(this->getValue(i,j))<EPSILON_ERROR);
 	}
 
@@ -187,10 +213,9 @@ bool Matrix<T> :: isTriang(bool superior) const {
 template <typename T>
 bool Matrix<T> :: isId() const {
 	bool res = true;
-	uInt dim = MatrixBase<T> :: getFiDimension();
 
-	for(int i=1; i<=dim; i++)
-		for(int j=1; j<=dim; j++)
+	for(uInt i=1; i<=_dim; i++)
+		for(uInt j=1; j<=_dim; j++)
 			res &= (i==j && (abs(this->getValue(i,j)-1)<EPSILON_ERROR)) || (i!=j && (abs(this->getValue(i,j))<EPSILON_ERROR));
 
 	return res;
@@ -199,8 +224,7 @@ bool Matrix<T> :: isId() const {
 
 template <typename T>
 T Matrix<T> :: K() const{
-	uInt dim = this->getFiDimension();
-	Matrix<T> Inverse(dim);
+	Matrix<T> Inverse(_dim);
 	Inverse = this->inverse();
 	T k = Inverse.normF();
 	k *= this->normF();
@@ -212,10 +236,8 @@ Matrix<T>& Matrix<T> :: operator= (const MatrixBase<T> &mb){
 	if(!this->matchExactDimesions(mb))
 		throw MatrixException((char*)"Asignacion de matrices de diferente dimension)", Default);
 
-	uInt dim = this->getFiDimension();
-
-	for(int i=1; i<=dim; i++)
-		for(int j=1;j<=dim;j++)
+	for(uInt i=1; i<=_dim; i++)
+		for(uInt j=1;j<=_dim;j++)
 			this->setValue(mb.getValue(i,j),i,j);
 
 	return *this;
@@ -229,10 +251,9 @@ T Matrix<T> :: det() const{
 		copy = this->gaussianElim();
 	}
 
-	uInt dim = copy.getFiDimension();
 	T aux;
 	T det = 1;
-	for(int i=1; i<=dim; i++){
+	for(uInt i=1; i<=_dim; i++){
 		aux = copy.getValue(i,i);
 		if(abs(aux) < EPSILON_ERROR) return 0;							//si es menor al epsilon lo considero cero
 		det *= aux;
@@ -243,17 +264,24 @@ T Matrix<T> :: det() const{
 
 template <typename T>
 void Matrix<T> :: Gauss_LU(bool L){
-	uInt dim = MatrixBase<T> :: getFiDimension();
-	uInt maxCol=0;
-	T coefficient;
-	for(int j=1; j<=dim; j++){
-		maxCol = this->maxUnderDiag(j);
-		if((this->getValue(maxCol,j))>EPSILON_ERROR){			//si es cero se pasa a la otra columna, ya esta lo que queremos
-			this->swapFi(j,maxCol);
-			for(int i=j+1; i<=dim; i++){
-				coefficient = this->coefficient(i,j);
-				this->putZero(i,j,coefficient,true);
-				if(L) this->setValue(coefficient,i,j);
+	
+	/* Inicializo el vector de permutacion */	
+	//_P = new Vector<uInt>(_dim);
+	for(uInt k=1;k<=_dim;k++) (*_P).setValue(k,k);
+		
+	if(!this->isTriang(true)){
+		uInt maxCol=0;
+		T coefficient;
+		for(uInt j=1; j<=_dim; j++){
+			maxCol = this->maxUnderDiag(j);
+			if((this->getValue(maxCol,j))>EPSILON_ERROR){			//si es cero se pasa a la otra columna, ya esta lo que queremos
+				this->swapFi(j,maxCol);
+				(*_P).swap(j,maxCol);
+				for(uInt i=j+1; i<=_dim; i++){
+					coefficient = this->coefficient(i,j);
+					this->putZero(i,j,coefficient,true);
+					if(L) this->setValue(coefficient,i,j);
+				}
 			}
 		}
 	}
@@ -274,9 +302,8 @@ T Matrix<T> :: coefficient(uInt i, uInt j){
  * Se agrega el bool porque para LU se guarda los coeficientes de L en la matriz y si se afecta toda la fila cambian */
 template <typename T>
 void Matrix<T> :: putZero(uInt i, uInt j, T coefficient, bool from_j){
-	uInt dimCol = MatrixBase<T> :: getColDimension();
 	T elem;
-	for(int k=1 + (j-1)*from_j; k<=dimCol; k++){
+	for(uInt k=1 + (j-1)*from_j; k<=_dim; k++){
 		elem = coefficient*this->getValue(j,k);
 		elem = this->getValue(i,k) - elem;
 		this->setValue(elem,i,k);
@@ -285,15 +312,13 @@ void Matrix<T> :: putZero(uInt i, uInt j, T coefficient, bool from_j){
 
 template <typename T>
 uInt Matrix<T> :: maxUnderDiag(uInt j) const{
-	uInt dim = MatrixBase<T> :: getFiDimension();
-
-	if(j==0 || j>dim)
+	if(j==0 || j>_dim)
 		throw MatrixException((char*)"El indice no pertenece a la diagonal, no esta en rango.", Default);
 
 	T pivot = abs(this->getValue(j,j));
 	uInt pivot_pos = j;
 
-	for(int i=j+1; i<=dim; i++){
+	for(uInt i=j+1; i<=_dim; i++){
 		T elem = abs(this->getValue(i,j));
 		if(elem>pivot){
 			pivot = elem;
@@ -306,14 +331,12 @@ uInt Matrix<T> :: maxUnderDiag(uInt j) const{
 
 template <typename T>
 T Matrix<T> :: normF() const {
-	uInt dim = MatrixBase<T> :: getFiDimension();
-
 	T normF = this->getValue(1,1);
 
-	if(dim==1) return normF;
+	if(_dim==1) return normF;
 
-	for(int i=1; i<=dim; i++)
-		for(int j=1; j<=dim; j++)
+	for(uInt i=1; i<=_dim; i++)
+		for(uInt j=1; j<=_dim; j++)
 			normF += this->getValue(i,j)*this->getValue(i,j);
 
 	normF -= this->getValue(1,1);
@@ -322,7 +345,7 @@ T Matrix<T> :: normF() const {
 
 template <typename T>
 void Matrix<T> :: createId(uInt dim){
-	for(int i=1;i<=dim;i++)
+	for(uInt i=1;i<=dim;i++)
 		this->setValue((T) 1, i,i);
 }
 
@@ -343,8 +366,8 @@ void Matrix<T> :: createBadK(uInt dim) {
 		Vector<T> randomV(dim);
 		randomV.createRandomVector();
 
-		for(int i=1;i<=dim;i++)
-			for(int j=1;j<=dim;j++){
+		for(uInt i=1;i<=dim;i++)
+			for(uInt j=1;j<=dim;j++){
 				this->setValue(randomV.getValue(j),i,j);
 				if(i==j){
 					this->setValue(randomV.getValue(j)+epsilon,i,j);
@@ -357,8 +380,8 @@ void Matrix<T> :: createBadK(uInt dim) {
 template <typename T>
 void Matrix<T> :: createHilbertMatrix(uInt dim){
 	T elem;
-	for(int i=1; i<=dim; i++)
-		for(int j=1; j<=dim; j++){
+	for(uInt i=1; i<=dim; i++)
+		for(uInt j=1; j<=dim; j++){
 			elem = 1;
 			elem /= (i+j-1);
 			this->setValue(elem,i,j);

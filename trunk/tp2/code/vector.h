@@ -27,6 +27,7 @@ class Vector : public MatrixBase<T>{
 		
 		/*para hacer anda la herencia*/
 		Vector<T>& operator= (const MatrixBase<T> &mb);
+		void swap(uInt i, uInt j);
 		
 		void createRandomVector();
 	private:
@@ -131,6 +132,11 @@ Vector<T>& Vector<T> :: operator= (const MatrixBase<T> &mb){
 	}
 
 	return *this;
+}
+
+template <typename T>
+void Vector<T> :: swap(uInt i, uInt j){
+	this->swapCol(i,j);
 }
 
 template <typename T>
