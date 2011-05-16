@@ -40,17 +40,27 @@ int main(int argc, char** argv){
 		cout << d << endl;*/
 		
 		Matrix<double> A(3);
-		A.setValue(2,1,1);
-		A.setValue(3,1,2);
-		A.setValue(4,1,3);
+		A.setValue(4,1,1);
+		A.setValue(5,1,2);
+		A.setValue(10,1,3);
 		A.setValue(4,2,1);
-		A.setValue(5,2,2);
-		A.setValue(10,2,3);
-		A.setValue(4,3,1);
-		A.setValue(8,3,2);
-		A.setValue(2,3,3);
-		sy
-		
+		A.setValue(8,2,2);
+		A.setValue(2,2,3);
+		A.setValue(2,3,1);
+		A.setValue(3,3,2);
+		A.setValue(4,3,3);
+
+		Vector<double> v(3);
+		v.setValue(6,1);
+		v.setValue(16,2);
+		v.setValue(2,3);
+		linearSystem ls(A,v);
+		Vector<double> z(3);
+		z=ls.usingLU();
+		cout << z << endl;
+		z = (A*z.traspuesta()).traspuesta();
+		cout << "es d?" << endl;
+		cout << z;		
 		
 /*		srand(time(NULL));
 		cout.precision(6);

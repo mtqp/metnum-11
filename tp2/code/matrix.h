@@ -48,14 +48,13 @@ class Matrix : public MatrixBase<T>{
 		T det() const;										//determinante en valor absouto, porque usa permutaciones que pueden cambiar el signo
 		void Gauss_LU(bool L);
 		T coefficient(uInt i, uInt j);
-		void putZero(uInt i, uInt j, T coefficient);		//pone el cero en esa posicion
+		void putZero(uInt i, uInt j, T coefficient, bool from_j);		//pone el cero en esa posicion
 		uInt maxUnderDiag(uInt j) const;					//estrategia de pivoteo parcial
 		T  	 normF() const;
 
 		void createId(uInt dim);
 		void createBadK(uInt dim);
 		void createHilbertMatrix(uInt dim);
-
 };
 
 template <typename T>
@@ -125,30 +124,31 @@ Matrix<T> Matrix<T> :: inverse() const{
 
 	uInt maxCol;
 	T coefficient;
-
+	
+	/* Triangulo inferiormente */
 	for(int j=1; j<dim; j++){
 		maxCol = copy.maxUnderDiag(j);
-		if(copy.getValue(maxCol,j)!=0){			//si es cero se pasa a la otra columna, ya esta lo que queremos
+		if(abs(copy.getValue(maxCol,j))>EPSILON_ERROR){			//si es cero se pasa a la otra columna, ya esta lo que queremos
 			copy.swapFi(j,maxCol);
 			I.swapFi(j,maxCol);
 			for(int i=j+1; i<=dim; i++){
 				coefficient = copy.coefficient(i,j);
-				copy.putZero(i,j,coefficient);
-				I.putZero(i,j,coefficient);
+				copy.putZero(i,j,coefficient,false);
+				I.putZero(i,j,coefficient,false	);
 			}
 		}
 	}
-
-	/* Aca no hay ceros en la diagonal, sino la matriz no seria inversible. No uso pivoteo parcial para no arruinar los ceros que ya consegui abajo de la diagonal */
+	
+	/* Triangulo superiormente -- Aca no hay ceros en la diagonal, sino la matriz no seria inversible. No uso pivoteo parcial para no arruinar los ceros que ya consegui abajo de la diagonal */
 	for(int j=dim; j>1; j--){
 		if(abs(copy.getValue(j,j))<EPSILON_ERROR) throw MatrixException((char*)"Error no deberia haber ceros en la diagonal", Default);
 		for(int i=1; i<j; i++){
 			coefficient = copy.coefficient(i,j);
-			copy.putZero(i,j,coefficient);
-			I.putZero(i,j,coefficient);
+			copy.putZero(i,j,coefficient,false);
+			I.putZero(i,j,coefficient,false);
 		}
 	}
-
+	
 	T elemDiag;
 	T elem;
 
@@ -161,7 +161,7 @@ Matrix<T> Matrix<T> :: inverse() const{
 			I.setValue(elem,i,j);
 		}
 	}
-
+	
 	return I;
 }
 
@@ -246,15 +246,14 @@ void Matrix<T> :: Gauss_LU(bool L){
 	uInt dim = MatrixBase<T> :: getFiDimension();
 	uInt maxCol=0;
 	T coefficient;
-
 	for(int j=1; j<=dim; j++){
 		maxCol = this->maxUnderDiag(j);
-		this->swapFi(j,maxCol);
-		if(this->getValue(j,j)!=0){			//si es cero se pasa a la otra columna, ya esta lo que queremos
+		if((this->getValue(maxCol,j))>EPSILON_ERROR){			//si es cero se pasa a la otra columna, ya esta lo que queremos
+			this->swapFi(j,maxCol);
 			for(int i=j+1; i<=dim; i++){
 				coefficient = this->coefficient(i,j);
-				this->putZero(i,j,coefficient);
-				if(L) setValue(coefficient,i,j);
+				this->putZero(i,j,coefficient,true);
+				if(L) this->setValue(coefficient,i,j);
 			}
 		}
 	}
@@ -271,13 +270,13 @@ T Matrix<T> :: coefficient(uInt i, uInt j){
 	return pivot;
 }
 
-/* Esta funcion afecta toda la fila de la matriz donde se quiere poner el cero para que sirva tanto para triangular abajo como arriba de la diagonal, funciona siempre y cuando los ceros se vayan poniendo en orden */
+/* Esta funcion afecta toda la fila de la matriz donde se quiere poner el cero para que sirva tanto para triangular abajo como arriba de la diagonal, funciona siempre y cuando los ceros se vayan poniendo en orden
+ * Se agrega el bool porque para LU se guarda los coeficientes de L en la matriz y si se afecta toda la fila cambian */
 template <typename T>
-void Matrix<T> :: putZero(uInt i, uInt j, T coefficient){
+void Matrix<T> :: putZero(uInt i, uInt j, T coefficient, bool from_j){
 	uInt dimCol = MatrixBase<T> :: getColDimension();
 	T elem;
-
-	for(int k=1; k<=dimCol; k++){
+	for(int k=1 + (j-1)*from_j; k<=dimCol; k++){
 		elem = coefficient*this->getValue(j,k);
 		elem = this->getValue(i,k) - elem;
 		this->setValue(elem,i,k);
@@ -334,7 +333,6 @@ void Matrix<T> :: createBadK(uInt dim) {
 		//matrix de hilbert por un coef
 		T randomCoef = rand()%100;
 		Matrix<double> bad_conditioned(dim, Hilbert);
-		cout << bad_conditioned << endl;
 		*this = randomCoef * bad_conditioned;
 	}
 	else
