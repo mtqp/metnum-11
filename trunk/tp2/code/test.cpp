@@ -3,8 +3,7 @@
 #include "matrix.h"
 #include "vector.h"
 #include "warp_cannon.h"
-//#include "structs.h"
-//#include "warp_cannon.h"
+#include "linear_system.h"
 
 
 /*	arreglar lo q qdo feo del determinante
@@ -20,7 +19,7 @@ int main(int argc, char** argv){
 
 	try
 	{
-		Matrix<double> A(10,Hilbert);
+		/*Matrix<double> A(10,Hilbert);
 		cout << "A --->" << endl;
 		cout << "A" << endl;
 		cout << A;
@@ -38,7 +37,20 @@ int main(int argc, char** argv){
 		Vector<double> d(10);
 		d = (A*pos.traspuesta()).traspuesta();
 		cout << "d --->" << endl;
-		cout << d << endl;
+		cout << d << endl;*/
+		
+		Matrix<double> A(3);
+		A.setValue(2,1,1);
+		A.setValue(3,1,2);
+		A.setValue(4,1,3);
+		A.setValue(4,2,1);
+		A.setValue(5,2,2);
+		A.setValue(10,2,3);
+		A.setValue(4,3,1);
+		A.setValue(8,3,2);
+		A.setValue(2,3,3);
+		sy
+		
 		
 /*		srand(time(NULL));
 		cout.precision(6);
