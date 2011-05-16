@@ -1,4 +1,4 @@
-#include "linearSystem.h"
+#include "linear_system.h"
 
 linearSystem::linearSystem(const Matrix<double> A, const Vector<double> d): _A(A), _d(d){
 	_dim = _A.getFiDimension();
@@ -14,6 +14,7 @@ Vector<double> linearSystem::usingInverse(){
 
 Vector<double> linearSystem::usingLU(){
 	Matrix<double> lu(_A.LU());
+	cout << "LU" << lu;
 	linearSystem ls(lu,_d);										//LUx=d
 	Vector<double> z(ls.forwardSub());							//Ux=z
 	ls._d=z;

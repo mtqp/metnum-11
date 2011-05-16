@@ -5,7 +5,7 @@
 #include "matrix.h"
 #include "vector.h"
 #include "warp_cannon.h"
-#include "linearSystem.h"
+#include "linear_system.h"
 
 using namespace std;
 
