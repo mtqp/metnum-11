@@ -1,5 +1,5 @@
-OBJS =  matrix_exceptions.cpp warp_cannon.cpp linearSystem.cpp
-OBJSo =  matrix_exceptions.o warp_cannon.o linearSystem.o
+OBJS =  matrix_exceptions.cpp warp_cannon.cpp linear_system.cpp
+OBJSo =  matrix_exceptions.o warp_cannon.o linear_system.o
 MATH = -lm
 CFLAGS = -ggdb 
 
