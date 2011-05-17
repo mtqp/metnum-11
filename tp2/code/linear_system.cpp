@@ -2,6 +2,7 @@
 
 linearSystem::linearSystem(const Matrix<double> A, const Vector<double> d): _A(A), _d(d){
 	_dim = _A.getFiDimension();
+	if(_dim!=d.dimension()) throw MatrixException((char*)"El sistema no se puede resolver, las dimensiones no coinciden",Default);
 }
 linearSystem::~linearSystem(){}
 
@@ -15,8 +16,8 @@ Vector<double> linearSystem::usingInverse(){
 Vector<double> linearSystem::usingLU(){
 	PLU<double> plu(_dim);
 	plu = _A.LU();
-	cout << "P --> " << endl;
-	cout << plu.P;
+	
+	/* Creo la matriz de permutacion */
 	Matrix<double> perm(_dim);
 	for(uInt i=1; i<=_dim; i++){
 		for(uInt j=1; j<=_dim; j++){
@@ -26,12 +27,15 @@ Vector<double> linearSystem::usingLU(){
 				perm.setValue(0,i,j);
 		}
 	}
+	
+	/* Permuto el d */
 	Vector<double> d_perm(_dim);
 	d_perm = (perm*_d.traspuesta()).traspuesta();
-	linearSystem ls(plu.LU,d_perm);								//LUx=d
+	
+	linearSystem ls(plu.LU,d_perm);							//LUx=d
 	Vector<double> z(ls.forwardSub());						//Ux=z
 	ls._d=z;
-	Vector<double> x(ls.backSub());							//Ux=z
+	Vector<double> x(ls.backSub());							//Lz=d
 	return x;
 }
 
