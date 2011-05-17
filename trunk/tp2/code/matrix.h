@@ -40,15 +40,14 @@ class Matrix : public MatrixBase<T>{
 		Matrix<T> gaussianElim() const;
 		PLU<T> LU() const;
 		Matrix<T> inverse() const;
-
-		bool isTriang(bool superior) const;
-		bool isId() const;
-
 		T K() const;
 
 		Matrix<T>& operator= (const MatrixBase<T> &mb);
 	
 	private:
+		bool isTriang(bool superior) const;
+		bool isId() const;
+
 		T det() const;													//determinante en valor absouto, porque usa permutaciones que pueden cambiar el signo
 		void Gauss_LU(bool L);
 		T coefficient(uInt i, uInt j);
