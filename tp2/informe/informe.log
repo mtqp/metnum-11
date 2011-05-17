@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  17 MAY 2011 04:51
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  17 MAY 2011 19:05
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
@@ -464,48 +464,38 @@ Underfull \hbox (badness 10000) in paragraph at lines 25--27
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 29--30
-
- []
-
-
 Overfull \hbox (1.9237pt too wide) in paragraph at lines 31--32
 []\OT1/cmr/m/n/12 Como creemos que el ad-ver-sario va a uti-lizar ma-tri-ces ma
 l condi-cionadas
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 48--49
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 50--51
 
  []
 
 
-Overfull \hbox (53.35004pt too wide) in paragraph at lines 52--61
+Underfull \hbox (badness 10000) in paragraph at lines 52--53
+
+ []
+
+
+Overfull \hbox (53.35004pt too wide) in paragraph at lines 54--63
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 52--61
+Underfull \hbox (badness 10000) in paragraph at lines 54--63
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--63
+Underfull \hbox (badness 10000) in paragraph at lines 64--65
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--66
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 67--68
+Underfull \hbox (badness 10000) in paragraph at lines 66--68
 
  []
 
@@ -520,32 +510,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 71--72
  []
 
 
-Overfull \hbox (34.0446pt too wide) in paragraph at lines 73--78
+Underfull \hbox (badness 10000) in paragraph at lines 73--74
+
+ []
+
+
+Overfull \hbox (34.0446pt too wide) in paragraph at lines 75--80
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 73--78
+Underfull \hbox (badness 10000) in paragraph at lines 75--80
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 79--80
+Underfull \hbox (badness 10000) in paragraph at lines 81--82
 
  []
 
 
-Overfull \hbox (72.76532pt too wide) in paragraph at lines 81--84
+Overfull \hbox (72.76532pt too wide) in paragraph at lines 83--86
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 81--84
+Underfull \hbox (badness 10000) in paragraph at lines 83--86
 
  []
 
-) [6] (./resultados.tex) [7] (./discusion.tex) [8] (./conclusiones.tex)
-[9] (./apendices.tex (./enunciado.tex [10] [11] [12] [13]
+[6]) [7] (./resultados.tex) [8] (./discusion.tex) [9] (./conclusiones.tex)
+[10] (./apendices.tex (./enunciado.tex [11] [12] [13] [14]
 Overfull \hbox (64.14026pt too wide) in paragraph at lines 158--158
 [][]\OT1/cmr/m/n/10 Una op-ci^^Son es \OT1/cmtt/m/n/10 precision(20) \OT1/cmr/m
 /n/10 y \OT1/cmtt/m/n/10 setf(std::ios[]base::scientific,std::ios[]base::floatf
@@ -558,7 +553,7 @@ Overfull \hbox (2.48878pt too wide) in paragraph at lines 151--160
 /cmtt/m/n/12 double\OT1/cmr/m/n/12 ). La Fuerza tomar^^Sa los
  []
 
-[14])) [15] (./referencias.tex) [16] (./informe.aux) ) 
+[15])) [16] (./referencias.tex) [17] (./informe.aux) ) 
 Here is how much of TeX's memory you used:
  2843 strings out of 495061
  33104 string characters out of 1182621
@@ -566,7 +561,7 @@ Here is how much of TeX's memory you used:
  5963 multiletter control sequences out of 15000+50000
  14039 words of font info for 55 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 27i,8n,27p,485b,351s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,8n,27p,517b,351s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive
 /fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type
 1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/am
@@ -580,9 +575,9 @@ ic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
 fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/sh
 are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf-t
 exlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on informe.pdf (17 pages, 192434 bytes).
+Output written on informe.pdf (18 pages, 193880 bytes).
 PDF statistics:
- 113 PDF objects out of 1000 (max. 8388607)
+ 116 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

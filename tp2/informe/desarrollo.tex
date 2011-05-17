@@ -7,7 +7,7 @@
 			\begin{enumerate}
 			\item Nos proveen la matriz $A'$ usada por el oponente para atacarnos y el punto $d'$ donde impactó el proyectil. Con esa información debemos intentar descubrir la posición $y$ donde se encuentra situada la nave enemiga, es decir, resolver el sistema $A'y=d'$.
 					
-			\item Tenemos la posición a la que pretendemos disparar ($d$) tenemos que conseguir una matriz $A$ tal que $Ax=d$ donde $x$ es nuestra posición.
+			\item Tenemos la posición a la que pretendemos disparar ($d$) y queremos conseguir una matriz de ataque $A$ tal que $Ax=d$ donde $x$ es nuestra posición.
 			\end{enumerate}
 		\end{subsubsection}
 		\begin{subsubsection}{Estrategia}
@@ -26,7 +26,7 @@
 					PONER MAS MOTIVOS COMO COMPLEJIDAD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\\
 				\end{itemize}
 			
-				La exactitud con la que la calculemos la posición buscada $y$ depende del número de condición de la matriz $A'$, y de este calculo entre otras cosas depende la exactitud de nuestro disparo.\\
+				La exactitud con la que calculemos la posición buscada $y$ depende del número de condición de la matriz $A'$, cuanto mayor es este número menor es la precisión del resultado obtenido.
 				
 				Como creemos que el adversario va a utilizar matrices mal condicionadas para atacarnos, en cada turno estariamos calculando una posición errada de donde se encuentra. Por este motivo, decidimos usar la estrategia de disparar en el punto promedio de todos las posiciones calculadas hasta el momento de donde se situa. Esperamos de esta manera ir obteniendo cada vez mejores aproximaciones a donde se encuentra realmente.
 			
@@ -40,7 +40,9 @@
 			
 			Para crear una matriz mal condicionada, generamos un único vector aleatorio de dimensión $n$ que resulta en las filas de dicha matriz. De esta manera tenemos una matriz cuyas filas son linealmente dependientes, por lo que la matriz no es inversible. Luego, sumamos a los elementos de la diagonal un $epsilon$ (QUE ELEGIMOS BLA BLA BLA BLA) obteniendo asi una matriz inversible y mal condicionada (JUSTIFICAR PORQUE).
 			
-			Por último, para forzarla a satisfacer el sistema elegimos una columna $j$ de $A$ tal que el $j-esimo$ elemento de $d$ sea distinto de $cero$ (COMO SABEMOS QUE NO ES EL NULO) (si es $cero$ los coeficientes de $A$ que pretendemos setear no tienen importancia) y consideramos incognitas sólo a los coeficientes de esa columna. Nos quedan así, $n$ incognitas y $n$ ecuaciones, por lo que podemos despejarlas y obtener la matriz final.
+			Por último, para forzarla a satisfacer el sistema elegimos una columna $j$ de $A$ tal que el $j-esimo$ elemento de $x$ sea distinto de $cero$ ($x$ no es el vector nulo por precondición ya que es nuestra posición), sino los coeficientes de $A$ que pretendemos setear no tienen importancia, y consideramos incognitas sólo a los coeficientes de esa columna. Nos quedan así, $n$ incognitas y $n$ ecuaciones, por lo que podemos despejarlas y obtener la matriz final.
+			
+			La matriz obtenida sigue siendo inversible ya que modficamos sólo una columna de la misma y lo que hace linealmente independiente a las filas son los elementos de la diagonal.			
 			\end{enumerate}
 		\end{subsubsection}
 	\end{subsection}
@@ -89,5 +91,12 @@
 		Para lograr esto, teniamos un $array$ de $tuplas$ donde la primer coordenada correspondia al vector y la segunda al número de condición de la matriz asociada.
 		
 		La idea finalmente implementada es una versión más simple (por cuestiones de tiempo), que sólo toma el promedio sin asignar prioridades. Igualmente quedo implementado con $tupla$ (ignorando la segunda coordenada).
+	\end{subsection}
+	\begin{subsection}{Ideas descartadas}
+		Nuestra primer estrategia consistía en atacar con la matriz de Hilbert de orden $n$ una cierta cantidad de turnos (que pensabamos decidir mediante pruebas) y guardar la posición del enemigo calculada en cada turno. Una vez cumplida esa cantidad de turnos, sacar un promedio entre la información obtenida y disparar a esa posición sin ningun tipo de defensa.
+		
+		La ventaja de esta estrategia es que evitabamos tener que generar matrices mal condicionadas (ya que usabamos siempre la de Hilbert).
+		
+		La desventaja es que dado que estariamos atacando siempre con la misma matriz o un múltiplo de esta, el oponente estaria siempre calculando la misma posición (punto de ataque) y no generariamos nueva información al recibir los datos (en realidad depende de como genere la matriz de ataque el oponente a partir de tener el punto de ataque).
 	\end{subsection}
 \end{section}
