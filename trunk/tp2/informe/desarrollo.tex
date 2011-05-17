@@ -1,17 +1,50 @@
 \begin{section}{Desarrollo}
 	\begin{subsection}{Explicación}
-		La guerra lineal consiste en dos naves situadas en el hiperespacio de $n$ dimensiones con el objetivo de desintegrarse mutuamente mediante disparos de cañones $Warp$. Un disparo con este cañón es una trasformación espacio-tiempo, llamada trasformacion Warp. Dicha trasformación es la resolución de un sistema de ecuaciones lineales ($Ax=d$). Es decir, la trasformacion consiste en encontrar una matriz $A$ tal que al multiplicarla por nuestra posición $x$ resulte en un impacto en la posición $d$, donde se supone está el enemigo.
-		
-		Cada turno consiste en la resolución de dos sitemas de ecuaciones.
-		
-		Primero nos proveen la matriz $A'$ usada por el oponente para atacarnos y el punto $d'$ donde impactó el proyectil. Con esa información debemos intentar descubrir la posición $y$ donde se encuentra situada la nave enemiga, es decir, resolver el sistema $A'y=d'$. Para resolverlo necesitamos conocer la inversa de la matriz $A'$ (existe porque es parte de las reglas de la batalla), la exactitud con la que la calculemos depende del número de condición de esta, y de este calculo depende la exactitud con la que calculemos la posición enemiga y a su vez la exactitud de nuestro disparo.
-		
-		Como creemos que el adversario va a utilizar matrices mal condicionadas para atacarnos, en cada turno estariamos calculando una posición errada de donde se encuentra. Por este motivo, decidimos usar la estrategia de disparar en el punto promedio de todos las posiciones calculadas hasta el momento de donde se situa. Esperamos de esta manera ir obteniendo cada vez mejores aproximaciones a donde se encuentra realmente.
-		
-		Una vez que tenemos la posición a la que pretendemos disparar ($d$) tenemos que conseguir una matriz $A$ tal que $Ax=d$ donde $x$ es nuestra posición. Como debemos proveer al adversario de la matriz $A$ tenemos que idear una estrategia para que nuestra posición no sea descubierta en el siguiente turno. La estrategia consiste en generar matrices mal condicionadas que a su vez sean inversibles.
-		
+		\begin{subsubsection}{Introducción al problema}
+			La guerra lineal consiste en dos naves situadas en el hiperespacio de $n$ dimensiones con el objetivo de desintegrarse mutuamente mediante disparos de cañones $Warp$.\\
+			
+			Cada turno del combate consiste en lo siguiente:
+			\begin{enumerate}
+			\item Nos proveen la matriz $A'$ usada por el oponente para atacarnos y el punto $d'$ donde impactó el proyectil. Con esa información debemos intentar descubrir la posición $y$ donde se encuentra situada la nave enemiga, es decir, resolver el sistema $A'y=d'$.
+					
+			\item Tenemos la posición a la que pretendemos disparar ($d$) tenemos que conseguir una matriz $A$ tal que $Ax=d$ donde $x$ es nuestra posición.
+			\end{enumerate}
+		\end{subsubsection}
+		\begin{subsubsection}{Estrategia}
+			En cada turno nuestra estrategia consiste en lo siguiente:
+			
+			\begin{enumerate}
+			\item Para resolver el sistema $A'y=d'$ decicimos usar métodos directos de resolución de sistemas de ecuaciones lineales.
+				\begin{itemize}
+					\item \underline{Opción 1:} Buscamos la matriz inversa de A' (existe porque es parte de las reglas de la batalla) mediante el método de eliminación Gaussiana. Es decir, efectuamos a la matriz A' distintas trasformaciones lineales hasta convertirla en la matriz identidad. Al mismo tiempo hacemos dichas trasformaciones a la matriz identidad quedando en esta la inversa de A'.
+					Las transformaciones consisten en triangular superior e inferiormente A' y poner $unos$ en la diagonal.
+					Una vez que conocemos la inversa ($A'^{-1}$) podemos hallar la posición buscada de la siguiente manera: $y=A'^{-1}*d'$.\\
+					
+					\item \underline{Opción 2:} Hallamos la factorización $LU$ de $A'$ (si no existe, conseguimos $PLU$). Resolvemos el sistema $LUy=d'$. LLamamos $Ux=z$ y resolvemos usando sustitución hacia adelante el sistema $Lz=d'$. Una vez que conocemos $z$ obtenemos $x$ tal que $Ux=z$ utilizando sustitución en reversa. (Con $PLU$ es el mismo procedimiento pero permutando $d'$ según $P$).\\
+					
+					Elegimos este método ya que las matrices son cuadradas y la implementación es sencilla.\\
+					PONER MAS MOTIVOS COMO COMPLEJIDAD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\\
+				\end{itemize}
+			
+				La exactitud con la que la calculemos la posición buscada $y$ depende del número de condición de la matriz $A'$, y de este calculo entre otras cosas depende la exactitud de nuestro disparo.\\
+				
+				Como creemos que el adversario va a utilizar matrices mal condicionadas para atacarnos, en cada turno estariamos calculando una posición errada de donde se encuentra. Por este motivo, decidimos usar la estrategia de disparar en el punto promedio de todos las posiciones calculadas hasta el momento de donde se situa. Esperamos de esta manera ir obteniendo cada vez mejores aproximaciones a donde se encuentra realmente.
+			
+			
+			\item Para atacar necesitamos una matriz $A$ que al multiplicarla por nuestra posición resulte en un impacto en la posición deseada $d$. Es decir, necesitamos que $A$ cumpla $Ax=d$.
+			
+			Sea $n$ la dimensión de $A$.
+			Dado que tenemos $n^2$ incognitas y $n$ ecuaciones, tenemos $n^2-n$ elementos de $A$ libres. Por este motivo, podemos elegir $A$ convenientemente y luego adaptarla (forzarla a cumplir $Ax=d$).			
+			
+			Como debemos proveer al adversario de la matriz $A$ que usemos para el ataque tenemos que idear una estrategia para que nuestra posición no sea descubierta en el siguiente turno. La estrategia consiste en generar matrices mal condicionadas que a su vez sean inversibles (esto último por reglamento).
+			
+			Para crear una matriz mal condicionada, generamos un único vector aleatorio de dimensión $n$ que resulta en las filas de dicha matriz. De esta manera tenemos una matriz cuyas filas son linealmente dependientes, por lo que la matriz no es inversible. Luego, sumamos a los elementos de la diagonal un $epsilon$ (QUE ELEGIMOS BLA BLA BLA BLA) obteniendo asi una matriz inversible y mal condicionada (JUSTIFICAR PORQUE).
+			
+			Por último, para forzarla a satisfacer el sistema elegimos una columna $j$ de $A$ tal que el $j-esimo$ elemento de $d$ sea distinto de $cero$ (COMO SABEMOS QUE NO ES EL NULO) (si es $cero$ los coeficientes de $A$ que pretendemos setear no tienen importancia) y consideramos incognitas sólo a los coeficientes de esa columna. Nos quedan así, $n$ incognitas y $n$ ecuaciones, por lo que podemos despejarlas y obtener la matriz final.
+			\end{enumerate}
+		\end{subsubsection}
 	\end{subsection}
 	\begin{subsection}{Implementación}
-
+		
 	\end{subsection}
 \end{section}
