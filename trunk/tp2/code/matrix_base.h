@@ -58,7 +58,7 @@ class MatrixBase{
 			
 	private:
 		void setMatrix(uInt dimFi, uInt dimCol);
-		void multiplyFiCol(int fiI, int colJ, const MatrixBase<T>& A, const MatrixBase<T>& B);
+		void multiplyFiCol(uInt fiI, uInt colJ, const MatrixBase<T>& A, const MatrixBase<T>& B);
 		
 		uInt _dimFi;
 		uInt _dimCol;
@@ -74,8 +74,8 @@ template <typename T>
 MatrixBase<T> :: MatrixBase(const MatrixBase<T>& mb){
 	setMatrix(mb._dimFi,mb._dimCol);
 
-	for(int i=0; i<this->_dimFi; i++)
-		for(int j=0;j<this->_dimCol;j++)
+	for(uInt i=0; i<this->_dimFi; i++)
+		for(uInt j=0;j<this->_dimCol;j++)
 			this->_matrix[i][j] = mb._matrix[i][j];	
 }
 
@@ -84,14 +84,14 @@ MatrixBase<T> :: MatrixBase(T** data, uInt dimFi, uInt dimCol){
 	setMatrix(dimFi,dimCol);
 	
 	///Copia la estructura en vez de hacer alias <==> T no genera alias en la asignacion
-	for(int i=0; i<_dimFi; i++)
-		for(int j=0;j<_dimCol;j++)
+	for(uInt i=0; i<_dimFi; i++)
+		for(uInt j=0;j<_dimCol;j++)
 			_matrix[i][j] = data[i][j];	
 }
 
 template <typename T>
 MatrixBase<T> :: ~MatrixBase(){
-	for(int j=0;j<_dimFi; j++)
+	for(uInt j=0;j<_dimFi; j++)
 		delete [] _matrix[j];
 		
 	delete [] _matrix;
@@ -104,8 +104,8 @@ MatrixBase<T> MatrixBase<T> :: operator+ (const MatrixBase<T> &mb) const {
 	
 	MatrixBase<T> resultSum(this->_dimFi,this->_dimCol);
 
-	for(int i=0;i<_dimFi;i++)
-		for(int j=0;j<_dimCol;j++)
+	for(uInt i=0;i<_dimFi;i++)
+		for(uInt j=0;j<_dimCol;j++)
 			resultSum._matrix[i][j] = this->_matrix[i][j] + mb._matrix[i][j];
 
 	return resultSum;
@@ -118,8 +118,8 @@ MatrixBase<T> MatrixBase<T> :: operator- (const MatrixBase<T> &mb) const {
 	
 	MatrixBase<T> resultSub(this->_dimFi,this->_dimCol);
 	
-	for(int i=0;i<_dimFi;i++)
-		for(int j=0;j<_dimCol;j++)
+	for(uInt i=0;i<_dimFi;i++)
+		for(uInt j=0;j<_dimCol;j++)
 			resultSub._matrix[i][j] = this->_matrix[i][j] - mb._matrix[i][j];
 
 	return resultSub;
@@ -132,8 +132,8 @@ MatrixBase<T> MatrixBase<T> :: operator* (const MatrixBase<T> &mb) const {
 	
 	MatrixBase<T> resultMult(this->_dimFi,mb._dimCol);
 
-	for(int i=0;i<this->_dimFi;i++){
-		for(int j=0;j<mb._dimCol;j++){
+	for(uInt i=0;i<this->_dimFi;i++){
+		for(uInt j=0;j<mb._dimCol;j++){
 			resultMult.multiplyFiCol(i,j,*this, mb);
 		}
 	}
@@ -158,8 +158,8 @@ bool MatrixBase<T> :: operator==(const MatrixBase<T> &mb) const {
 	
 	bool eq = true;
 
-	for(int i=0; i<this->_dimFi && eq; i++)
-		for(int j=0; j<this->_dimCol && eq; j++)
+	for(uInt i=0; i<this->_dimFi && eq; i++)
+		for(uInt j=0; j<this->_dimCol && eq; j++)
 			eq = abs(this->_matrix[i][j] - mb._matrix[i][j]) < ::EPSILON_ERROR;
 			//eq = this->_matrix[i][j] == mb._matrix[i][j];
 	
@@ -178,8 +178,8 @@ MatrixBase<T>& MatrixBase<T> :: operator= (const MatrixBase<T> &mb){
 		if(!matchExactDimesions(mb))
 			throw MatrixException((char*)"Asignacion de matrices de distinta dimension", Default);
 	
-		for(int i=0; i<mb._dimFi; i++)
-			for(int j=0;j<mb._dimCol;j++)
+		for(uInt i=0; i<mb._dimFi; i++)
+			for(uInt j=0;j<mb._dimCol;j++)
 				this->_matrix[i][j] = mb._matrix[i][j];	
 	}
 	
@@ -189,8 +189,8 @@ MatrixBase<T>& MatrixBase<T> :: operator= (const MatrixBase<T> &mb){
 template <typename T>
 MatrixBase<T> MatrixBase<T> :: traspuesta() const {
 	MatrixBase<T> mt(this->_dimCol,this->_dimFi);
-	for(int i=0; i<mt._dimFi; i++)
-		for(int j=0;j<mt._dimCol;j++)
+	for(uInt i=0; i<mt._dimFi; i++)
+		for(uInt j=0;j<mt._dimCol;j++)
 			mt._matrix[i][j] = this->_matrix[j][i];
 	
 	return mt;
@@ -201,8 +201,8 @@ template <typename T>
 MatrixBase<T> MatrixBase<T> :: scalarMult(const T& value, const MatrixBase<T> &mb){
 	MatrixBase<T> scalarMultMatrix(mb._dimFi,mb._dimCol);
 
-	for(int i=0; i<mb._dimFi; i++)
-		for(int j=0;j<mb._dimCol;j++)
+	for(uInt i=0; i<mb._dimFi; i++)
+		for(uInt j=0;j<mb._dimCol;j++)
 			scalarMultMatrix._matrix[i][j] = value * mb._matrix[i][j];
 
 	return scalarMultMatrix;	
@@ -249,9 +249,9 @@ T MatrixBase<T> :: det() const {
 	}
 
 	int determinante = 0;
-	int i = 1;
+	uInt i = 1;
 
-	for(int j=1;j<=_dimCol;j++){	//Caso Recursivo
+	for(uInt j=1;j<=_dimCol;j++){	//Caso Recursivo
 		MatrixBase<T> subMatrix(this->_dimFi-1,this->_dimCol-1);
 		subMatrix = this->deleteFiCol(i,j);
 
@@ -272,9 +272,9 @@ ostream &operator<< (ostream &stream, const MatrixBase<T>& mb){
   stream << "Dimension Filas = " << mb._dimFi << endl;
   stream << "Dimension Columnas = " << mb._dimCol << endl;
   
-  for(int i=0; i<mb._dimFi; i++){
+  for(uInt i=0; i<mb._dimFi; i++){
   	stream << endl;
-  	for(int j=0; j<mb._dimCol; j++){
+  	for(uInt j=0; j<mb._dimCol; j++){
   		stream << mb._matrix[i][j] << "\t";
   	}
   }
@@ -313,15 +313,15 @@ MatrixBase<T> MatrixBase<T> :: deleteFi(uInt fiElim) const {
 	
 	MatrixBase<T> deletedFi(_dimFi-1,_dimCol);
 	
-	for(int i=0; i<deletedFi._dimFi; i++){
+	for(uInt i=0; i<deletedFi._dimFi; i++){
 		if(i<fiElim){
-			for(int j=0;j<_dimCol;j++){
+			for(uInt j=0;j<_dimCol;j++){
 				deletedFi._matrix[i][j] = this->_matrix[i][j];
 			}
 		}
 		else 
 		{
-			for(int j=0;j<_dimCol;j++){
+			for(uInt j=0;j<_dimCol;j++){
 				deletedFi._matrix[i][j] = this->_matrix[i+1][j];
 			}
 		}
@@ -339,15 +339,15 @@ MatrixBase<T> MatrixBase<T> :: deleteCol(uInt colElim) const {
 	
 	colElim--;	//Recordar que los arreglos son [0,...n-1], nosotros pasamos [1,...,n]
 	
-	for(int j=0;j<deletedCol._dimCol;j++){
+	for(uInt j=0;j<deletedCol._dimCol;j++){
 		if(j<colElim){
-			for(int i=0; i<this->_dimFi; i++){
+			for(uInt i=0; i<this->_dimFi; i++){
 				deletedCol._matrix[i][j] = this->_matrix[i][j];
 			}
 		}
 		else 
 		{
-			for(int i=0; i<this->_dimFi; i++){
+			for(uInt i=0; i<this->_dimFi; i++){
 				deletedCol._matrix[i][j] = this->_matrix[i][j+1];
 			}
 		}
@@ -382,7 +382,7 @@ MatrixBase<T>& MatrixBase<T> :: swapFi(uInt i, uInt i2){
 	
 	T swapElem;
 	
-	for(int h=0;h<_dimCol;h++){
+	for(uInt h=0;h<_dimCol;h++){
 		swapElem = _matrix[i2-1][h];
 		_matrix[i2-1][h] = _matrix[i-1][h];
 		_matrix[i-1][h] = swapElem;	
@@ -401,7 +401,7 @@ MatrixBase<T>& MatrixBase<T> :: swapCol(uInt j, uInt j2){
 	
 	T swapElem;
 
-	for(int h=0;h<_dimFi;h++){
+	for(uInt h=0;h<_dimFi;h++){
 		swapElem = _matrix[h][j2-1];
 		_matrix[h][j2-1] = _matrix[h][j-1];
 		_matrix[h][j-1] = swapElem;
@@ -421,17 +421,17 @@ void MatrixBase<T> :: setMatrix(uInt dimFi, uInt dimCol){
 	
 	_matrix = new T* [_dimFi];
 
-    for (int i=0; i<_dimFi; i++){
+    for (uInt i=0; i<_dimFi; i++){
       	_matrix[i] = new T [_dimCol];
-     	for(int j=0; j<_dimCol; j++){
+     	for(uInt j=0; j<_dimCol; j++){
      		memset((void*) &_matrix[i][j],0,sizeof(T));
      	}
      }
 }
 
 template <typename T>
-void MatrixBase<T> :: multiplyFiCol(int fiI, int colJ, const MatrixBase<T>& A, const MatrixBase<T>& B){
-	for(int i=0; i<A._dimCol; i++){
+void MatrixBase<T> :: multiplyFiCol(uInt fiI, uInt colJ, const MatrixBase<T>& A, const MatrixBase<T>& B){
+	for(uInt i=0; i<A._dimCol; i++){
 		this->_matrix[fiI][colJ] = this->_matrix[fiI][colJ] + (A._matrix[fiI][i] * B._matrix[i][colJ]);
 	}
 }

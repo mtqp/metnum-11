@@ -54,8 +54,8 @@ Vector<double> WarpCannon :: getAimPosition(){
 	uInt data_amount = _turn-1;
 	double average_coordinate;
 	
-	for(int i=0; i<=data_amount; i++)
-		for(int j=1; j<=_dim; j++){
+	for(uInt i=0; i<=data_amount; i++)
+		for(uInt j=1; j<=_dim; j++){
 			if(i!=data_amount)
 				average_coordinate = (*_position_enemy[i].first).getValue(j) + average.getValue(j);
 			else
@@ -76,16 +76,16 @@ Matrix<double> WarpCannon :: getMatrixAttack(Vector<double> attack_point){
 	/* Seteo una columna (elegida tal que en esa posicion el vector _position sea distinto de cero) con los valores tal que al multiplicarla por _position de attack_point */
 	uInt col = 1;
 	bool zero = abs(_position.getValue(col))<EPSILON_ERROR;
-	for(int i=2; i<=_dim && zero; i++){
+	for(uInt i=2; i<=_dim && zero; i++){
 		col = i;
 		zero = abs(_position.getValue(col))<EPSILON_ERROR;
 	}
 	if(!zero){
 		double acum;
 		double value;
-		for(int i=1; i<=_dim; i++){
+		for(uInt i=1; i<=_dim; i++){
 			acum = 0;
-			for(int j=1; j<=_dim; j++){
+			for(uInt j=1; j<=_dim; j++){
 				if(j!=col){
 					acum += attack_A.getValue(i,j)*_position.getValue(j);
 				}

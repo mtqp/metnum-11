@@ -48,7 +48,7 @@ Vector<T> :: Vector(const Vector<T>& v) : MatrixBase<T>(v.getFiDimension(),v.get
 	
 	uInt pres = this->dimension();
 	
-	for(int i=1;i<=pres;i++){
+	for(uInt i=1;i<=pres;i++){
 		this->setValue(v.getValue(i),i);
 	}
 }
@@ -123,11 +123,11 @@ Vector<T>& Vector<T> :: operator= (const MatrixBase<T> &mb){
 	this->_traspuesta = validTrasp;
 
 	if(this->_traspuesta){
-		for(int i=1;i<=vDim;i++)
+		for(uInt i=1;i<=vDim;i++)
 			this->setValue(mb.getValue(i,1),i);		
 	}
 	else {
-		for(int i=1;i<=vDim;i++)
+		for(uInt i=1;i<=vDim;i++)
 			this->setValue(mb.getValue(1,i),i);
 	}
 
@@ -148,7 +148,7 @@ T Vector<T> :: normUno() const {
 	if(dim==1)
 		return nUno;
 	
-	for(int i=2;i<=dim;i++){
+	for(uInt i=2;i<=dim;i++){
 		nUno += module(this->getValue(i));
 	}
 	
@@ -164,7 +164,7 @@ T Vector<T> :: normDos() const {
 	if(dim==1)
 		return sqrt(nDos*nDos);
 	
-	for(int i=2;i<=dim;i++){
+	for(uInt i=2;i<=dim;i++){
 		nDos += this->getValue(i)*this->getValue(i);
 	}
 	
@@ -180,7 +180,7 @@ T Vector<T> :: normInf() const {
 	if(dim==1)
 		return nMax;
 
-	for(int i=2;i<=dim;i++){
+	for(uInt i=2;i<=dim;i++){
 		if(module(this->getValue(i)) > nMax)
 			nMax = module(this->getValue(i));
 	}
@@ -192,7 +192,7 @@ template <typename T>
 void Vector<T> :: createRandomVector(){
 	uInt dim = dimension();
 	T den;
-	for(int i=1;i<=dim;i++){
+	for(uInt i=1;i<=dim;i++){
 		den = (T)rand();
 		den = den / RAND_MAX;
 		den = 1/den;
