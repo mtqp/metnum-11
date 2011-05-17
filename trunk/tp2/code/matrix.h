@@ -27,12 +27,6 @@ struct PLU{
 	PLU<T>(uInt dim) : LU(dim), P(dim){}
 };
 
-/*
-	NOTA:
-		- Utilizar try catch para manejar casos bordes
-		- Si se acude a metodos auxiliares, mientras no este implementado tirar excepcion de no implementado
-*/
-
 template <class T>
 class Matrix : public MatrixBase<T>{
 	public:
@@ -67,31 +61,31 @@ class Matrix : public MatrixBase<T>{
 		void createHilbertMatrix(uInt dim);
 		
 		uInt _dim;
-		Vector<uInt>* _P;
+		Vector<uInt> _P;
 };
 
 template <typename T>
-Matrix<T> :: Matrix(uInt dim) : MatrixBase<T>(dim,dim){
+Matrix<T> :: Matrix(uInt dim) : MatrixBase<T>(dim,dim), _P(dim){
 	_dim = dim;
-	_P = new Vector<uInt>(dim);
+	for(uInt k=1;k<=_dim;k++) _P.setValue(k,k);
 }
 
 template <typename T>
-Matrix<T> :: Matrix(const Matrix<T>& mCopy) : MatrixBase<T>(mCopy){
+Matrix<T> :: Matrix(const Matrix<T>& mCopy) : MatrixBase<T>(mCopy), _P(mCopy.getFiDimension()){
 	_dim = mCopy.getFiDimension();
-	_P = new Vector<uInt>(_dim);
+	for(uInt k=1;k<=_dim;k++) _P.setValue(k,k);
 }
 
 template <typename T>
-Matrix<T> :: Matrix(T** data, uInt dim) : MatrixBase<T>(data,dim,dim){
+Matrix<T> :: Matrix(T** data, uInt dim) : MatrixBase<T>(data,dim,dim), _P(dim){
 	_dim = dim;
-	_P = new Vector<uInt>(dim);
+	for(uInt k=1;k<=_dim;k++) _P.setValue(k,k);
 }
 
 template <typename T>
-Matrix<T> :: Matrix(const T* data, uInt dim) : MatrixBase<T>(dim,dim) {
+Matrix<T> :: Matrix(const T* data, uInt dim) : MatrixBase<T>(dim,dim), _P(dim){
 	_dim = dim;
-	_P = new Vector<uInt>(dim);
+	for(uInt k=1;k<=_dim;k++) _P.setValue(k,k);
 	uInt h = 0;
 
 	for(uInt i=1;i<=dim;i++)
@@ -102,8 +96,9 @@ Matrix<T> :: Matrix(const T* data, uInt dim) : MatrixBase<T>(dim,dim) {
 }
 
 template <typename T>
-Matrix<T> :: Matrix(uInt dim, MatrixType type) : MatrixBase<T>(dim, dim){
+Matrix<T> :: Matrix(uInt dim, MatrixType type) : MatrixBase<T>(dim, dim), _P(dim){
 	_dim = dim;
+	for(uInt k=1;k<=_dim;k++) _P.setValue(k,k);
 	switch(type){
 		case(ID):
 			createId(dim);
@@ -120,9 +115,7 @@ Matrix<T> :: Matrix(uInt dim, MatrixType type) : MatrixBase<T>(dim, dim){
 }
 
 template <typename T>
-Matrix<T> :: ~Matrix(){
-	//delete _P;
-}
+Matrix<T> :: ~Matrix(){}
 
 template <typename T>
 Matrix<T> Matrix<T> :: gaussianElim() const {
@@ -138,7 +131,7 @@ PLU<T> Matrix<T> :: LU() const{
 	Matrix<T> copy(*this);
 	copy.Gauss_LU(true);
 	plu.LU = copy;
-	plu.P = *copy._P;
+	plu.P = copy._P;
 	return plu;
 }
 
@@ -157,7 +150,9 @@ Matrix<T> Matrix<T> :: inverse() const{
 		maxCol = copy.maxUnderDiag(j);
 		if(abs(copy.getValue(maxCol,j))>EPSILON_ERROR){			//si es cero se pasa a la otra columna, ya esta lo que queremos
 			copy.swapFi(j,maxCol);
+			copy._P.swap(j,maxCol);
 			I.swapFi(j,maxCol);
+			I._P.swap(j,maxCol);
 			for(uInt i=j+1; i<=_dim; i++){
 				coefficient = copy.coefficient(i,j);
 				copy.putZero(i,j,coefficient,false);
@@ -263,12 +258,7 @@ T Matrix<T> :: det() const{
 }
 
 template <typename T>
-void Matrix<T> :: Gauss_LU(bool L){
-	
-	/* Inicializo el vector de permutacion */	
-	//_P = new Vector<uInt>(_dim);
-	for(uInt k=1;k<=_dim;k++) (*_P).setValue(k,k);
-		
+void Matrix<T> :: Gauss_LU(bool L){		
 	if(!this->isTriang(true)){
 		uInt maxCol=0;
 		T coefficient;
@@ -276,7 +266,7 @@ void Matrix<T> :: Gauss_LU(bool L){
 			maxCol = this->maxUnderDiag(j);
 			if((this->getValue(maxCol,j))>EPSILON_ERROR){			//si es cero se pasa a la otra columna, ya esta lo que queremos
 				this->swapFi(j,maxCol);
-				(*_P).swap(j,maxCol);
+				_P.swap(j,maxCol);
 				for(uInt i=j+1; i<=_dim; i++){
 					coefficient = this->coefficient(i,j);
 					this->putZero(i,j,coefficient,true);
