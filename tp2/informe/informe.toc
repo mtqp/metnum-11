@@ -5,12 +5,12 @@
 \contentsline {subsubsection}{\numberline {2.1.1}Introducci\IeC {\'o}n al problema}{3}
 \contentsline {subsubsection}{\numberline {2.1.2}Estrategia}{3}
 \contentsline {subsection}{\numberline {2.2}Implementaci\IeC {\'o}n}{5}
-\contentsline {section}{\numberline {3}Resultados}{6}
-\contentsline {section}{\numberline {4}Discusi\IeC {\'o}n}{7}
-\contentsline {section}{\numberline {5}Conclusiones}{8}
-\contentsline {section}{\numberline {6}Ap\IeC {\'e}ndices}{9}
-\contentsline {subsection}{\numberline {6.1}Ap\IeC {\'e}ndice A: Enunciado}{9}
-\contentsline {subsection}{\numberline {6.2}Ap\IeC {\'e}ndice B: C\IeC {\'o}digo fuente}{14}
-\contentsline {subsection}{\numberline {6.3}Modo de compilaci\IeC {\'o}n}{14}
-\contentsline {subsection}{\numberline {6.4}Modo de uso}{14}
-\contentsline {section}{\numberline {7}Referencias}{15}
+\contentsline {section}{\numberline {3}Resultados}{7}
+\contentsline {section}{\numberline {4}Discusi\IeC {\'o}n}{8}
+\contentsline {section}{\numberline {5}Conclusiones}{9}
+\contentsline {section}{\numberline {6}Ap\IeC {\'e}ndices}{10}
+\contentsline {subsection}{\numberline {6.1}Ap\IeC {\'e}ndice A: Enunciado}{10}
+\contentsline {subsection}{\numberline {6.2}Ap\IeC {\'e}ndice B: C\IeC {\'o}digo fuente}{15}
+\contentsline {subsection}{\numberline {6.3}Modo de compilaci\IeC {\'o}n}{15}
+\contentsline {subsection}{\numberline {6.4}Modo de uso}{15}
+\contentsline {section}{\numberline {7}Referencias}{16}
