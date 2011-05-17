@@ -39,19 +39,19 @@ int main(int argc, char** argv){
 		cout << "d --->" << endl;
 		cout << d << endl;*/
 		
-		Matrix<double> A(2);
-		A.setValue(1,1,1);
-		A.setValue(0.5,1,2);
-		A.setValue(0.5,2,1);
-		A.setValue(0.333333333,2,2);
-
-		Vector<double> v(2);
-		v.setValue(6,1);
-		v.setValue(16,2);
-		linearSystem ls(A,v);
-		Vector<double> z(2);
-		z=ls.usingLU();
-		cout << z << endl;
+		uInt dim=5;
+		Matrix<double> id(dim,ID);
+		cout << "ID" << endl;
+		cout << id;
+		Matrix<double> id_inverse(dim);
+		id_inverse = id.inverse();
+		cout << "Inversa de ID" << endl;
+		cout << id_inverse;
+		Matrix<double> res(dim);
+		res = id*id_inverse;
+		cout << "es id?" << endl;
+		cout << res;
+		
 /*		srand(time(NULL));
 		cout.precision(6);
 		/*Matrix<int>A(1,1);

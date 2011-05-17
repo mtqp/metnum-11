@@ -6,14 +6,14 @@ linearSystem::linearSystem(const Matrix<double> A, const Vector<double> d): _A(A
 }
 linearSystem::~linearSystem(){}
 
-Vector<double> linearSystem::usingInverse(){
+Vector<double> linearSystem::usingInverse() const{
 	Matrix<double> A_inverse(_A.inverse());
 	Vector<double> x(_dim);
 	x = (A_inverse*_d.traspuesta()).traspuesta();
 	return x;
 }
 
-Vector<double> linearSystem::usingLU(){
+Vector<double> linearSystem::usingLU() const{
 	PLU<double> plu(_dim);
 	plu = _A.LU();
 	
@@ -39,12 +39,12 @@ Vector<double> linearSystem::usingLU(){
 	return x;
 }
 
-Vector<double> linearSystem::backSub(){
+Vector<double> linearSystem::backSub() const{
 	Vector<double> res(_d.dimension());
 	double acum;
-	for(int i=_dim;i>=1;i--){
+	for(uInt i=_dim;i>=1;i--){
 		acum = 0;
-		for(int j=_dim;j>i;j--){
+		for(uInt j=_dim;j>i;j--){
 			acum+=(_A.getValue(i,j)*res.getValue(j));
 		}
 		res.setValue((_d.getValue(i)-acum)/_A.getValue(i,i),i);
@@ -53,12 +53,12 @@ Vector<double> linearSystem::backSub(){
 	cout << res;
 }
 
-Vector<double> linearSystem::forwardSub(){
+Vector<double> linearSystem::forwardSub() const{
 	Vector<double> res(_d.dimension());
 	double acum;
-	for(int i=1;i<=_dim;i++){
+	for(uInt i=1;i<=_dim;i++){
 		acum = 0;
-		for(int j=1;j<i;j++){
+		for(uInt j=1;j<i;j++){
 			acum+=(_A.getValue(i,j)*res.getValue(j));
 		}
 		res.setValue((_d.getValue(i)-acum),i);							//la diagonal de L esta toda en uno por eso no divido

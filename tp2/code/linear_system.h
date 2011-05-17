@@ -10,12 +10,12 @@ class linearSystem{
 		linearSystem(const Matrix<double> A, const Vector<double> d);
 		~linearSystem();
 		
-		Vector<double> usingInverse();
-		Vector<double> usingLU();
+		Vector<double> usingInverse() const;
+		Vector<double> usingLU() const;
 
 	private:
-		Vector<double> backSub();
-		Vector<double> forwardSub();
+		Vector<double> backSub() const;
+		Vector<double> forwardSub() const;
 	
 		uInt _dim;
 		Matrix<double> _A;
