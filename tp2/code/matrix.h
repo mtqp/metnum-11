@@ -355,13 +355,12 @@ void Matrix<T> :: createBadK(uInt dim) {
 
 		Vector<T> randomV(dim);
 		randomV.createRandomVector();
-
+		
 		for(uInt i=1;i<=dim;i++)
 			for(uInt j=1;j<=dim;j++){
 				this->setValue(randomV.getValue(j),i,j);
-				if(i==j){
+				if(i==j)
 					this->setValue(randomV.getValue(j)+epsilon,i,j);
-				}
 			}
 	}
 }

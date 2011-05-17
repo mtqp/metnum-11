@@ -11,7 +11,7 @@ using namespace std;
 
 int main(int argc, char** argv){
 	srand(time(NULL));
-	
+
 	cout.precision(20);
 	cout.setf(ios::scientific,ios::floatfield);
 
@@ -99,7 +99,6 @@ int main(int argc, char** argv){
 				else
 					wd.position_enemy[i].second = tmp;
 			}
-			cout << endl;
 		}
 
 		/* Seteo el punto donde supuestamente esta la nave enemiga segun el ultimo ataque recibido */
@@ -120,15 +119,18 @@ int main(int argc, char** argv){
 				position_enemy << cond_number << endl;
 			}
 		}
-
 		position_enemy.close();
-		
 	}
 	
 	/* Llamada a la funcion principal */
 	WarpCannon wp(wd,dimension);
 	attackData wa(dimension);
 	wa = wp.attack();
+
+	/* Libero la memoria (en el turno 1 no entra)*/
+	for(int i=0; i<time-1;i++)
+		delete wd.position_enemy[i].first;
+	delete [] wd.position_enemy;
 
 	ofstream out(argv[2]);
 	if(!out.is_open()) cout << "No se puedo abrir el archivo: " << argv[2] << endl;
@@ -149,18 +151,6 @@ int main(int argc, char** argv){
 	}
 	
 	out.close();
-	
-	/******************************************************************/
-	/******************** Para testear!!!! ****************************/
-	/******************************************************************/
-	if( !wa.A.isInversible())
-			cout << "La matriz generada para el ataque no es inversible!" << endl;
-	
-	//elimino la struct loca de carla
-	for(int i=0; i<time-1; i++){
-		delete wd.position_enemy[i].first;
-	}
-	delete [] wd.position_enemy;
-	
+					
 	return 0;
 }

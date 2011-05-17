@@ -20,6 +20,20 @@ attackData WarpCannon :: attack(){
 	if(_turn==1){
 		/* Empiezo con una matriz mal condicionada */
 		Matrix<double> Bad(_dim,BadK);
+		/***************************************************************
+		***************Poner la excepcion que haga esto*****************
+		***************************************************************/
+		
+		uInt i=1;
+		while(!Bad.isInversible() && i<10){
+			Matrix<double> Bad(_dim,BadK);
+			cout << "Generando por " << i << "vez la matriz mal condicionada" << endl;
+		}
+		if(!Bad.isInversible()) Matrix<double> Bad(_dim,Hilbert);
+		
+		/***************************************************************
+		****************************************************************
+		***************************************************************/
 		attack_A = Bad;
 		attack_point = (attack_A*_position.traspuesta()).traspuesta();
 	}
@@ -71,12 +85,25 @@ Vector<double> WarpCannon :: getAimPosition(){
 }
 
 Matrix<double> WarpCannon :: getMatrixAttack(Vector<double> attack_point){
-	/* Quiero A tal que A*_position=attack_point 	*
+	/* Quiero A tal que A*_position=attack_point
 	 * Tengo _dim ecuaciones y _dim*_dim incognitas por lo que dim*dim-dim coeficientes de A estan libres*/
 
 	/* Empiezo con una matriz mal condicionada */
 	Matrix<double> attack_A(_dim,BadK);
-
+	/*******************************************************************
+	 *****************Poner la excepcion que haga esto******************
+	 ******************************************************************/
+	
+	uInt i=1;
+	while(!attack_A.isInversible() && i<10){
+		 Matrix<double> attack_A(_dim,BadK);
+		cout << "Generando por " << i << "vez la matriz mal condicionada" << endl;
+	}
+	if(!attack_A.isInversible()) Matrix<double> attack_A(_dim,Hilbert);
+	
+	/*******************************************************************
+	 *******************************************************************
+	 ******************************************************************/
 	/* Seteo una columna (elegida tal que en esa posicion el vector _position sea distinto de cero) con los valores tal que al multiplicarla por _position de attack_point */
 	uInt col = 1;
 	bool zero = abs(_position.getValue(col))<EPSILON_ERROR;
