@@ -45,6 +45,49 @@
 		\end{subsubsection}
 	\end{subsection}
 	\begin{subsection}{Implementación}
+		En primer lugar el desarrollo consistio en implementar módulos para las operaciones entre Matrices y Vectores que fuesen necesarias para resolver sistemas lineales. Esto implicaba también implementar el algoritmo de factorización LU y el algoritmo de eliminación Gaussiana ambos con pivoteo parcial para resolver el sistema lineal.\\
 		
+		Escribimos el módulo \texttt{Matrix} que implementa una matriz en $\mathbb{R}^{nxn}$ con las siguientes operaciones:\\
+		
+		\begin{tabular}{rl}
+			\texttt{Eliminación Gaussiana} & Eliminacion Gaussiana con pivoteo parcial.\\
+			\texttt{LU} & Factorización LU con pivoteo parcial.\\
+			\texttt{Inversa} & Matriz inversa con el método de Gauss.\\
+			\texttt{K} & Número de condición.\\
+			\multicolumn{2}{l}{
+				\texttt{Suma, Resta, Multiplicación, Multiplicación por escalar, traspuesta}
+			}
+		\end{tabular}\\
+		
+		Usamos pivoteo parcial tanto para la eliminación Gaussiana como para la factorización LU para reducir el error de redondeo en las operaciones.\\
+		
+		Además escribimos la clase \texttt{Vector} que implementa un vector en $\mathbb{R}^n$ con las operaciones básicas como \texttt{Suma, Resta,
+		Producto Escalar, Producto Vectorial, Normas}, etc.\\
+		
+		\underline{NOTA:} Ambas clases heredan de una clase \texttt{MatrixBase} que implementa las funciones básicas como son la suma, resta, multiplicación, etc.\\
+		
+		Teniendo la base (matrices, vectores y las operaciones entre ellos) implementamos una clase para la resolución de sistemas de ecuciones lineales y una clase para elegir la matriz de ataque.\\
+		
+		El módulo \texttt{linearSystem} implementa las siguientes funciones:\\
+		
+		\begin{tabular}{rl}
+			\texttt{Resolución por inversa} & consigue la inversa y hace la multiplicación.\\
+			\texttt{Resolución por LU} & consigue LU (PLU) y despeja el sistema usando\\
+									   & sustitución hacia adelante y sustitución reversa.\\
+		\end{tabular}\\
+		
+		El módulo \texttt{warpCannon} implementa las siguientes funciones:\\
+		
+		\begin{tabular}{rl}
+			\texttt{Atacar} & consigue la posición de impacto deseada y arma la matriz correspondiente.\\
+		\end{tabular}\\
+		
+		Esta clase tiene un método privado que calcula la posición del enemigo.
+		
+		Nuestra primer idea fue hacer un promedio coordenada a coordenada dandole una prioridad distinta a cada vector (posición), dicha prioridad dependia del número de condición de la matriz que uso el oponente en ese turno. Es decir, $y$ tiene mayor prioridad que $z$ si y sólo si $K(A')<K(A)$ siendo $A'y=d'$ y $Az=d$.
+		
+		Para lograr esto, teniamos un $array$ de $tuplas$ donde la primer coordenada correspondia al vector y la segunda al número de condición de la matriz asociada.
+		
+		La idea finalmente implementada es una versión más simple (por cuestiones de tiempo), que sólo toma el promedio sin asignar prioridades. Igualmente quedo implementado con $tupla$ (ignorando la segunda coordenada).
 	\end{subsection}
 \end{section}
