@@ -22,7 +22,7 @@ attackData WarpCannon :: attack(){
 		Matrix<double> Bad(_dim,BadK);
 		/***************************************************************
 		***************Poner la excepcion que haga esto*****************
-		***************************************************************/
+		***************************************************************
 		
 		uInt i=1;
 		while(!Bad.isInversible() && i<10){
@@ -68,18 +68,14 @@ Vector<double> WarpCannon :: getAimPosition(){
 	uInt data_amount = _turn-1;
 	double average_coordinate;
 	
-	for(int i=0; i<=data_amount; i++){
+	for(int i=0; i<=data_amount; i++)
 		for(int j=1; j<=_dim; j++){
-			if(i!=data_amount){
+			if(i!=data_amount)
 				average_coordinate = (*_position_enemy[i].first).getValue(j) + average.getValue(j);
-			}
 			else
-			{
 				average_coordinate = average.getValue(j)/data_amount;
-			}
 			average.setValue(average_coordinate,j);
 		}
-	}
 
 	return average;
 }
@@ -92,7 +88,7 @@ Matrix<double> WarpCannon :: getMatrixAttack(Vector<double> attack_point){
 	Matrix<double> attack_A(_dim,BadK);
 	/*******************************************************************
 	 *****************Poner la excepcion que haga esto******************
-	 ******************************************************************/
+	 ******************************************************************
 	
 	uInt i=1;
 	while(!attack_A.isInversible() && i<10){
