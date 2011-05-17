@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  17 MAY 2011 01:54
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  17 MAY 2011 03:40
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
@@ -437,9 +437,45 @@ Overfull \hbox (61.84195pt too wide) in paragraph at lines 63--63
 \openout3 = `informe.toc'.
 
  [1]
-(./teoria.tex) [2] (./desarrollo.tex) [3] (./resultados.tex) [4]
-(./discusion.tex) [5] (./conclusiones.tex) [6] (./apendices.tex
-(./enunciado.tex [7] [8] [9] [10]
+(./teoria.tex) [2] (./desarrollo.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--22
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--24
+
+ []
+
+[3]
+Overfull \hbox (96.80368pt too wide) in paragraph at lines 25--27
+\OT1/cmr/m/n/12 PONER MAS MO-TIVOS CO-MO COM-PLE-JI-DAD!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--27
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--30
+
+ []
+
+
+Overfull \hbox (1.9237pt too wide) in paragraph at lines 31--32
+[]\OT1/cmr/m/n/12 Como creemos que el ad-ver-sario va a uti-lizar ma-tri-ces ma
+l condi-cionadas
+ []
+
+[4]) [5] (./resultados.tex) [6] (./discusion.tex) [7] (./conclusiones.tex)
+[8] (./apendices.tex (./enunciado.tex [9] [10] [11] [12]
 Overfull \hbox (64.14026pt too wide) in paragraph at lines 158--158
 [][]\OT1/cmr/m/n/10 Una op-ci^^Son es \OT1/cmtt/m/n/10 precision(20) \OT1/cmr/m
 /n/10 y \OT1/cmtt/m/n/10 setf(std::ios[]base::scientific,std::ios[]base::floatf
@@ -452,15 +488,15 @@ Overfull \hbox (2.48878pt too wide) in paragraph at lines 151--160
 /cmtt/m/n/12 double\OT1/cmr/m/n/12 ). La Fuerza tomar^^Sa los
  []
 
-[11])) [12] (./referencias.tex) [13] (./informe.aux) ) 
+[13])) [14] (./referencias.tex) [15] (./informe.aux) ) 
 Here is how much of TeX's memory you used:
- 2842 strings out of 495061
- 33088 string characters out of 1182621
+ 2843 strings out of 495061
+ 33104 string characters out of 1182621
  93114 words of memory out of 3000000
- 5962 multiletter control sequences out of 15000+50000
+ 5963 multiletter control sequences out of 15000+50000
  14039 words of font info for 55 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 27i,8n,27p,640b,346s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,8n,27p,485b,351s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive
 /fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type
 1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/am
@@ -474,9 +510,9 @@ ic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
 fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/sh
 are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf-t
 exlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on informe.pdf (14 pages, 178490 bytes).
+Output written on informe.pdf (16 pages, 185333 bytes).
 PDF statistics:
- 104 PDF objects out of 1000 (max. 8388607)
+ 110 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
