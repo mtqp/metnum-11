@@ -103,8 +103,9 @@ int main(int argc, char** argv){
 
 		/* Seteo el punto donde supuestamente esta la nave enemiga segun el ultimo ataque recibido */
 		linearSystem ls(wd.A,wd.d);
-		wd.position_enemy[data_amount-1].first = new Vector<double>(ls.usingInverse());
-		double cond_number = wd.A.K();												//dato para la segunda coordenada de la tupla
+		wd.position_enemy[data_amount-1].first = new Vector<double>(ls.usingLU());
+		//double cond_number = wd.A.K();												//dato para la segunda coordenada de la tupla
+		double cond_number = 0;
 		wd.position_enemy[data_amount-1].second = cond_number;
 
 		/* Me posiciono al final del archivo */
@@ -128,10 +129,12 @@ int main(int argc, char** argv){
 	wa = wp.attack();
 
 	/* Libero la memoria (en el turno 1 no entra)*/
-	for(int i=0; i<time-1;i++)
-		delete wd.position_enemy[i].first;
-	delete [] wd.position_enemy;
-
+	if(wd.turn!=1){
+		for(int i=0; i<time-1;i++)
+			delete wd.position_enemy[i].first;
+		delete [] wd.position_enemy;
+	}
+	
 	ofstream out(argv[2]);
 	if(!out.is_open()) cout << "No se puedo abrir el archivo: " << argv[2] << endl;
 	out.precision(20);
