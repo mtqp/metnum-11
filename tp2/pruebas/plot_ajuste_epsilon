@@ -1,0 +1,20 @@
+#!/usr/bin/gnuplot -persist
+load 'plot_style'
+
+#le pone titulo al grafico
+set title "Ajuste de parámetro epsilon maximizando número de condición obtenido"
+
+#pone la descripccion de los ejes
+set xlabel "Dimensión de la matriz"
+set ylabel "Número de condicion de la matriz"
+
+set logscale y
+
+set output 'graficos/ajuste_epsilon.eps'
+plot 'data/ajuste_epsilon.dat' using 1:3 title "bla" linestyle 1,\
+	 'data/ajuste_epsilon.dat' using 1:3 title "bla" linestyle 2
+
+#pongo la salida default para mostrar en pantalla
+set term pop
+set output
+replot
