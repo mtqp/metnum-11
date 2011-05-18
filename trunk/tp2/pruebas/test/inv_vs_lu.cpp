@@ -42,8 +42,7 @@ int main(int argc, char** argv){
 			err_lu += abs(lu.getValue(j) - pos.getValue(j));
 		}
 		
-		//cout << err_inv << " " << err_lu << endl;
-		cout << i << " " << err_inv << endl;
+		cout << i << " " << err_inv << " " << err_lu << endl;
 	}
 	
 	return 0;
