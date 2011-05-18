@@ -12,3 +12,8 @@ set key right box
 set style line 1 lt 1 pt 1 ps 1
 set style line 2 lt 2 pt 2 ps 1
 set style line 3 lt 3 pt 3 ps 1
+set style line 4 lt 4 pt 1 ps 1
+set style line 5 lt 5 pt 1 ps 1
+set style line 6 lt 6 pt 1 ps 1
+set style line 7 lt 7 pt 1 ps 1
+
