@@ -37,12 +37,20 @@ int main(int argc, char** argv){
 		Vector<double> lu(dim);
 		lu = ls.usingLU();
 		
-		for(uInt j=1; j<=dim; j++){
+		/*for(uInt j=1; j<=dim; j++){
 			err_inv += abs(inv.getValue(j) - pos.getValue(j));
 			err_lu += abs(lu.getValue(j) - pos.getValue(j));
 		}
 		
-		cout << i << " " << err_inv << " " << err_lu << endl;
+		cout << i << " " << err_inv << " " << err_lu << endl;*/
+
+		for(uInt j=1; j<=dim; j++){
+			inv.setValue(abs(inv.getValue(j) - pos.getValue(j)),j);
+			err_inv = inv.normDos();
+			lu.setValue(abs(lu.getValue(j) - pos.getValue(j)),j);
+			err_lu = lu.normDos();
+		}
+		cout << i << " " << err_inv << " " << err_lu << endl;		
 	}
 	
 	return 0;

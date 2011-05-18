@@ -4,22 +4,22 @@ load 'plot_style'
 set key bottom right
 
 #le pone titulo al grafico
-set title "Ajuste de parámetro epsilon maximizando número de condición obtenido"
+set title "Numero de condicion de la matriz en funcion de su dimension variando el parametro epsilon"
 
 #pone la descripccion de los ejes
-set xlabel "Dimensión de la matriz"
-set ylabel "Número de condicion de la matriz"
+set xlabel "Dimension de la matriz"
+set ylabel "Numero de condicion de la matriz"
 
 set logscale y
 
 set output 'graficos/ajuste_epsilon.eps'
 plot	'data/ajuste_epsilon.dat' using 1:(int($0)%7==0?$3:1/0) title "1" linestyle 1,\
-		'data/ajuste_epsilon.dat' using 1:(int($0)%7==1?$3:1/0) title "0.1" linestyle 2,\
-		'data/ajuste_epsilon.dat' using 1:(int($0)%7==2?$3:1/0) title "0.01" linestyle 3,\
-		'data/ajuste_epsilon.dat' using 1:(int($0)%7==3?$3:1/0) title "0.001" linestyle 4,\
-		'data/ajuste_epsilon.dat' using 1:(int($0)%7==4?$3:1/0) title "0.0001" linestyle 5,\
-		'data/ajuste_epsilon.dat' using 1:(int($0)%7==5?$3:1/0) title "0.00001" linestyle 6,\
-		'data/ajuste_epsilon.dat' using 1:(int($0)%7==6?$3:1/0) title "0.000001" linestyle 7
+		'data/ajuste_epsilon.dat' using 1:(int($0)%7==1?$3:1/0) title "1e^-1" linestyle 2,\
+		'data/ajuste_epsilon.dat' using 1:(int($0)%7==2?$3:1/0) title "1e^-2" linestyle 3,\
+		'data/ajuste_epsilon.dat' using 1:(int($0)%7==3?$3:1/0) title "1e^-3" linestyle 4,\
+		'data/ajuste_epsilon.dat' using 1:(int($0)%7==4?$3:1/0) title "1e^-4" linestyle 5,\
+		'data/ajuste_epsilon.dat' using 1:(int($0)%7==5?$3:1/0) title "1e^-5" linestyle 6,\
+		'data/ajuste_epsilon.dat' using 1:(int($0)%7==6?$3:1/0) title "1e^-6" linestyle 7
 
 #pongo la salida default para mostrar en pantalla
 set term pop

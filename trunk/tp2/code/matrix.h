@@ -350,7 +350,7 @@ void Matrix<T> :: createBadK(uInt dim) {
 	else
 	{
 		//matriz con filas casi ld
-		T epsilon = 1.0/1000.0;
+		T epsilon = 1.0/1000000.0;
 
 		Vector<T> randomV(dim);
 		randomV.createRandomVector();
