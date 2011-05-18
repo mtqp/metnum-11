@@ -1,0 +1,19 @@
+#!/usr/bin/gnuplot -persist
+load 'plot_style'
+
+#le pone titulo al grafico
+set title "Distancia a la solución exacta del sistena por el método de la inversa vs factorizacion LU"
+
+#pone la descripccion de los ejes
+set xlabel "Dimension de la matriz"
+set ylabel "Distancia a la solución exacta"
+
+set logscale y
+
+set output 'graficos/inv_vs_lu.eps'
+plot 'data/inv_vs_lu.dat' title "Inversa" linestyle 1
+
+#pongo la salida default para mostrar en pantalla
+set term pop
+set output
+replot
