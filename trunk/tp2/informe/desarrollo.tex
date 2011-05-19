@@ -22,10 +22,7 @@
 					
 					\item \underline{Opción 2:} Hallamos la factorización $LU$ de $A'$ (si no existe, conseguimos $PLU$). Resolvemos el sistema $LUy=d'$. LLamamos $Ux=z$ y resolvemos usando sustitución hacia adelante el sistema $Lz=d'$. Una vez que conocemos $z$ obtenemos $x$ tal que $Ux=z$ utilizando sustitución en reversa. (Con $PLU$ es el mismo procedimiento pero permutando $d'$ según $P$).\\
 					
-					Elegimos este método ya que las matrices son cuadradas y la implementación es sencilla.\\
-					AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!!!!!!!!!!!!!!!!!!!!!!!!!!!!\\
-					PONER MAS MOTIVOS COMO COMPLEJIDAD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\\
-					AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!!!!!!!!!!!!!!!!!\\			
+					Elegimos este método ya que las matrices son cuadradas. Además, la implementación es sencilla y la complejidad algorítmica del método es razonable ya que se trata de un algoritmo de orden cúbico.
 				\end{itemize}
 			
 				La exactitud con la que calculemos la posición buscada $y$ depende del número de condición de la matriz $A'$, cuanto mayor es este número menor es la precisión del resultado obtenido. Se considera que alcanzamos al rival cuando $\left|| y' - y \right|| \leq 1$, donde $y'$ es la solución encontrada.
@@ -40,7 +37,7 @@
 			
 			Como debemos proveer al adversario de la matriz $A$ que usemos para el ataque tenemos que idear una estrategia para que nuestra posición no sea descubierta en el siguiente turno. La estrategia consiste en generar matrices mal condicionadas que a su vez sean inversibles (esto último por reglamento). En algunos turno usamos la matriz de Hilbert multiplicada por un escalar. 
 			
-			Para crear una matriz mal condicionada, generamos un único vector aleatorio de dimensión $n$ que resulta en las filas de dicha matriz. De esta manera tenemos una matriz cuyas filas son linealmente dependientes, por lo que la matriz no es inversible. Luego, sumamos a los elementos de la diagonal un $epsilon$ (Ver en las pruebas (secciones \texttt{Resultados} y \texttt{Discusión}) como fue elegido) obteniendo asi una matriz inversible y mal condicionada. Este tipo de matrices poseen su determinante tendiendo a cero a medida que su dimensión crece, es decir, a pesar de ser inversible, esta muy cercana a dejar de serlo.
+			Para crear una matriz mal condicionada, generamos un único vector aleatorio de dimensión $n$ que resulta en las filas de dicha matriz. De esta manera tenemos una matriz cuyas filas son linealmente dependientes, por lo que la matriz no es inversible. Luego, sumamos a los elementos de la diagonal un $epsilon$ (Ver en las pruebas (secciones \texttt{Resultados} y \texttt{Discusión}) como fue elegido) obteniendo asi una matriz inversible y mal condicionada. En este tipo de matrices el determinante tiende a $cero$, es decir, a pesar de ser inversible, esta muy cercana a dejar de serlo.
 			
 			Por último, para forzarla a satisfacer el sistema elegimos una columna $j$ de $A$ tal que el $j-esimo$ elemento de $x$ sea distinto de $cero$ ($x$ no es el vector nulo por precondición ya que es nuestra posición), sino los coeficientes de $A$ que pretendemos setear no tienen importancia, y consideramos incognitas sólo a los coeficientes de esa columna. Nos quedan así, $n$ incognitas y $n$ ecuaciones, por lo que podemos despejarlas y obtener la matriz final.
 			
