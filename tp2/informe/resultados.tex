@@ -10,8 +10,8 @@
 
 	El gráfico muestra el número de condición de la matriz en función de su dimensión para los siguientes valores de
 	$epsilon$: $1$, $1e^{-1}$, $1e^{-2}$, $1e^{-3}$, $1e^{-4}$, $1e^{-5}$ y $1e^{-6}$. Elegimos esos valores de
-	$epsilon$ ya que para generarlos tenemos una variable $v$ ($unsigned\;int$) que itera por los multiplos de $10$ 
-	(empezando en $1$),	siendo $epsilon$ igual a $1.0/v$. El mayor multiplo de $10$ que $v$ es capaz de almacenar es $1e^9$ 
+	$epsilon$ ya que para generarlos tenemos una variable $v$ ($unsigned\;int$) que itera por los múltiplos de $10$ 
+	(empezando en $1$),	siendo $epsilon$ igual a $1.0/v$. El mayor múltiplo de $10$ que $v$ es capaz de almacenar es $1e^9$ 
 	pero con $epsilon$ igual a $1e^{-7}$, $1e^{-8}$ y $1e^{-9}$ las matrices generadas quedaban singulares en muchas
 	ocasiones, suponemos que eso se debe a que estos valores de $epsilon$ ya son despreciables ($cero$) y al sumarle 
 	ese valor a la diagonal no conseguimos filas linealmente dependientes como queremos.
