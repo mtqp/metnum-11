@@ -36,19 +36,6 @@ attackData WarpCannon :: attack() const{
 	return ad;
 }
 
-
-/*Strategy WarpCannon :: setStrategy(){
-	if(_failedAttack)
-		return fail;
-
-	double condition_number = _A.K();
-	if(_turn==8 || condition_number<=_threshold)
-		return attack;
-
-	return disguise;
-}*/
-
-
 Vector<double> WarpCannon :: getAimPosition() const{
 	Vector<double> average(_dim);
 	uInt data_amount = _turn-1;
