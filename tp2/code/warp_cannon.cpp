@@ -14,7 +14,7 @@ WarpCannon :: WarpCannon(warpData wd, uInt dim) : _position(dim), _A(dim), _d(di
 
 WarpCannon :: ~WarpCannon(){}
 
-attackData WarpCannon :: attack(){
+attackData WarpCannon :: attack() const{
 	Matrix<double> attack_A(_dim);
 	Vector<double> attack_point(_dim);
 	if(_turn==1){
@@ -49,7 +49,7 @@ attackData WarpCannon :: attack(){
 }*/
 
 
-Vector<double> WarpCannon :: getAimPosition(){
+Vector<double> WarpCannon :: getAimPosition() const{
 	Vector<double> average(_dim);
 	uInt data_amount = _turn-1;
 	double average_coordinate;
@@ -66,7 +66,7 @@ Vector<double> WarpCannon :: getAimPosition(){
 	return average;
 }
 
-Matrix<double> WarpCannon :: getMatrixAttack(Vector<double> attack_point){
+Matrix<double> WarpCannon :: getMatrixAttack(const Vector<double> attack_point) const{
 	/* Quiero A tal que A*_position=attack_point
 	 * Tengo _dim ecuaciones y _dim*_dim incognitas por lo que dim*dim-dim coeficientes de A estan libres*/
 

@@ -15,7 +15,7 @@ int main(int argc, char** argv){
 	cout.precision(20);
 	cout.setf(ios::scientific,ios::floatfield);
 
-	if(argc!=3 && argc!=5){
+	if(argc!=3 && argc!=6){
 		cout << "Error en el pasaje de parámetros" << endl;
 		exit(0);
 	}
@@ -48,7 +48,7 @@ int main(int argc, char** argv){
 	position.close();
 
 	/* Si no es el primer turno */
-	if(argc==5){
+	if(argc==6){
 		ifstream ultimo(argv[3]);
 		if(!ultimo.is_open()) cout << "No se puedo abrir el archivo: " << argv[3] << endl;
 
@@ -81,7 +81,7 @@ int main(int argc, char** argv){
 		ultimo.close();
 		
 		/* Leo los datos de las posiciones del enemigo calculadas anteriormente */
-		fstream position_enemy("posicion_enemiga", ios_base::in | ios_base::out);
+		fstream position_enemy(argv[5], ios_base::in | ios_base::out);
 		if(!position_enemy.is_open()) cout << "No se puedo abrir el archivo 'posicion enemiga'" << endl;
 		position_enemy.precision(20);
 		position_enemy.setf(ios::scientific,ios::floatfield);
@@ -106,7 +106,7 @@ int main(int argc, char** argv){
 		wd.position_enemy[data_amount-1].first = new Vector<double>(ls.usingLU());
 		//double cond_number = wd.A.K();												//dato para la segunda coordenada de la tupla
 		double cond_number = 0;
-		wd.position_enemy[data_amount-1].second = cond_number;
+		wd.position_enemy[data_amount-1].second = cond_number;							//no usamos esta coordenada de la tupla
 
 		/* Me posiciono al final del archivo */
 		position_enemy.seekp(0,ios_base::end);
