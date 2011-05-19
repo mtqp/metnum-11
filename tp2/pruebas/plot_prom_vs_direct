@@ -1,0 +1,22 @@
+#!/usr/bin/gnuplot -persist
+load 'plot_style'
+
+set key top right
+
+#le pone titulo al grafico
+set title "Distancia a la posicion exacta en funcion del turno"
+
+#pone la descripccion de los ejes
+set xlabel "Turno"
+set ylabel "Distancia a la solución exacta"
+
+set logscale y
+
+set output 'graficos/prom_vs_direct.eps'
+plot 'data/prom_vs_direct.dat' using 1:2 title "Promedio" with lines,\
+	 'data/prom_vs_direct.dat' using 1:3 title "Directo" with lines
+	 
+#pongo la salida default para mostrar en pantalla
+set term pop
+set output
+replot
