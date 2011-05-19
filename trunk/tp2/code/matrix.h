@@ -263,7 +263,7 @@ void Matrix<T> :: Gauss_LU(bool L){
 		T coefficient;
 		for(uInt j=1; j<=_dim; j++){
 			maxCol = this->maxUnderDiag(j);
-			if((this->getValue(maxCol,j))>EPSILON_ERROR){			//si es cero se pasa a la otra columna, ya esta lo que queremos
+			if(abs(this->getValue(maxCol,j))>EPSILON_ERROR){			//si es cero se pasa a la otra columna, ya esta lo que queremos
 				this->swapFi(j,maxCol);
 				_P.swap(j,maxCol);
 				for(uInt i=j+1; i<=_dim; i++){

@@ -11,12 +11,12 @@ class WarpCannon{
 		WarpCannon(warpData wd, uInt dim);
 		~WarpCannon();
 	
-		attackData attack();	//genera matrix mal condicionada y multiplicar x vector
+		attackData attack() const;	//genera matrix mal condicionada y multiplicar x vector
 
 	private:
 		//Strategy setStrategy();
-		Vector<double> getAimPosition();
-		Matrix<double> getMatrixAttack(Vector<double> attack_point);
+		Vector<double> getAimPosition() const;
+		Matrix<double> getMatrixAttack(const Vector<double> attack_point) const;
 	
 		uInt _dim;
 		uInt  _turn;
