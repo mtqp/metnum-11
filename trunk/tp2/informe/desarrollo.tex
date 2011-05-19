@@ -14,7 +14,7 @@
 			En cada turno nuestra estrategia consiste en lo siguiente:
 			
 			\begin{enumerate}
-			\item Para resolver el sistema $A'y=d'$ decicimos usar métodos directos de resolución de sistemas de ecuaciones lineales. La elección se basa en que los métodos iterativos calculan $aproximaciones$ a la solución por lo que los elegiriamos sólo en el caso de no conocer un método que calcule la solución de forma $exacta$ o de ser este muy costoso.
+			\item Para resolver el sistema $A'y=d'$ decicimos usar métodos directos de resolución de sistemas de ecuaciones lineales. La elección se basa en que los métodos iterativos calculan $aproximaciones$ a la solución por lo que los elegiríamos sólo en el caso de no conocer un método que calcule la solución de forma $exacta$ o que este, sea muy costoso.
 				\begin{itemize}
 					\item \underline{Opción 1:} Buscamos la matriz inversa de A' (existe porque es parte de las reglas de la batalla) mediante el método de eliminación Gaussiana. Es decir, efectuamos a la matriz A' distintas trasformaciones lineales hasta convertirla en la matriz identidad. Al mismo tiempo hacemos dichas trasformaciones a la matriz identidad quedando en esta la inversa de A'.
 					Las transformaciones consisten en triangular superior e inferiormente A' y poner $unos$ en la diagonal.
@@ -23,12 +23,14 @@
 					\item \underline{Opción 2:} Hallamos la factorización $LU$ de $A'$ (si no existe, conseguimos $PLU$). Resolvemos el sistema $LUy=d'$. LLamamos $Ux=z$ y resolvemos usando sustitución hacia adelante el sistema $Lz=d'$. Una vez que conocemos $z$ obtenemos $x$ tal que $Ux=z$ utilizando sustitución en reversa. (Con $PLU$ es el mismo procedimiento pero permutando $d'$ según $P$).\\
 					
 					Elegimos este método ya que las matrices son cuadradas y la implementación es sencilla.\\
+					AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!!!!!!!!!!!!!!!!!!!!!!!!!!!!\\
 					PONER MAS MOTIVOS COMO COMPLEJIDAD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\\
+					AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!!!!!!!!!!!!!!!!!\\			
 				\end{itemize}
 			
 				La exactitud con la que calculemos la posición buscada $y$ depende del número de condición de la matriz $A'$, cuanto mayor es este número menor es la precisión del resultado obtenido. Se considera que alcanzamos al rival cuando $\left|| y' - y \right|| \leq 1$, donde $y'$ es la solución encontrada.
 				
-				Como creemos que el adversario va a utilizar matrices mal condicionadas para atacarnos, en cada turno estariamos calculando una posición errada de donde se encuentra. Por este motivo, decidimos usar la estrategia de disparar en el punto promedio de todos las posiciones calculadas hasta el momento de donde se situa. Esperamos de esta manera ir obteniendo cada vez mejores aproximaciones a donde se encuentra realmente.
+				Como creemos que el adversario va a utilizar matrices mal condicionadas para atacarnos, en cada turno estaríamos calculando una posición errada de donde se encuentra. Por este motivo, decidimos usar la estrategia de disparar en el punto promedio de todas las posiciones calculadas hasta el momento del ataque (utilizando la información de los ataques previos). Esperamos de esta manera ir obteniendo cada vez mejores aproximaciones a donde se encuentra realmente.
 			
 			
 			\item Para atacar necesitamos una matriz $A$ que al multiplicarla por nuestra posición resulte en un impacto en la posición deseada $d$. Es decir, necesitamos que $A$ cumpla $Ax=d$.
@@ -38,7 +40,7 @@
 			
 			Como debemos proveer al adversario de la matriz $A$ que usemos para el ataque tenemos que idear una estrategia para que nuestra posición no sea descubierta en el siguiente turno. La estrategia consiste en generar matrices mal condicionadas que a su vez sean inversibles (esto último por reglamento). En algunos turno usamos la matriz de Hilbert multiplicada por un escalar. 
 			
-			Para crear una matriz mal condicionada, generamos un único vector aleatorio de dimensión $n$ que resulta en las filas de dicha matriz. De esta manera tenemos una matriz cuyas filas son linealmente dependientes, por lo que la matriz no es inversible. Luego, sumamos a los elementos de la diagonal un $epsilon$ (Ver en las pruebas (secciones \texttt{Resultados} y \texttt{Discusión}) como fue elegido) obteniendo asi una matriz inversible y mal condicionada (JUSTIFICAR PORQUE).
+			Para crear una matriz mal condicionada, generamos un único vector aleatorio de dimensión $n$ que resulta en las filas de dicha matriz. De esta manera tenemos una matriz cuyas filas son linealmente dependientes, por lo que la matriz no es inversible. Luego, sumamos a los elementos de la diagonal un $epsilon$ (Ver en las pruebas (secciones \texttt{Resultados} y \texttt{Discusión}) como fue elegido) obteniendo asi una matriz inversible y mal condicionada. Este tipo de matrices poseen su determinante tendiendo a cero a medida que su dimensión crece, es decir, a pesar de ser inversible, esta muy cercana a dejar de serlo.
 			
 			Por último, para forzarla a satisfacer el sistema elegimos una columna $j$ de $A$ tal que el $j-esimo$ elemento de $x$ sea distinto de $cero$ ($x$ no es el vector nulo por precondición ya que es nuestra posición), sino los coeficientes de $A$ que pretendemos setear no tienen importancia, y consideramos incognitas sólo a los coeficientes de esa columna. Nos quedan así, $n$ incognitas y $n$ ecuaciones, por lo que podemos despejarlas y obtener la matriz final.
 			
@@ -49,7 +51,7 @@
 		\end{subsubsection}
 	\end{subsection}
 	\begin{subsection}{Implementación}
-		En primer lugar el desarrollo consistio en implementar módulos para las operaciones entre Matrices y Vectores que fuesen necesarias para resolver sistemas lineales. Esto implicaba también implementar el algoritmo de factorización LU y el algoritmo de eliminación Gaussiana ambos con pivoteo parcial para resolver el sistema lineal.\\
+		En primer lugar el desarrollo consistió en implementar módulos para las operaciones entre Matrices y Vectores que fueran necesarias para resolver sistemas lineales. Esto implicaba también implementar el algoritmo de factorización LU y el algoritmo de eliminación Gaussiana ambos con pivoteo parcial para resolver el sistema lineal.\\
 		
 		Escribimos el módulo \texttt{Matrix} que implementa una matriz en $\mathbb{R}^{nxn}$ con las siguientes operaciones:\\
 		
@@ -88,17 +90,17 @@
 		
 		Esta clase tiene un método privado que calcula la posición del enemigo.
 		
-		Nuestra primer idea fue hacer un promedio coordenada a coordenada dandole una prioridad distinta a cada vector (posición), dicha prioridad dependia del número de condición de la matriz que uso el oponente en ese turno. Es decir, $y$ tiene mayor prioridad que $z$ si y sólo si $K(A')<K(A)$ siendo $A'y=d'$ y $Az=d$.
+		Nuestra primer idea fue hacer un promedio coordenada a coordenada dandole una distinta prioridad a cada vector (posición), dicha prioridad dependía del número de condición de la matriz que uso el oponente en ese turno. Es decir, $y$ tiene mayor prioridad que $z$ si y sólo si $K(A')<K(A)$ siendo $A'y=d'$ y $Az=d$.
 		
-		Para lograr esto, teniamos un $array$ de $tuplas$ donde la primer coordenada correspondia al vector y la segunda al número de condición de la matriz asociada.
+		Para lograr esto, teníamos un $array$ de $tuplas$ donde la primer coordenada correspondía al vector y la segunda al número de condición de la matriz asociada.
 		
-		La idea finalmente implementada es una versión más simple (por cuestiones de tiempo), que sólo toma el promedio sin asignar prioridades. Igualmente quedo implementado con $tupla$ (ignorando la segunda coordenada).
+		La idea finalmente implementada es una versión más simple (por cuestiones de tiempo), que sólo toma el promedio sin asignar prioridades. Igualmente quedó implementado con $tupla$ (ignorando la segunda coordenada).
 	\end{subsection}
 	\begin{subsection}{Ideas descartadas}
 		Nuestra primer estrategia consistía en atacar con la matriz de Hilbert de orden $n$ una cierta cantidad de turnos (que pensabamos decidir mediante pruebas) y guardar en cada turno la posición del enemigo calculada. Una vez cumplida esa cantidad de turnos, sacar un promedio entre la información obtenida y disparar a esa posición sin ningun tipo de defensa.
 		
 		La ventaja de esta estrategia es que evitabamos tener que generar matrices mal condicionadas (ya que usabamos siempre la de Hilbert).
 		
-		La desventaja es que dado que estariamos atacando siempre con la misma matriz o un múltiplo de esta, el oponente estaria siempre calculando la misma posición (punto de ataque) y no generariamos nueva información al recibir los datos (en realidad depende de como genere la matriz de ataque el oponente a partir de tener el punto de ataque).
+		La desventaja es que dado que estaríamos atacando siempre con la misma matriz o un múltiplo de esta, el oponente estaria siempre calculando la misma posición (punto de ataque) y no generaríamos nueva información al recibir los datos. Esta conclusión es válida si y solo si el oponente posee como estrategia invertir la matriz pasada como parámetro y atacar a esa posición siempre de la misma forma. Como no podemos afirmar que esta estrategia no sea utilizada, esta idea fue descartada.
 	\end{subsection}
 \end{section}
