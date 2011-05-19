@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0
 %%Title: graficos/inv_vs_lu.eps
-%%Creator: gnuplot 4.2 patchlevel 5 
-%%CreationDate: Thu May 19 05:42:19 2011
+%%Creator: gnuplot 4.4 patchlevel 2
+%%CreationDate: Thu May 19 13:50:44 2011
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 554 770
 %%Orientation: Landscape
@@ -11,8 +11,8 @@
 /gnudict 256 dict def
 gnudict begin
 %
-% The following 6 true/false flags may be edited by hand if required
-% The unit line width may also be changed
+% The following true/false flags may be edited by hand if desired.
+% The unit line width and grayscale image gamma correction may also be changed.
 %
 /Color true def
 /Blacktext false def
@@ -21,9 +21,11 @@ gnudict begin
 /Landscape true def
 /Level1 false def
 /Rounded false def
+/ClipToBoundingBox false def
 /TransparentPatterns false def
 /gnulinewidth 5.000 def
 /userlinewidth gnulinewidth def
+/Gamma 1.0 def
 %
 /vshift -46 def
 /dl1 {
@@ -46,16 +48,24 @@ systemdict /pdfmark known not {
 SDict begin [
   /Title (graficos/inv_vs_lu.eps)
   /Subject (gnuplot plot)
-  /Creator (gnuplot 4.2 patchlevel 5 )
-  /Author (Carla,,,)
+  /Creator (gnuplot 4.4 patchlevel 2)
+  /Author (carla)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Thu May 19 05:42:19 2011)
+  /CreationDate (Thu May 19 13:50:44 2011)
   /DOCINFO pdfmark
 end
 } ifelse
+/doclip {
+  ClipToBoundingBox {
+    newpath 50 50 moveto 554 50 lineto 554 770 lineto 50 770 lineto closepath
+    clip
+  } if
+} def
 %
-% Gnuplot Prolog Version 4.2 (August 2006)
+% Gnuplot Prolog Version 4.4 (August 2010)
+%
+%/SuppressPDFMark true def
 %
 /M {moveto} bind def
 /L {lineto} bind def
@@ -65,6 +75,8 @@ end
 /Z {closepath} bind def
 /C {setrgbcolor} bind def
 /f {rlineto fill} bind def
+/g {setgray} bind def
+/Gshow {show} def   % May be redefined later in the file to support UTF-8
 /vpt2 vpt 2 mul def
 /hpt2 hpt 2 mul def
 /Lshow {currentpoint stroke M 0 vshift R 
@@ -85,6 +97,7 @@ end
 	dup 1 lt {pop 1} if 10 mul /udl exch def} def
 /PL {stroke userlinewidth setlinewidth
 	Rounded {1 setlinejoin 1 setlinecap} if} def
+3.8 setmiterlimit
 % Default Line colors
 /LCw {1 1 1} def
 /LCb {0 0 0} def
@@ -427,17 +440,18 @@ currentdict end definefont pop
      { 5 get 3 eq {gsave} {grestore} ifelse }
      {dup dup 0 get findfont exch 1 get scalefont setfont
      [ currentpoint ] exch dup 2 get 0 exch R dup 5 get 2 ne {dup dup 6
-     get exch 4 get {show} {stringwidth pop 0 R} ifelse }if dup 5 get 0 eq
+     get exch 4 get {Gshow} {stringwidth pop 0 R} ifelse }if dup 5 get 0 eq
      {dup 3 get {2 get neg 0 exch R pop} {pop aload pop M} ifelse} {dup 5
      get 1 eq {dup 2 get exch dup 3 get exch 6 get stringwidth pop -2 div
      dup 0 R} {dup 6 get stringwidth pop -2 div 0 R 6 get
      show 2 index {aload pop M neg 3 -1 roll neg R pop pop} {pop pop pop
      pop aload pop M} ifelse }ifelse }ifelse }
      ifelse }
-   forall} bind def
+   forall} def
+/Gswidth {dup type /stringtype eq {stringwidth} {pop (n) stringwidth} ifelse} def
 /MFwidth {0 exch { dup 5 get 3 ge { 5 get 3 eq { 0 } { pop } ifelse }
  {dup 3 get{dup dup 0 get findfont exch 1 get scalefont setfont
-     6 get stringwidth pop add} {pop} ifelse} ifelse} forall} bind def
+     6 get Gswidth pop add} {pop} ifelse} ifelse} forall} def
 /MLshow { currentpoint stroke M
   0 exch R
   Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
@@ -454,6 +468,7 @@ end
 %%Page: 1 1
 gnudict begin
 gsave
+doclip
 50 50 translate
 0.100 0.100 scale
 90 rotate
@@ -463,257 +478,257 @@ newpath
 (Helvetica) findfont 140 scalefont setfont
 1.000 UL
 LTb
-1022 448 M
+854 448 M
 63 0 V
-5905 0 R
+6030 0 R
 -63 0 V
 stroke
-938 448 M
+770 448 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 1e+06)]
 ] -46.7 MRshow
 1.000 UL
 LTb
-1022 699 M
+854 699 M
 31 0 V
-5937 0 R
+6062 0 R
 -31 0 V
-1022 1031 M
+854 1031 M
 31 0 V
-5937 0 R
+6062 0 R
 -31 0 V
-1022 1202 M
+854 1201 M
 31 0 V
-5937 0 R
+6062 0 R
 -31 0 V
--5937 80 R
+854 1282 M
 63 0 V
-5905 0 R
+6030 0 R
 -63 0 V
 stroke
-938 1282 M
+770 1282 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 1e+07)]
 ] -46.7 MRshow
 1.000 UL
 LTb
-1022 1534 M
+854 1533 M
 31 0 V
-5937 0 R
+6062 0 R
 -31 0 V
-1022 1866 M
+854 1865 M
 31 0 V
-5937 0 R
+6062 0 R
 -31 0 V
-1022 2036 M
+854 2036 M
 31 0 V
-5937 0 R
+6062 0 R
 -31 0 V
--5937 81 R
+854 2116 M
 63 0 V
-5905 0 R
+6030 0 R
 -63 0 V
 stroke
-938 2117 M
+770 2116 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 1e+08)]
 ] -46.7 MRshow
 1.000 UL
 LTb
-1022 2368 M
+854 2368 M
 31 0 V
-5937 0 R
+6062 0 R
 -31 0 V
-1022 2700 M
+854 2699 M
 31 0 V
-5937 0 R
+6062 0 R
 -31 0 V
-1022 2870 M
+854 2870 M
 31 0 V
-5937 0 R
+6062 0 R
 -31 0 V
--5937 81 R
+854 2951 M
 63 0 V
-5905 0 R
+6030 0 R
 -63 0 V
 stroke
-938 2951 M
+770 2951 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 1e+09)]
 ] -46.7 MRshow
 1.000 UL
 LTb
-1022 3202 M
+854 3202 M
 31 0 V
-5937 0 R
+6062 0 R
 -31 0 V
-1022 3534 M
+854 3534 M
 31 0 V
-5937 0 R
+6062 0 R
 -31 0 V
-1022 3705 M
+854 3704 M
 31 0 V
-5937 0 R
+6062 0 R
 -31 0 V
--5937 81 R
+854 3785 M
 63 0 V
-5905 0 R
+6030 0 R
 -63 0 V
 stroke
-938 3786 M
+770 3785 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 1e+10)]
 ] -46.7 MRshow
 1.000 UL
 LTb
-1022 4037 M
+854 4036 M
 31 0 V
-5937 0 R
+6062 0 R
 -31 0 V
-1022 4369 M
+854 4368 M
 31 0 V
-5937 0 R
+6062 0 R
 -31 0 V
-1022 4539 M
+854 4538 M
 31 0 V
-5937 0 R
+6062 0 R
 -31 0 V
--5937 81 R
+854 4619 M
 63 0 V
-5905 0 R
+6030 0 R
 -63 0 V
 stroke
-938 4620 M
+770 4619 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 1e+11)]
 ] -46.7 MRshow
 1.000 UL
 LTb
-1022 448 M
+854 448 M
 0 63 V
-0 4109 R
+0 4108 R
 0 -63 V
 stroke
-1022 308 M
+854 308 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 0)]
 ] -46.7 MCshow
 1.000 UL
 LTb
-1619 448 M
+1463 448 M
 0 63 V
-0 4109 R
+0 4108 R
 0 -63 V
 stroke
-1619 308 M
+1463 308 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 5)]
 ] -46.7 MCshow
 1.000 UL
 LTb
-2216 448 M
+2073 448 M
 0 63 V
-0 4109 R
+0 4108 R
 0 -63 V
 stroke
-2216 308 M
+2073 308 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 10)]
 ] -46.7 MCshow
 1.000 UL
 LTb
-2812 448 M
+2682 448 M
 0 63 V
-0 4109 R
+0 4108 R
 0 -63 V
 stroke
-2812 308 M
+2682 308 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 15)]
 ] -46.7 MCshow
 1.000 UL
 LTb
-3409 448 M
+3291 448 M
 0 63 V
-0 4109 R
+0 4108 R
 0 -63 V
 stroke
-3409 308 M
+3291 308 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 20)]
 ] -46.7 MCshow
 1.000 UL
 LTb
-4006 448 M
+3900 448 M
 0 63 V
-0 4109 R
+0 4108 R
 0 -63 V
 stroke
-4006 308 M
+3900 308 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 25)]
 ] -46.7 MCshow
 1.000 UL
 LTb
-4603 448 M
+4510 448 M
 0 63 V
-0 4109 R
+0 4108 R
 0 -63 V
 stroke
-4603 308 M
+4510 308 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 30)]
 ] -46.7 MCshow
 1.000 UL
 LTb
-5200 448 M
+5119 448 M
 0 63 V
-0 4109 R
+0 4108 R
 0 -63 V
 stroke
-5200 308 M
+5119 308 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 35)]
 ] -46.7 MCshow
 1.000 UL
 LTb
-5796 448 M
+5728 448 M
 0 63 V
-0 4109 R
+0 4108 R
 0 -63 V
 stroke
-5796 308 M
+5728 308 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 40)]
 ] -46.7 MCshow
 1.000 UL
 LTb
-6393 448 M
+6338 448 M
 0 63 V
-0 4109 R
+0 4108 R
 0 -63 V
 stroke
-6393 308 M
+6338 308 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 45)]
 ] -46.7 MCshow
 1.000 UL
 LTb
-6990 448 M
+6947 448 M
 0 63 V
-0 4109 R
+0 4108 R
 0 -63 V
 stroke
-6990 308 M
+6947 308 M
 [ [(Helvetica) 140.0 0.0 true true 0 ( 50)]
 ] -46.7 MCshow
 1.000 UL
 LTb
 1.000 UL
 LTb
-1022 4620 N
-0 -4172 V
-5968 0 V
-0 4172 V
--5968 0 V
+854 4619 N
+854 448 L
+6093 0 V
+0 4171 V
+-6093 0 V
 Z stroke
 LCb setrgbcolor
-280 2534 M
-currentpoint gsave translate 90 rotate 0 0 moveto
+112 2533 M
+currentpoint gsave translate -270 rotate 0 0 moveto
 [ [(Helvetica) 140.0 0.0 true true 0 (Distancia a la solución exacta)]
 ] -46.7 MCshow
 grestore
 LTb
 LCb setrgbcolor
-4006 98 M
+3900 98 M
 [ [(Helvetica) 140.0 0.0 true true 0 (Dimension de la matriz)]
 ] -46.7 MCshow
 LTb
-4006 4830 M
+3900 4829 M
 [ [(Helvetica) 140.0 0.0 true true 0 (Distancia a la solucion exacta del sistema en funcion de la dimension de la matriz usando inversa y LU)]
 ] -46.7 MCshow
 1.000 UP
@@ -721,137 +736,141 @@ LTb
 LTb
 1.000 UL
 LTb
-5751 511 N
+5708 511 N
 0 280 V
 1155 0 V
 0 -280 V
 -1155 0 V
 Z stroke
-5751 791 M
+5708 791 M
 1155 0 V
+% Begin plot #1
 1.000 UP
 stroke
 LT0
-LTb
-6339 721 M
+LCb setrgbcolor
+6296 721 M
 [ [(Helvetica) 140.0 0.0 true true 0 (Inversa)]
 ] -46.7 MRshow
 LT0
-1261 1812 Pls
-1380 1388 Pls
-1499 1526 Pls
-1619 2117 Pls
-1738 2614 Pls
-1858 2880 Pls
-1977 2716 Pls
-2096 3052 Pls
-2216 3321 Pls
-2335 3200 Pls
-2454 2987 Pls
-2574 3171 Pls
-2693 3169 Pls
-2812 3649 Pls
-2932 4316 Pls
-3051 3336 Pls
-3170 3464 Pls
-3290 3584 Pls
-3409 4052 Pls
-3529 3379 Pls
-3648 3816 Pls
-3767 3653 Pls
-3887 3827 Pls
-4006 3834 Pls
-4125 4025 Pls
-4245 3722 Pls
-4364 3833 Pls
-4483 3983 Pls
-4603 3959 Pls
-4722 4040 Pls
-4842 3883 Pls
-4961 3889 Pls
-5080 4072 Pls
-5200 3832 Pls
-5319 4241 Pls
-5438 4472 Pls
-5558 3964 Pls
-5677 4217 Pls
-5796 4238 Pls
-5916 4127 Pls
-6035 4349 Pls
-6154 4254 Pls
-6274 4230 Pls
-6393 4177 Pls
-6513 4203 Pls
-6632 4273 Pls
-6751 4200 Pls
-6871 4515 Pls
-6990 4305 Pls
-6622 721 Pls
+1098 1811 Pls
+1220 1388 Pls
+1341 1526 Pls
+1463 2116 Pls
+1585 2613 Pls
+1707 2879 Pls
+1829 2715 Pls
+1951 3052 Pls
+2073 3320 Pls
+2194 3199 Pls
+2316 2987 Pls
+2438 3170 Pls
+2560 3168 Pls
+2682 3648 Pls
+2804 4315 Pls
+2926 3335 Pls
+3047 3463 Pls
+3169 3583 Pls
+3291 4051 Pls
+3413 3378 Pls
+3535 3815 Pls
+3657 3652 Pls
+3779 3826 Pls
+3900 3833 Pls
+4022 4024 Pls
+4144 3722 Pls
+4266 3832 Pls
+4388 3982 Pls
+4510 3958 Pls
+4632 4039 Pls
+4754 3882 Pls
+4875 3888 Pls
+4997 4071 Pls
+5119 3832 Pls
+5241 4240 Pls
+5363 4471 Pls
+5485 3963 Pls
+5607 4216 Pls
+5728 4237 Pls
+5850 4126 Pls
+5972 4349 Pls
+6094 4253 Pls
+6216 4229 Pls
+6338 4176 Pls
+6460 4203 Pls
+6581 4272 Pls
+6703 4199 Pls
+6825 4514 Pls
+6947 4304 Pls
+6579 721 Pls
+% End plot #1
+% Begin plot #2
 1.000 UP
 1.000 UL
 LT1
-LTb
-6339 581 M
+LCb setrgbcolor
+6296 581 M
 [ [(Helvetica) 140.0 0.0 true true 0 (LU)]
 ] -46.7 MRshow
 LT1
-1261 1575 Crs
-1380 1045 Crs
-1499 1153 Crs
-1619 1883 Crs
-1738 2231 Crs
-1858 2696 Crs
-1977 2359 Crs
-2096 3089 Crs
-2216 3162 Crs
-2335 2852 Crs
-2454 2597 Crs
-2574 3019 Crs
-2693 3098 Crs
-2812 3232 Crs
-2932 2971 Crs
-3051 2941 Crs
-3170 2961 Crs
-3290 3013 Crs
-3409 3252 Crs
-3529 3368 Crs
-3648 3524 Crs
-3767 3444 Crs
-3887 3465 Crs
-4006 3428 Crs
-4125 3644 Crs
-4245 3043 Crs
-4364 3478 Crs
-4483 3684 Crs
-4603 3415 Crs
-4722 3419 Crs
-4842 3697 Crs
-4961 3530 Crs
-5080 3651 Crs
-5200 3583 Crs
-5319 3763 Crs
-5438 3782 Crs
-5558 3509 Crs
-5677 4013 Crs
-5796 3748 Crs
-5916 4029 Crs
-6035 3734 Crs
-6154 3676 Crs
-6274 4035 Crs
-6393 3745 Crs
-6513 3578 Crs
-6632 4050 Crs
-6751 3745 Crs
-6871 4021 Crs
-6990 3854 Crs
-6622 581 Crs
+1098 1575 Crs
+1220 1045 Crs
+1341 1153 Crs
+1463 1882 Crs
+1585 2231 Crs
+1707 2695 Crs
+1829 2359 Crs
+1951 3088 Crs
+2073 3161 Crs
+2194 2851 Crs
+2316 2596 Crs
+2438 3018 Crs
+2560 3098 Crs
+2682 3231 Crs
+2804 2971 Crs
+2926 2940 Crs
+3047 2960 Crs
+3169 3012 Crs
+3291 3251 Crs
+3413 3368 Crs
+3535 3523 Crs
+3657 3443 Crs
+3779 3465 Crs
+3900 3427 Crs
+4022 3644 Crs
+4144 3042 Crs
+4266 3477 Crs
+4388 3683 Crs
+4510 3415 Crs
+4632 3418 Crs
+4754 3696 Crs
+4875 3529 Crs
+4997 3650 Crs
+5119 3582 Crs
+5241 3762 Crs
+5363 3781 Crs
+5485 3508 Crs
+5607 4012 Crs
+5728 3747 Crs
+5850 4028 Crs
+5972 3734 Crs
+6094 3675 Crs
+6216 4035 Crs
+6338 3744 Crs
+6460 3577 Crs
+6581 4050 Crs
+6703 3744 Crs
+6825 4020 Crs
+6947 3853 Crs
+6579 581 Crs
+% End plot #2
 1.000 UL
 LTb
-1022 4620 N
-0 -4172 V
-5968 0 V
-0 4172 V
--5968 0 V
+854 4619 N
+854 448 L
+6093 0 V
+0 4171 V
+-6093 0 V
 Z stroke
 1.000 UP
 1.000 UL
