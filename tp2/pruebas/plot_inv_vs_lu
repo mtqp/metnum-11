@@ -4,7 +4,7 @@ load 'plot_style'
 set key bottom right
 
 #le pone titulo al grafico
-set title "Distancia a la solución exacta del sistena en funcion de la dimension de la matriz usando el método de la inversa y factorizacion LU"
+set title "Distancia a la solucion exacta del sistema en funcion de la dimension de la matriz usando inversa y LU"
 
 #pone la descripccion de los ejes
 set xlabel "Dimension de la matriz"
