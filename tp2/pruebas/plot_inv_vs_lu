@@ -16,6 +16,9 @@ set output 'graficos/inv_vs_lu.eps'
 plot 'data/inv_vs_lu.dat' using 1:2 title "Inversa" linestyle 1,\
 	 'data/inv_vs_lu.dat' using 1:3 title "LU" linestyle 2
 
+set output 'graficos/inv_vs_lu_promedio.eps'
+plot 'data/inv_vs_lu_promedio.dat' using 1:2 title "Inversa" linestyle 1,\
+	 'data/inv_vs_lu_promedio.dat' using 1:3 title "LU" linestyle 2
 
 #pongo la salida default para mostrar en pantalla
 set term pop
