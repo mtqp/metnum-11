@@ -1,8 +1,9 @@
 all: inv_vs_lu ajuste_epsilon
 	
-inv_vs_lu: plot_inv_vs_lu 
+inv_vs_lu: plot_inv_vs_lu
 	./plot_inv_vs_lu
 	ps2pdf graficos/inv_vs_lu.eps ../informe/graficos/inv_vs_lu.pdf
+	ps2pdf graficos/inv_vs_lu_promedio.eps ../informe/graficos/inv_vs_lu_promedio.pdf
 
 ajuste_epsilon: plot_ajuste_epsilon
 	./plot_ajuste_epsilon
