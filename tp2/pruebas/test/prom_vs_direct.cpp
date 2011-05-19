@@ -7,7 +7,8 @@
 
 extern const double EPSILON_ERROR;
 
-/* argv[1] --> hasta que dimension de matriz se quiere testear */
+/* argv[1] --> dimension de matriz se quiere testear 
+ * argv[2] --> cantidad de turnos a ejecutar */
 
 Matrix<double> getMatrixAttack(uInt _dim, const Vector<double> _position,const Vector<double> attack_point);
 
@@ -16,48 +17,46 @@ int main(int argc, char** argv){
 	cout.precision(20);
 	cout.setf(ios::scientific,ios::floatfield);
 
-	uInt dim = 5;
-	uInt turns = atoi(argv[1]);
+	uInt dim = atoi(argv[1]);
+	uInt turns = atoi(argv[2]);
 	double err_prom;
-	double err;
+	double err_direct;
 	
-	/* Posicion que intenta descubrir sin usar promedio */
-	Vector<double> my_position(dim);
-	my_position.createRandomVector();
-	
-	/* Matriz mal condicionada */
-	Matrix<double> my_bad_cond(dim,BadK);
-	
-	/* Ataque primer turno */
-	Vector<double> my_attack(dim);
-	my_attack = (my_bad_cond*my_position.traspuesta()).traspuesta();
-	
-	pair<Vector<double>*,double>* history_enemy_position;
-	history_enemy_position = new pair<Vector<double>*,double> [turns-1];
-	for(uInt k=0; k<turns-1; k++)
-		history_enemy_position[k].first = new Vector<double>(dim);
-
-	/* Posicion que intenta descubrir usando promedio */
+	/* Posicion del enemigo */
 	Vector<double> enemy_position(dim);
 	enemy_position.createRandomVector();
 	
 	/* Matriz mal condicionada */
 	Matrix<double> enemy_bad_cond(dim,BadK);
 	
-	/* Ataque primer turno */
+	/* Ataque del enemigo */
 	Vector<double> enemy_attack(dim);
 	enemy_attack = (enemy_bad_cond*enemy_position.traspuesta()).traspuesta();
+	
+	/* Nuestra posicion */
+	Vector<double> my_position(dim);
+	my_position.createRandomVector();
+	
+	pair<Vector<double>*,double>* history_enemy_position;
+	history_enemy_position = new pair<Vector<double>*,double> [turns-1];
+	for(uInt k=0; k<turns-1; k++)
+		history_enemy_position[k].first = new Vector<double>(dim);
 	
 	for(uInt i=2; i<=turns; i++){
 		
 		/*************************************************************/
 		/********************* Atacamos nosotros *********************/
 		/*************************************************************/
+		
 		linearSystem ls(enemy_bad_cond,enemy_attack);
 		
 		/* Resulvo el sistema para encontrar al enemigo */
 		Vector<double> lu(dim);
-		lu = ls.usingLU();
+		lu = ls.usingLU();					//ataque directo
+		
+		/*************************************************************/
+		/********************* Sacando promedio **********************/
+		/*************************************************************/
 		
 		/* Guardo las posiciones calculadas para sacar promedio */
 		*history_enemy_position[i-2].first = lu;
@@ -73,37 +72,27 @@ int main(int argc, char** argv){
 		/* Llamada a la funcion principal */
 		WarpCannon wp(wd,dim);
 		attackData wa(dim);
-		wa = wp.attack();
+		wa = wp.attack();					//en wa.d queda el punto donde dispara usando promedio
 		
 		/*************************************************************/
 		/********************* Ataca el enemigo **********************/
 		/*************************************************************/
-		linearSystem e_ls(my_bad_cond,my_attack);
+		Matrix<double> attack_matrix(dim,BadK);
+		enemy_bad_cond = attack_matrix;
 		
-		/* Resulvo el sistema para encontrar al enemigo */
-		Vector<double> e_lu(dim);
-		e_lu = e_ls.usingLU();
-		
-		Matrix<double> enemy_attack_matrix(dim);
-		enemy_attack_matrix = getMatrixAttack(dim, enemy_position, e_lu);
-		
-		/* Acomodo las cosas para el siguiente turno */
-		my_bad_cond = wa.A;
-		my_attack = wa.d;
-		
-		enemy_bad_cond = enemy_attack_matrix;
-		enemy_attack = e_lu;
-		
-		Vector<double> my_dif(dim);
-		Vector<double> enemy_dif(dim);
+		enemy_attack = (enemy_bad_cond*enemy_position.traspuesta()).traspuesta();		
+	
+		/* Saco las distancias */
+		Vector<double> prom_dif(dim);
+		Vector<double> direct_dif(dim);
 		for(uInt j=1; j<=dim; j++){
-			my_dif.setValue(abs(wa.d.getValue(j) - enemy_position.getValue(j)),j);
-			err_prom = my_dif.normDos();
-			enemy_dif.setValue(abs(e_lu.getValue(j) - my_position.getValue(j)),j);
-			err = enemy_dif.normDos();
+			prom_dif.setValue(abs(wa.d.getValue(j) - enemy_position.getValue(j)),j);
+			err_prom = prom_dif.normDos();
+			direct_dif.setValue(abs(lu.getValue(j) - enemy_position.getValue(j)),j);
+			err_direct = direct_dif.normDos();
 		}
 	
-		cout << i << " " << err_prom << " " << err << endl;
+		cout << i << " " << err_prom << " " << err_direct << endl;
 	}
 	
 	return 0;
