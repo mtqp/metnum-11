@@ -15,7 +15,7 @@ int main(int argc, char** argv){
 	cout.precision(20);
 	cout.setf(ios::scientific,ios::floatfield);
 
-	if(argc!=3 && argc!=6){
+	if(argc!=3 && argc!=5){
 		cout << "Error en el pasaje de parámetros" << endl;
 		exit(0);
 	}
@@ -48,7 +48,7 @@ int main(int argc, char** argv){
 	position.close();
 
 	/* Si no es el primer turno */
-	if(argc==6){
+	if(argc==5){
 		ifstream ultimo(argv[3]);
 		if(!ultimo.is_open()) cout << "No se puedo abrir el archivo: " << argv[3] << endl;
 
@@ -81,7 +81,7 @@ int main(int argc, char** argv){
 		ultimo.close();
 		
 		/* Leo los datos de las posiciones del enemigo calculadas anteriormente */
-		fstream position_enemy(argv[5], ios_base::in | ios_base::out);
+		fstream position_enemy("posicion_enemiga", ios_base::in | ios_base::out);
 		if(!position_enemy.is_open()) cout << "No se puedo abrir el archivo 'posicion enemiga'" << endl;
 		position_enemy.precision(20);
 		position_enemy.setf(ios::scientific,ios::floatfield);

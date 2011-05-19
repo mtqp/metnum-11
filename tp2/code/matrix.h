@@ -56,7 +56,7 @@ class Matrix : public MatrixBase<T>{
 		T  	 normF() const;
 		
 		void createId(uInt dim);
-		void createBadK(uInt dim);
+		bool createBadK(uInt dim);
 		void createHilbertMatrix(uInt dim);
 		
 		uInt _dim;
@@ -98,12 +98,20 @@ template <typename T>
 Matrix<T> :: Matrix(uInt dim, MatrixType type) : MatrixBase<T>(dim, dim), _P(dim){
 	_dim = dim;
 	for(uInt k=1;k<=_dim;k++) _P.setValue(k,k);
+	uInt attempts;
+	bool invertible;
 	switch(type){
 		case(ID):
 			createId(dim);
 			break;
 		case(BadK):
-			createBadK(dim);
+			attempts = 0;
+			invertible = this->createBadK(dim);
+			while(!invertible && attempts<tolerance){
+				invertible = this->createBadK(dim);
+				attempts++;
+			}
+			if(!invertible) this->createHilbertMatrix(dim);
 			break;
 		case(Hilbert):
 			createHilbertMatrix(dim);
@@ -339,7 +347,7 @@ void Matrix<T> :: createId(uInt dim){
 }
 
 template <typename T>
-void Matrix<T> :: createBadK(uInt dim) {
+bool Matrix<T> :: createBadK(uInt dim) {
 	uInt mode = rand()%10;
 	if(mode==0 && dim>4){							//para matrices chicas el num de cond de Hilbert no es tan malo
 		//matrix de hilbert por un coef
@@ -362,6 +370,7 @@ void Matrix<T> :: createBadK(uInt dim) {
 					this->setValue(randomV.getValue(j)+epsilon,i,j);
 			}
 	}
+	return this->isInversible();
 }
 
 /* Matriz de Hilbert de orden dim */
