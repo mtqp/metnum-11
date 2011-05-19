@@ -14,7 +14,7 @@
 			En cada turno nuestra estrategia consiste en lo siguiente:
 			
 			\begin{enumerate}
-			\item Para resolver el sistema $A'y=d'$ decicimos usar métodos directos de resolución de sistemas de ecuaciones lineales.
+			\item Para resolver el sistema $A'y=d'$ decicimos usar métodos directos de resolución de sistemas de ecuaciones lineales. La elección se basa en que los métodos iterativos calculan $aproximaciones$ a la solución por lo que los elegiriamos sólo en el caso de no conocer un método que calcule la solución de forma $exacta$ o de ser este muy costoso.
 				\begin{itemize}
 					\item \underline{Opción 1:} Buscamos la matriz inversa de A' (existe porque es parte de las reglas de la batalla) mediante el método de eliminación Gaussiana. Es decir, efectuamos a la matriz A' distintas trasformaciones lineales hasta convertirla en la matriz identidad. Al mismo tiempo hacemos dichas trasformaciones a la matriz identidad quedando en esta la inversa de A'.
 					Las transformaciones consisten en triangular superior e inferiormente A' y poner $unos$ en la diagonal.
@@ -38,7 +38,7 @@
 			
 			Como debemos proveer al adversario de la matriz $A$ que usemos para el ataque tenemos que idear una estrategia para que nuestra posición no sea descubierta en el siguiente turno. La estrategia consiste en generar matrices mal condicionadas que a su vez sean inversibles (esto último por reglamento). En algunos turno usamos la matriz de Hilbert multiplicada por un escalar. 
 			
-			Para crear una matriz mal condicionada, generamos un único vector aleatorio de dimensión $n$ que resulta en las filas de dicha matriz. De esta manera tenemos una matriz cuyas filas son linealmente dependientes, por lo que la matriz no es inversible. Luego, sumamos a los elementos de la diagonal un $epsilon$ (Ver en las pruebas (secciones Resultados y Discusión) como fue elegido) obteniendo asi una matriz inversible y mal condicionada (JUSTIFICAR PORQUE).
+			Para crear una matriz mal condicionada, generamos un único vector aleatorio de dimensión $n$ que resulta en las filas de dicha matriz. De esta manera tenemos una matriz cuyas filas son linealmente dependientes, por lo que la matriz no es inversible. Luego, sumamos a los elementos de la diagonal un $epsilon$ (Ver en las pruebas (secciones \texttt{Resultados} y \texttt{Discusión}) como fue elegido) obteniendo asi una matriz inversible y mal condicionada (JUSTIFICAR PORQUE).
 			
 			Por último, para forzarla a satisfacer el sistema elegimos una columna $j$ de $A$ tal que el $j-esimo$ elemento de $x$ sea distinto de $cero$ ($x$ no es el vector nulo por precondición ya que es nuestra posición), sino los coeficientes de $A$ que pretendemos setear no tienen importancia, y consideramos incognitas sólo a los coeficientes de esa columna. Nos quedan así, $n$ incognitas y $n$ ecuaciones, por lo que podemos despejarlas y obtener la matriz final.
 			

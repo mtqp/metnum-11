@@ -1,9 +1,22 @@
 \begin{section}{Resultados}
-	El siguiente gráfico se realizó para ajustar un parámetro ($epsilon$) del programa que sirve para generar las matrices mal condicionadas. Recordar que una matriz mal condicionada se construye a partir de un vector que resulta en las filas de la misma y luego se le suma el $epsilon$ a los elementos de la diagonal para que quede inversible.
+	El siguiente gráfico se realizó para ajustar un parámetro ($epsilon$) del programa que sirve para generar las
+	matrices mal condicionadas. Recordar que una matriz mal condicionada se construye a partir de un vector que 
+	resulta en las filas de la misma y luego se le suma el $epsilon$ a los elementos de la diagonal para que quede 
+	inversible.
 	
-	Con esta prueba esperamos ver que cuanto menor es el $epsilon$ mayor es el número de condición de la matriz debido a que las filas están más cerca de ser linealmente dependientes y por ende la matriz más cerca de ser singular.
+	Con esta prueba esperamos ver que cuanto menor es el $epsilon$ mayor es el número de condición de la matriz
+	 debido a que las filas están más cerca de ser linealmente dependientes y por ende la matriz más cerca de ser
+	  singular.
 
-	El gráfico muestra el número de condición de la matriz en función de su dimensión para los siguientes valores de $epsilon$: $1$, $1e^{-1}$, $1e^{-2}$, $1e^{-3}$, $1e^{-4}$, $1e^{-5}$ y $1e^{-6}$. Corrimos las pruebas para matrices de dimensión $2$ a dimensión $50$.
+	El gráfico muestra el número de condición de la matriz en función de su dimensión para los siguientes valores de
+	$epsilon$: $1$, $1e^{-1}$, $1e^{-2}$, $1e^{-3}$, $1e^{-4}$, $1e^{-5}$ y $1e^{-6}$. Elegimos esos valores de
+	$epsilon$ ya que para generarlos tenemos una variable $v$ ($unsigned\;int$) que itera por los multiplos de $10$ 
+	(empezando en $1$),	siendo $epsilon$ igual a $1.0/v$. El mayor multiplo de $10$ que $v$ es capaz de almacenar es $1e^9$ 
+	pero con $epsilon$ igual a $1e^{-7}$, $1e^{-8}$ y $1e^{-9}$ las matrices generadas quedaban singulares en muchas
+	ocasiones, suponemos que eso se debe a que estos valores de $epsilon$ ya son despreciables ($cero$) y al sumarle 
+	ese valor a la diagonal no conseguimos filas linealmente dependientes como queremos.
+	
+	Corrimos las pruebas para matrices de dimensión $2$ a dimensión $50$.
 	El eje que corresponde al \texttt{número de condición} está en escala logarítmica para poder apreciar mejor los valores correspondientes dado que estos crecen exponencialmente.
 
 	\begin{figure}[H]
