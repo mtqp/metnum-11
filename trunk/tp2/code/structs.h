@@ -23,11 +23,4 @@ struct attackData{
 	attackData(uInt dim) : A(dim), d(dim){}
 };
 
-/*
-enum Strategy{
-	attack,
-	disguise,
-	fail
-};*/
-
 #endif

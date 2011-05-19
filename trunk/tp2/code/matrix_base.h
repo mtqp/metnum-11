@@ -161,7 +161,6 @@ bool MatrixBase<T> :: operator==(const MatrixBase<T> &mb) const {
 	for(uInt i=0; i<this->_dimFi && eq; i++)
 		for(uInt j=0; j<this->_dimCol && eq; j++)
 			eq = abs(this->_matrix[i][j] - mb._matrix[i][j]) < ::EPSILON_ERROR;
-			//eq = this->_matrix[i][j] == mb._matrix[i][j];
 	
 	return eq;
 }
