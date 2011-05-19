@@ -17,10 +17,20 @@
 	bajo una escala logarítmica el número de condición de la matriz crece linealmente conforme aumenta su dimensión.
 	
 	Teniendo en cuenta los resultados aquí expuestos y considerando las restricciones impuestas en el valor de 
-	$epsilon$ (ver sección \texttt{Resultados}) decidimos que $1e^{-6}$ es el valor adecuado.
+	$epsilon$ (ver sección \texttt{Resultados}) decidimos que $1e^{-6}$ es el valor adecuado.\\
 	
 	Analizando el segundo gráfico, vemos que la implementación utilizando el algoritmo de factorización LU conseguimos soluciones más aproximadas a la exacta. PORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQU
 	EPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPO
 	RQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPORQUEPOR
-	QUEPORQUEPORQUEPORQUEPORQUEPORQUE
+	QUEPORQUEPORQUEPORQUEPORQUEPORQUE\\
+	
+	
+	El último gráfico adjuntado, (Figura:\ref{fig:prom_vs_direct}) refuta nuestra hipotesis, es decir, demuestra que nuestra estrategia de ir aproximandonos al enemigo mediante el promedio de las posiciones claculadas hasta el momento no resulta en lo esperado. Vemos que tomar el promedio resulta en una mejora muy lenta, en $500$ turnos logramos refinar la punteria en aproximadamente un orden de magnitud, lo cual no nos sirve ya que la distancia de la posición calculada por nosotros a la posición real del enemigo es de varios ordenes de magnitud y la batalla dura pocos turnos.
+	
+	Tomar el promedio estabiliza la precisión del disparo y se acerca progresivamente al enemigo mientras que los disparos directos son muy disperso, es decir, el error cometido en estos disparos es muy variable. Esto nos lleva a pensar en la conveniecia de disparar directamente, pero vemos entonces el problema de que si la matriz tiene una dimensión grande el error cometido es siempre excesivo y nunca dariamos con el oponente.
+	
+	Este gráfico nos lleva a pensar en dos posibilidades, o tenemos un mal algoritmo para la resolución de sistemas de ecuaciones o no tenemos una buena estrategia para hallar al enemigo a partir de los datos disponibles.\\
+
+	\underline{NOTA:} Se utilizó factorización LU para la resolución del sistema de ecuaciones lineales porque vimos en (Figura:\ref{fig:inv_vs_lu}) que es más preciso en comparación a la otra opción disponible (Inversa). 
+
 \end{section}
