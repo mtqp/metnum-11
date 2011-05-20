@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="..\..\tp2\code\main.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="545" topLine="6" />
+	</File>
+	<File name="..\..\tp2\code\matrix.h" open="1" top="0" tabpos="3">
+		<Cursor position="7847" topLine="325" />
+	</File>
+	<File name="..\..\tp2\code\vector.h" open="1" top="0" tabpos="4">
+		<Cursor position="3935" topLine="179" />
+	</File>
+	<File name="..\..\tp2\code\warp_cannon.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="1653" topLine="75" />
+	</File>
+</CodeBlocks_layout_file>

@@ -1,0 +1,56 @@
+# depslib dependency file v1.0
+1304138318 source:f:\back\tp2\code\matrix_exceptions.cpp
+	"matrix_exceptions.h"
+
+1304138318 f:\back\tp2\code\matrix_exceptions.h
+	"includes.h"
+
+1305319586 f:\back\tp2\code\includes.h
+	<cmath>
+	<iostream>
+	<cstdlib>
+	<cstdio>
+	<cstring>
+	<exception>
+	<fstream>
+	<ctime>
+
+1305311020 source:f:\back\tp2\code\warp_cannon.cpp
+	"warp_cannon.h"
+
+1305095896 f:\back\tp2\code\warp_cannon.h
+	"includes.h"
+	"structs.h"
+	"matrix.h"
+	"vector.h"
+
+1305094620 f:\back\tp2\code\structs.h
+	<utility>
+	"includes.h"
+	"matrix.h"
+	"vector.h"
+
+1305320414 f:\back\tp2\code\matrix.h
+	"includes.h"
+	"vector.h"
+	"matrix_base.h"
+	"matrix_exceptions.h"
+
+1305320728 f:\back\tp2\code\vector.h
+	"includes.h"
+	"matrix_exceptions.h"
+	"matrix_base.h"
+
+1304954334 f:\back\tp2\code\matrix_base.h
+	"includes.h"
+	"matrix_exceptions.h"
+
+1305320328 source:f:\back\tp2\code\main.cpp
+	<iostream>
+	<fstream>
+	"includes.h"
+	"structs.h"
+	"matrix.h"
+	"vector.h"
+	"warp_cannon.h"
+
