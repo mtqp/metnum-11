@@ -17,13 +17,12 @@
 	bajo una escala logarítmica el número de condición de la matriz crece linealmente conforme aumenta su dimensión.
 	
 	Teniendo en cuenta los resultados aquí expuestos y considerando las restricciones impuestas en el valor de 
-	$epsilon$ (ver sección \texttt{Resultados}) decidimos que $1e^{-6}$ es el valor adecuado.\\
+	$epsilon$ (ver sección \texttt{Resultados}) decidimos que $1e^{-6}$ es el valor adecuado.\pa
 	
-	Analizando el segundo gráfico, vemos que la implementación utilizando el algoritmo de factorización LU conseguimos soluciones más aproximadas a la exacta. Existe mayor propagación de errores en el cálculo de la inversa mediante el método de Gauss. Suponemos que esta diferencia es proporcional a la cantidad de cálculos y al tipo de matrices utilizadas para resolver el sistema. Cada una de las matrices que se obtienen mediante la factorización LU (es decir la L, y la U), poseen a lo sumo la mitad de elementos no nulos y la diagonal. Cuando estas matrices se multiplican por el vector correspondiente (sustitución reversa y sustitución hacia adelante), al ser triangulares, existe menor propagación de errores que al multiplicar la inversa por el vector.
+	Analizando el segundo gráfico (Figura:\ref{fig:inv_vs_lu}), vemos que la implementación utilizando el algoritmo de factorización LU conseguimos soluciones más aproximadas a la exacta. Existe mayor propagación de errores en el cálculo de la inversa mediante el método de Gauss. Suponemos que esta diferencia es proporcional a la cantidad de cálculos y al tipo de matrices utilizadas para resolver el sistema. Cada una de las matrices que se obtienen mediante la factorización LU (es decir la L, y la U), poseen a lo sumo la mitad de elementos no nulos y la diagonal. Cuando estas matrices se multiplican por el vector correspondiente (sustitución reversa y sustitución hacia adelante), al ser triangulares, existe menor propagación de errores que al multiplicar la inversa por el vector.
 	
-	A partir del gráfico suponemos que resolver un sistema mediante el método de la inversa implica mayor cantidad de operaciones y/u operaciones que propagan errores más grandes que resolverlo por el método de factorización LU. 
-	
-	
+	A partir del gráfico suponemos que resolver un sistema mediante el método de la inversa implica mayor cantidad de operaciones y/u operaciones que propagan errores más grandes que resolverlo por el método de factorización LU.\pa
+		
 	El último gráfico adjuntado, (Figura:\ref{fig:prom_vs_direct}) refuta nuestra hipotesis, es decir, demuestra que nuestra estrategia de ir aproximandonos al enemigo mediante el promedio de las posiciones claculadas hasta el momento no resulta en lo esperado. Vemos que tomar el promedio es una mejora muy lenta, en $500$ turnos logramos refinar la punteria en aproximadamente un orden de magnitud, lo cual no nos sirve ya que la distancia de la posición calculada por nosotros a la posición real del enemigo es de varios ordenes de magnitud y la batalla dura pocos turnos.
 	
 	Tomar el promedio estabiliza la precisión del disparo y se acerca progresivamente al enemigo mientras que los disparos directos son muy disperso, es decir, el error cometido en estos disparos es muy variable. Esto nos lleva a pensar en la conveniecia de disparar directamente, pero vemos entonces el problema de que si la matriz tiene una dimensión grande el error cometido es siempre excesivo y nunca dariamos con el oponente.
