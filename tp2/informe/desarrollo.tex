@@ -94,10 +94,13 @@
 		La idea finalmente implementada es una versión más simple (por cuestiones de tiempo), que sólo toma el promedio sin asignar prioridades. Igualmente quedó implementado con $tupla$ (ignorando la segunda coordenada).
 	\end{subsection}
 	\begin{subsection}{Ideas descartadas}
-		Nuestra primer estrategia consistía en atacar con la matriz de Hilbert de orden $n$ una cierta cantidad de turnos (que pensabamos decidir mediante pruebas) y guardar en cada turno la posición del enemigo calculada. Una vez cumplida esa cantidad de turnos, sacar un promedio entre la información obtenida y disparar a esa posición sin ningun tipo de defensa.
+		Nuestra primer estrategia consistía en atacar con la matriz de Hilbert de orden $n$ una cierta cantidad de turnos (que pensabamos decidir mediante pruebas) y guardar en cada turno la posición del enemigo calculada. Una vez cumplida esa cantidad de turnos, sacar un promedio entre la información obtenida y disparar a esa posición sin ningún tipo de defensa.
 		
 		La ventaja de esta estrategia es que evitabamos tener que generar matrices mal condicionadas (ya que usabamos siempre la de Hilbert).
 		
-		La desventaja es que dado que estaríamos atacando siempre con la misma matriz o un múltiplo de esta, el oponente estaria siempre calculando la misma posición (punto de ataque) y no generaríamos nueva información al recibir los datos. Esta conclusión es válida si y solo si el oponente posee como estrategia invertir la matriz pasada como parámetro y atacar a esa posición siempre de la misma forma. Como no podemos afirmar que esta estrategia no sea utilizada, esta idea fue descartada.
-	\end{subsection}
+		La desventaja es que al estar atacando siempre con la misma matriz o un múltiplo de esta, el oponente estaría siempre calculando la misma posición (punto de ataque) y no generaríamos nueva información al recibir los datos. Esta conclusión es válida si y solo si el oponente posee como estrategia invertir la matriz pasada como parámetro y atacar a esa posición siempre de la misma forma. Como no podemos afirmar que esta estrategia no sea utilizada, esta idea fue descartada.
+		
+		Se propuso una mejora a este sistema, la cual fue generar matrices aleatoreas mal condicionadas distintas de la matriz de Hilbert o un múltiplo de ella. La idea entonces se mantenía; se enviarían matrices mal condicionadas, apuntando siempre a cualquier lugar, hasta tener información suficiente sobre la posición del contraincante para atacar. Nos pareció una idea viable, siempre que el enemigo no tenga la misma estrategia que nosotros, ya que de ser así, no recolectaríamos ningún tipo de información útil.
+		
+		Posterior a la última opción mencionada, encontramos la forma de generar matrices mal condicionadas que apunten a donde nosotros querramos, pudiendo evitar (o por lo menos intentar evitar) que nuestra posición sea develada al momento de atacar. De esta forma la estrategía de disparar a cualquier lado pierde sentido, ya que siempre se le envía matrices diferentes (por lo tanto siempre se obtiene información diferente y potencialmente útil) y atacar no implica necesariamente exponer nuestra posición real.	\end{subsection}
 \end{section}
