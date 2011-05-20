@@ -40,9 +40,9 @@ int main(int argc, char** argv){
 			lu = ls.usingLU();
 				
 			for(uInt j=1; j<=dim; j++){
-				inv.setValue(abs(inv.getValue(j) - pos.getValue(j)),j);
+				inv.setValue(inv.getValue(j) - pos.getValue(j),j);
 				err_inv += inv.normDos();
-				lu.setValue(abs(lu.getValue(j) - pos.getValue(j)),j);
+				lu.setValue(lu.getValue(j) - pos.getValue(j),j);
 				err_lu += lu.normDos();
 			}
 		}
