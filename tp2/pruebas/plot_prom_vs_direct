@@ -8,7 +8,7 @@ set title "Distancia a la posicion exacta en funcion del turno"
 
 #pone la descripccion de los ejes
 set xlabel "Turno"
-set ylabel "Distancia a la solución exacta"
+set ylabel "Distancia a la solucion exacta"
 
 set logscale y
 

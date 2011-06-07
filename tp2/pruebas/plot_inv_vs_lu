@@ -8,7 +8,7 @@ set title "Distancia a la solucion exacta del sistema en funcion de la dimension
 
 #pone la descripccion de los ejes
 set xlabel "Dimension de la matriz"
-set ylabel "Distancia a la solución exacta"
+set ylabel "Distancia a la solucion exacta"
 
 set logscale y
 
