@@ -62,7 +62,7 @@ void Spline :: print(uint polynomial){
 	if(polynomial<=0 || polynomial>=amount_control)
 		cout << "No existe tal polinomio " << endl;
 	else{
-		cout << "S_" << polynomial << " = ";
+		//cout << "S_" << polynomial << " = ";
 		double x_ = x[p];
 		cout << d[p] << "(x - " << x_ << ")^3 + " << c[p] << "(x - " << x_ << ")^2 + " << b[p] << "(x - " << x_ << ") + " << a[p] << endl;
 	}
