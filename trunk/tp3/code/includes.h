@@ -4,6 +4,8 @@
 #include <cmath>
 #include <iostream>
 #include <fstream>
+#include <utility>
+#include <cstdlib>
 
 using namespace std;
 
