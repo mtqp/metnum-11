@@ -11,14 +11,14 @@ enum ParamType{
 
 class Parametrization{
 	public:
-		Parametrization(uint n, double* x, double* y, ParamType type);
+		Parametrization(uint n, pair* xy, ParamType type);
 		~Parametrization();
 		
 		double* data();
 		
 	private:
 		double dist(double x1, double y1, double x2, double y2);
-	
+
 		double* t;
 };
 
