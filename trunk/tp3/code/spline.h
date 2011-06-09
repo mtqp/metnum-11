@@ -8,6 +8,7 @@ class Spline{
 		Spline(uint n, double* x, double* f_x);
 		~Spline();
 		
+		double evaluate(double t);
 		void print(uint polynomial);			//imprime un polinomio
 		
 	private:

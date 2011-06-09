@@ -1,6 +1,6 @@
 #include "parametrization.h"
 
-Parametrization :: Parametrization(uint n, double* x, double* y, ParamType type){
+Parametrization :: Parametrization(uint n, pair* xy, ParamType type){
 	t = new double [n];
 	switch(type){
 		case(Uniform):
@@ -9,7 +9,7 @@ Parametrization :: Parametrization(uint n, double* x, double* y, ParamType type)
 		case(Chord_length):
 			t[0]=0;
 			for(int i=1; i<n; i++)
-				t[i] = t[i-1] + dist(x[i-1], y[i-1], x[i], y[i]);
+				t[i] = t[i-1] + dist(xy[i-1].first, xy[i-1].second, xy[i].first, xy[i].second);
 			break;
 		case(Centripetal):
 			cout << "Falta implementar" << endl;
@@ -17,7 +17,9 @@ Parametrization :: Parametrization(uint n, double* x, double* y, ParamType type)
 	}
 }
 
-Parametrization :: ~Parametrization(){}
+Parametrization :: ~Parametrization(){
+	delete [] t;
+}
 
 double* Parametrization :: data(){
 	return t;

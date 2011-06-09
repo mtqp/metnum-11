@@ -57,12 +57,18 @@ Spline :: ~Spline(){
 	delete [] d;
 }
 
+double Spline :: evaluate(double t){
+	uint i = 0;
+	while( x[i+1] < t && i+1 < amount_control ) i++;
+	double h = (t - x[i]);
+	return a[i] + b[i]*h + c[i]*h*h + d[i]*h*h*h;
+}
+
 void Spline :: print(uint polynomial){
 	uint p = polynomial - 1;
 	if(polynomial<=0 || polynomial>=amount_control)
 		cout << "No existe tal polinomio " << endl;
 	else{
-		//cout << "S_" << polynomial << " = ";
 		double x_ = x[p];
 		cout << d[p] << "(x - " << x_ << ")^3 + " << c[p] << "(x - " << x_ << ")^2 + " << b[p] << "(x - " << x_ << ") + " << a[p] << endl;
 	}
