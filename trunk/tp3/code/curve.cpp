@@ -22,7 +22,7 @@ Curve :: ~Curve(){
 vector<pair> Curve :: sampling(uint m){
 	if(m<2) cout << "m debe ser mayor a 1 sino no se puede incluir a los extremos" << endl;
 	vector<pair> sampling(m);
-	double t_dist = 1/(m-1);
+	double t_dist = 1.0/(m-1);
 	double t = 0;
 	for(int i=0; i<m; i++){
 		sampling[i].first = (*S_x).evaluate(t);
