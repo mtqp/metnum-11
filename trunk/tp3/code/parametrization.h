@@ -17,8 +17,12 @@ class Parametrization{
 		vector<double> data();
 		
 	private:
-		double dist(double x1, double y1, double x2, double y2);
-
+		double point_dist(double x1, double y1, double x2, double y2);
+		double sum_all_dist(uint n, vector<pair> xy, bool centripetal);
+		void uniform(uint n, vector<pair> xy);
+		void non_uniform(uint n, vector<pair> xy, bool centripetal);
+		
+		double amount_control;
 		vector<double> t;
 };
 
