@@ -1,13 +1,15 @@
 #include "curve.h"
 
-Curve :: Curve(uint n, pair* xy, Parametrization t){
+Curve :: Curve(uint n, vector<pair> xy, Parametrization t){
 	amount_control = n;
-	double x[n];
-	double y[n];
+	
+	vector<double> x(n);
+	vector<double> y(n);
 	for(int i=0; i<n; i++){
 		x[i] = xy[i].first;
 		y[i] = xy[i].second;
 	}
+	
 	S_x = new Spline(n,t.data(),x);
 	S_y = new Spline(n,t.data(),y);
 }

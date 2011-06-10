@@ -24,7 +24,7 @@ int main(int argc, char** argv){
 	in >> m;
 	
 	/* Leo los puntos de control (x,y) */
-	pair xy[n];
+	vector<pair> xy(n);
 	for(int i=0; i<n; i++){
 		in >> xy[i].first;
 		in >> xy[i].second;
