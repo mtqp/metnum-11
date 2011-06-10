@@ -46,7 +46,7 @@ Spline :: ~Spline(){}
 
 double Spline :: evaluate(double t){
 	uint i = 0;
-	while( x[i+1] < t && i+1 < amount_control ) i++;
+	while(x[i+1] < t && i+1 < amount_control) i++;
 	double h = (t - x[i]);
 	return a[i] + b[i]*h + c[i]*h*h + d[i]*h*h*h;
 }
