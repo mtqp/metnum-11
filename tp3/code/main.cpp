@@ -49,7 +49,7 @@ int main(int argc, char** argv){
 	
 	Parametrization param(n,xy,Centripetal);
 	Curve curve(n,xy,param);
-	//curve.print();
+	curve.print();
 	vector<pair> sampling(m);
 	sampling = curve.sampling(m);
 	
