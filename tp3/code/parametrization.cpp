@@ -1,7 +1,6 @@
 #include "parametrization.h"
 
-Parametrization :: Parametrization(uint n, pair* xy, ParamType type){
-	t = new double [n];
+Parametrization :: Parametrization(uint n, vector<pair> xy, ParamType type) : t(n){
 	switch(type){
 		case(Uniform):
 			cout << "Falta implementar" << endl;
@@ -17,11 +16,9 @@ Parametrization :: Parametrization(uint n, pair* xy, ParamType type){
 	}
 }
 
-Parametrization :: ~Parametrization(){
-	delete [] t;
-}
+Parametrization :: ~Parametrization(){}
 
-double* Parametrization :: data(){
+vector<double> Parametrization :: data(){
 	return t;
 }
 

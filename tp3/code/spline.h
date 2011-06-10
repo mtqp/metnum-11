@@ -5,7 +5,7 @@
 
 class Spline{
 	public:
-		Spline(uint n, double* x, double* f_x);
+		Spline(uint n, vector<double> x, vector<double> f_x);
 		~Spline();
 		
 		double evaluate(double t);
@@ -13,11 +13,11 @@ class Spline{
 		
 	private:
 		uint amount_control;
-		double* x;
-		double* a;			//coeficientes independiente
-		double* b;			//coeficientes lineal
-		double* c;			//coeficientes cuadratico
-		double* d;			//coeficientes cubico
+		vector<double> x;
+		vector<double> a;			//coeficientes independiente
+		vector<double> b;			//coeficientes lineal
+		vector<double> c;			//coeficientes cuadratico
+		vector<double> d;			//coeficientes cubico
 };
 
 #endif

@@ -5,7 +5,7 @@
 
 class Curve{
 	public:
-		Curve(uint n, pair* xy, Parametrization t);
+		Curve(uint n, vector<pair> xy, Parametrization t);
 		~Curve();
 		
 		//funcion que modifique un punto
