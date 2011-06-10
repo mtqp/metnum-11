@@ -9,9 +9,9 @@ Spline :: Spline(uint n, vector<double> xs, vector<double> f_x) : x(n), a(n), b(
 	}
 	
 	vector<double> h(n-1);				//se interpreta desde cero (h_0, h_1, ..., h_n-1)
-	vector<double> alpha(n-2);			//se interpreta desde uno (alpha_1, alpha_2, ..., alpha_n-2)
+	vector<double> alpha(n-1);			//se interpreta desde uno (alpha_1, alpha_2, ..., alpha_n-2)
 	
-	for(uint i=0; i<n-2; i++){
+	for(uint i=0; i<n-1; i++){
 		h[i] = x[i+1] - x[i];
 		if(i!=0)
 			alpha[i] = (3/h[i])*(a[i+1] - a[i]) - (3/h[i-1])*(a[i] - a[i-1]);
@@ -25,7 +25,7 @@ Spline :: Spline(uint n, vector<double> xs, vector<double> f_x) : x(n), a(n), b(
 	u[0] = 0;
 	z[0] = 0;
 	
-	for(uint j=1; j<n-2; j++){
+	for(uint j=1; j<n-1; j++){
 			l[j] = 2*(x[j+1] - x[j-1]) - (h[j-1]*u[j-1]);
 			u[j] = h[j]/l[j];
 			z[j] = (alpha[j] - h[j-1]*z[j-1])/l[j];
