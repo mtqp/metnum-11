@@ -42,6 +42,10 @@ Spline :: Spline(uint n, vector<double> xs, vector<double> f_x) : x(n), a(n), b(
 	}
 }
 
+Spline :: Spline(const Spline& s) : x(s.x), a(s.a), b(s.b), c(s.c), d(s.d) {
+	this->amount_control = s.amount_control;
+}
+
 Spline :: ~Spline(){}
 
 double Spline :: evaluate(double t){
@@ -50,6 +54,44 @@ double Spline :: evaluate(double t){
 	double h = (t - x[i]);
 	return a[i] + b[i]*h + c[i]*h*h + d[i]*h*h*h;
 }
+
+vector<pair> Spline :: getControls()
+{
+	vector<pair> controls(amount_control);
+	
+	for(int i=0; i<amount_control; i++)
+	{
+		controls[i].first = x[i];
+		controls[i].second= a[i];
+	}
+	
+	return controls;
+}
+
+uint Spline :: amountControls(){
+	return amount_control;
+}
+
+Polynomial Spline :: getPolynom(uint polIndex)
+{
+	polIndex--;
+
+	if(polIndex < 0 || polIndex > amount_control-1)
+		cout << "No se puede obtener el polinomio pedido" << endl;
+	
+	int quantityCoefs = 4;
+	
+	vector<double> coefs(quantityCoefs);
+	coefs[0] = a[polIndex];
+	coefs[1] = b[polIndex];
+	coefs[2] = c[polIndex];
+	coefs[3] = d[polIndex];
+
+	Polynomial pol(coefs,quantityCoefs);
+	return pol;
+}
+
+
 
 void Spline :: print(uint polynomial){
 	uint p = polynomial - 1;

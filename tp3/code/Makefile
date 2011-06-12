@@ -1,5 +1,5 @@
-OBJS = parametrization.cpp spline.cpp curve.cpp
-OBJSo = parametrization.o spline.o curve.o
+OBJS = parametrization.cpp spline.cpp curve.cpp polynomial.cpp
+OBJSo = parametrization.o spline.o curve.o polynomial.o
 MATH = -lm
 CFLAGS = -ggdb 
 

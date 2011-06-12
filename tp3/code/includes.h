@@ -12,5 +12,6 @@ using namespace std;
 
 #define uint  unsigned int
 #define pair pair<double,double>
+#define EPSILON 1/100000000000000;		//CORREGIR!!!IUOASDVIAHIVHADFIUVHADFIHI
 
 #endif
