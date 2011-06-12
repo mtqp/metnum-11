@@ -2,15 +2,21 @@
 #define __SPLINE_H__
 
 #include "parametrization.h"
+#include "polynomial.h"
 
 class Spline{
 	public:
 		Spline(uint n, vector<double> x, vector<double> f_x);
+		Spline(const Spline& s);
 		~Spline();
 		
 		double evaluate(double t);
+		vector<pair> getControls();
+		uint amountControls();
+		Polynomial getPolynom(uint control);
+
 		void print(uint polynomial);			//imprime un polinomio
-		
+				
 	private:
 		uint amount_control;
 		vector<double> x;
