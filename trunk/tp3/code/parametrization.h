@@ -19,7 +19,7 @@ class Parametrization{
 	private:
 		double point_dist(double x1, double y1, double x2, double y2);
 		double sum_all_dist(uint n, vector<pair> xy, bool centripetal);
-		void uniform(uint n, vector<pair> xy);
+		void uniform(uint n);
 		void non_uniform(uint n, vector<pair> xy, bool centripetal);
 		
 		double amount_control;

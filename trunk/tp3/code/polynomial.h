@@ -18,10 +18,14 @@ class Polynomial
 
 		double evaluate(double x) const;
 		Polynomial derive() const;
-		
+		double getOneRoot(double a, double b);
+	
 		void print() const;
 
 	private:
+		double bisection(double a, double b);	//continua en el [a,b]
+		bool changeSign(double a, double b);
+	
 		uint _order;
 		double _xj;
 		vector<double> _coefs;

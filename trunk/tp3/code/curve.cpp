@@ -25,8 +25,8 @@ vector<pair> Curve :: sampling(uint m){
 	double t_dist = 1.0/(m-1);
 	double t = 0;
 	for(int i=0; i<m; i++){
-		sampling[i].first = (*S_x).evaluate(t);
-		sampling[i].second = (*S_y).evaluate(t);
+		sampling[i].first = S_x->evaluate(t);
+		sampling[i].second = S_y->evaluate(t);
 		t += t_dist;
 	}
 	return sampling;
@@ -35,10 +35,10 @@ vector<pair> Curve :: sampling(uint m){
 void Curve :: print(){
 	for(int i=1;i<amount_control;i++){
 		cout << "S_x" << i << " = ";
-		(*S_x).print(i);
+		S_x->print(i);
 	}
 	for(int i=1;i<amount_control;i++){
 		cout << "S_y" << i << " = ";
-		(*S_y).print(i);
+		S_y->print(i);
 	}
 }
