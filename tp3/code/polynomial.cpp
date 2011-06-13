@@ -47,6 +47,39 @@ Polynomial Polynomial :: derive() const
 	return derived;
 }
 
+double Polynomial :: getOneRoot(double a, double b)
+{
+	if(evaluate(a) < EPSILON)
+		return a;
+	if(evaluate(b) < EPSILON)
+		return b;
+	if(changeSign(a,b))
+		return bisection(a,b);
+
+	return -1;	//--> nada sirve oh nou! --> implementar el iterativo re loco
+}
+
+double Polynomial :: bisection(double a, double b)
+{
+	double c = (a+b)/2;
+	while(evaluate(c) < EPSILON)
+	{
+		if(changeSign(a,c))
+			b = c;
+		else
+			a = c;
+		c = (a+b)/2;
+	}
+	return c;
+}	
+
+bool Polynomial :: changeSign(double a, double b)
+{
+	return (evaluate(a) < 0 && evaluate(b)>0) || (evaluate(a) > 0 && evaluate(b)<0);
+}
+
+
+
 void Polynomial :: print() const{
 	for(int i=_order; i>=0; i--){
 		if(_coefs[i]>=0 && i!=_order) cout << "+ ";

@@ -4,7 +4,7 @@ Parametrization :: Parametrization(uint n, vector<pair> xy, ParamType type) : t(
 	amount_control = n;
 	switch(type){
 		case(Uniform):
-			uniform(n,xy);
+			uniform(n);
 			break;
 		case(Chord_length):
 			non_uniform(n,xy,false);
@@ -39,7 +39,7 @@ double Parametrization :: sum_all_dist(uint n, vector<pair> xy, bool centripetal
 	return sum;
 }
 
-void Parametrization :: uniform(uint n, vector<pair> xy){
+void Parametrization :: uniform(uint n){
 	double t_dist = 1.0/(n-1);
 	t[0] = 0;
 	for(int i=1; i<n; i++){
