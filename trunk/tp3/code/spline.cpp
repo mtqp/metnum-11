@@ -72,10 +72,9 @@ uint Spline :: amountControls(){
 	return amount_control;
 }
 
-Polynomial Spline :: getPolynom(uint polIndex)
+Polynomial Spline :: getPolynom(int polIndex)
 {
 	polIndex--;
-
 	if(polIndex < 0 || polIndex > amount_control-1)
 		cout << "No se puede obtener el polinomio pedido" << endl;
 	
@@ -87,7 +86,9 @@ Polynomial Spline :: getPolynom(uint polIndex)
 	coefs[2] = c[polIndex];
 	coefs[3] = d[polIndex];
 
-	Polynomial pol(coefs,quantityCoefs);
+	double xj = x[polIndex];
+
+	Polynomial pol(coefs, xj,quantityCoefs-1);
 	return pol;
 }
 
@@ -99,6 +100,12 @@ void Spline :: print(uint polynomial){
 		cout << "No existe tal polinomio " << endl;
 	else{
 		double x_ = x[p];
-		cout << d[p] << "(x - " << x_ << ")^3 + " << c[p] << "(x - " << x_ << ")^2 + " << b[p] << "(x - " << x_ << ") + " << a[p] << endl;
+		cout << d[p] << "(x - " << x_ << ")^3 ";
+		if(c[p]>=0) cout << "+ ";
+		cout << c[p] << "(x - " << x_ << ")^2 ";
+		if(b[p]>=0) cout << "+ ";
+		cout << b[p] << "(x - " << x_ << ") ";
+		if(a[p]>=0) cout << "+ ";
+		cout << a[p] << endl;
 	}
 }
