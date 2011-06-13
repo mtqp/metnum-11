@@ -13,7 +13,7 @@ class Spline{
 		double evaluate(double t);
 		vector<pair> getControls();
 		uint amountControls();
-		Polynomial getPolynom(uint control);
+		Polynomial getPolynom(int control);
 
 		void print(uint polynomial);			//imprime un polinomio
 				

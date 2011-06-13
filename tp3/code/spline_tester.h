@@ -12,9 +12,12 @@ class SplineTester{
 	private:
 		Spline _spline;
 	
-		bool matchPolynomials(pair xy, uint controlNumber);
-		bool matchFirstDeriv(pair xy, uint controlNumber);
-		bool matchSecondDeriv(pair xy, uint controlNumber);
+		bool matchPolynomials(pair xy, int controlNumber);
+		bool matchFirstDeriv(pair xy, int controlNumber);
+		bool matchSecondDeriv(pair xy, int controlNumber);
+		bool matchNthDeriv(pair xy, int controlNumber, uint nthDeriv);
+		bool matchBorderCase(pair xy, int controlNumber, uint nthDeriv);
+		bool checkNaturalSplineCondition(double xleft, double xright, uint amount_controls);
 };
 
 #endif
