@@ -1,5 +1,7 @@
 #include "parametrization.h"
 
+extern double pointDist(double x1, double y1, double x2, double y2);
+
 Parametrization :: Parametrization(uint n, vector<pair> xy, ParamType type) : t(n){
 	amount_control = n;
 	switch(type){
@@ -19,16 +21,6 @@ Parametrization :: ~Parametrization(){}
 
 vector<double> Parametrization :: data() const{
 	return t;
-}
-
-double Parametrization :: pointDist(double x1, double y1, double x2, double y2) const{
-	double delta_x = x1 - x2;
-	double delta_y = y1 - y2;
-	
-	delta_x *= delta_x;
-	delta_y *= delta_y;
-		
-	return sqrt(delta_x + delta_y);
 }
 
 double Parametrization :: sumAllDist(uint n, vector<pair> xy, bool centripetal) const{

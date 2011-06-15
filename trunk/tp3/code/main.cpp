@@ -33,11 +33,16 @@ int main(int argc, char** argv){
 	/* Ignoro la linea en blanco */
 	in.ignore(0,'\n');
 	
-	/* Leo el punto proximo a la curva y su nueva posicion */
+	/* Leo el punto proximo a la curva */
 	pair ipoint;
-	pair fpoint;
 	in >> ipoint.first;
 	in >> ipoint.second;
+	
+	/* Ignoro la linea en blanco */
+	in.ignore(0,'\n');
+	
+	/* Leo la nueva posicion del punto */
+	pair fpoint;
 	in >> fpoint.first;
 	in >> fpoint.second;
 	
@@ -47,11 +52,22 @@ int main(int argc, char** argv){
 	/**************************** Programa ****************************/
 	/******************************************************************/
 	
+	// Creo la parametrizacion y la curva
 	Parametrization param(n,xy,Centripetal);
 	Curve curve(n,xy,param);
+
+	// Obtengo el muestreo de la spline original
+	vector<pair> original_sampling(m);
+	original_sampling = curve.sampling(m);
+	
+	// Muevo el punto
+	pair near_point = curve.nearPoint(ipoint);	
+	
+	// Obtengo el muestreo de la spline deformada
 	vector<pair> sampling(m);
 	sampling = curve.sampling(m);
 	
+
 	/******************************************************************/
 	/***************************** Salida *****************************/
 	/******************************************************************/
@@ -62,11 +78,21 @@ int main(int argc, char** argv){
 	out << m << endl;
 	
 	for(int i=0; i<m; i++){
-		out << sampling[i].first << " ";
-		out << sampling[i].second << endl;
+		out << original_sampling[i].first << " ";
+		out << original_sampling[i].second << endl;
 	}
 	
 	out << endl;
+	
+	out << near_point.first << " ";
+	out << near_point.second << endl;
+	
+	out << endl;
+	
+	for(int i=0; i<m; i++){
+		out << sampling[i].first << " ";
+		out << sampling[i].second << endl;
+	}
 	
 	out.close();
 	

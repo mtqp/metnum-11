@@ -1,5 +1,7 @@
 #include "curve.h"
 
+extern double pointDist(double x1, double y1, double x2, double y2);
+
 Curve :: Curve(uint n, vector<pair> xy, Parametrization t){
 	amount_control = n;
 	
@@ -22,10 +24,23 @@ Curve :: ~Curve(){
 }
 		
 pair Curve :: nearPoint(pair xy) const{
+	pair near_point;
+	double min_t;
+	double min_dist = 0;							//empiezo con t igual al parametro correspondiente al primer pto de control, es arbitraria la eleccion
+	double dist1;
+	double dist2;
 	for(int i=1; i<amount_control; i++){
 		Polynomial pol = distancePolynom(i,xy);
-		pol.zeros(param[i-1],param[i]);
+		min_t = pol.zeros(param[i-1],param[i]);
+		dist1 = pointDist(S_x->evaluate(min_dist),S_y->evaluate(min_dist),xy.first,xy.second);
+		dist2 = pointDist(S_x->evaluate(min_t),S_y->evaluate(min_t),xy.first,xy.second);
+		if(dist2<dist1) min_dist = min_t;
 	}
+	
+	near_point.first = S_x->evaluate(min_dist);
+	near_point.second = S_y->evaluate(min_dist);
+	
+	return near_point;
 }
 
 vector<pair> Curve :: sampling(uint m) const{
