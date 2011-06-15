@@ -14,13 +14,13 @@ class Parametrization{
 		Parametrization(uint n, vector<pair> xy, ParamType type);
 		~Parametrization();
 		
-		vector<double> data();
+		vector<double> data() const;
 		
 	private:
-		double point_dist(double x1, double y1, double x2, double y2);
-		double sum_all_dist(uint n, vector<pair> xy, bool centripetal);
+		double pointDist(double x1, double y1, double x2, double y2) const;
+		double sumAllDist(uint n, vector<pair> xy, bool centripetal) const;
 		void uniform(uint n);
-		void non_uniform(uint n, vector<pair> xy, bool centripetal);
+		void nonUniform(uint n, vector<pair> xy, bool centripetal);
 		
 		double amount_control;
 		vector<double> t;

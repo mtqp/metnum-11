@@ -10,12 +10,11 @@ class Spline{
 		Spline(const Spline& s);
 		~Spline();
 		
-		double evaluate(double t);
-		vector<pair> getControls();
-		uint amountControls();
-		Polynomial getPolynom(int control);
-
-		void print(uint polynomial);			//imprime un polinomio
+		uint amountControls() const;
+		vector<pair> getControls() const;
+		Polynomial getPolynom(int polIndex) const;
+		double evaluate(double t) const;
+		void print(uint polynomial) const;			//imprime un polinomio
 				
 	private:
 		uint amount_control;
