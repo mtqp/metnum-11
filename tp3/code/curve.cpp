@@ -4,8 +4,8 @@ extern double pointDist(double x1, double y1, double x2, double y2);
 
 Curve :: Curve(uint n, vector<pair> xy, Parametrization t){
 	amount_control = n;
-	
-	param = t.data();
+	_type = t.getType();
+	vector<double> param = t.data();
 	
 	vector<double> x(n);
 	vector<double> y(n);
@@ -18,29 +18,102 @@ Curve :: Curve(uint n, vector<pair> xy, Parametrization t){
 	S_y = new Spline(n,param,y);
 }
 
+Curve :: Curve(const Curve& c) : S_x(c.S_x), S_y(c.S_y)
+{
+	amount_control = c.amount_control;
+	_type = c._type;
+}
+
 Curve :: ~Curve(){
 	delete S_x;
 	delete S_y;
 }
+
+Curve Curve :: moveCurve(const pair fpoint, const pair ipoint) const
+{
+	int t = this->nearPoint(ipoint);
+	
+	int position;
+	if(isControlPoint(t,position)) return moveControlPoint(fpoint,position);
+	
+	return movePoint(fpoint,t);
+	
+}
+
+bool Curve :: isControlPoint(double t, int& position) const{
+	vector<double> params = S_x->getParams();
+	int pos;
+	bool isControl = false;
+	for(pos=0; pos<params.size() && !isControl; pos++)
+		isControl |= abs(params[pos]-t)<EPSILON;
+	position = (isControl) ? pos : -1;
+	
+	return isControl;
+}
+
+Curve Curve :: moveControlPoint(const pair fpoint, int position) const{
+	vector<pair> paramX = S_x->getControls();
+	vector<pair> paramY = S_y->getControls();
+	
+	paramX[position].second = fpoint.first;
+	paramY[position].second = fpoint.second;
+	
+	vector<pair> xy(paramX.size());
+	for(int i=0; i<paramX.size(); i++){
+		xy[i].first = paramX[i].second;
+		xy[i].second = paramY[i].second;
+	}
+	
+	Parametrization parametrization(xy.size(),xy,_type);
+	Curve movedCurve(xy.size(),xy,parametrization);
+	return movedCurve;
+}
+
+Curve Curve :: movePoint(const pair fpoint, int t) const
+{
+	vector<pair> paramsX = S_x->getControls();
+	vector<pair> paramsY = S_y->getControls();
+	vector<double> newParams(paramsX.size()+1);
+	vector<pair> newControls(paramsX.size()+1);
+	
+	int j=0;
+	for(int i=0;i<newControls.size();i++)
+	{
+		if(t<paramsX[j].first){
+			newParams[i] = t;
+			newControls[i].first = fpoint.first;
+			newControls[i].second= fpoint.second;
+		}
+		else
+		{
+			j++;
+			newParams[i] = paramsX[j].first;
+			newControls[i].first = paramsX[j].second;
+			newControls[i].second= paramsY[j].second;
+		}		
+	}
+
+	Parametrization parametrization(newControls.size(),newControls,_type);
+	Curve movedCurve(newControls.size(),newControls,parametrization);
+	return movedCurve;
+}
+	
 		
-pair Curve :: nearPoint(pair xy) const{
-	pair near_point;
+uint Curve :: nearPoint(const pair xy) const{
 	double min_t;
 	double min_dist = 0;							//empiezo con t igual al parametro correspondiente al primer pto de control, es arbitraria la eleccion
 	double dist1;
 	double dist2;
+	vector<double> param = S_x->getParams();
 	for(int i=1; i<amount_control; i++){
-		Polynomial pol = distancePolynom(i,xy);
+		Polynomial pol = distancePolynom(i,xy,param[i-1]);
 		min_t = pol.zeros(param[i-1],param[i]);
 		dist1 = pointDist(S_x->evaluate(min_dist),S_y->evaluate(min_dist),xy.first,xy.second);
 		dist2 = pointDist(S_x->evaluate(min_t),S_y->evaluate(min_t),xy.first,xy.second);
 		if(dist2<dist1) min_dist = min_t;
 	}
 	
-	near_point.first = S_x->evaluate(min_dist);
-	near_point.second = S_y->evaluate(min_dist);
-	
-	return near_point;
+	return min_dist;
 }
 
 vector<pair> Curve :: sampling(uint m) const{
@@ -56,7 +129,7 @@ vector<pair> Curve :: sampling(uint m) const{
 	return sampling;
 }
 
-Polynomial Curve :: distancePolynom(int polIndex,pair xy) const{
+Polynomial Curve :: distancePolynom(int polIndex, const pair xy, double t) const{
 	
 	/******************************************************************************************************
 	 *  Distancia al cuadrado entre el polinomio 'polIndex' en x y el polinomio 'polIndex' en y al punto xy 
@@ -88,8 +161,18 @@ Polynomial Curve :: distancePolynom(int polIndex,pair xy) const{
 	newCoefs[4] = 10*((coefs_x[3]*coefs_x[2]) + (coefs_y[3]*coefs_y[2]));
 	newCoefs[5] = 6*((pow(coefs_x[3],2.0)) + (pow(coefs_y[3],2.0)));
 	
-	Polynomial newPol(newCoefs,param[polIndex-1],5);
+	Polynomial newPol(newCoefs,t,5);
 	return newPol;
+}
+
+Curve& Curve :: operator= (const Curve &c)
+{
+	if(this!=&c){
+		this->S_x = c.S_x;
+		this->S_y = c.S_y;
+		this->amount_control = c.amount_control;
+	}
+	return *this;
 }
 
 void Curve :: print() const{

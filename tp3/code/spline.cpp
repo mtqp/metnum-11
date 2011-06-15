@@ -52,6 +52,10 @@ uint Spline :: amountControls() const{
 	return amount_control;
 }
 
+vector<double> Spline :: getParams() const{
+	return x;
+}
+
 vector<pair> Spline :: getControls() const{
 	vector<pair> controls(amount_control);
 	
