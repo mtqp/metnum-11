@@ -11,6 +11,7 @@ class Spline{
 		~Spline();
 		
 		uint amountControls() const;
+		vector<double> getParams() const;
 		vector<pair> getControls() const;
 		Polynomial getPolynom(int polIndex) const;
 		double evaluate(double t) const;

@@ -4,6 +4,7 @@ extern double pointDist(double x1, double y1, double x2, double y2);
 
 Parametrization :: Parametrization(uint n, vector<pair> xy, ParamType type) : t(n){
 	amount_control = n;
+	_type = type;
 	switch(type){
 		case(Uniform):
 			uniform(n);
@@ -21,6 +22,10 @@ Parametrization :: ~Parametrization(){}
 
 vector<double> Parametrization :: data() const{
 	return t;
+}
+
+ParamType Parametrization :: getType() const{
+	return _type;
 }
 
 double Parametrization :: sumAllDist(uint n, vector<pair> xy, bool centripetal) const{

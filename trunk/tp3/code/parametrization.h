@@ -15,6 +15,7 @@ class Parametrization{
 		~Parametrization();
 		
 		vector<double> data() const;
+		ParamType getType() const;
 		
 	private:
 		double sumAllDist(uint n, vector<pair> xy, bool centripetal) const;
@@ -23,6 +24,7 @@ class Parametrization{
 		
 		double amount_control;
 		vector<double> t;
+		ParamType _type;
 };
 
 #endif

@@ -61,7 +61,7 @@ int main(int argc, char** argv){
 	original_sampling = curve.sampling(m);
 	
 	// Muevo el punto
-	pair near_point = curve.nearPoint(ipoint);	
+	Curve movedCurve(curve.moveCurve(fpoint, ipoint));
 	
 	// Obtengo el muestreo de la spline deformada
 	vector<pair> sampling(m);

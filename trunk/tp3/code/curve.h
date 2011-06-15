@@ -6,15 +6,24 @@
 class Curve{
 	public:
 		Curve(uint n, vector<pair> xy, Parametrization t);
+		Curve(const Curve& c);
 		~Curve();
-		
-		pair nearPoint(pair xy) const;
+
+		Curve moveCurve(const pair fpoint, const pair ipoint) const;
+
 		vector<pair> sampling(uint m) const;						//intervalo [0,1]
+		
+		Curve& operator= (const Curve &c);
 		void print() const;
 	private:
-		Polynomial distancePolynom(int polIndex,pair xy) const;
+		bool isControlPoint(double t, int& position) const;
+		Curve moveControlPoint(const pair fpoint,int position) const;
+		Curve movePoint(const pair fpoint, int t) const;
+		uint nearPoint(const pair xy) const;
+
+		Polynomial distancePolynom(int polIndex,const pair xy, double t) const;
 		uint amount_control;
-		vector<double> param;
+		ParamType _type;
 		Spline* S_x;
 		Spline* S_y;
 };
