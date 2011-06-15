@@ -40,6 +40,14 @@ Curve Curve :: moveCurve(const pair fpoint, const pair ipoint) const
 	
 }
 
+pair Curve :: getNearPoint(const pair xy) const {
+	double t = nearPoint(xy);
+	pair near_point;
+	near_point.first = S_x->evaluate(t);
+	near_point.second= S_y->evaluate(t);
+	return near_point;
+}
+
 bool Curve :: isControlPoint(double t, int& position) const{
 	vector<double> params = S_x->getParams();
 	int pos;
@@ -99,7 +107,7 @@ Curve Curve :: movePoint(const pair fpoint, int t) const
 }
 	
 		
-uint Curve :: nearPoint(const pair xy) const{
+double Curve :: nearPoint(const pair xy) const{
 	double min_t;
 	double min_dist = 0;							//empiezo con t igual al parametro correspondiente al primer pto de control, es arbitraria la eleccion
 	double dist1;
@@ -112,7 +120,6 @@ uint Curve :: nearPoint(const pair xy) const{
 		dist2 = pointDist(S_x->evaluate(min_t),S_y->evaluate(min_t),xy.first,xy.second);
 		if(dist2<dist1) min_dist = min_t;
 	}
-	
 	return min_dist;
 }
 

@@ -60,6 +60,9 @@ int main(int argc, char** argv){
 	vector<pair> original_sampling(m);
 	original_sampling = curve.sampling(m);
 	
+	//Obtengo el punto mas cercano al clickeado
+	pair near_point = curve.getNearPoint(ipoint);
+	
 	// Muevo el punto
 	Curve movedCurve(curve.moveCurve(fpoint, ipoint));
 	
@@ -67,7 +70,6 @@ int main(int argc, char** argv){
 	vector<pair> sampling(m);
 	sampling = curve.sampling(m);
 	
-
 	/******************************************************************/
 	/***************************** Salida *****************************/
 	/******************************************************************/

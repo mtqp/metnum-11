@@ -10,16 +10,18 @@ class Curve{
 		~Curve();
 
 		Curve moveCurve(const pair fpoint, const pair ipoint) const;
+		pair getNearPoint(const pair xy) const;
 
 		vector<pair> sampling(uint m) const;						//intervalo [0,1]
 		
 		Curve& operator= (const Curve &c);
 		void print() const;
+		
 	private:
 		bool isControlPoint(double t, int& position) const;
 		Curve moveControlPoint(const pair fpoint,int position) const;
 		Curve movePoint(const pair fpoint, int t) const;
-		uint nearPoint(const pair xy) const;
+		double nearPoint(const pair xy) const;
 
 		Polynomial distancePolynom(int polIndex,const pair xy, double t) const;
 		uint amount_control;
