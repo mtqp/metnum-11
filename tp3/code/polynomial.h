@@ -16,15 +16,16 @@ class Polynomial
 
 		Polynomial& operator= (const Polynomial &p);
 
+		vector<double> coefficients() const;
 		double evaluate(double x) const;
 		Polynomial derive() const;
-		double getOneRoot(double a, double b);
-	
+		double zeros(double a, double b) const;
 		void print() const;
 
 	private:
-		double bisection(double a, double b);	//continua en el [a,b]
-		bool changeSign(double a, double b);
+		double newton(double p0, uint iter) const;
+		double bisection(double a, double b) const;	//continua en el [a,b]
+		bool changeSign(double a, double b) const;
 	
 		uint _order;
 		double _xj;

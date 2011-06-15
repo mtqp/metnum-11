@@ -7,21 +7,21 @@ Parametrization :: Parametrization(uint n, vector<pair> xy, ParamType type) : t(
 			uniform(n);
 			break;
 		case(Chord_length):
-			non_uniform(n,xy,false);
+			nonUniform(n,xy,false);
 			break;
 		case(Centripetal):
-			non_uniform(n,xy,true);
+			nonUniform(n,xy,true);
 			break;
 	}
 }
 
 Parametrization :: ~Parametrization(){}
 
-vector<double> Parametrization :: data(){
+vector<double> Parametrization :: data() const{
 	return t;
 }
 
-double Parametrization :: point_dist(double x1, double y1, double x2, double y2){
+double Parametrization :: pointDist(double x1, double y1, double x2, double y2) const{
 	double delta_x = x1 - x2;
 	double delta_y = y1 - y2;
 	
@@ -31,10 +31,10 @@ double Parametrization :: point_dist(double x1, double y1, double x2, double y2)
 	return sqrt(delta_x + delta_y);
 }
 
-double Parametrization :: sum_all_dist(uint n, vector<pair> xy, bool centripetal){
+double Parametrization :: sumAllDist(uint n, vector<pair> xy, bool centripetal) const{
 	double sum = 0;
 	for(int i=1; i<n; i++){
-		sum += pow(point_dist(xy[i-1].first, xy[i-1].second, xy[i].first, xy[i].second),0.5*centripetal+!centripetal);
+		sum += pow(pointDist(xy[i-1].first, xy[i-1].second, xy[i].first, xy[i].second),0.5*centripetal+!centripetal);
 	}
 	return sum;
 }
@@ -47,12 +47,12 @@ void Parametrization :: uniform(uint n){
 	}
 }
 
-void Parametrization :: non_uniform(uint n, vector<pair> xy, bool centripetal){
-	double total = sum_all_dist(n,xy,centripetal);						//para mantenerme en el intervalo [0,1]
+void Parametrization :: nonUniform(uint n, vector<pair> xy, bool centripetal){
+	double total = sumAllDist(n,xy,centripetal);						//para mantenerme en el intervalo [0,1]
 	double sum_acum = 0;												//para no tener que recalcular la suma
 	t[0] = 0;
 	for(int i=1; i<n; i++){
-		sum_acum += pow(point_dist(xy[i-1].first, xy[i-1].second, xy[i].first, xy[i].second),0.5*centripetal+!centripetal);
+		sum_acum += pow(pointDist(xy[i-1].first, xy[i-1].second, xy[i].first, xy[i].second),0.5*centripetal+!centripetal);
 		t[i] = sum_acum/total;
 	}
 }

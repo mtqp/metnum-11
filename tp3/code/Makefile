@@ -1,17 +1,16 @@
-OBJS = parametrization.cpp spline.cpp curve.cpp polynomial.cpp spline_tester.cpp
-OBJSo = parametrization.o spline.o curve.o polynomial.o spline_tester.o
+OBJS = parametrization.o spline.o curve.o polynomial.o spline_tester.o
 MATH = -lm
 CFLAGS = -ggdb 
 
 all: tp3 test
 
-tp3: main.cpp $(OBJSo)
-	g++ -o tp3 $(CFLAGS) $(MATH) main.cpp $(OBJSo)
+tp3: main.cpp $(OBJS)
+	g++ -o tp3 $(CFLAGS) $(MATH) main.cpp $(OBJS)
 	
-test: test.cpp $(OBJSo)
-	g++ -o test $(CFLAGS) $(MATH) test.cpp $(OBJSo)	
+test: test.cpp $(OBJS)
+	g++ -o test $(CFLAGS) $(MATH) test.cpp $(OBJS)	
 	
-%.o: %.cpp
+%.o: %.cpp %.h
 	g++ -c $< $(MATH)
 	
 clean:

@@ -48,15 +48,11 @@ Spline :: Spline(const Spline& s) : x(s.x), a(s.a), b(s.b), c(s.c), d(s.d) {
 
 Spline :: ~Spline(){}
 
-double Spline :: evaluate(double t){
-	uint i = 0;
-	while(x[i+1] < t && i+1 < amount_control) i++;
-	double h = (t - x[i]);
-	return a[i] + b[i]*h + c[i]*h*h + d[i]*h*h*h;
+uint Spline :: amountControls() const{
+	return amount_control;
 }
 
-vector<pair> Spline :: getControls()
-{
+vector<pair> Spline :: getControls() const{
 	vector<pair> controls(amount_control);
 	
 	for(int i=0; i<amount_control; i++)
@@ -68,12 +64,7 @@ vector<pair> Spline :: getControls()
 	return controls;
 }
 
-uint Spline :: amountControls(){
-	return amount_control;
-}
-
-Polynomial Spline :: getPolynom(int polIndex)
-{
+Polynomial Spline :: getPolynom(int polIndex) const{
 	polIndex--;
 	if(polIndex < 0 || polIndex > amount_control-1)
 		cout << "No se puede obtener el polinomio pedido" << endl;
@@ -92,9 +83,14 @@ Polynomial Spline :: getPolynom(int polIndex)
 	return pol;
 }
 
+double Spline :: evaluate(double t) const{
+	uint i = 0;
+	while(x[i+1] < t && i+1 < amount_control) i++;
+	double h = (t - x[i]);
+	return a[i] + b[i]*h + c[i]*h*h + d[i]*h*h*h;
+}
 
-
-void Spline :: print(uint polynomial){
+void Spline :: print(uint polynomial) const{
 	uint p = polynomial - 1;
 	if(polynomial<=0 || polynomial>=amount_control)
 		cout << "No existe tal polinomio " << endl;

@@ -4,8 +4,7 @@ SplineTester :: SplineTester(Spline s) : _spline(s){}
 
 SplineTester :: ~SplineTester(){}
 
-bool SplineTester :: isSuccessful()
-{
+bool SplineTester :: isSuccessful() const{
 	vector<pair> controls = _spline.getControls();
 	for(int i=0; i<controls.size(); i++)
 		cout << "( " << controls[i].first << ", " << controls[i].second << " )" << endl;
@@ -25,35 +24,34 @@ bool SplineTester :: isSuccessful()
 	return success;
 }
 
-bool SplineTester :: checkNaturalSplineCondition(double xleft, double xright, uint amount_controls)
-{
+bool SplineTester :: checkNaturalSplineCondition(double xleft, double xright, uint amount_controls) const{
 	bool checksForCondition = abs(_spline.getPolynom(1).derive().derive().evaluate(xleft)) < EPSILON;
 	checksForCondition &= abs(_spline.getPolynom(amount_controls).derive().derive().evaluate(xright)) < EPSILON;
 	return  checksForCondition;
 }
 
-bool SplineTester :: matchPolynomials(pair xy, int controlNumber){
+bool SplineTester :: matchPolynomials(pair xy, int controlNumber) const{
 	if(controlNumber == 1 || controlNumber == _spline.amountControls())
 		return matchBorderCase(xy,controlNumber,0);
 	return matchNthDeriv(xy, controlNumber, 0);
 }
 
-bool SplineTester :: matchFirstDeriv(pair xy, int controlNumber){
+bool SplineTester :: matchFirstDeriv(pair xy, int controlNumber) const{
 	return matchNthDeriv(xy, controlNumber, 1);
 }
 
-bool SplineTester :: matchSecondDeriv(pair xy, int controlNumber){
+bool SplineTester :: matchSecondDeriv(pair xy, int controlNumber) const{
 	return matchNthDeriv(xy, controlNumber, 2);
 }
 
-bool SplineTester :: matchBorderCase(pair xy, int controlNumber, uint nthDeriv){
+bool SplineTester :: matchBorderCase(pair xy, int controlNumber, uint nthDeriv) const{
 	int caseControlNumber = (controlNumber == 1) ? 1 : controlNumber-1;
 	Polynomial casePolynomial = _spline.getPolynom(caseControlNumber);
 	double evalPolynomial = casePolynomial.evaluate(xy.first);
 	return abs(evalPolynomial-xy.second) < EPSILON;
 }
 
-bool SplineTester :: matchNthDeriv(pair xy, int controlNumber, uint nthDeriv){
+bool SplineTester :: matchNthDeriv(pair xy, int controlNumber, uint nthDeriv) const{
 	Polynomial rightPol= _spline.getPolynom(controlNumber);
 	Polynomial leftPol = _spline.getPolynom(controlNumber-1);
 	
