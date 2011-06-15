@@ -23,7 +23,7 @@ class Polynomial
 		void print() const;
 
 	private:
-		double newton(double p0, uint iter) const;
+		double newton(double p0, double tolerance, llint iter) const;
 		double bisection(double a, double b) const;	//continua en el [a,b]
 		bool changeSign(double a, double b) const;
 	

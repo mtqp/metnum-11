@@ -17,7 +17,6 @@ class Parametrization{
 		vector<double> data() const;
 		
 	private:
-		double pointDist(double x1, double y1, double x2, double y2) const;
 		double sumAllDist(uint n, vector<pair> xy, bool centripetal) const;
 		void uniform(uint n);
 		void nonUniform(uint n, vector<pair> xy, bool centripetal);

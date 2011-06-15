@@ -1,4 +1,4 @@
-OBJS = parametrization.o spline.o curve.o polynomial.o spline_tester.o
+OBJS = parametrization.o spline.o curve.o polynomial.o spline_tester.o functions.o
 MATH = -lm
 CFLAGS = -ggdb 
 

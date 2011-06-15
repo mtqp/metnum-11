@@ -48,33 +48,32 @@ Polynomial Polynomial :: derive() const{
 }
 
 double Polynomial :: zeros(double a, double b) const{
-	if(evaluate(a) < EPSILON)
+	if(abs(evaluate(a)) < EPSILON){
 		return a;
-	if(evaluate(b) < EPSILON)
+	}
+	if(abs(evaluate(b)) < EPSILON)
 		return b;
-	if(changeSign(a,b))
-		return bisection(a,b);
 
-	return -1;	//--> nada sirve oh nou! --> implementar el iterativo re loco
+	return newton(a,1.0e-15,10000000);
 }
 
-double Polynomial :: newton(double p0, uint iter) const{
-	uint i=1;
+double Polynomial :: newton(double p0, double tolerance, llint iter) const{
+	llint i=1;
 	Polynomial derivedPol = this->derive();
 	double pi = p0 - this->evaluate(p0)/derivedPol.evaluate(p0);
 	
-	while(i<=iter && abs(pi-p0) > EPSILON){
+	while(i<=iter && abs(pi-p0) > tolerance){
 		i++;
 		p0 = pi;
 		pi = p0 - this->evaluate(p0)/derivedPol.evaluate(p0);
 	}
-	if(i>iter) return pi;
+	if(i<=iter) return pi;
 	return -1;
 }
 
 double Polynomial :: bisection(double a, double b) const {
 	double c = (a+b)/2;
-	while(evaluate(c) < EPSILON){
+	while(abs(evaluate(c)) < EPSILON){
 		if(changeSign(a,c))
 			b = c;
 		else
