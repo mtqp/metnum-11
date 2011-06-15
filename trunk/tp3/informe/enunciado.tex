@@ -1,0 +1,118 @@
+\parindent = 0 pt
+\parskip = 11 pt
+%\usepackage[width=15.3cm, left=3.5cm, top=2.5cm, height= 24.5cm]{geometry}
+
+\pagestyle{empty}
+
+\newcommand{\real}{\ensuremath{\mathbb{R}}}
+
+%\begin{document}
+
+\begin{centering}
+\bf Laboratorio de M\'etodos Num\'ericos - Primer cuatrimestre de 2011 \\
+Trabajo Pr\'actico N\'umero 3: CAD - M\'as que splines \\
+\end{centering}
+
+\vskip 25pt
+\hrule
+\vskip 11pt
+
+% {\bf Enunciado}
+
+Los programas de dise\~no asistido por computadora (CAD) son herramientas fundamentales para ingenieros, arquitectos, dise\~nadores, artistas y animadores. Sus interfaces gr\'aficas esconden un sinn\'umero de complicadas operaciones. Un ejemplo b\'asico de tales operaciones es la tarea de seleccionar un punto cualquiera de una curva y moverlo a una nueva posici\'on deformando la curva. El punto seleccionado se ingresa usualmente mediante un dispositivo apuntador (\emph{mouse} o tableta digitalizadora) interactuando con la interfaz, y en general el punto ingresado est\'a meramente \emph{cerca} de la curva.
+
+En este trabajo pr\'actico se deber\'an dise\~nar algoritmos e implementar un programa que, dadas las coordenadas $(\bar{x}_i,\bar{y}_i) \in \real^2$ de una serie de puntos de control ($i = 1..n$), construya una spline natural\footnote{Esto es suficiente para nuestro TP, pero en realidad los sistemas de CAD utilizan m\'as frecuentemente otros mecanismos para obtener, describir y manipular curvas y superficies.} param\'etrica que pase por los puntos en el orden dado. Adem\'as, dadas las coordenadas $(x^*,y^*) \in \real^2$ de un punto cercano a la curva, calcule el punto de la curva m\'as pr\'oximo y construya una nueva spline natural resultante de modificar la spline original de forma que ahora adem\'as pase por la nueva posici\'on $(\bar{x}^*,\bar{y}^*) \in \real^2$ del punto seleccionado. 
+El procedimiento descripto se muestra en la figura con la spline original dibujada en l\'inea de trazos y la spline deformada en l\'inea continua.
+%\begin{center}
+ %\includegraphics[height=0.35\textheight]{./figura2.png}
+%\end{center}
+
+El programa deber\'a trabajar las splines como curvas param\'etricas en $\real^2$. Dadas las coordenadas de los puntos de control existen varias estrategias para definir la parametrizaci\'on. Algunas de las parametrizaciones com\'unmente utilizadas son:
+\vspace{-15pt}
+\begin{description}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+ \item[Uniforme:] la variaci\'on del par\'ametro es igual entre cualquier par de puntos de control consecutivos;
+ \item[\emph{Chord-length}:] la variaci\'on del par\'ametro entre dos puntos de control consecutivos es proporcional a la distancia entre los mismos;
+ \item[Centr\'ipeta:] la variaci\'on del par\'ametro es proporcional a la ra\'iz cuadrada de la distancia entre los puntos de control\footnote{Este m\'etodo fue propuesto por Eugene Lee en \emph{Choosing nodes in parametric curve interpolation}, Computer-Aided Design 21, 1989.}.
+\end{description}
+\vspace{-15pt}
+En este trabajo pr\'actico deber\'an utilizar alguna de estas parametrizaciones. Opcionalmente podr\'an implementar las restantes y comparar los resultados obtenidos con las tres variantes.
+
+Adem\'as, el programa deber\'a conservar el valor del par\'ametro que le corresponde a cada punto de control y al punto seleccionado, antes y despu\'es de moverlo. 
+
+{\bf Preguntas:}
+\vspace{-15pt}
+\begin{enumerate}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+ \item >Depende la forma de la curva de la elecci\'on de la parametrizaci\'on? 
+ \item >Cambia la forma de la curva si en lugar de deformar la curva conservando la parametrizaci\'on el programa la recalcula al mover el punto?
+ \item (Opcional) >C\'omo cambia la forma de la curva seg\'un la condici\'on de borde usada (natural, sujeto, \textit{not-a-knot}, etc.)? 
+ \item (Opcional) Si se quiere redibujar cont\'inuamente la curva mientras el usuario mueve el punto seleccionado, >c\'omo se puede calcular esto m\'as eficientemente?
+ \item (Opcional) Luego de mover el punto seleccionado, >cambia toda la curva (\emph{control global}) o solamente una parte (\emph{control local})? >Qu\'e consecuencias puede tener esto?
+ \item (Opcional) Si el intervalo del par\'ametro se muestrea uniformemente, >los puntos resultantes quedan espaciados uniformemente? >Qu\'e otras alternativas de muestreo ser\'ian apropiadas? 
+ \item (Opcional) Si se necesitara que las longitudes de curva entre puntos consecutivos sean todas iguales, >c\'omo deber\'ia muestrearse?
+\end{enumerate}
+
+{\bf Archivos de entrada / salida}
+
+La entrada de datos se realizar\'a mediante un archivo de texto con el siguiente formato:
+\vspace{-15pt}
+\begin{itemize}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+\item En la primera l\'inea figurar\'a el n\'umero $n$ de puntos de control utilizados para definir la spline y, separado por espacio, el n\'umero $m$ de puntos de muestreo de la spline. 
+\item En las siguientes $n$ l\'ineas figurar\'an las coordenadas $\bar{x}$ e $\bar{y}$ de cada punto de control separadas por espacio.
+\item Una l\'inea en blanco
+\item Una l\'inea con las coordenadas $x^*$ e $y^*$ del punto pr\'oximo a la curva, separadas por espacio.
+\item Una l\'inea en blanco
+\item Una l\'inea con las coordenadas $\bar{x}^*$ e $\bar{y}^*$ de la nueva posici\'on del punto, separadas por espacio.
+\end{itemize}
+
+La salida de datos estar\'a dada por un archivo de texto con el siguiente formato:
+\vspace{-15pt}
+\begin{itemize}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+\item En la primera l\'inea figurar\'a el n\'umero $m$ de puntos muestreados. 
+\item En las siguientes $m$ l\'ineas figurar\'an las coordenadas $x$ e $y$ de cada punto muestreado en la spline original, separadas por espacio. Estos puntos corresponder\'an a un muestreo uniforme del rango del par\'ametro e incluir\'an los extremos. De esta forma, probablemente este conjunto de puntos no incluya los puntos de control originales.
+\item Una l\'inea en blanco
+\item Una l\'inea con las coordenadas del punto en la curva original m\'as pr\'oximo al punto ingresado, separadas por espacio.
+\item Una l\'inea en blanco
+\item En las siguientes $m$ l\'ineas figurar\'an las coordenadas $x$ e $y$ de cada punto muestreado en la spline deformada, separadas por espacio.
+\end{itemize}
+
+
+\vskip 30pt
+\hrule
+\vskip 11pt
+
+{\bf Entregas parciales}
+\vspace{-15pt}
+\begin{description}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+ \item[10 de junio:] Implementaci\'on del c\'alculo de splines y funciones de entrada/salida.
+ \item[17 de junio:] Implementaci\'on completa y verificaci\'on.
+\end{description}
+
+{\bf Entrega Final}
+\vspace{-15pt}
+\begin{description}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+ \item[Formato Electr\'onico:] 23 de junio de 2011, hasta las 23:59 hs, a la direcci\'on: 
+
+  {\emph{metnum.lab2011@gmail.com}}
+ \item[Formato f\'isico:] 24 de junio de 2011, de 17 a 21 hs.
+\end{description}
+
+%\end{document}
+
