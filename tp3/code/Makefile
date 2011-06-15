@@ -2,7 +2,7 @@ OBJS = parametrization.o spline.o curve.o polynomial.o spline_tester.o functions
 MATH = -lm
 CFLAGS = -ggdb 
 
-all: tp3 test
+all: tp3
 
 tp3: main.cpp $(OBJS)
 	g++ -o tp3 $(CFLAGS) $(MATH) main.cpp $(OBJS)
