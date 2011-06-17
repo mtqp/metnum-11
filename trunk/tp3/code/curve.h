@@ -6,6 +6,7 @@
 class Curve{
 	public:
 		Curve(uint n, vector<pair> xy, Parametrization t);
+		Curve(uint n, vector<pair> xy, vector<double> t);
 		Curve(const Curve& c);
 		~Curve();
 
@@ -25,7 +26,6 @@ class Curve{
 
 		Polynomial distancePolynom(int polIndex,const pair xy, double t) const;
 		uint amount_control;
-		ParamType _type;
 		Spline* S_x;
 		Spline* S_y;
 };
