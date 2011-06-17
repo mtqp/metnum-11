@@ -108,8 +108,8 @@ Curve Curve :: movePoint(const pair fpoint, int t) const
 	
 		
 double Curve :: nearPoint(const pair xy) const{
-	double min_t;
 	double min_dist = 0;							//empiezo con t igual al parametro correspondiente al primer pto de control, es arbitraria la eleccion
+	double min_t;
 	double dist1;
 	double dist2;
 	vector<double> param = S_x->getParams();
