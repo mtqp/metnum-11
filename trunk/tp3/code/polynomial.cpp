@@ -23,7 +23,7 @@ vector<double> Polynomial :: coefficients() const{
 	return _coefs;
 }
 
-double Polynomial :: evaluate(double x) const{
+double Polynomial :: evaluate(const double x) const{
 	double evaluationResult = 0;
 	for(int i=0;i<_order+1;i++)
 		evaluationResult += _coefs[i]*pow(x-_xj,i);
@@ -51,9 +51,9 @@ double Polynomial :: zeros(double a, double b) const{
 	if(abs(evaluate(a)) < EPSILON){
 		return a;
 	}
-	if(abs(evaluate(b)) < EPSILON)
+	if(abs(evaluate(b)) < EPSILON){
 		return b;
-
+	}	
 	return newton(a,1.0e-15,10000000);
 }
 
@@ -67,24 +67,25 @@ double Polynomial :: newton(double p0, double tolerance, llint iter) const{
 		p0 = pi;
 		pi = p0 - this->evaluate(p0)/derivedPol.evaluate(p0);
 	}
-	if(i<=iter) return pi;
-	return -1;
+	return pi;
 }
 
-double Polynomial :: bisection(double a, double b) const {
-	double c = (a+b)/2;
-	while(abs(evaluate(c)) < EPSILON){
+double Polynomial :: bisection(double a, double b, double radius) const{
+	double c;
+	while(changeSign(a,b) && abs(a-b)>radius){
+		c = (a+b)/2;
+		if(abs(evaluate(c)) < EPSILON)
+			return c;
 		if(changeSign(a,c))
 			b = c;
 		else
 			a = c;
-		c = (a+b)/2;
 	}
-	return c;
-}	
+	return newton(c,1.0e-20,10000000);
+}
 
-bool Polynomial :: changeSign(double a, double b) const {
-	return (evaluate(a) < 0 && evaluate(b)>0) || (evaluate(a) > 0 && evaluate(b)<0);
+bool Polynomial :: changeSign(const double a, const double b) const{
+	return (evaluate(a) < 0 && evaluate(b) > 0) || (evaluate(a) > 0 && evaluate(b) < 0);
 }
 
 void Polynomial :: print() const{
