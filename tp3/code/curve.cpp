@@ -4,8 +4,22 @@ extern double pointDist(double x1, double y1, double x2, double y2);
 
 Curve :: Curve(uint n, vector<pair> xy, Parametrization t){
 	amount_control = n;
-	_type = t.getType();
 	vector<double> param = t.data();
+	
+	vector<double> x(n);
+	vector<double> y(n);
+	for(int i=0; i<n; i++){
+		x[i] = xy[i].first;
+		y[i] = xy[i].second;
+	}
+	
+	S_x = new Spline(n,param,x);
+	S_y = new Spline(n,param,y);
+}
+
+Curve :: Curve(uint n, vector<pair> xy, vector<double> t){
+	amount_control = n;
+	vector<double> param = t;
 	
 	vector<double> x(n);
 	vector<double> y(n);
@@ -21,7 +35,6 @@ Curve :: Curve(uint n, vector<pair> xy, Parametrization t){
 Curve :: Curve(const Curve& c) : S_x(c.S_x), S_y(c.S_y)
 {
 	amount_control = c.amount_control;
-	_type = c._type;
 }
 
 Curve :: ~Curve(){
@@ -60,6 +73,7 @@ bool Curve :: isControlPoint(double t, int& position) const{
 Curve Curve :: moveControlPoint(const pair fpoint, int position) const{
 	vector<pair> paramX = S_x->getControls();
 	vector<pair> paramY = S_y->getControls();
+	vector<double> newParams(paramX.size());
 	
 	paramX[position].second = fpoint.first;
 	paramY[position].second = fpoint.second;
@@ -68,10 +82,9 @@ Curve Curve :: moveControlPoint(const pair fpoint, int position) const{
 	for(int i=0; i<paramX.size(); i++){
 		xy[i].first = paramX[i].second;
 		xy[i].second = paramY[i].second;
+		newParams[i] = paramX[i].first;
 	}
-	
-	Parametrization parametrization(xy.size(),xy,_type);
-	Curve movedCurve(xy.size(),xy,parametrization);
+	Curve movedCurve(xy.size(),xy,newParams);
 	return movedCurve;
 }
 
@@ -100,8 +113,7 @@ Curve Curve :: movePoint(const pair fpoint, double t) const
 		}
 	}
 
-	Parametrization parametrization(newControls.size(),newControls,_type);
-	Curve movedCurve(newControls.size(),newControls,parametrization);
+	Curve movedCurve(newControls.size(),newControls,newParams);
 	return movedCurve;
 }
 	
