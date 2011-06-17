@@ -20,7 +20,7 @@ class Curve{
 	private:
 		bool isControlPoint(double t, int& position) const;
 		Curve moveControlPoint(const pair fpoint,int position) const;
-		Curve movePoint(const pair fpoint, int t) const;
+		Curve movePoint(const pair fpoint, double t) const;
 		double nearPoint(const pair xy) const;
 
 		Polynomial distancePolynom(int polIndex,const pair xy, double t) const;

@@ -29,9 +29,8 @@ Curve :: ~Curve(){
 	delete S_y;
 }
 
-Curve Curve :: moveCurve(const pair fpoint, const pair ipoint) const
-{
-	int t = this->nearPoint(ipoint);
+Curve Curve :: moveCurve(const pair fpoint, const pair ipoint) const{
+	double t = this->nearPoint(ipoint);
 	
 	int position;
 	if(isControlPoint(t,position)) return moveControlPoint(fpoint,position);
@@ -54,8 +53,7 @@ bool Curve :: isControlPoint(double t, int& position) const{
 	bool isControl = false;
 	for(pos=0; pos<params.size() && !isControl; pos++)
 		isControl |= abs(params[pos]-t)<EPSILON;
-	position = (isControl) ? pos : -1;
-	
+	position = (isControl) ? pos-1 : -1;
 	return isControl;
 }
 
@@ -77,28 +75,29 @@ Curve Curve :: moveControlPoint(const pair fpoint, int position) const{
 	return movedCurve;
 }
 
-Curve Curve :: movePoint(const pair fpoint, int t) const
+Curve Curve :: movePoint(const pair fpoint, double t) const
 {
 	vector<pair> paramsX = S_x->getControls();
 	vector<pair> paramsY = S_y->getControls();
 	vector<double> newParams(paramsX.size()+1);
 	vector<pair> newControls(paramsX.size()+1);
 	
+	bool setNewPoint = false;
 	int j=0;
-	for(int i=0;i<newControls.size();i++)
-	{
-		if(t<paramsX[j].first){
-			newParams[i] = t;
-			newControls[i].first = fpoint.first;
-			newControls[i].second= fpoint.second;
-		}
-		else
-		{
-			j++;
+	for(int i=0;i<newControls.size();i++){
+		if(t>paramsX[j].first || setNewPoint){
 			newParams[i] = paramsX[j].first;
 			newControls[i].first = paramsX[j].second;
 			newControls[i].second= paramsY[j].second;
-		}		
+			j++;
+		}
+		else
+		{
+			newParams[i] = t;
+			newControls[i].first = fpoint.first;
+			newControls[i].second= fpoint.second;
+			setNewPoint = true;
+		}
 	}
 
 	Parametrization parametrization(newControls.size(),newControls,_type);

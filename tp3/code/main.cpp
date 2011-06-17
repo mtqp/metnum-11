@@ -53,7 +53,7 @@ int main(int argc, char** argv){
 	/******************************************************************/
 	
 	// Creo la parametrizacion y la curva
-	Parametrization param(n,xy,Centripetal);
+	Parametrization param(n,xy,Uniform);
 	Curve curve(n,xy,param);
 
 	// Obtengo el muestreo de la spline original
@@ -68,7 +68,7 @@ int main(int argc, char** argv){
 	
 	// Obtengo el muestreo de la spline deformada
 	vector<pair> sampling(m);
-	sampling = curve.sampling(m);
+	sampling = movedCurve.sampling(m);
 	
 	/******************************************************************/
 	/***************************** Salida *****************************/
