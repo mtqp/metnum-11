@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2011.3.5)  18 JUN 2011 12:50
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2011.3.5)  18 JUN 2011 13:40
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
@@ -438,10 +438,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 9--11
 (./enunciado.tex [8] [9] [10])) [11] (./referencias.tex) [12] (./informe.aux) )
  
 Here is how much of TeX's memory you used:
- 2454 strings out of 95086
- 27908 string characters out of 1183256
+ 2459 strings out of 95086
+ 27974 string characters out of 1183256
  84947 words of memory out of 1500000
- 5565 multiletter control sequences out of 10000+50000
+ 5570 multiletter control sequences out of 10000+50000
  14585 words of font info for 56 fonts, out of 1200000 for 2000
  28 hyphenation exceptions out of 8191
  27i,8n,25p,882b,287s stack positions out of 5000i,500n,6000p,200000b,5000s
@@ -457,7 +457,7 @@ bluesky/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmti10.pf
 b></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmti12.pfb></usr/share/texmf
 -texlive/fonts/type1/bluesky/cm/cmtt12.pfb></usr/share/texmf-texlive/fonts/type
 1/bluesky/ams/msbm10.pfb>
-Output written on informe.pdf (13 pages, 92719 bytes).
+Output written on informe.pdf (13 pages, 94599 bytes).
 PDF statistics:
  105 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
