@@ -47,6 +47,53 @@ Polynomial Polynomial :: derive() const{
 	return derived;
 }
 
+////////////////////////////////////////////////////////////////////////
+/*vector<double> Polynomial :: superZeros(double a, double b) const
+{//ojo q esto debe recorrer de A a B pero x error de fucking doubles capas no llega a B exacto.
+	int rootcount = _order-1;
+	double interval = (a+b)/_order;
+	double x = a;
+	double x1= a+interval;
+	vector<double> roots(rootcount);
+	for(int i=0;i<rootcount;i++)
+	{
+		roots[i] = findRoot(x, x1);
+		x+=interval;
+		x1+=interval;
+	}
+	return roots;//globalMin(roots);
+}
+
+//SUPONEMOS QUE TENEMOS SOLO UNA RAIZ ENTRE A Y B
+#define RADIUS 0.0001
+#define TOLERANCE 1.0e-20
+#define ITERATIONS 10000000
+double Polynomial :: findRoot(double a, double b) const {
+	if(abs(evaluate(a)) < EPSILON){
+		return a;
+	}
+	if(abs(evaluate(b)) < EPSILON){
+		return b;
+	}	
+
+	if(changeSign(a,b))
+		return bisection(a,b,RADIUS);
+	return newton((a+b)/2,TOLERANCE,ITERATIONS);
+}
+
+//esto al menos recibe UNA raiz
+double Polynomial :: globalMin(vector<double> &roots) const {
+	int rootcount = roots.size();
+	double globalMinEval = this->evaluate(roots[0]);
+	double globalMin = roots[0];
+	for(int i=1;i<rootcount;i++)
+		if(globalMinEval > this->evaluate(roots[1]))
+			globalMin = roots[i];
+	return globalMin;
+}*/
+///////////////////////////////////////////////////////////////////////
+
+
 double Polynomial :: zeros(double a, double b) const{
 	if(abs(evaluate(a)) < EPSILON){
 		return a;
@@ -81,7 +128,7 @@ double Polynomial :: bisection(double a, double b, double radius) const{
 		else
 			a = c;
 	}
-	return newton(c,1.0e-20,10000000);
+	return newton(c,TOLERANCE,ITERATIONS);
 }
 
 bool Polynomial :: changeSign(const double a, const double b) const{
