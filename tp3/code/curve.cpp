@@ -121,14 +121,17 @@ Curve Curve :: movePoint(const pair fpoint, double t) const
 double Curve :: nearPoint(const pair xy) const{
 	double min_dist = 0;							//empiezo con t igual al parametro correspondiente al primer pto de control, es arbitraria la eleccion
 	double min_t;
+	vector<double> critic_points;
 	double dist1;
 	double dist2;
 	vector<double> param = S_x->getParams();
 	for(int i=1; i<amount_control; i++){
-		Polynomial pol = distancePolynom(i,xy,param[i-1]);
-		min_t = pol.zeros(param[i-1],param[i]);
-		dist1 = pointDist(S_x->evaluate(min_dist),S_y->evaluate(min_dist),xy.first,xy.second);
-		dist2 = pointDist(S_x->evaluate(min_t),S_y->evaluate(min_t),xy.first,xy.second);
+		Polynomial pol = derivedDistancePolynom(i,xy,param[i-1]);
+		//min_t = pol.zeros(param[i-1],param[i]);
+		critic_points = pol.zeros(param[i-1],param[i]);
+		min_t = minInPoints(xy,critic_points);
+		dist1 = evaluateDistance(xy,min_dist);//S_x->evaluate(min_dist),S_y->evaluate(min_dist),xy.first,xy.second);
+		dist2 = evaluateDistance(xy,min_t);//S_x->evaluate(min_t),S_y->evaluate(min_t),xy.first,xy.second);
 		if(dist2<dist1) min_dist = min_t;
 	}
 	return min_dist;
@@ -147,7 +150,23 @@ vector<pair> Curve :: sampling(uint m) const{
 	return sampling;
 }
 
-Polynomial Curve :: distancePolynom(int polIndex, const pair xy, double t) const{
+double Curve :: minInPoints(const pair xy, vector<double> points) const {
+	double globalMin = evaluateDistance(xy,points[0]);	//hay si o si uno por lo menos???
+	double globalMinPoint = points[0];
+	for(int i=1;i<points.size();i++)
+		if(globalMin > evaluateDistance(xy,points[i]))
+		{
+			globalMin = evaluateDistance(xy,points[i]);
+			globalMinPoint = points[i];
+		}
+	return globalMin;
+}
+
+double Curve :: evaluateDistance(const pair xy, double point) const {
+	return pointDist(S_x->evaluate(point), S_y->evaluate(point), xy.first, xy.second);
+}
+
+Polynomial Curve :: derivedDistancePolynom(int polIndex, const pair xy, double t) const{
 	
 	/******************************************************************************************************
 	 *  Distancia al cuadrado entre el polinomio 'polIndex' en x y el polinomio 'polIndex' en y al punto xy 

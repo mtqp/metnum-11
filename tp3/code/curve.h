@@ -24,7 +24,11 @@ class Curve{
 		Curve movePoint(const pair fpoint, double t) const;
 		double nearPoint(const pair xy) const;
 
-		Polynomial distancePolynom(int polIndex,const pair xy, double t) const;
+		double evaluateDistance(const pair xy, double point) const;
+		double minInPoints(const pair xy, vector<double> points) const;
+
+
+		Polynomial derivedDistancePolynom(int polIndex,const pair xy, double t) const;
 		uint amount_control;
 		Spline* S_x;
 		Spline* S_y;
