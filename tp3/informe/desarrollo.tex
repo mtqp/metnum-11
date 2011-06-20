@@ -1,11 +1,17 @@
 \begin{section}{Desarrollo}
 	\begin{subsection}{Explicación}
-		Para construir la curva parámetrica se puede utilizar cualquiera de las $tres$ parametrizaciones (uniforme, chord-length y centripeta).
+		Para construir la curva parámetrica se puede utilizar cualquiera de las $tres$ parametrizaciones (uniforme, chord-length y centripeta) en el intervalo
+		$[0,1]$.
 		La parametrización $t$ se elige a partir de los puntos de control $(x,y)$ recibidos en la entrada del programa.
 		Una vez elegida la parametrización se generan dos splines, el primero $S_x$ a partir del par $(t,x)$ y el otro $S_y$ a partir de $(t,y)$.
 		De esta manera, queda definida una curva $C \in \mathbb{R}^2$ donde $C(t) = (S_x(t),S_y(t),)$.
 		
+		Para mover un punto $(x,y)$ cercano a la curva a una nueva posición $(x*,y*)$, calculamos primero el punto de la curva más próximo a $(x,y)$ y luego
+		construimos una nueva curva de manera tal que ambas splines ($S_x$ y $S_y$) ahora pasen también por la nueva posición $(x*,y*)$.
 		
+		Para calcular el punto de la curva más próximo a $(x,y)$ minimizamos (derivamos y buscamos donde se anula distinguiendo entre máximos y mínimos) la 
+		función distancia\footnote{Distancia de $(S_x(t),S_y(t))$ a $(x,y)$: $\sqrt{(S_x(t)-x)^2+(S_y(t)-y)^2}$} de la curva a $(x,y)$ en cada intervalo
+		$[t_i,t_{i+1}] \in [0,1]$ (polinomio que la conforma) y luego seleccionamos el mínimo en $[0,1]$.
 	\end{subsection}
 	\begin{subsection}{Implementación}
 		La implementación esta divida en módulos que realizan tareas especificas, a continuación detallaremos cada uno de ellos.
@@ -13,7 +19,7 @@
 		\begin{itemize}
 			\item \underline{Módulo Parametrización:}\\
 				Este módulo implementa las $tres$ parametrizaciones (uniforme,\\
-				chord-length, centripeta) dado un conjunto de puntos de control.
+				chord-length, centripeta) en el $[0,1]$ dado un conjunto de puntos de control.
 			\item \underline{Módulo Polinomio:}\\
 				Escribimos el módulo \texttt{Polinomio} que implementa un polinomio de\\
 				grado $n$ con las siguientes operaciones:\\
@@ -21,15 +27,17 @@
 				\begin{tabular}{rl}
 					\texttt{Evaluar} & Evalua el polinomio en un valor recibido por parámetro.\\
 					\texttt{Derivar} & Realiza la derivada primera del polinomio.\\
-					\texttt{Ceros}   & Busca una raíz del polinomio usando bisección y el método de Newton.\\
-				\end{tabular}\\
+					\texttt{Ceros}   & Busca una raíz del polinomio usando bisección y el método\\
+									 & de Newton.\\
+				\end{tabular}\\ 
 				EXPLICAR CON MAYOR DETALLES LAS OPERACIONES (COMO NEWTON)!!!!!!
 		
 			\item \underline{Módulo Spline:}\\
 				Escribimos el módulo \texttt{Spline} que implementa un spline cúbico natural con las siguientes operaciones:\\
 				
 				\begin{tabular}{rl}
-					\texttt{Evaluar} & Evalua la spline (el polinomio correspondiente) en un valor recibido\\
+					\texttt{Evaluar} & Evalua la spline (el polinomio correspondiente) en un\\
+									 & valor recibido como parámetro\\
 									 & como parámetro.\\
 					\texttt{Polinomio} & Devuelve el polinomio requerido.\\
 				\end{tabular}\\
@@ -48,14 +56,14 @@
 				\end{tabular}\\
 				
 				Esta clase cuenta con un método $private$ que busca el $t \in [0,1]$ tal que al evaluar la curva en $t$ se obtiene el punto más cercano a la 
-				misma respecto de un punto dado.
+				misma respecto de un punto dado $(x,y)$.
 				
-				Para esto, se busca el $t$ que minimiza la función distancia\footnote{Distancia de $(S_x(t),S_y(t))$ a $(x,y)$: $\sqrt{(S_x(t)-x)^2+(S_y(t)-y)^2}$} 
-				del punto $(x,y)$ a cada polinomio de la curva en el intervalo correspondiente ($[t_i,t_{i+1}]$) y luego se calcula la distancia de evaluar la curva en cada $t$ 
-				(que minimiza la distancia a cada polinomio) a $(x,y)$ y se selecciona el mínimo.
+				Se busca el $t$ que minimiza la función distancia$^1$
+				del punto $(x,y)$ a cada polinomio de la curva en el intervalo correspondiente ($[t_i,t_{i+1}]$) y luego se calcula la distancia de evaluar
+				la curva en cada $t$ obtenido (que minimiza la distancia a cada polinomio) a $(x,y)$ y se selecciona el mínimo.
 				
-				%Llamamos $d(t)$ a la distancia de $(S_x(t),S_y(t))$ a $(x,y)$. Para minimizar $d(t)$ obtenemos la derivada y buscamos los $t$ donde se anula. Estos $t$ que son
-				%los puntos criticos de la función distancia ($d(t)$) corresponden a máximos o 
+				Llamamos $d(t)$ a la distancia de $(S_x(t),S_y(t))$ a $(x,y)$. Para minimizar $d(t)$ obtenemos la derivada y buscamos los $t$ donde se anula. 
+				Estos $t$ que son los puntos criticos de la función distancia corresponden a máximos o mínimos. 
 				
 				
 		\end{itemize}
