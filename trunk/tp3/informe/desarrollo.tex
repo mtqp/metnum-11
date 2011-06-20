@@ -1,5 +1,10 @@
 \begin{section}{Desarrollo}
 	\begin{subsection}{Explicación}
+		Para construir la curva parámetrica se puede utilizar cualquiera de las $tres$ parametrizaciones (uniforme, chord-length y centripeta).
+		La parametrización $t$ se elige a partir de los puntos de control $(x,y)$ recibidos en la entrada del programa.
+		Una vez elegida la parametrización se generan dos splines, el primero $Sx$ a partir del par $(t,x)$ y el otro $Sy$ a partir de $(t,y)$.
+		De esta manera, queda definida una curva $C \in \mathbb{R}^2$ donde $C(t) = (Sx(t),Sy(t),)$.
+		
 		
 	\end{subsection}
 	\begin{subsection}{Implementación}
@@ -12,7 +17,7 @@
 				Escribimos el módulo \texttt{Polinomio} que implementa un polinomio de grado $n$ con las siguientes operaciones:\\
 				
 				\begin{tabular}{rl}
-					\texttt{Evaluar} & Evalua el polinomio en un valor recibido como parámetro.\\
+					\texttt{Evaluar} & Evalua el polinomio en un valor recibido por parámetro.\\
 					\texttt{Derivar} & Realiza la derivada primera del polinomio.\\
 					\texttt{Ceros}   & Busca una raíz del polinomio usando bisección y el método de Newton.\\
 				\end{tabular}\\
@@ -27,11 +32,16 @@
 				\end{tabular}\\
 
 			\item \underline{Módulo Curva:}\\
-				El módulo \texttt{curva} implementa una curva parámetrica con las siguientes operaciones:\\
+				El módulo \texttt{Curva} implementa una curva parámetrica con las siguientes operaciones:\\
 				
 				\begin{tabular}{rl}
-					\texttt{Evaluar} & Evalua la spline (el polinomio correspondiente) en un valor recibido como parámetro.\\
-					\texttt{Polinomio} & Devuelve el $n-esimo$ polinomio (siendo $n$ el parámetro).\\
+					\texttt{Punto} & Dadas las coordenadas de un punto cercano a la curva, calcula\\
+								   & el punto de la curva más próximo.\\
+					\texttt{Mover punto} & Dadas las coordenadas de un punto cercano a la curva, calcula el\\
+										 & punto de la curva más próximo y construye una nueva spline\\
+										 & resultante de modificar la spline original de manera que ahora pase por\\
+										 & la nueva posición del punto seleccionado.\\
+					\texttt{Muestreo} & Devuelve un muestreo de la curva.\\
 				\end{tabular}\\
 		\end{itemize}
 	\end{subsection}
