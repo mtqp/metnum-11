@@ -19,9 +19,9 @@ class Polynomial
 		vector<double> coefficients() const;
 		double evaluate(const double x) const;
 		Polynomial derive() const;
-		double zeros(double a, double b) const;
-		vector<double> superZeros(double a, double b) const;
-		double globalMin(vector<double> &points) const;
+		//double zeros(double a, double b) const;
+		vector<double> zeros(double a, double b) const;
+		//double globalMin(vector<double> &points) const;
 		void print() const;
 
 	private:
