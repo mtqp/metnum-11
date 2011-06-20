@@ -20,17 +20,17 @@ class Polynomial
 		double evaluate(const double x) const;
 		Polynomial derive() const;
 		double zeros(double a, double b) const;
-//		vector<double> superZeros(double a, double b) const;
+		vector<double> superZeros(double a, double b) const;
+		double globalMin(vector<double> &points) const;
 		void print() const;
 
 	private:
 		double newton(double p0, double tolerance, llint iter) const;
 		double bisection(double a, double b, double radius) const;	//continua en el [a,b]
 		bool changeSign(const double a, const double b) const;
-/*	
+	
 		double findRoot(double a, double b) const;
-		double globalMin(vector<double> &roots) const;
-*/	
+	
 		uint _order;
 		double _xj;
 		vector<double> _coefs;
