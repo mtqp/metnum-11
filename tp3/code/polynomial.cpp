@@ -7,6 +7,13 @@ Polynomial :: Polynomial(const vector<double> coefs, double xj, uint order) : _c
 		_coefs[i] = coefs[i];	
 }
 
+Polynomial :: Polynomial(const vector<double> coefs, uint order) : _coefs(order+1) {
+	_order = order;
+	_xj = 0;
+	for(int i=0;i<order+1;i++)
+		_coefs[i] = coefs[i];	
+}
+
 Polynomial :: ~Polynomial(){}
 
 Polynomial& Polynomial :: operator= (const Polynomial &p)
