@@ -3,6 +3,36 @@
 		
 	\end{subsection}
 	\begin{subsection}{Implementación}
+		La implementación esta divida en módulos que realizan tareas especificas, a continuación detallaremos cada uno de ellos.
+		
+		\begin{itemize}
+			\item \underline{Módulo Parametrización:}\\
+				Este módulo implementa las $tres$ parametrizaciones (uniforme, chord-length, centripeta) a partir de un conjunto de puntos de control.
+			\item \underline{Módulo Polinomio:}\\
+				Escribimos el módulo \texttt{Polinomio} que implementa un polinomio de grado $n$ con las siguientes operaciones:\\
+				
+				\begin{tabular}{rl}
+					\texttt{Evaluar} & Evalua el polinomio en un valor recibido como parámetro.\\
+					\texttt{Derivar} & Realiza la derivada primera del polinomio.\\
+					\texttt{Ceros}   & Busca una raíz del polinomio usando bisección y el método de Newton.\\
+				\end{tabular}\\
+				EXPLICAR CON MAYOR DETALLES LAS OPERACIONES (COMO NEWTON)!!!!!!
+		
+			\item \underline{Módulo Spline:}\\
+				Escribimos el módulo \texttt{Spline} que implementa un spline cúbico natural con las siguientes operaciones:\\
+				
+				\begin{tabular}{rl}
+					\texttt{Evaluar} & Evalua la spline (el polinomio correspondiente) en un valor recibido como parámetro.\\
+					\texttt{Polinomio} & Devuelve el polinomio requerido.\\
+				\end{tabular}\\
 
+			\item \underline{Módulo Curva:}\\
+				El módulo \texttt{curva} implementa una curva parámetrica con las siguientes operaciones:\\
+				
+				\begin{tabular}{rl}
+					\texttt{Evaluar} & Evalua la spline (el polinomio correspondiente) en un valor recibido como parámetro.\\
+					\texttt{Polinomio} & Devuelve el $n-esimo$ polinomio (siendo $n$ el parámetro).\\
+				\end{tabular}\\
+		\end{itemize}
 	\end{subsection}
 \end{section}
