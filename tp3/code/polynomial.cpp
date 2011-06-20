@@ -82,13 +82,13 @@ double Polynomial :: findRoot(double a, double b) const {
 }
 
 //esto al menos recibe UNA raiz
-double Polynomial :: globalMin(vector<double> &roots) const {
-	int rootcount = roots.size();
-	double globalMinEval = this->evaluate(roots[0]);
-	double globalMin = roots[0];
+double Polynomial :: globalMin(vector<double> &points) const {
+	int rootcount = points.size();
+	double globalMinEval = this->evaluate(points[0]);
+	double globalMin = points[0];
 	for(int i=1;i<rootcount;i++)
-		if(globalMinEval > this->evaluate(roots[1]))
-			globalMin = roots[i];
+		if(globalMinEval > this->evaluate(points[1]))
+			globalMin = points[i];
 	return globalMin;
 }*/
 ///////////////////////////////////////////////////////////////////////
