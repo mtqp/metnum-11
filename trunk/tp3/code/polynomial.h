@@ -12,6 +12,7 @@ class Polynomial
 {
 	public:
 		Polynomial(const vector<double> coefs, double xj, uint order);
+		Polynomial(const vector<double> coefs, uint order);
 		~Polynomial();
 
 		Polynomial& operator= (const Polynomial &p);

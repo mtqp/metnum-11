@@ -13,7 +13,7 @@ int main(int argc, char** argv){
 	
 	/* Abro el archivo */
 	ifstream in(argv[1]);
-	if(!in.is_open()) cout << "No se puedo abrir el archivo: " << argv[1] << endl;
+	if(!in.is_open()) cout << "No se pudo abrir el archivo: " << argv[1] << endl;
 	
 	/* Leo la cantidad de puntos de control */
 	uint n;
@@ -75,7 +75,7 @@ int main(int argc, char** argv){
 	/******************************************************************/
 	
 	ofstream out(argv[2]);
-	if(!out.is_open()) cout << "No se puedo abrir el archivo: " << argv[2] << endl;
+	if(!out.is_open()) cout << "No se pudo abrir el archivo: " << argv[2] << endl;
 	
 	out << m << endl;
 	

@@ -56,8 +56,8 @@ int main(int argc, char** argv){
 	
 	/**************************** Programa ****************************/
 	//Creo ambos polinomios que formaran (Px(t),Py(t));
-	Polynomial Px(coefs_x,orderX);
-	Polynomial Py(coefs_y,orderY);
+	Polynomial Px(coefs_x,0,orderX);
+	Polynomial Py(coefs_y,0,orderY);
 	double sampling_interval = 1/smp_count;
 	
 	srand(time(NULL));
