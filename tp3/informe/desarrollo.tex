@@ -2,8 +2,8 @@
 	\begin{subsection}{Explicación}
 		Para construir la curva parámetrica se puede utilizar cualquiera de las $tres$ parametrizaciones (uniforme, chord-length y centripeta).
 		La parametrización $t$ se elige a partir de los puntos de control $(x,y)$ recibidos en la entrada del programa.
-		Una vez elegida la parametrización se generan dos splines, el primero $Sx$ a partir del par $(t,x)$ y el otro $Sy$ a partir de $(t,y)$.
-		De esta manera, queda definida una curva $C \in \mathbb{R}^2$ donde $C(t) = (Sx(t),Sy(t),)$.
+		Una vez elegida la parametrización se generan dos splines, el primero $S_x$ a partir del par $(t,x)$ y el otro $S_y$ a partir de $(t,y)$.
+		De esta manera, queda definida una curva $C \in \mathbb{R}^2$ donde $C(t) = (S_x(t),S_y(t),)$.
 		
 		
 	\end{subsection}
@@ -12,9 +12,11 @@
 		
 		\begin{itemize}
 			\item \underline{Módulo Parametrización:}\\
-				Este módulo implementa las $tres$ parametrizaciones (uniforme, chord-length, centripeta) a partir de un conjunto de puntos de control.
+				Este módulo implementa las $tres$ parametrizaciones (uniforme,\\
+				chord-length, centripeta) dado un conjunto de puntos de control.
 			\item \underline{Módulo Polinomio:}\\
-				Escribimos el módulo \texttt{Polinomio} que implementa un polinomio de grado $n$ con las siguientes operaciones:\\
+				Escribimos el módulo \texttt{Polinomio} que implementa un polinomio de\\
+				grado $n$ con las siguientes operaciones:\\
 				
 				\begin{tabular}{rl}
 					\texttt{Evaluar} & Evalua el polinomio en un valor recibido por parámetro.\\
@@ -27,7 +29,8 @@
 				Escribimos el módulo \texttt{Spline} que implementa un spline cúbico natural con las siguientes operaciones:\\
 				
 				\begin{tabular}{rl}
-					\texttt{Evaluar} & Evalua la spline (el polinomio correspondiente) en un valor recibido como parámetro.\\
+					\texttt{Evaluar} & Evalua la spline (el polinomio correspondiente) en un valor recibido\\
+									 & como parámetro.\\
 					\texttt{Polinomio} & Devuelve el polinomio requerido.\\
 				\end{tabular}\\
 
@@ -35,14 +38,26 @@
 				El módulo \texttt{Curva} implementa una curva parámetrica con las siguientes operaciones:\\
 				
 				\begin{tabular}{rl}
-					\texttt{Punto} & Dadas las coordenadas de un punto cercano a la curva, calcula\\
-								   & el punto de la curva más próximo.\\
+					\texttt{Punto cercano} & Dadas las coordenadas de un punto cercano a la curva, calcula\\
+										   & el punto de la curva más próximo.\\
 					\texttt{Mover punto} & Dadas las coordenadas de un punto cercano a la curva, calcula el\\
 										 & punto de la curva más próximo y construye una nueva spline\\
-										 & resultante de modificar la spline original de manera que ahora pase por\\
-										 & la nueva posición del punto seleccionado.\\
+										 & resultante de modificar la spline original de manera que ahora\\
+										 & pase por la nueva posición del punto seleccionado.\\
 					\texttt{Muestreo} & Devuelve un muestreo de la curva.\\
 				\end{tabular}\\
+				
+				Esta clase cuenta con un método $private$ que busca el $t \in [0,1]$ tal que al evaluar la curva en $t$ se obtiene el punto más cercano a la 
+				misma respecto de un punto dado.
+				
+				Para esto, se busca el $t$ que minimiza la función distancia\footnote{Distancia de $(S_x(t),S_y(t))$ a $(x,y)$: $\sqrt{(S_x(t)-x)^2+(S_y(t)-y)^2}$} 
+				del punto $(x,y)$ a cada polinomio de la curva en el intervalo correspondiente ($[t_i,t_{i+1}]$) y luego se calcula la distancia de evaluar la curva en cada $t$ 
+				(que minimiza la distancia a cada polinomio) a $(x,y)$ y se selecciona el mínimo.
+				
+				%Llamamos $d(t)$ a la distancia de $(S_x(t),S_y(t))$ a $(x,y)$. Para minimizar $d(t)$ obtenemos la derivada y buscamos los $t$ donde se anula. Estos $t$ que son
+				%los puntos criticos de la función distancia ($d(t)$) corresponden a máximos o 
+				
+				
 		\end{itemize}
 	\end{subsection}
 \end{section}
