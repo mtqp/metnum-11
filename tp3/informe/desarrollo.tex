@@ -7,10 +7,10 @@
 		De esta manera, queda definida una curva $C \in \mathbb{R}^2$ donde $C(t) = (S_x(t),S_y(t),)$.
 		
 		Para mover un punto $(x,y)$ cercano a la curva a una nueva posición $(x*,y*)$, calculamos primero el punto de la curva más próximo a $(x,y)$ y luego
-		construimos una nueva curva de manera tal que ambas splines ($S_x$ y $S_y$) ahora pasen también por la nueva posición $(x*,y*)$.
+		construimos una nueva curva (manteniendo la parametrización original) de manera tal que ambas splines ($S_x$ y $S_y$) ahora pasen también por la nueva posición $(x*,y*)$.
 		
 		Para calcular el punto de la curva más próximo a $(x,y)$ minimizamos (derivamos y buscamos donde se anula distinguiendo entre máximos y mínimos) la 
-		función distancia\footnote{Distancia de $(S_x(t),S_y(t))$ a $(x,y)$: $\sqrt{(S_x(t)-x)^2+(S_y(t)-y)^2}$} de la curva al punto $(x,y)$ en cada intervalo
+		función distancia$^1$ de la curva al punto $(x,y)$ en cada intervalo
 		$[t_i,t_{i+1}] \in [0,1]$ (polinomio que la conforma) y luego seleccionamos el mínimo en $[0,1]$.\\
 		
 		A continuación se detalla la busqueda del punto más cercano a la curva dado $(x,y)$.
@@ -26,8 +26,7 @@
 		t_{n-1}\; /\; min\; \sqrt{(S_x^{(n-1)}(t)-x)^2+(S_y^{(n-1)}(t)-y)^2}\\
 		\end{array}
 		\right.$
-		\VSP
-		
+		\VSP		
 	\end{subsection}
 	\begin{subsection}{Implementación}
 		La implementación esta divida en módulos que realizan tareas especificas, a continuación detallaremos cada uno de ellos.
@@ -46,7 +45,29 @@
 					\texttt{Ceros}   & Busca una raíz del polinomio usando bisección y el método\\
 									 & de Newton.\\
 				\end{tabular}\\ 
-				EXPLICAR CON MAYOR DETALLES LAS OPERACIONES (COMO NEWTON)!!!!!!
+				
+				Para encontrar los ceros del polinomio en el intervalo $[a,b]$ implementamos un algortimo heurístico que detallamos a continuación:\\
+				
+				\begin{pseudo}
+					\func{ceros}{$polinomio$,$a$,$b$}\\
+					\tab $long\_intervalo = (b-a)/grado(polinomio)$\\
+					\tab $b = a+long\_intervalo$\\
+					\tab \FOR $i\gets 0 \TO grado(polinomio)-1$\\
+					\tab\tab\tab $raices[i] = BuscarRaiz(polinomio,a,b)$\\
+					\tab\tab\tab $a = b$\\
+					\tab\tab\tab $b = b + long\_intervalo$\\
+					\tab \RET $raices$\\
+				\end{pseudo}
+		
+				Dado que el polinomio tiene a lo sumo tantas raíces como su grado, dividimos $[a,b]$ en esa cantidad de intervalos, apostando a que
+				las mismas se encuentran uniformemente distribuídas, si esto sucede encontramos una raíz en cada intervalo. Para buscar cada una de 
+				ellas ejecutamos el método de bisección mientras sea posible (cambie de signo en el intervalo) o hasta acercarnos lo suficiente
+				(parámetro definido por nosotros, Ver Pruebas!!!!). En ambos casos el algoritmo aplica en última instancia el método de $Newton$.\\
+				En los intervalos donde no hay ninguna raíz el procedimiento es el mismo, el valor conseguido es producto de que el método de 
+				$Newton$ utilizó todas las iteraciones permitidas, no alcanzando este valor la tolerancia que le otorga la condición de cero del
+				polinomio (recordemos que como las operaciones son en punto flotante y existe error de representación, consideramos que dos valores
+				son el mismo si cumplen que la diferencia es menor a la tolerancia (elegida por nosotros, Ver Pruebas!!!!))
+				
 		
 			\item \underline{Módulo Spline:}\\
 				Escribimos el módulo \texttt{Spline} que implementa un spline cúbico natural con las siguientes operaciones:\\
@@ -54,7 +75,6 @@
 				\begin{tabular}{rl}
 					\texttt{Evaluar} & Evalua la spline (el polinomio correspondiente) en un\\
 									 & valor recibido como parámetro\\
-									 & como parámetro.\\
 					\texttt{Polinomio} & Devuelve el polinomio requerido.\\
 				\end{tabular}\\
 
@@ -71,17 +91,58 @@
 					\texttt{Muestreo} & Devuelve un muestreo de la curva.\\
 				\end{tabular}\\
 				
-				Esta clase cuenta con un método $private$ que busca el $t \in [0,1]$ tal que al evaluar la curva en $t$ se obtiene el punto más cercano a la 
+				Esta clase cuenta con un método $private$ (que se usa tanto para \texttt{'Punto cercano'} como para \texttt{'Mover Punto'}) que busca el $t \in [0,1]$ tal que al evaluar la curva en $t$ se obtiene el punto más cercano a la 
 				misma respecto de un punto dado $(x,y)$.
 				
-				Se busca el $t$ que minimiza la función distancia$^1$
-				del punto $(x,y)$ a cada polinomio de la curva en el intervalo correspondiente ($[t_i,t_{i+1}]$) y luego se calcula la distancia de evaluar
-				la curva en cada $t$ obtenido (que minimiza la distancia a cada polinomio) a $(x,y)$ y se selecciona el mínimo.
+				Se busca el $t$ que minimiza la función distancia\footnote{Distancia euclídea de $(S_x(t),S_y(t))$ a $(x,y)$: $\sqrt{(S_x(t)-x)^2+(S_y(t)-y)^2}$}
+				del punto $(x,y)$ a cada polinomio de la curva en el intervalo correspondiente ($[t_i,t_{i+1}]$) y se verifica si se puede actualizar el mínimo 
+				global, es decir, se selecciona el $t$ que minimiza la distancia en $[t_1,t_{i+1}]$.
 				
-				Llamamos $d(t)$ a la distancia de $(S_x(t),S_y(t))$ a $(x,y)$. Para minimizar $d(t)$ obtenemos la derivada y buscamos los $t$ donde se anula. 
-				Estos $t$ que son los puntos criticos de la función distancia corresponden a máximos o mínimos. 
+				Llamamos $d_i(t)$ a la distancia de $(S_x^{(i)}(t),S_y^{(i)}(t))$ a $(x,y)$, es decir, la distancia a la curva en el intervalo $[t_i,t_{i+1}]$ 
+				($i-esimo$ polinomio).\\
 				
+				Como la función distancia es BLABLABLA podemos minimizar $d_i^2(t)$.\\
 				
+				$d_i^2(t) = (S_x^{(i)}-x)^2+(S_y^{(i)}-y)^2$\\
+				
+				Sea $z=(t-t_i) \Rightarrow$
+				
+				$d_i^2(t) = (a_{x_i} + b_{x_i}*z + c_{x_i}*z^2 + d_{x_i}*z^3 - x)^2 + (a_{y_i} + b_{y_i}*z + c_{y_i}*z^2 + d_{y_i}*z^3 -y)^2$\\
+				
+				Para minimizar $d_i^2(t)$ obtenemos la derivada:.
+				
+				$(d_i^2)'(t) = 2(S_x^{(i)}(t)-x)(S_x^{(i)}(t)-x)'+2(S_y^{(i)}(t)-y)(S_y^{(i)}(t)-y)'$\\
+				
+				Sea $E_{k_i} = 2(S_k^{(i)}(t)-k)(S_k^{(i)}(t)-k)'$ \\
+				
+				$E_{k_i} = 2b_{k_i}(a_{k_i}-k)+2(b_{k_i}^2+2c_{k_i}(a_{k_i}-k))*z+6(c_{k_i}b_{k_i}+d_{k_i}(a_{k_i}-k)))*z^2+4(2d_{k_i}b_{k_i}+c_{k_i}^2)*z^3+10d_{k_i}c_{k_i}*z^4+6d_{k_i}^2*z^5$\\
+				
+				$\Rightarrow (d_i^2)'(t) = E_{x_i} + E_{y_i}$\\
+				
+				\underline{\texttt{Nota:}} Esta expresión esta 'hardcodeada' en una función $private$ que devuelve el polinomio 'distancia' derivado a partir
+				de los coeficientes de $S_x$, $S_y$ .
+				
+				Por último, buscamos los $t$ donde $(d_i^2)'(t)$ se anula. Estos $t$ que son los puntos criticos de la función corresponden a máximos o a mínimos. 
+				Nos quedamos con el $t$ tal minimiza $d(t)$.
+				
+				Para mover un punto $(x,y)$	calculamos el punto de la curva más próximo como se explico previamente. Luego, separamos en los siguientes casos:
+				
+				\begin{itemize}
+					\item \underline{Caso punto más cercano a $(x,y)$ es un punto de control:}\\
+					
+						Se reemplaza el punto de control (aquel que es el punto más próximo a $(x,y)$) por la posición final de $(x,y)$ y se construye una
+						nueva curva a partir de los nuevos puntos de control manteniendo la parametrización.\\
+					
+					\item \underline{Caso punto más cercano a $(x,y)$ no es un punto de control:}\\
+					
+						Se agrega como nuevo punto de control $(x*,y*)$ (posición final de $(x,y)$), además se agrega el $t$ correspondiente a la parametrización 
+						(la paramerización para el resto de los puntos de control se mantiene).
+						Para esto, se selecciona la posición que le corresponde a estos datos según un orden creciente de $t$. Luego, se construye una nueva curva
+						que ahora también pase por $(x*,y*)$.
+				\end{itemize}
+				
+				La última de las operaciones selecciona $m$ puntos de muestreo, donde $m$ es recibido en la entrada.
+				Estos puntos corresponden a un muestreo uniforme del rango del parámetro $([0,1])$ incluyendo los extremos.
 		\end{itemize}
 	\end{subsection}
 \end{section}
