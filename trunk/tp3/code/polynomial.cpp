@@ -48,7 +48,7 @@ Polynomial Polynomial :: derive() const{
 }
 
 ////////////////////////////////////////////////////////////////////////
-/*vector<double> Polynomial :: superZeros(double a, double b) const
+vector<double> Polynomial :: superZeros(double a, double b) const
 {//ojo q esto debe recorrer de A a B pero x error de fucking doubles capas no llega a B exacto.
 	int rootcount = _order-1;
 	double interval = (a+b)/_order;
@@ -90,7 +90,7 @@ double Polynomial :: globalMin(vector<double> &points) const {
 		if(globalMinEval > this->evaluate(points[1]))
 			globalMin = points[i];
 	return globalMin;
-}*/
+}
 ///////////////////////////////////////////////////////////////////////
 
 
