@@ -2,11 +2,11 @@
 \contentsline {section}{\numberline {1}Introducci\IeC {\'o}n te\IeC {\'o}rica}{2}
 \contentsline {section}{\numberline {2}Desarrollo}{3}
 \contentsline {subsection}{\numberline {2.1}Explicaci\IeC {\'o}n}{3}
-\contentsline {subsection}{\numberline {2.2}Implementaci\IeC {\'o}n}{3}
-\contentsline {section}{\numberline {3}Resultados}{5}
-\contentsline {section}{\numberline {4}Discusi\IeC {\'o}n}{6}
-\contentsline {section}{\numberline {5}Conclusiones}{7}
-\contentsline {section}{\numberline {6}Modo de compilaci\IeC {\'o}n y uso}{8}
-\contentsline {section}{\numberline {7}Ap\IeC {\'e}ndices}{9}
-\contentsline {subsection}{\numberline {7.1}Ap\IeC {\'e}ndice A: Enunciado}{9}
-\contentsline {section}{\numberline {8}Referencias}{12}
+\contentsline {subsection}{\numberline {2.2}Implementaci\IeC {\'o}n}{4}
+\contentsline {section}{\numberline {3}Resultados}{6}
+\contentsline {section}{\numberline {4}Discusi\IeC {\'o}n}{7}
+\contentsline {section}{\numberline {5}Conclusiones}{8}
+\contentsline {section}{\numberline {6}Modo de compilaci\IeC {\'o}n y uso}{9}
+\contentsline {section}{\numberline {7}Ap\IeC {\'e}ndices}{10}
+\contentsline {subsection}{\numberline {7.1}Ap\IeC {\'e}ndice A: Enunciado}{10}
+\contentsline {section}{\numberline {8}Referencias}{13}

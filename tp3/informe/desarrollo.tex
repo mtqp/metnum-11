@@ -10,8 +10,24 @@
 		construimos una nueva curva de manera tal que ambas splines ($S_x$ y $S_y$) ahora pasen también por la nueva posición $(x*,y*)$.
 		
 		Para calcular el punto de la curva más próximo a $(x,y)$ minimizamos (derivamos y buscamos donde se anula distinguiendo entre máximos y mínimos) la 
-		función distancia\footnote{Distancia de $(S_x(t),S_y(t))$ a $(x,y)$: $\sqrt{(S_x(t)-x)^2+(S_y(t)-y)^2}$} de la curva a $(x,y)$ en cada intervalo
-		$[t_i,t_{i+1}] \in [0,1]$ (polinomio que la conforma) y luego seleccionamos el mínimo en $[0,1]$.
+		función distancia\footnote{Distancia de $(S_x(t),S_y(t))$ a $(x,y)$: $\sqrt{(S_x(t)-x)^2+(S_y(t)-y)^2}$} de la curva al punto $(x,y)$ en cada intervalo
+		$[t_i,t_{i+1}] \in [0,1]$ (polinomio que la conforma) y luego seleccionamos el mínimo en $[0,1]$.\\
+		
+		A continuación se detalla la busqueda del punto más cercano a la curva dado $(x,y)$.
+		
+		Sea $n$ la cantidad de puntos de control y $S_x^i$, $S_y^i$ el $i-esimo$ polinomio de cada spline de la curva.\\
+		
+		 
+		$t \; /\; min\; \sqrt{(S_x(t)-x)^2+(S_y(t)-y)^2} \left\{
+		\begin{array}{c}
+		t_1\; /\; min\; \sqrt{(S_x^{(1)}(t)-x)^2+(S_y^{(1)}(t)-y)^2}\\
+		t_2\; /\; min\; \sqrt{(S_x^{(2)}(t)-x)^2+(S_y^{(2)}(t)-y)^2}\\
+		\vdots\\
+		t_{n-1}\; /\; min\; \sqrt{(S_x^{(n-1)}(t)-x)^2+(S_y^{(n-1)}(t)-y)^2}\\
+		\end{array}
+		\right.$
+		\VSP
+		
 	\end{subsection}
 	\begin{subsection}{Implementación}
 		La implementación esta divida en módulos que realizan tareas especificas, a continuación detallaremos cada uno de ellos.
