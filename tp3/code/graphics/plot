@@ -1,20 +1,21 @@
 #!/usr/bin/gnuplot -persist
 load 'plot_style'
 
-set key bottom right
+set key bottom center
 
 #le pone titulo al grafico
-#set title "My lovely title"
+#set title "Calidad de la distintas parametrizaciones"
 
 #pone la descripccion de los ejes
 set xlabel "X"
 set ylabel "Y"
 
 set output 'eps/grafiquin.eps'
-plot 'data/pol.dat' using 1:2 title "Polinomio" with lines,\
-	 'data/curvUniform.dat' using 1:2 title "Uniforme" with lines,\
-	 'data/curvChordLength.dat' using 1:2 title "ChordLength" with lines,\
-	 'data/curvCentripetal.dat' using 1:2 title "Centripetal" with lines
+plot 'data/pol.dat' using 1:2 title "Polinomio" with lines linecolor rgb 'black',\
+	 'data/curvUniform.dat' using 1:2 title "Uniforme" with lines linecolor rgb 'red',\
+	 'data/curvChordLength.dat' using 1:2 title "ChordLength" with lines linecolor rgb 'violet',\
+	 'data/curvCentripetal.dat' using 1:2 title "Centripetal" with lines linecolor rgb 'green',\
+	 'data/controls.dat' using 1:2 title "Puntos Control" linestyle 2
 
 #pongo la salida default para mostrar en pantalla
 set term pop

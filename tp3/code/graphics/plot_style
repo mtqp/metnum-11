@@ -9,11 +9,9 @@ set key right box
 #defino dos tipos de lineas
 #lt=tipo de linea y color,  pt=point type,  ps=point size
 #(para ver los distintos point types pongan "test" en el gnuplot)
-set style line 1 lt 1 pt 1 ps 1
-set style line 2 lt 2 pt 2 ps 1
-set style line 3 lt 3 pt 3 ps 1
-set style line 4 lt 4 pt 1 ps 1
-set style line 5 lt 5 pt 1 ps 1
-set style line 6 lt 6 pt 1 ps 1
-set style line 7 lt 7 pt 1 ps 1
-
+set style line 1 lt 7 pt 1 ps 1
+set style line 2 lt 3 pt 3 ps 2
+set style line 3 lt 1 pt 2 ps 1
+set style line 4 lt 2 pt 3 ps 1
+set style line 5 lt 4 pt 4 ps 1
+	
