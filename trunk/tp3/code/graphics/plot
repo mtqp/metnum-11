@@ -10,9 +10,11 @@ set key bottom right
 set xlabel "X"
 set ylabel "Y"
 
-set output 'grafiquin.eps'
-plot[-2:2][-2:2]'polym.dat' using 1:2 title "SAY WHAAAT?" with lines 1  #,\
-	#'data/inv_vs_lu_promedio.dat' using 1:3 title "LU" linestyle 2
+set output 'eps/grafiquin.eps'
+plot 'data/pol.dat' using 1:2 title "Polinomio" with lines,\
+	 'data/curvUniform.dat' using 1:2 title "Uniforme" with lines,\
+	 'data/curvChordLength.dat' using 1:2 title "ChordLength" with lines,\
+	 'data/curvCentripetal.dat' using 1:2 title "Centripetal" with lines
 
 #pongo la salida default para mostrar en pantalla
 set term pop
