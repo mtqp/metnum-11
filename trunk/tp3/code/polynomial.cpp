@@ -65,7 +65,7 @@ vector<double> Polynomial :: zeros(double a, double b) const
 	for(int i=0;i<rootcount;i++)
 	{
 		roots[i] = findRoot(x, x1);
-		x+=interval;
+		x=x1;
 		x1+=interval;
 	}
 	return roots;//globalMin(roots);
