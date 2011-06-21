@@ -6,6 +6,11 @@ all: generador
 
 generador: curve_generator.cpp $(OBJS)
 	g++ -o curve_generator $(CFLAGS) $(MATH) curve_generator.cpp $(OBJS)
+
+plot:
+	./plot
+	ps2pdf /eps/grafiquin.eps /pdf/grafiquin.pdf
+
 		
 %.o: %.cpp %.h
 	g++ -c $< $(MATH)
