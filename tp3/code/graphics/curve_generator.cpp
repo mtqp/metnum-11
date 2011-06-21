@@ -59,7 +59,7 @@ int main(int argc, char** argv){
 //	Px.print();
 //	Py.print();
 	
-	double sampling_interval = 1.0/smp_count;
+	double sampling_interval = 6.28/smp_count;
 	
 	srand(time(NULL));
 	double control_t[amount_count];
@@ -91,7 +91,7 @@ int main(int argc, char** argv){
 		exit(-1);
 	}
 	
-	double t_eval = 0;
+	double t_eval = -3.14;
 	for(int i=0;i<smp_count;i++)
 	{
 		out_p << Px.evaluate(t_eval) << " " << Py.evaluate(t_eval) << endl;
