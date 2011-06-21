@@ -13,11 +13,6 @@ test: test.cpp $(OBJS)
 generador: curve_generator.cpp $(OBJS)
 	g++ -o curve_generator $(CFLAGS) $(MATH) curve_generator.cpp $(OBJS)
 
-plot: plot /graphics/data/pol.dat
-	/graphics/./plot
-	ps2pdf /graphics/eps/grafiquin.eps /graphics/pdf/grafiquin.pdf
-
-	
 %.o: %.cpp %.h
 	g++ -c $< $(MATH)
 	

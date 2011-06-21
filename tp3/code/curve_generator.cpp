@@ -108,11 +108,8 @@ int main(int argc, char** argv){
 	
 	/************************* Salida Curva ***************************/
 	saveCurve(/*argv[3],*/ "Uniform.dat", sampling_uni);
-	cout << "w" << endl;
 	saveCurve(/*argv[3],*/ "ChordLength.dat", sampling_clength);
-	cout << "t" << endl;
 	saveCurve(/*argv[3],*/ "Centripetal.dat", sampling_cent);
-	cout << "F!!!!!" << endl;
 		
 	return 0;
 }
@@ -127,23 +124,17 @@ vector<pair> getSamples(uint smp_count, uint amount_control, vector<pair> xy, Pa
 void saveCurve(/*char* argv, */char* paramType, vector<pair> smp)
 {
 	cout << "Guardando la curva " << paramType << endl;
-	char file_name[strlen("./graphics/data/curv"/*argv*/)];
-	cout << "a" << endl;
+	char file_name[100];
 	strcpy(file_name, "./graphics/data/curv"/*argv*/);
-	cout << "b" << endl;
 	ofstream out(strcat(file_name,paramType));
-	cout << "c" << endl;
 	if(!out.is_open())
 	{
 		cout << "No se pudo salvar la curva con parametrizacion: " << paramType << endl;
 		return;
 	}
-	cout << "d" << endl;
 	for(int i=0;i<smp.size();i++)
 		out << smp[i].first << " " << smp[i].second << endl;
-	cout << "e" << endl;
 	out.close();
-	cout << "f" << endl;
 }
 
 int compare_doubles(const void *a, const void* b)

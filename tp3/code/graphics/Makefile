@@ -1,6 +1,6 @@
 all: plot
 
-plot: data/pol.dat
+plot: data/*.dat
 	./plot
 	ps2pdf eps/grafiquin.eps pdf/grafiquin.pdf
 
