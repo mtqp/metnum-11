@@ -11,7 +11,7 @@ int main(int argc, char** argv){
 		exit(0);
 	}
 	
-	cout << "recordar que los coeficientes del polinomio se pasan de la forma:" << endl;
+	cout << "Los coeficientes del polinomio se pasan de la forma:" << endl;
 	cout << "\t--> a0 + a1.(x-xj) + a2.(x-xj)^2 + ... + an.(x-xj)^n" << endl;
 	
 	/***************************** Entrada ****************************/
@@ -56,11 +56,8 @@ int main(int argc, char** argv){
 	Polynomial Px(coefs_x,orderX);
 	Polynomial Py(coefs_y,orderY);
 	
-	cout << "fucking pol px" << endl;
-	Px.print();
-	
-	cout << "fucking pol py" << endl;
-	Py.print();
+//	Px.print();
+//	Py.print();
 	
 	double sampling_interval = 1.0/smp_count;
 	
@@ -68,7 +65,6 @@ int main(int argc, char** argv){
 	double control_t[amount_count];
 	for(int i=0;i<amount_count;i++)	{	//genero amount_count t's en el [0,...,1]
 		control_t[i] = (double) rand()/RAND_MAX;
-		cout << "fucking controls = " << control_t[i] << endl;	
 	}
 		
 	//ordeno los t para generar los puntos de control de la curva
@@ -87,10 +83,11 @@ int main(int argc, char** argv){
 	vector<pair> sampling_cent    = getSamples(smp_count, amount_count, xy, Centripetal);
 	
 	/************************* Salida Polinomio ***********************/
-	ofstream out_p(argv[2]);
+	char file_pol[strlen(argv[2])];
+	strcpy(file_pol,argv[2]);
+	ofstream out_p(strcat(file_pol,".dat"));
 	if(!out_p.is_open()) 
 	{
-		cout << "No se pudo abrir el archivo: " << argv[2] << endl;
 		exit(-1);
 	}
 	
@@ -98,16 +95,15 @@ int main(int argc, char** argv){
 	for(int i=0;i<smp_count;i++)
 	{
 		out_p << Px.evaluate(t_eval) << " " << Py.evaluate(t_eval) << endl;
-		//cout << "fucking teval = " << t_eval << endl;
 		t_eval += sampling_interval;
 	}
 	
 	out_p.close();
 	
 	/************************* Salida Curva ***************************/
-	saveCurve(argv[2], "Uniform.dat", sampling_uni);
-	saveCurve(argv[2], "ChordLength.dat", sampling_clength);
-	saveCurve(argv[2], "Centripetal.dat", sampling_cent);
+	saveCurve(argv[3], "Uniform.dat", sampling_uni);
+	saveCurve(argv[3], "ChordLength.dat", sampling_clength);
+	saveCurve(argv[3], "Centripetal.dat", sampling_cent);
 		
 	return 0;
 }
