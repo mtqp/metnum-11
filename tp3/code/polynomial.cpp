@@ -57,6 +57,7 @@ Polynomial Polynomial :: derive() const{
 ////////////////////////////////////////////////////////////////////////
 vector<double> Polynomial :: zeros(double a, double b) const
 {//ojo q esto debe recorrer de A a B pero x error de fucking doubles capas no llega a B exacto.
+	//cout << "busco cero entre --> " << a << " " << b << endl; 
 	int rootcount = _order;//-1;
 	double interval = (b-a)/rootcount;
 	double x = a;
@@ -64,7 +65,9 @@ vector<double> Polynomial :: zeros(double a, double b) const
 	vector<double> roots(rootcount);
 	for(int i=0;i<rootcount;i++)
 	{
+		//cout << "intervalo --> " << x << " " << x1 << endl; 
 		roots[i] = findRoot(x, x1);
+		//cout << "encontro raiz --> " << roots[i] << endl;
 		x=x1;
 		x1+=interval;
 	}
@@ -112,6 +115,7 @@ double Polynomial :: zeros(double a, double b) const{
 }*/
 
 double Polynomial :: newton(double p0, double tolerance, llint iter) const{
+	//cout << "newton --> " << p0 << endl;
 	llint i=1;
 	Polynomial derivedPol = this->derive();
 	double pi = p0 - this->evaluate(p0)/derivedPol.evaluate(p0);
@@ -125,9 +129,12 @@ double Polynomial :: newton(double p0, double tolerance, llint iter) const{
 }
 
 double Polynomial :: bisection(double a, double b, double radius) const{
+	//cout << "Biseccion" << endl;
 	double c;
 	while(changeSign(a,b) && abs(a-b)>radius){
+		//cout << "a: " << a << "b: " << b << endl;
 		c = (a+b)/2;
+		//cout << "c: " << c << endl;
 		if(abs(evaluate(c)) < EPSILON)
 			return c;
 		if(changeSign(a,c))
