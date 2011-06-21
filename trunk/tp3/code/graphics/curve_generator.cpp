@@ -27,7 +27,8 @@ int main(int argc, char** argv){
 	vector<double> coefs_x(orderX+1);
 	for(int i=0; i<orderX+1; i++)
 		in >> coefs_x[i];
-		
+	
+	
 	/* Ignoro la linea en blanco */
 	//in.ignore(0,'\n');
 	
@@ -54,12 +55,21 @@ int main(int argc, char** argv){
 	//Creo ambos polinomios que formaran (Px(t),Py(t));
 	Polynomial Px(coefs_x,orderX);
 	Polynomial Py(coefs_y,orderY);
-	double sampling_interval = 1/smp_count;
+	
+	cout << "fucking pol px" << endl;
+	Px.print();
+	
+	cout << "fucking pol py" << endl;
+	Py.print();
+	
+	double sampling_interval = 1.0/smp_count;
 	
 	srand(time(NULL));
 	double control_t[amount_count];
-	for(int i=0;i<amount_count;i++)		//genero amount_count t's en el [0,...,1]
-		control_t[i] = rand()/RAND_MAX;
+	for(int i=0;i<amount_count;i++)	{	//genero amount_count t's en el [0,...,1]
+		control_t[i] = (double) rand()/RAND_MAX;
+		cout << "fucking controls = " << control_t[i] << endl;	
+	}
 		
 	//ordeno los t para generar los puntos de control de la curva
 	qsort(&control_t,amount_count,sizeof(double),compare_doubles);
@@ -88,15 +98,16 @@ int main(int argc, char** argv){
 	for(int i=0;i<smp_count;i++)
 	{
 		out_p << Px.evaluate(t_eval) << " " << Py.evaluate(t_eval) << endl;
+		//cout << "fucking teval = " << t_eval << endl;
 		t_eval += sampling_interval;
 	}
 	
 	out_p.close();
 	
 	/************************* Salida Curva ***************************/
-	saveCurve(argv[2], "Uniform", sampling_uni);
-	saveCurve(argv[2], "ChordLength", sampling_clength);
-	saveCurve(argv[2], "Centripetal", sampling_cent);
+	saveCurve(argv[2], "Uniform.dat", sampling_uni);
+	saveCurve(argv[2], "ChordLength.dat", sampling_clength);
+	saveCurve(argv[2], "Centripetal.dat", sampling_cent);
 		
 	return 0;
 }
@@ -110,7 +121,9 @@ vector<pair> getSamples(uint smp_count, uint amount_control, vector<pair> xy, Pa
 
 void saveCurve(char* argv, char* paramType, vector<pair> smp)
 {
-	ofstream out(strcat(argv,paramType));
+	char file_name[strlen(argv)];
+	strcpy(file_name, argv);
+	ofstream out(strcat(file_name,paramType));
 	if(!out.is_open())
 	{
 		cout << "No se pudo salva la curva con parametrizacion: " << paramType << endl;
