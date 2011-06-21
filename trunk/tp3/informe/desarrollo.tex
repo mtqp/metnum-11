@@ -12,7 +12,6 @@
 		A continuación se detalla la busqueda del punto más cercano a la curva dado $(x,y)$.
 		
 		Sea $n$ la cantidad de puntos de control y $S_x^i$, $S_y^i$ el $i-esimo$ polinomio de cada spline de la curva.\\
-		
 		 
 		$t /\; min\; \sqrt{(S_x(t)-x)^2+(S_y(t)-y)^2} \left\{
 		\begin{array}{c}
@@ -82,6 +81,22 @@
 				
 				Por último, buscamos los $t$ donde $(d_i^2)'(t)$ se anula. Estos $t$ que son los puntos críticos de la función corresponden a máximos o a mínimos.
 				Nos quedamos con el $t$ tal minimiza $d(t)$.
+				
+				A continuación exponemos el pseudocódigo de esta función con el objetivo de esclarecer su explicación:\\
+				
+				\begin{pseudo}
+					\func{PuntoMásProx}{$curva$,$(x,y)$}\\
+					\tab $min\_global = 0$\\
+					\tab \FOR $i\gets 1 \TO cantPtosControl-1$\\
+					\tab\tab $pol_i = distDerivada(curva,(x,y),i)$\\
+					\tab\tab $ptosCriticos = ceros(pol_i,i,i+1)$\\
+					\tab\tab $min\_t = minimo(ptosCriticos)$\\
+					\tab\tab $dist\_min\_global = dist(S_x(min\_global),S_y(min\_global),x,y)$\\
+					\tab\tab $dist\_min\_t = dist(S_x(min\_t),S_y(min\_t),x,y)$\\
+					\tab\tab \IF $dist\_min\_t < dist\_min\_global$ \THEN\\
+					\tab\tab\tab $dist\_min\_global = dist\_min_t$\\
+					\tab \RET $(S_x(min\_global),S_y(min\_global))$\\
+				\end{pseudo}
 				
 				Para mover un punto $(x,y)$	calculamos el punto de la curva más próximo como se explico previamente. Luego, separamos en los siguientes casos:
 				
