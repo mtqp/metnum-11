@@ -11,6 +11,5 @@ generador: curve_generator.cpp $(OBJS)
 	g++ -c $< $(MATH)
 	
 clean:
-	rm -f tp3
-	rm -f test
+	rm -f generador
 	rm -f *.o
