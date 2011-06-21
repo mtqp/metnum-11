@@ -4,11 +4,24 @@ vector<pair> getSamples(uint smp_count, uint amount_control, vector<pair> xy, Pa
 void saveCurve(/*char* argv, */char* paramType, vector<pair> smp);
 int compare_doubles(const void *a, const void* b);
 
+void saveControlPoints(vector<pair> xy){
+	ofstream out("./graphics/data/controls.dat");
+	if(!out.is_open()) 
+	{
+		cout << "No pudo crear el archivo de puntos de control" << endl;
+		exit(-1);
+	}
+	cout << "Generando el archivo de puntos de control" << endl;
+	for(int i=0;i<xy.size();i++)
+		out << xy[i].first << " " << xy[i].second << endl;
+	out.close();
+}
+
 int main(int argc, char** argv){
 	
 	//if(argc<4){
-	if(argc<2){
-		cout << "uso: [entrada]" << endl;
+	if(argc<3){
+		cout << "uso: [entrada] [r (rand) / u (uniform)]" << endl;
 		exit(0);
 	}
 	
@@ -57,17 +70,24 @@ int main(int argc, char** argv){
 	Polynomial Px(coefs_x,orderX);
 	Polynomial Py(coefs_y,orderY);
 	
-//	Px.print();
-//	Py.print();
-	
+	//carla es una negra black
 	double sampling_interval = 1.0/smp_count;
 	
-	srand(time(NULL));
-	double control_t[amount_count];
-	for(int i=0;i<amount_count;i++)	{	//genero amount_count t's en el [0,...,1]
-		control_t[i] = (double) rand()/RAND_MAX;
+	double den, num;
+	if(argv[3] == "r"){
+		srand(time(NULL));
+		den = (double) RAND_MAX;
 	}
-		
+	else
+		den = amount_count;
+
+	double control_t[amount_count];
+	
+	for(int i=0;i<amount_count;i++)	{	//genero amount_count t's en el [0,...,1]
+		num = (argv[3]=="r") ? rand() : i;
+		control_t[i] = num/den;
+	}
+
 	//ordeno los t para generar los puntos de control de la curva
 	qsort(&control_t,amount_count,sizeof(double),compare_doubles);
 	
@@ -77,6 +97,8 @@ int main(int argc, char** argv){
 			xy[i].first = Px.evaluate(control_t[i]);
 			xy[i].second= Py.evaluate(control_t[i]);
 	}
+
+	saveControlPoints(xy);
 	// Creo la parametrizaciones y curvas
 	// Obtengo el muestreo de las splines originales
 	vector<pair> sampling_uni 	  = getSamples(smp_count, amount_count, xy, Uniform);
@@ -84,11 +106,6 @@ int main(int argc, char** argv){
 	vector<pair> sampling_cent    = getSamples(smp_count, amount_count, xy, Centripetal);
 	
 	/************************* Salida Polinomio ***********************/
-	/*char file_pol[strlen("pol"/*argv[2])];
-	strcpy(file_pol,"pol"/*argv[2]);
-	ofstream out_p(strcat(file_pol,".dat"));
-	*/
-	
 	ofstream out_p("./graphics/data/pol.dat");
 	if(!out_p.is_open()) 
 	{
