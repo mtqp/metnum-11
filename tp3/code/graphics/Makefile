@@ -1,20 +1,8 @@
-OBJS = ../polynomial.o ../parametrization.o ../spline.o ../curve.o ../functions.o
-MATH = -lm
-CFLAGS = -ggdb 
+all: plot
 
-all: generador
-
-generador: curve_generator.cpp $(OBJS)
-	g++ -o curve_generator $(CFLAGS) $(MATH) curve_generator.cpp $(OBJS)
-
-plot:
+plot: data/pol.dat
 	./plot
-	ps2pdf /eps/grafiquin.eps /pdf/grafiquin.pdf
+	ps2pdf eps/grafiquin.eps pdf/grafiquin.pdf
 
-		
-%.o: %.cpp %.h
-	g++ -c $< $(MATH)
-	
 clean:
-	rm -f generador
-	rm -f *.o
+	rm -f eps/grafiquin.eps
