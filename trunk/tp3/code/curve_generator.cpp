@@ -18,7 +18,7 @@ void saveControlPoints(vector<pair> xy){
 }
 
 int main(int argc, char** argv){
-	
+	double lambda = 15.0;
 	//if(argc<4){
 	if(argc<3){
 		cout << "uso: [entrada] [r (rand) / u (uniform)]" << endl;
@@ -74,18 +74,22 @@ int main(int argc, char** argv){
 	double sampling_interval = 1.0/smp_count;
 	
 	double den, num;
-	if(argv[3] == "r"){
-		srand(time(NULL));
+	srand(time(NULL));
+	if(strcmp(argv[2],"r")==0){
+		cout << "Generacion de T's random" << endl;
 		den = (double) RAND_MAX;
 	}
 	else
+	{
 		den = amount_count;
+		cout << "Generacion de T's uniformes en [0,...,1]" << endl;
+	}
 
 	double control_t[amount_count];
 	
 	for(int i=0;i<amount_count;i++)	{	//genero amount_count t's en el [0,...,1]
-		num = (argv[3]=="r") ? rand() : i;
-		control_t[i] = num/den;
+		num = (strcmp(argv[2],"r")==0) ? rand() : i;
+		control_t[i] = lambda*(num/den);
 	}
 
 	//ordeno los t para generar los puntos de control de la curva
