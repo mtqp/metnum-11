@@ -5,6 +5,7 @@
 void createFile(char* filename, int control_count, int range);
 vector<pair> getRandomControlPoints(int control_count,int range);
 int compare_doubles(const void *a, const void* b);
+double getRandDouble(int range);
 
 int main(int argc, char** argv)
 {
@@ -33,7 +34,11 @@ int main(int argc, char** argv)
 		createFile(argv[1],controls,range);
 	}
 	cout << endl << "Archivo cargado" << endl;
-	
+
+	ofstream out;
+	out.open(argv[1],ios::app);
+	out << -1  << endl;
+	out.close();
 	return 0;
 }
 
@@ -57,8 +62,8 @@ void createFile(char* filename, int control_count, int range)
 		out << control_points[i].first << " " << control_points[i].second << endl;
 		
 	out << endl << 0 << " " << 0 << endl;		//-->x*,y*
-	out << endl << 0 << " " << 0 << endl;		//-->x**,y**
-	out << -1  << endl;
+	out << endl << getRandDouble(range) << " " << getRandDouble(range) << endl;		//-->x**,y**
+
 	out.close();
 }
 
@@ -67,20 +72,28 @@ vector<pair> getRandomControlPoints(int control_count,int range)
 {
 	vector<pair> randControlPoints(control_count);
 	double X[control_count];
-	double maxRand = (double) RAND_MAX;
-	
+	int sign = 1;
 	for(int i=0;i<control_count;i++)
-		X[i] = (rand()/maxRand) * ((double)(range+1));
+		X[i] = getRandDouble(range);
 	
 	qsort(&X,control_count,sizeof(double),compare_doubles);
 	
 	for(int i=0;i<control_count;i++){
 		randControlPoints[i].first = X[i];
-		randControlPoints[i].second= (double) (rand()/maxRand)*((double)(range+1));
+		randControlPoints[i].second= getRandDouble(range);
 	}
 	
 	return randControlPoints;
 }
+
+//precond, se llamo a srand...!!!
+double getRandDouble(int range)
+{
+	double maxRand = (double) RAND_MAX;
+	int sign = (rand()%3!=0)? 1 : -1;
+	return sign * (rand()/maxRand) * ((double)(range+1));
+}
+
 
 int compare_doubles(const void *a, const void* b)
 {
