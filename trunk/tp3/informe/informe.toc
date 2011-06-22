@@ -4,9 +4,9 @@
 \contentsline {subsection}{\numberline {2.1}Explicaci\IeC {\'o}n}{3}
 \contentsline {subsection}{\numberline {2.2}Implementaci\IeC {\'o}n}{4}
 \contentsline {section}{\numberline {3}Resultados}{9}
-\contentsline {section}{\numberline {4}Discusi\IeC {\'o}n}{10}
-\contentsline {section}{\numberline {5}Conclusiones}{11}
-\contentsline {section}{\numberline {6}Modo de compilaci\IeC {\'o}n y uso}{12}
-\contentsline {section}{\numberline {7}Ap\IeC {\'e}ndices}{13}
-\contentsline {subsection}{\numberline {7.1}Ap\IeC {\'e}ndice A: Enunciado}{13}
-\contentsline {section}{\numberline {8}Referencias}{16}
+\contentsline {section}{\numberline {4}Discusi\IeC {\'o}n}{13}
+\contentsline {section}{\numberline {5}Conclusiones}{15}
+\contentsline {section}{\numberline {6}Modo de compilaci\IeC {\'o}n y uso}{16}
+\contentsline {section}{\numberline {7}Ap\IeC {\'e}ndices}{17}
+\contentsline {subsection}{\numberline {7.1}Ap\IeC {\'e}ndice A: Enunciado}{17}
+\contentsline {section}{\numberline {8}Referencias}{20}
