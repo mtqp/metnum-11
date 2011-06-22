@@ -3,7 +3,7 @@
 int main(int argc, char** argv){
 	
 	if(argc<3){
-		cout << "Error en el pasaje de parametros: debe especificar el nombre del archivo de entrada y el de salida" << endl;
+		cout << "uso: ./tp3 [input] [output]" << endl;
 		exit(0);
 	}
 	

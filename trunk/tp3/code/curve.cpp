@@ -133,7 +133,7 @@ double Curve :: nearPoint(const pair xy) const{
 		//cout << "pol entre pto de control extremo izq --> " << S_x->evaluate(param[i-1]) << " " <<  S_y->evaluate(param[i-1]) << endl;
 		//cout << "pol entre pto de control extremo der --> " << S_x->evaluate(param[i]) << " " <<  S_y->evaluate(param[i]) << endl;
 		critic_points = pol.zeros(param[i-1],param[i]);
-		pol.print();
+		//pol.print();
 		//cout << "ceros del pol nro --> " << i << endl;
 		//for(int j=0; j<critic_points.size(); j++)
 			//cout << critic_points[j] << " --> ( " << S_x->evaluate(critic_points[j]) << " " << S_y->evaluate(critic_points[j]) << " ) --> " << evaluateDistance(xy,critic_points[j]) << endl;

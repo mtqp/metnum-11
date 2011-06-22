@@ -115,7 +115,6 @@ double Polynomial :: zeros(double a, double b) const{
 }*/
 
 double Polynomial :: newton(double p0, double tolerance, llint iter) const{
-	//cout << "newton --> " << p0 << endl;
 	llint i=1;
 	Polynomial derivedPol = this->derive();
 	double pi = p0 - this->evaluate(p0)/derivedPol.evaluate(p0);
@@ -129,12 +128,9 @@ double Polynomial :: newton(double p0, double tolerance, llint iter) const{
 }
 
 double Polynomial :: bisection(double a, double b, double radius) const{
-	//cout << "Biseccion" << endl;
 	double c;
 	while(changeSign(a,b) && abs(a-b)>radius){
-		//cout << "a: " << a << "b: " << b << endl;
 		c = (a+b)/2;
-		//cout << "c: " << c << endl;
 		if(abs(evaluate(c)) < EPSILON)
 			return c;
 		if(changeSign(a,c))
