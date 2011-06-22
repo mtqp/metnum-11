@@ -1,0 +1,19 @@
+#!/usr/bin/gnuplot -persist
+load 'plot_style'
+
+set key bottom center
+
+#le pone titulo al grafico
+#set title "Costo de encontrar un cero en función de la calidad del mismo para distintos valores de tolerancia"
+
+#pone la descripccion de los ejes
+set xlabel "Costo"
+set ylabel "Calidad solución"
+
+set output 'eps/tolerance_graf.eps'
+plot 'data/tolerance.dat' using 1:2 title "Tolerancia bla" linestyle 2
+	 
+#pongo la salida default para mostrar en pantalla
+set term pop
+set output
+replot
