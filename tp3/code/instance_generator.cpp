@@ -61,9 +61,8 @@ void createFile(char* filename, int control_count, int range)
 	for(int i=0;i<control_count;i++)
 		out << control_points[i].first << " " << control_points[i].second << endl;
 		
-	out << endl << 0 << " " << 0 << endl;		//-->x*,y*
 	out << endl << getRandDouble(range) << " " << getRandDouble(range) << endl;		//-->x**,y**
-
+	out << endl << 0 << " " << 0 << endl;		//-->x*,y*
 	out.close();
 }
 
