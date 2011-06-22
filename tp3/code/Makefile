@@ -10,7 +10,8 @@ tp3: main.cpp $(OBJS)
 test: test.cpp $(OBJS)
 	g++ -o test $(CFLAGS) $(MATH) test.cpp $(OBJS)	
 
-generador: curve_generator.cpp $(OBJS)
+generador: instance_generator.cpp curve_generator.cpp $(OBJS)
+	g++ -o instance_generator $(CFLAGS) $(MATH) instance_generator.cpp $(OBJS)
 	g++ -o curve_generator $(CFLAGS) $(MATH) curve_generator.cpp $(OBJS)
 
 %.o: %.cpp %.h
