@@ -10,8 +10,10 @@ set key bottom center
 set xlabel "Costo"
 set ylabel "Calidad solución"
 
+set logscale y
+
 set output 'eps/tolerance_graf.eps'
-plot 'data/tolerance.dat' using 1:2 title "Tolerancia bla" linestyle 2
+plot [3000:10000][1.0e-20:1.0e-5]'data/tolerance.dat' using 3:4 title "Tolerancia bla" linestyle 2
 	 
 #pongo la salida default para mostrar en pantalla
 set term pop
