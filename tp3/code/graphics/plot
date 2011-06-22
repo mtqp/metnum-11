@@ -11,7 +11,7 @@ set xlabel "X"
 set ylabel "Y"
 
 set output 'eps/grafiquin.eps'
-plot [-3.5:0.6][-0.01:0.6]'data/pol.dat' using 1:2 title "Polinomio" with lines linecolor rgb 'black',\
+plot 'data/pol.dat' using 1:2 title "Polinomio" with lines linecolor rgb 'black',\
 	 'data/curvUniform.dat' using 1:2 title "Uniforme" with lines linecolor rgb 'red',\
 	 'data/curvChordLength.dat' using 1:2 title "ChordLength" with lines linecolor rgb 'violet',\
 	 'data/curvCentripetal.dat' using 1:2 title "Centripetal" with lines linecolor rgb 'green',\
