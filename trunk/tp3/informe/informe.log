@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2011.3.28)  22 JUN 2011 20:55
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2011.3.28)  22 JUN 2011 21:28
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
@@ -623,8 +623,36 @@ Overfull \hbox (8.33858pt too wide) in paragraph at lines 37--38
  [][] 
  []
 
-[11 <./graficos/5p.pdf, page is rotated 90 degrees>]) [12 <./graficos/5p_u.pdf,
- page is rotated 90 degrees>] (./discusion.tex
+[11 <./graficos/5p.pdf, page is rotated 90 degrees>]
+<graficos/uniform_grafiquinSame.pdf, id=67, 794.97pt x 614.295pt>
+File: graficos/uniform_grafiquinSame.pdf Graphic file (type pdf)
+
+<use graficos/uniform_grafiquinSame.pdf>
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 50--51
+ [][] 
+ []
+
+[12 <./graficos/5p_u.pdf, page is rotated 90 degrees>]
+<graficos/centripetal_grafiquinSame.pdf, id=76, 794.97pt x 614.295pt>
+File: graficos/centripetal_grafiquinSame.pdf Graphic file (type pdf)
+
+<use graficos/centripetal_grafiquinSame.pdf>
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 61--62
+ [][] 
+ []
+
+[13 <./graficos/uniform_grafiquinSame.pdf, page is rotated 90 degrees>]
+<graficos/chordLength_grafiquinSame.pdf, id=84, 794.97pt x 614.295pt>
+File: graficos/chordLength_grafiquinSame.pdf Graphic file (type pdf)
+
+<use graficos/chordLength_grafiquinSame.pdf>
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 72--73
+ [][] 
+ []
+
+[14 <./graficos/centripetal_grafiquinSame.pdf, page is rotated 90 degrees>])
+[15 <./graficos/chordLength_grafiquinSame.pdf, page is rotated 90 degrees>]
+(./discusion.tex
 Underfull \hbox (badness 10000) in paragraph at lines 2--3
 
  []
@@ -649,14 +677,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 16--17
 
  []
 
-[13]) [14] (./conclusiones.tex) [15] (./modo_comp_y_uso.tex) [16]
-(./apendices.tex (./enunciado.tex [17] [18])) [19] (./referencias.tex) [20]
+[16]) [17] (./conclusiones.tex) [18] (./modo_comp_y_uso.tex) [19]
+(./apendices.tex (./enunciado.tex [20] [21])) [22] (./referencias.tex) [23]
 (./informe.aux) ) 
 Here is how much of TeX's memory you used:
- 2501 strings out of 95086
- 28631 string characters out of 1183255
- 87974 words of memory out of 1500000
- 5603 multiletter control sequences out of 10000+50000
+ 2519 strings out of 95086
+ 29258 string characters out of 1183255
+ 88001 words of memory out of 1500000
+ 5618 multiletter control sequences out of 10000+50000
  15206 words of font info for 58 fonts, out of 1200000 for 2000
  28 hyphenation exceptions out of 8191
  27i,13n,25p,882b,322s stack positions out of 5000i,500n,6000p,200000b,5000s
@@ -675,9 +703,9 @@ xlive/fonts/type1/bluesky/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/bl
 uesky/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmti12.pfb
 ></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmtt12.pfb></usr/share/texmf-
 texlive/fonts/type1/bluesky/ams/msbm10.pfb>
-Output written on informe.pdf (21 pages, 359454 bytes).
+Output written on informe.pdf (24 pages, 486388 bytes).
 PDF statistics:
- 161 PDF objects out of 1000 (max. 8388607)
+ 185 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

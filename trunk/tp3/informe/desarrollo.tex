@@ -152,4 +152,17 @@
 				Como lo que buscamos es el mínimo global del polinomio en el intervalo $[a,b]$ y los polinomios a los que les buscamos los puntos críticos son de grado 5 $((d_i^2)'(t))$ obtenemos 5 raíces como se explicó previamente. Luego elegimos aquella que al evaluar la curva nos da un valor menor a todas las demás, es por esto que podemos tolerar tener valores que no son considerados raíces ya que serán descartadas o no en el caso de no haber podido hallar la raíz que corresponde al mínimo global y el resto correspondan a máximos (ese es uno de los posibles casos).
 		\end{itemize}
 	\end{subsection}
+	\begin{subsection}{Correctitud de $splines$}
+		A fin de probar que efectivamente los cálculos sean correctos, se creó la clase $SplineTester$ la cual exporta un constructor en la que su parámetro es el $spline$ a analizar y un método $isSuccessful$ sin parámetros el cual devuelve un parámetro booleano correspondiente a si cumplió con todas las condiciones para ser un spline o no.
+		Utilizamos $splines$ naturales.
+		Condiciones que valida el objeto $SplineTester$
+		\begin{itemize}
+			\item La derivada segunda en los puntos de control bordes es cero.
+			\item El polinomio izquierda y derecho a un punto de control evaluados en el punto de control son iguales (en los casos bordes, es decir primer y último punto, se toma el primer y último $spline$ respectivamente).
+			\item La primer derivada de cada par de polinomios contiguos evaluadas en el punto de control son iguales (valen las mismas consideraciones para el primer y último punto de control).
+			\item
+		\end{itemize}
+		
+	
+	\end{subsection}
 \end{section}
