@@ -36,7 +36,7 @@ int main(int argc, char** argv){
 		for(int i=0; i<order+1; i++)
 			in >> coefs[i];
 
-		/*for(ull iter=10; iter<=10000000; iter*=10){
+		for(ull iter=10; iter<=10000000; iter*=10){
 			cout << "Con iter = " << iter << endl;
 			Setp_Polynomial pol(coefs,xj,order);
 			
@@ -44,10 +44,10 @@ int main(int argc, char** argv){
 			zeros = pol.zeros(0,1,0,iter);
 			double min_zero = min(pol, zeros);
 			
-			out << iter << " " << pol.getAmountOp() << " " << abs(pol.evaluate(min_zero)) << endl; 
-		}*/
+			out << iter << " " << abs(pol.evaluate(min_zero)) << endl; 
+		}
 		
-		double tolerance = TOLERANCE;
+		/*double tolerance = TOLERANCE;
 		//Parto de e-5 quiero llegar a e-25
 		for(int i=0; i<20; i++){
 			cout << "Con tolerance = " << tolerance << endl;
@@ -67,7 +67,7 @@ int main(int argc, char** argv){
 			}
 			
 			tolerance/=10;
-		}
+		}*/
 	}
 	
 	in.close();

@@ -1,20 +1,26 @@
 #!/usr/bin/gnuplot -persist
 load 'plot_style'
 
-set key bottom center
+set nokey
 
 #le pone titulo al grafico
-#set title "Costo de encontrar un cero en función de la calidad del mismo para distintos valores de cantidad de iteraciones"
+#set title "Cantidad de iteraciones en función del error"
 
 #pone la descripccion de los ejes
 set xlabel "Cantidad de iteraciones"
-set ylabel "Calidad solución"
+set ylabel "Error"
 
 set logscale y
 set logscale x
 
 set output 'eps/iter_graf.eps'
-plot 'data/iter.dat' using 1:2 title "bla iteraciones" linestyle 2
+plot [10:10000000][1.0e-18:1] 'data/ajuste/iterInst1.dat' with lines linecolor rgb 'black',\
+	 'data/ajuste/iterInst2.dat' with lines linecolor rgb 'green',\
+	 'data/ajuste/iterInst3.dat' with lines linecolor rgb 'red',\
+	 'data/ajuste/iterInst4.dat' with lines linecolor rgb 'green',\
+	 'data/ajuste/iterInst5.dat' with lines linecolor rgb 'blue',\
+	 'data/ajuste/iterInst6.dat' with lines linecolor rgb 'red',\
+	 'data/ajuste/iterInst7.dat' with lines linecolor rgb 'black'
 	 
 #pongo la salida default para mostrar en pantalla
 set term pop
