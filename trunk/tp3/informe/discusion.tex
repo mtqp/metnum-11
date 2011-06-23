@@ -1,9 +1,17 @@
 \begin{section}{Discusión}
-	En esta sección, buscaremos conclusiones a la información suministrada por los gráficos de la sección anterior.\\
+	En esta sección, buscaremos conclusiones a la información suministrada por los gráficos de la sección anterior. Dividiremos la sección en dos subsecciones analizando en cada una de ella, cada una de las mismas en los resultados.\\
 	
-	CHAMUZCO GRAFICOS ANTERIORES	CHAMUZCO GRAFICOS ANTERIORES	CHAMUZCO GRAFICOS ANTERIORES	CHAMUZCO GRAFICOS ANTERIORES	CHAMUZCO GRAFICOS ANTERIORES	CHAMUZCO GRAFICOS ANTERIORES	CHAMUZCO GRAFICOS ANTERIORES	CHAMUZCO GRAFICOS ANTERIORES	CHAMUZCO GRAFICOS ANTERIORES	CHAMUZCO GRAFICOS ANTERIORES	CHAMUZCO GRAFICOS ANTERIORES	CHAMUZCO GRAFICOS ANTERIORES	CHAMUZCO GRAFICOS ANTERIORES	CHAMUZCO GRAFICOS ANTERIORES
+\begin{subsection}{Ajuste de parámetros}
+	Ambos gráficos están relacionados entre sí, por lo tanto, no analizaremos cada uno por separado. 
 	
-	En el tercer y cuarto gráfico (Figura:\ref{fig:5p} y Figura:\ref{fig:5p_r}) vemos que la elección de la parametrización define la forma en la que se aproxima la curva. Si bien las tres parametrizaciones cumple todas las condiciones exigidas por los $splines$, la que utiliza la parametrización por longitud de cuerda es la que mejor aproxima a la curva original mientras que la parametrización uniforme consigue la peor aproximación.
+	Podemos notar en primera instancia, que utilizar como cantidad de iteraciones permitidas mayores a 1000 en el algoritmo, no tiene sentido, ya que las soluciones no mejoran, es decir el error cometido al buscar la raíz no disminuye. Si bien no estamos contemplando todos los casos posibles, ya que existen infinitos polinomios, por ende infinitas soluciones, podemos reforzar esta conclusión viendo que en el segundo gráfico (Figura \ref{fig:tol}) sin importar el costo (donde costo es una medida proporcional a la cantidad de iteraciones) la calidad de la solución no mejora en la casi totalidad de los caso de $1.0e-17$, es decir no se aproxima más al cero ideal.
+	Estos nos lleva a inducir que un parámetro para la cantidad de iteraciones máxima de valor $1000$ es suficiente para que el algoritmo aproxime lo más posible a la raíz.
+	
+	Por otro lado, el primer gráfico nos muestra que las soluciones no mejoran al error de $1.0e-17$. Al ser pocos polinomios los analizados, necesitamos más información para poder inferir una cota para la $tolerancia$. Recolectando información sobre el segundo gráfico, vemos que salvo escasos casos atípicos, el resto de las muestras,
+	
+\end{subsection}
+\begin{subsection}{Análisis de curvas}
+	Los gráficos referenciados por (Figura:\ref{fig:5p} y Figura:\ref{fig:5p_r}) vemos que la elección de la parametrización define la forma en la que se aproxima la curva. Si bien las tres parametrizaciones cumple todas las condiciones exigidas por los $splines$, la que utiliza la parametrización por longitud de cuerda es la que mejor aproxima a la curva original mientras que la parametrización uniforme consigue la peor aproximación.
 	
 	Observamos que la parametrización uniforme (basándonos en estas instancias) tiende a unir los puntos con lineas más rectas cuanto más separados estos se encuentran. Es decir si existe cambios abruptos en la dirección donde la curva debe moverse y además en el lugar donde se produce este cambio, existe varios puntos cercanos entre sí, se generan oscilaciones importantes.  
 	
@@ -26,7 +34,7 @@
 	En el caso de la parametrización por longitud de cuerda, observamos que dada la presición del gráfico, este no aporta información sobre la existencia de diferencias con respecto a la curva real. Por lo tanto, y suponiendo que quisieramos visualizar y/o analizar datos con esa precision, no sería necesario aumentar la cantidad de puntos de control.
 	
 	\underline{\texttt{Nota:}} Es importante destacar que existen infinitos polinomios en $\mathbb{R}^n$ (en particular en $\mathbb{R}^n$), por lo tanto no podemos considerar como generales las conclusiones tomadas en este análisis, ya que pueden existir casos donde la mejor aproximación a la curva no es utilizando la parametrización por longitud de cuerda. Tanto los gráficos como el análisis nos da una idea general de como estas se comportan.
-	
+\end{subsection}
 
 
 	
