@@ -53,7 +53,7 @@ int main(int argc, char** argv){
 	/******************************************************************/
 	
 	// Creo la parametrizacion y la curva
-	Parametrization param(n,xy,Centripetal);	
+	Parametrization param(n,xy,Chord_length);	
 	Curve curve(n,xy,param);
 
 	// Obtengo el muestreo de la spline original
