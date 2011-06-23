@@ -80,8 +80,8 @@ double Setp_Polynomial :: newton(double p0, double tolerance, llint iter){
 	Setp_Polynomial derivedPol = this->derive();
 	double pi = p0 - this->evaluate(p0)/derivedPol.evaluate(p0);
 	O(5);
-	while(i<=iter && abs(pi-p0) > tolerance){
-	//while(i<=iter){//para ajuste cantidad de iteraciones
+	//while(i<=iter && abs(pi-p0) > tolerance){
+	while(i<=iter){//para ajuste cantidad de iteraciones
 		i++;
 		p0 = pi;
 		pi = p0 - this->evaluate(p0)/derivedPol.evaluate(p0);
