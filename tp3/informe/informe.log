@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  23 JUN 2011 19:35
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  23 JUN 2011 20:03
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
@@ -655,77 +655,91 @@ Underfull \hbox (badness 10000) in paragraph at lines 209--210
 ) [11] (./resultados.tex <graficos/newton.jpg, id=65, 240.9pt x 197.73875pt>
 File: graficos/newton.jpg Graphic file (type jpg)
 
-<use graficos/newton.jpg> [12 <./graficos/newton.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 23--24
+<use graficos/newton.jpg>
+<graficos/iter_graf.pdf, id=66, 794.97pt x 614.295pt>
+File: graficos/iter_graf.pdf Graphic file (type pdf)
 
- []
-
-<graficos/tol_graf.pdf, id=70, 794.97pt x 614.295pt>
-File: graficos/tol_graf.pdf Graphic file (type pdf)
-
-<use graficos/tol_graf.pdf>
-Overfull \hbox (8.33858pt too wide) in paragraph at lines 27--28
+<use graficos/iter_graf.pdf>
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 24--25
  [][] 
  []
 
+[12 <./graficos/newton.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 33--34
 
-Overfull \hbox (5.47923pt too wide) in paragraph at lines 36--37
+ []
+
+<graficos/tol_graf.pdf, id=71, 794.97pt x 614.295pt>
+File: graficos/tol_graf.pdf Graphic file (type pdf)
+
+<use graficos/tol_graf.pdf>
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 37--38
+ [][] 
+ []
+
+[13 <./graficos/iter_graf.pdf, page is rotated 90 degrees>]
+Underfull \hbox (badness 10000) in paragraph at lines 44--45
+
+ []
+
+
+Overfull \hbox (5.47923pt too wide) in paragraph at lines 49--50
 []\OT1/cmr/m/n/12 Para poder analizar si ex-is-ten difer-en-cias en el uso de d
 is-tin-tas parametriza-
  []
 
-[13 <./graficos/tol_graf.pdf, page is rotated 90 degrees>]
-<graficos/5p.pdf, id=77, 794.97pt x 614.295pt>
+[14 <./graficos/tol_graf.pdf, page is rotated 90 degrees>]
+<graficos/5p.pdf, id=84, 794.97pt x 614.295pt>
 File: graficos/5p.pdf Graphic file (type pdf)
  <use graficos/5p.pdf>
-Overfull \hbox (8.33858pt too wide) in paragraph at lines 42--43
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 55--56
  [][] 
  []
 
-<graficos/5p_r.pdf, id=78, 794.97pt x 614.295pt>
+<graficos/5p_r.pdf, id=85, 794.97pt x 614.295pt>
 File: graficos/5p_r.pdf Graphic file (type pdf)
  <use graficos/5p_r.pdf>
-Overfull \hbox (8.33858pt too wide) in paragraph at lines 51--52
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 64--65
  [][] 
  []
 
-[14 <./graficos/5p.pdf, page is rotated 90 degrees>]
-<graficos/5p_u.pdf, id=85, 794.97pt x 614.295pt>
+[15 <./graficos/5p.pdf, page is rotated 90 degrees>]
+<graficos/5p_u.pdf, id=92, 794.97pt x 614.295pt>
 File: graficos/5p_u.pdf Graphic file (type pdf)
  <use graficos/5p_u.pdf>
-Overfull \hbox (8.33858pt too wide) in paragraph at lines 62--63
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 75--76
  [][] 
  []
 
-[15 <./graficos/5p_r.pdf, page is rotated 90 degrees>]
-<graficos/uniform_grafiquinSame.pdf, id=92, 794.97pt x 614.295pt>
+[16 <./graficos/5p_r.pdf, page is rotated 90 degrees>]
+<graficos/uniform_grafiquinSame.pdf, id=99, 794.97pt x 614.295pt>
 File: graficos/uniform_grafiquinSame.pdf Graphic file (type pdf)
 
 <use graficos/uniform_grafiquinSame.pdf>
-Overfull \hbox (8.33858pt too wide) in paragraph at lines 76--77
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 89--90
  [][] 
  []
 
-[16 <./graficos/5p_u.pdf, page is rotated 90 degrees>]
-<graficos/centripetal_grafiquinSame.pdf, id=99, 794.97pt x 614.295pt>
+[17 <./graficos/5p_u.pdf, page is rotated 90 degrees>]
+<graficos/centripetal_grafiquinSame.pdf, id=106, 794.97pt x 614.295pt>
 File: graficos/centripetal_grafiquinSame.pdf Graphic file (type pdf)
 
 <use graficos/centripetal_grafiquinSame.pdf>
-Overfull \hbox (8.33858pt too wide) in paragraph at lines 87--88
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 100--101
  [][] 
  []
 
-[17 <./graficos/uniform_grafiquinSame.pdf, page is rotated 90 degrees>]
-<graficos/chordLength_grafiquinSame.pdf, id=106, 794.97pt x 614.295pt>
+[18 <./graficos/uniform_grafiquinSame.pdf, page is rotated 90 degrees>]
+<graficos/chordLength_grafiquinSame.pdf, id=114, 794.97pt x 614.295pt>
 File: graficos/chordLength_grafiquinSame.pdf Graphic file (type pdf)
 
 <use graficos/chordLength_grafiquinSame.pdf>
-Overfull \hbox (8.33858pt too wide) in paragraph at lines 98--99
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 111--112
  [][] 
  []
 
-[18 <./graficos/centripetal_grafiquinSame.pdf, page is rotated 90 degrees>])
-[19 <./graficos/chordLength_grafiquinSame.pdf, page is rotated 90 degrees>]
+[19 <./graficos/centripetal_grafiquinSame.pdf, page is rotated 90 degrees>])
+[20 <./graficos/chordLength_grafiquinSame.pdf, page is rotated 90 degrees>]
 (./discusion.tex
 Underfull \hbox (badness 10000) in paragraph at lines 2--3
 
@@ -751,13 +765,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 16--17
 
  []
 
-[20]
+[21]
 Underfull \hbox (badness 10000) in paragraph at lines 22--23
 
  []
 
-) [21] (./preguntas.tex
-<graficos/paramVSreparamUniform.pdf, id=126, 341.43306pt x 315.82558pt>
+) [22] (./preguntas.tex
+<graficos/paramVSreparamUniform.pdf, id=133, 341.43306pt x 315.82558pt>
 File: graficos/paramVSreparamUniform.pdf Graphic file (type pdf)
 
 <use graficos/paramVSreparamUniform.pdf>
@@ -765,8 +779,8 @@ Overfull \hbox (8.33858pt too wide) in paragraph at lines 16--17
  [][] 
  []
 
-[22]
-<graficos/paramVSreparamCentripetal.pdf, id=130, 369.88583pt x 312.98033pt>
+[23]
+<graficos/paramVSreparamCentripetal.pdf, id=137, 369.88583pt x 312.98033pt>
 File: graficos/paramVSreparamCentripetal.pdf Graphic file (type pdf)
 
 <use graficos/paramVSreparamCentripetal.pdf>
@@ -774,8 +788,8 @@ Overfull \hbox (8.33858pt too wide) in paragraph at lines 23--24
  [][] 
  []
 
-[23 <./graficos/paramVSreparamUniform.pdf>]
-<graficos/paramVSreparamChord.pdf, id=136, 384.1122pt x 355.65945pt>
+[24 <./graficos/paramVSreparamUniform.pdf>]
+<graficos/paramVSreparamChord.pdf, id=144, 384.1122pt x 355.65945pt>
 File: graficos/paramVSreparamChord.pdf Graphic file (type pdf)
 
 <use graficos/paramVSreparamChord.pdf>
@@ -783,19 +797,19 @@ Overfull \hbox (8.33858pt too wide) in paragraph at lines 30--31
  [][] 
  []
 
-[24 <./graficos/paramVSreparamCentripetal.pdf>]) [25 <./graficos/paramVSreparam
-Chord.pdf>] (./conclusiones.tex) [26] (./modo_comp_y_uso.tex) [27]
-(./apendices.tex (./enunciado.tex [28] [29])) [30] (./referencias.tex) [31]
+[25 <./graficos/paramVSreparamCentripetal.pdf>]) [26 <./graficos/paramVSreparam
+Chord.pdf>] (./conclusiones.tex) [27] (./modo_comp_y_uso.tex) [28]
+(./apendices.tex (./enunciado.tex [29] [30])) [31] (./referencias.tex) [32]
 (./informe.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 2974 strings out of 495061
- 36056 string characters out of 1182621
- 97272 words of memory out of 3000000
- 6066 multiletter control sequences out of 15000+50000
+ 2980 strings out of 495061
+ 36186 string characters out of 1182621
+ 97282 words of memory out of 3000000
+ 6071 multiletter control sequences out of 15000+50000
  16444 words of font info for 63 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  27i,13n,27p,882b,409s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -816,9 +830,9 @@ xmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive
 /fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-texlive/fonts/type
 1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf-texlive/fonts/type1/public/am
 sfonts/symbols/msbm10.pfb>
-Output written on informe.pdf (32 pages, 630783 bytes).
+Output written on informe.pdf (33 pages, 633416 bytes).
 PDF statistics:
- 228 PDF objects out of 1000 (max. 8388607)
+ 235 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 71 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
 
