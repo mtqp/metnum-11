@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  23 JUN 2011 20:03
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  23 JUN 2011 20:38
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
@@ -388,11 +388,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box28
 \@float@everytoks=\toks29
 \@floatcapt=\box29
-) (./informe.aux
-
-LaTeX Warning: Label `fig:5p_r' multiply defined.
-
-)
+) (./informe.aux)
 \openout1 = `informe.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
@@ -407,7 +403,8 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
 LaTeX Font Info:    ... okay on input line 43.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
 LaTeX Font Info:    ... okay on input line 43.
- (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
+
+(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count104
 \scratchdimen=\dimen115
@@ -745,33 +742,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--3
 
  []
 
-
-Overfull \hbox (7.93115pt too wide) in paragraph at lines 4--5
-[]\OT1/cmr/m/n/12 CHAMUZCO GRAFI-COS AN-TE-RI-ORES CHAMUZ-CO GRAFI-COS AN-
- []
-
-
-Overfull \hbox (10.21172pt too wide) in paragraph at lines 4--5
-\OT1/cmr/m/n/12 TE-RI-ORES CHAMUZ-CO GRAFI-COS AN-TE-RI-ORES CHAMUZ-CO GRAFI-
- []
-
-
-Overfull \hbox (10.21172pt too wide) in paragraph at lines 4--5
-\OT1/cmr/m/n/12 TE-RI-ORES CHAMUZ-CO GRAFI-COS AN-TE-RI-ORES CHAMUZ-CO GRAFI-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 16--17
-
- []
-
 [21]
-Underfull \hbox (badness 10000) in paragraph at lines 22--23
+Underfull \hbox (badness 10000) in paragraph at lines 24--25
 
  []
 
-) [22] (./preguntas.tex
-<graficos/paramVSreparamUniform.pdf, id=133, 341.43306pt x 315.82558pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 30--31
+
+ []
+
+[22]) [23] (./preguntas.tex
+<graficos/paramVSreparamUniform.pdf, id=136, 341.43306pt x 315.82558pt>
 File: graficos/paramVSreparamUniform.pdf Graphic file (type pdf)
 
 <use graficos/paramVSreparamUniform.pdf>
@@ -779,8 +761,8 @@ Overfull \hbox (8.33858pt too wide) in paragraph at lines 16--17
  [][] 
  []
 
-[23]
-<graficos/paramVSreparamCentripetal.pdf, id=137, 369.88583pt x 312.98033pt>
+[24]
+<graficos/paramVSreparamCentripetal.pdf, id=141, 443.57848pt x 378.42165pt>
 File: graficos/paramVSreparamCentripetal.pdf Graphic file (type pdf)
 
 <use graficos/paramVSreparamCentripetal.pdf>
@@ -788,8 +770,8 @@ Overfull \hbox (8.33858pt too wide) in paragraph at lines 23--24
  [][] 
  []
 
-[24 <./graficos/paramVSreparamUniform.pdf>]
-<graficos/paramVSreparamChord.pdf, id=144, 384.1122pt x 355.65945pt>
+[25 <./graficos/paramVSreparamUniform.pdf>]
+<graficos/paramVSreparamChord.pdf, id=147, 386.67297pt x 327.2067pt>
 File: graficos/paramVSreparamChord.pdf Graphic file (type pdf)
 
 <use graficos/paramVSreparamChord.pdf>
@@ -797,42 +779,38 @@ Overfull \hbox (8.33858pt too wide) in paragraph at lines 30--31
  [][] 
  []
 
-[25 <./graficos/paramVSreparamCentripetal.pdf>]) [26 <./graficos/paramVSreparam
-Chord.pdf>] (./conclusiones.tex) [27] (./modo_comp_y_uso.tex) [28]
-(./apendices.tex (./enunciado.tex [29] [30])) [31] (./referencias.tex) [32]
-(./informe.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+[26 <./graficos/paramVSreparamCentripetal.pdf>]) [27 <./graficos/paramVSreparam
+Chord.pdf>] (./conclusiones.tex) [28] (./modo_comp_y_uso.tex) [29]
+(./apendices.tex (./enunciado.tex [30] [31])) [32] (./referencias.tex) [33]
+(./informe.aux) ) 
 Here is how much of TeX's memory you used:
- 2980 strings out of 495061
- 36186 string characters out of 1182621
- 97282 words of memory out of 3000000
- 6071 multiletter control sequences out of 15000+50000
+ 2981 strings out of 495061
+ 36195 string characters out of 1182621
+ 97252 words of memory out of 3000000
+ 6072 multiletter control sequences out of 15000+50000
  16444 words of font info for 63 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  27i,13n,27p,882b,409s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texmf-
-texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fon
-ts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/pu
-blic/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
-ts/cm/cmmi6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.
-pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/sh
-are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public
-/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
-cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></
-usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/te
-xmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive
-/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-texlive/fonts/type
-1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf-texlive/fonts/type1/public/am
-sfonts/symbols/msbm10.pfb>
-Output written on informe.pdf (33 pages, 633416 bytes).
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx1
+2.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></u
+sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/te
+xmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive
+/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type
+1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
+fonts/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmm
+i8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf
+-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fon
+ts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/publ
+ic/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
+m/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb
+></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/shar
+e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-tex
+live/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf-texlive/fonts/
+type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on informe.pdf (34 pages, 634556 bytes).
 PDF statistics:
- 235 PDF objects out of 1000 (max. 8388607)
+ 238 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  76 words of extra memory for PDF output out of 10000 (max. 10000000)
 

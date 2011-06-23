@@ -8,9 +8,11 @@
 \contentsline {subsection}{\numberline {3.1}Ajuste de par\IeC {\'a}metros}{12}
 \contentsline {subsection}{\numberline {3.2}An\IeC {\'a}lisis de curvas}{15}
 \contentsline {section}{\numberline {4}Discusi\IeC {\'o}n}{21}
-\contentsline {section}{\numberline {5}Preguntas}{23}
-\contentsline {section}{\numberline {6}Conclusiones}{27}
-\contentsline {section}{\numberline {7}Modo de compilaci\IeC {\'o}n y uso}{28}
-\contentsline {section}{\numberline {8}Ap\IeC {\'e}ndices}{29}
-\contentsline {subsection}{\numberline {8.1}Ap\IeC {\'e}ndice A: Enunciado}{29}
-\contentsline {section}{\numberline {9}Referencias}{32}
+\contentsline {subsection}{\numberline {4.1}Ajuste de par\IeC {\'a}metros}{21}
+\contentsline {subsection}{\numberline {4.2}An\IeC {\'a}lisis de curvas}{21}
+\contentsline {section}{\numberline {5}Preguntas}{24}
+\contentsline {section}{\numberline {6}Conclusiones}{28}
+\contentsline {section}{\numberline {7}Modo de compilaci\IeC {\'o}n y uso}{29}
+\contentsline {section}{\numberline {8}Ap\IeC {\'e}ndices}{30}
+\contentsline {subsection}{\numberline {8.1}Ap\IeC {\'e}ndice A: Enunciado}{30}
+\contentsline {section}{\numberline {9}Referencias}{33}
