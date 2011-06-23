@@ -1,0 +1,20 @@
+#!/usr/bin/gnuplot -persist
+load 'plot_style'
+
+set key bottom right
+
+#le pone titulo al grafico
+#set title "My lovely title"
+
+#pone la descripccion de los ejes
+set xlabel "X"
+set ylabel "Y"
+
+set output 'grafiquin.eps'
+plot 'polym.dat' using 1:2 title "Inversa" with lines 1  #,\
+	#'data/inv_vs_lu_promedio.dat' using 1:3 title "LU" linestyle 2
+
+#pongo la salida default para mostrar en pantalla
+set term pop
+set output
+replot
