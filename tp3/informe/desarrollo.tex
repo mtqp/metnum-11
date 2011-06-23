@@ -104,11 +104,15 @@
 					\item \underline{Caso punto más cercano a $(x,y)$ es un punto de control:}\\
 					
 						Se reemplaza el punto de control (aquel que es el punto más próximo a $(x,y)$) por la posición final de $(x,y)$ y se construye una nueva curva a partir de los nuevos puntos de control manteniendo la parametrización.\\
+						
+						ACA PONER FIGURA!!!
 					
 					\item \underline{Caso punto más cercano a $(x,y)$ no es un punto de control:}\\
 					
 						Se agrega como nuevo punto de control $(x*,y*)$ (posición final de $(x,y)$), además se agrega el $t$ correspondiente a la parametrización (la paramerización para el resto de los puntos de control se mantiene).
-						Para esto, se selecciona la posición que le corresponde a estos datos según un orden creciente de $t$. Luego, se construye una nueva curva que ahora también pase por $(x*,y*)$.
+						Para esto, se selecciona la posición que le corresponde a estos datos según un orden creciente de $t$. Luego, se construye una nueva curva que ahora también pase por $(x*,y*)$.\\
+						
+						ACA PONER LAS DOS FIGURAS!!!
 				\end{itemize}
 				
 				La última de las operaciones selecciona $m$ puntos de muestreo, donde $m$ es recibido en la entrada.
@@ -143,9 +147,9 @@
 				ellas ejecutamos el método de bisección mientras sea posible (cambie de signo en el intervalo) o hasta acercarnos lo suficiente
 				(parámetro definido por nosotros, Ver Pruebas!!!!). En ambos casos el algoritmo aplica en última instancia el método de $Newton$.\\
 				En los intervalos donde no hay ninguna raíz el procedimiento es el mismo, el valor conseguido es producto de que el método de 
-				$Newton$ utilizó todas las iteraciones permitidas, no alcanzando este valor la tolerancia que le otorga la condición de cero del
-				polinomio (recordemos que como las operaciones son en punto flotante y existe error de representación, consideramos que dos valores
-				son el mismo si cumplen que la diferencia es menor a la tolerancia (elegida por nosotros, Ver Pruebas!!!!), es decir, consideramos que un valor es cero si es menor a la tolerancia).\\
+				$Newton$ utilizó todas las iteraciones permitidas, no alcanzando este valor la tolerancia (parámetro definido por nosotros, Ver Pruebas!!!!) que le otorga la condición de cero del
+				polinomio.
+				%(recordemos que como las operaciones son en punto flotante y existe error de representación, consideramos que dos valores son el mismo si cumplen que la diferencia es menor a la tolerancia (elegida por nosotros, Ver Pruebas!!!!), es decir, consideramos que un valor es cero si es menor a la tolerancia).\\
 				
 				\underline{\texttt{Observación:}} Si tenemos intervalos sin raíces implica que no vamos a encontrarlas todas, ya que obtenemos una raíz por intervalo (vamos a encontrar tantas raíces como intervalos con raíces tengamos).\\
 				
@@ -153,12 +157,15 @@
 		\end{itemize}
 	\end{subsection}
 	\begin{subsection}{Correctitud de $splines$}
-		A fin de probar que efectivamente los cálculos sean correctos, se creó la clase $SplineTester$ la cual exporta un constructor en la que su parámetro es el $spline$ a analizar y un método $isSuccessful$ sin parámetros el cual devuelve un parámetro booleano correspondiente a si cumplió con todas las condiciones para ser un spline o no.
-		Utilizamos $splines$ naturales.
-		Condiciones que valida el objeto $SplineTester$
+		Con el fin de probar que efectivamente los cálculos sean correctos, se creó la clase $SplineTester$ la cual exporta un constructor que recibe el $spline$ a analizar y un método $isSuccessful$ que devuelve un valor booleano correspondiente a si cumplió con todas las condiciones para ser un spline o no.
+		
+		Utilizamos $splines$ naturales.\\
+		
+		Las siguientes son las condiciones que valida el objeto $SplineTester$:
+		
 		\begin{itemize}
-			\item La derivada segunda en los puntos de control bordes es cero.
-			\item El polinomio izquierda y derecho a un punto de control evaluados en el punto de control son iguales (en los casos bordes, es decir primer y último punto, se toma el primer y último $spline$ respectivamente).
+			\item La derivada segunda en los puntos de control bordes es cero (natural).
+			\item Los resultado de evaluar el polinomio a izquierda y derecha de un punto de control en si mismo son iguales (en los casos bordes, es decir primer y último punto, se toma el primer y último $spline$ respectivamente).
 			\item La primer derivada de cada par de polinomios contiguos evaluadas en el punto de control son iguales (valen las mismas consideraciones para el primer y último punto de control).
 			\item La derivada segunda de cada par de polinomios evaluadas en el punto de control que las une son iguales (iguales consideraciones que en el item anterior).
 		\end{itemize}

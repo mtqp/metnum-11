@@ -5,7 +5,7 @@
 	
 	En el tercer y cuarto gráfico (Figura:\ref{fig:5p_r} y Figura:\ref{fig:5p}) vemos que la elección de la parametrización define la forma en la que se aproxima la curva. Si bien las tres parametrizaciones cumple todas las condiciones exigidas por los splines, la que utiliza la parametrización por longitud de cuerda es la que mejor aproxima a la curva original mientras que la parametrización uniforme consigue la peor aproximación.
 	
-	Observamos además, que la parametrización uniforme (basandonos en estas instancias) tiende a unir los puntos con lineas más rectas cuanto más separados se encuentran estos. Por otra parte, cuando tenemos dos puntos cercanos posteriores a un par de punto lejanos la linea sigue su trayectoria y luego retoma para unirse con el punto correspondiente.  
+	Observamos que la parametrización uniforme (basandonos en estas instancias) tiende a unir los puntos con lineas más rectas cuanto más separados se encuentran estos. Por otra parte, cuando tenemos dos puntos cercanos posteriores a un par de punto lejanos la linea sigue su trayectoria y luego retoma para unirse con el punto correspondiente.  
 	
 	%Si tomamos el par de puntos de control que se encuentran entre $-5$ y $-4$ vemos que todas ellas se asemejan entre sí. La uniforme sin embargo se separa de la curva original debido a que el punto de control siguiente se encuentra alejado de ella y prácticamente en el mismo $y$.
 	
@@ -15,15 +15,15 @@
 	
 	La parametrización centrípeta si bien es mejor que la uniforme (en estos caso), evitando por ejemplo la oscilación entre los tres puntos de control cercanos entre sí, dista considerablemente de la curva original y de la aproximación a la curva bajo la parametrización por longitud de cuerda.\\
 	
-	En el otro gráfico donde los puntos de control fueron seleccionados de manera uniforme (Figura:\ref{fig:5p_u}) observamos que a pesar de los proximidad de las $cuatro$ curvas la parametrización por longitud de cuerda sigue siendo la que mejor aproxima y uniforme la que peor lo hace.
+	En el otro gráfico donde los puntos de control fueron seleccionados de manera uniforme (Figura:\ref{fig:5p_u}) observamos que a pesar de la proximidad de las $cuatro$ curvas la parametrización por longitud de cuerda sigue siendo la que mejor aproxima y uniforme la que peor lo hace.
 	
 	Concluimos finalmente que la parametrización por longitud de cuerda tiene trayectorias suaves en contraste con las demás (centripeta y uniforme), siendo centripeta a su vez más suave que uniforme. 
 	
-	Además, la parametrización uniforme es totalmente dependiente de la distribución de los puntos de control mientas que el resto de las parametrizaciones (centripeta y longitud de cuerda) lo son en menor medida, siendo longitud de cuerda la menos dependiente de este suceso.
+	Además, la parametrización uniforme es totalmente dependiente de la distribución de los puntos de control mientas que el resto de las parametrizaciones (centripeta y longitud de cuerda) lo son en menor medida, siendo longitud de cuerda la menos dependiente de este suceso.\\
 	
-	En los gráficos (Figura:\ref{fig:uniform}, \ref{fig:centripetal}y \ref{fig:chordLength}) podemos ver que a medida que la cantidad de puntos de control aumenta, la aproximación se acerca cada vez mas a la curva real. De todas formas, la velocidad de acercamiento a una aproximacion igual a la curva varía dependiendo de la parametrización, pudiendo notar que para el polinomio analizado, la parametrización uniforme necesita la mayor cantidad de puntos para aproximar la curva, seguido de la centrípeta y por último la parametrización por longitud de cuerda.
+	En los gráficos (Figura:\ref{fig:uniform}, \ref{fig:centripetal}y \ref{fig:chordLength}) podemos ver que a medida que la cantidad de puntos de control aumenta, la aproximación se acerca cada vez mas a la curva real. De todas formas, la velocidad de acercamiento varía dependiendo de la parametrización, pudiendo notar (basandonos en la curva analizada), que la parametrización que mayor cantidad de puntos de control necesita para aproximar la curva es la uniforme, seguido de la centrípeta y por último la parametrización por longitud de cuerda.
 	
-	En el caso de la parametrización por longitud de cuerda, observamos que dada la presición del gráfico, este no aporta información sobre la existencia de diferencias con respecto a la curva real. Por lo tanto, y suponiendo que quisieramos visualizar y o analizar datos con esa precision, no sería necesario aumentar la cantidad de puntos de control.
+	En el caso de la parametrización por longitud de cuerda, observamos que dada la presición del gráfico, este no aporta información sobre la existencia de diferencias con respecto a la curva real. Por lo tanto, y suponiendo que quisieramos visualizar y/o analizar datos con esa precision, no sería necesario aumentar la cantidad de puntos de control.
 	
 	
 	
