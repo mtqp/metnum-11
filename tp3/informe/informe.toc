@@ -3,11 +3,11 @@
 \contentsline {section}{\numberline {2}Desarrollo}{3}
 \contentsline {subsection}{\numberline {2.1}Explicaci\IeC {\'o}n}{3}
 \contentsline {subsection}{\numberline {2.2}Implementaci\IeC {\'o}n}{4}
-\contentsline {subsection}{\numberline {2.3}Correctitud de $splines$}{8}
-\contentsline {section}{\numberline {3}Resultados}{9}
-\contentsline {section}{\numberline {4}Discusi\IeC {\'o}n}{17}
-\contentsline {section}{\numberline {5}Conclusiones}{19}
-\contentsline {section}{\numberline {6}Modo de compilaci\IeC {\'o}n y uso}{20}
-\contentsline {section}{\numberline {7}Ap\IeC {\'e}ndices}{21}
-\contentsline {subsection}{\numberline {7.1}Ap\IeC {\'e}ndice A: Enunciado}{21}
-\contentsline {section}{\numberline {8}Referencias}{24}
+\contentsline {subsection}{\numberline {2.3}Correctitud de $splines$}{11}
+\contentsline {section}{\numberline {3}Resultados}{12}
+\contentsline {section}{\numberline {4}Discusi\IeC {\'o}n}{20}
+\contentsline {section}{\numberline {5}Conclusiones}{22}
+\contentsline {section}{\numberline {6}Modo de compilaci\IeC {\'o}n y uso}{23}
+\contentsline {section}{\numberline {7}Ap\IeC {\'e}ndices}{24}
+\contentsline {subsection}{\numberline {7.1}Ap\IeC {\'e}ndice A: Enunciado}{24}
+\contentsline {section}{\numberline {8}Referencias}{27}
