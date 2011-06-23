@@ -105,17 +105,67 @@
 					
 						Se reemplaza el punto de control (aquel que es el punto más próximo a $(x,y)$) por la posición final de $(x,y)$ y se construye una nueva curva a partir de los nuevos puntos de control manteniendo la parametrización.\\
 						
-						ACA PONER FIGURA!!!
+						La siguiente figura ejemplifica este caso.\\
+						
+						\begin{figure}[H]
+							\centering
+							\includegraphics[width=8cm]{graficos/ptoCtrl.pdf}
+							\caption{Punto más próximo a la curva corresponde a un punto de control de la misma}
+							\label{fig:ptoCtrl}
+						\end{figure}
+						
+						\VSP
+						
+						En este caso, la curva original ($roja$) se construyó a partir de $cuatro$ puntos de control (los puntos $rojos$ y el $rosa$), se seleccionó el punto $rosa$ por lo que sí mismo es el más cercano y se lo desplazó
+						como ya se explicó a la posición donde está el punto $azul$.
+						
+						\VSP 
 					
 					\item \underline{Caso punto más cercano a $(x,y)$ no es un punto de control:}\\
 					
 						Se agrega como nuevo punto de control $(x*,y*)$ (posición final de $(x,y)$), además se agrega el $t$ correspondiente a la parametrización (la paramerización para el resto de los puntos de control se mantiene).
 						Para esto, se selecciona la posición que le corresponde a estos datos según un orden creciente de $t$. Luego, se construye una nueva curva que ahora también pase por $(x*,y*)$.\\
 						
-						ACA PONER LAS DOS FIGURAS!!!
+						La siguiente figura es un ejemplo de esto, donde el punto seleccionado no está sobre la curva y el punto más próximo a este no es un punto de control.\\
+						
+						\begin{figure}[H]
+							\centering
+							\includegraphics[width=8cm]{graficos/noPtoCtrl_noSobreCurva.pdf}
+							\caption{El punto seleccionado no pertenece a la curva y el punto más próximo no es un punto de control}
+							\label{fig:noPtoCtrl_noSobreCurva}
+						\end{figure}
+						
+						\VSP
+						
+						La curva $roja$ corresponde a la curva original y los puntos $rojos$ a los puntos de control provistos para su construcción.
+						
+						El punto $negro$ es el punto seleccionado para ser movido, y el $rosa$ el punto perteneciente a la curva más próximo a este.
+						
+						La curva $azul$ es la curva deformada de forma tal que el punto $rosa$ toma la posición del punto $azul$.\\
+						
+						Por último, la siguiente figura refleja el comportamiento cuando el punto seleccionado esta sobre la curva.\\
+						
+						\begin{figure}[H]
+							\centering
+							\includegraphics[width=8cm]{graficos/sobreCurva.pdf}
+							\caption{Punto seleccionado pertenece a la curva pero no es un punto de control}
+							\label{fig:sobreCurva}
+						\end{figure}
 				\end{itemize}
 				
-				La última de las operaciones selecciona $m$ puntos de muestreo, donde $m$ es recibido en la entrada.
+				\VSP
+				
+				Como en las figuras anteriores la curva $roja$ corresponde a la curva original. Los puntos de control son lo de color
+				$rojo$. 
+				
+				El punto seleccionado se ve en color $rosa$ porque el punto perteneciente a la curva más próximo es sí mismo. Finalmente, vemos en $azul$ la curva
+				deformada y la posición final del punto elegido.
+				
+				\VSP 
+				
+				
+				
+				La última de las operaciones de la clase $curva$ (muestreo) selecciona $m$ puntos de muestreo, donde $m$ es recibido en la entrada.
 				Estos puntos corresponden a un muestreo uniforme del rango del parámetro $([0,1])$ incluyendo los extremos.\\
 				
 				\item \underline{Módulo Polinomio:}\\
