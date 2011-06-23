@@ -1,6 +1,6 @@
 \begin{section}{Desarrollo}
 	\begin{subsection}{Explicación}
-		Para construir la curva parámetrica se puede utilizar cualquiera de las $tres$ parametrizaciones (uniforme, chord-length y centripeta) en el intervalo $[0,1]$.
+		Para construir la curva parámetrica se puede utilizar cualquiera de las $tres$ parametrizaciones (uniforme, chord-length y centrípeta) en el intervalo $[0,1]$.
 		La parametrización $t$ se elige a partir de los puntos de control $(x,y)$ recibidos en la entrada del programa.
 		Una vez elegida la parametrización se generan dos splines, el primero $S_x$ a partir del par $(t,x)$ y el otro $S_y$ a partir de $(t,y)$.
 		De esta manera, queda definida una curva $C \in \mathbb{R}^2$ donde $C(t) = (S_x(t),S_y(t))$.
@@ -24,19 +24,19 @@
 		\VSP		
 	\end{subsection}
 	\begin{subsection}{Implementación}
-		La implementación esta divida en módulos que realizan tareas especificas, a continuación detallaremos cada uno de ellos.
+		La implementación esta divida en módulos que realizan tareas específicas, a continuación detallaremos cada uno de ellos.
 		
 		\begin{itemize}
 			\item \underline{Módulo Parametrización:}\\
 				Este módulo implementa las $tres$ parametrizaciones (uniforme,\\
-				chord-length, centripeta) en el $[0,1]$ dado un conjunto de puntos de control.
+				chord-length, centrípeta) en el $[0,1]$ dado un conjunto de puntos de control.
 		
 			\item \underline{Módulo Spline:}\\
 				Escribimos el módulo \texttt{Spline} que implementa un spline cúbico natural con las siguientes operaciones:\\
 				
 				\begin{tabular}{rl}
-					\texttt{Evaluar} & Evalua la spline (el polinomio correspondiente) en un\\
-									 & valor recibido como parámetro\\
+					\texttt{Evaluar} & Evalua la spline (buscando previamente el polinomio \\
+									 & correspondiente) en un valor recibido como parámetro.\\
 					\texttt{Polinomio} & Devuelve el polinomio requerido.\\
 				\end{tabular}\\
 
@@ -59,7 +59,7 @@
 				
 				Llamamos $d_i(t)$ a la distancia de $(S_x^{(i)}(t),S_y^{(i)}(t))$ a $(x,y)$, es decir, la distancia a la curva en el intervalo $[t_i,t_{i+1}]$ ($i-esimo$ polinomio).\\
 				
-				Como la función distancia ($d_i(t)$) es monótona creciente en $\mathbb{R}_{>0}$ podemos minimizar $d_i^2(t)$ ya que coinciden en los puntos criticos.\\
+				Como la función distancia ($d_i(t)$) es monótona creciente en $\mathbb{R}_{>0}$ podemos minimizar $d_i^2(t)$ ya que coinciden en los puntos críticos (mínimo y máximo).\\
 				
 				$d_i^2(t) = (S_x^{(i)}-x)^2+(S_y^{(i)}-y)^2$\\
 				
@@ -77,7 +77,7 @@
 				
 				$\Rightarrow (d_i^2)'(t) = E_{x_i} + E_{y_i}$\\
 				
-				\underline{\texttt{Nota:}} Esta expresión esta 'hardcodeada' en una función $private$ que devuelve el polinomio 'distancia' derivado a partir de los coeficientes de $S_x$, $S_y$.
+				\underline{\texttt{Nota:}} Esta expresión se encuentra 'hardcodeada' en una función $private$ que devuelve el polinomio 'distancia' derivado a partir de los coeficientes de $S_x$, $S_y$.
 				
 				Por último, buscamos los $t$ donde $(d_i^2)'(t)$ se anula. Estos $t$ que son los puntos críticos de la función corresponden a máximos o a mínimos.
 				Nos quedamos con el $t$ tal minimiza $d(t)$.
@@ -98,7 +98,7 @@
 					\tab \RET $(S_x(min\_global),S_y(min\_global))$\\
 				\end{pseudo}
 				
-				Para mover un punto $(x,y)$	calculamos el punto de la curva más próximo como se explico previamente. Luego, separamos en los siguientes casos:
+				Para mover un punto $(x,y)$	calculamos el punto de la curva más próximo como se explicó previamente. Luego, separamos en los siguientes casos:
 				
 				\begin{itemize}
 					\item \underline{Caso punto más cercano a $(x,y)$ es un punto de control:}\\
@@ -143,7 +143,7 @@
 						
 						La curva $azul$ es la curva deformada de forma tal que el punto $rosa$ toma la posición del punto $azul$.\\
 						
-						Por último, la siguiente figura refleja el comportamiento cuando el punto seleccionado esta sobre la curva.\\
+						Por último, la siguiente figura refleja el comportamiento cuando el punto seleccionado está sobre la curva.\\
 						
 						\begin{figure}[H]
 							\centering
@@ -193,10 +193,9 @@
 				Dado que el polinomio tiene a lo sumo tantas raíces como su grado, dividimos $[a,b]$ en esa cantidad de intervalos, apostando a que
 				las mismas se encuentran uniformemente distribuídas, si esto sucede encontramos una raíz en cada intervalo. Para buscar cada una de 
 				ellas ejecutamos el método de bisección mientras sea posible (cambie de signo en el intervalo) o hasta acercarnos lo suficiente
-				(parámetro definido por nosotros, Ver Pruebas!!!!). En ambos casos el algoritmo aplica en última instancia el método de $Newton$.\\
+				(parámetro definido por nosotros, ver subsección 'Ajuste de parámetros' en la sección de resultados así como discusión). En ambos casos el algoritmo aplica en última instancia el método de $Newton$.\\
 				En los intervalos donde no hay ninguna raíz el procedimiento es el mismo, el valor conseguido es producto de que el método de 
-				$Newton$ utilizó todas las iteraciones permitidas, no alcanzando este valor la tolerancia (parámetro definido por nosotros, Ver Pruebas!!!!) que le otorga la condición de cero del
-				polinomio.
+				$Newton$ utilizó todas las iteraciones permitidas, no alcanzando la tolerancia exigida (parámetro definido por nosotros, para más información ver nuevamente la subsección 'Ajuste de parámetros' en la sección de resultados asi como su análisis en discusión). La tolerancia que tomamos que le otorga a un valor real la condición de cero del polinomio.
 				%(recordemos que como las operaciones son en punto flotante y existe error de representación, consideramos que dos valores son el mismo si cumplen que la diferencia es menor a la tolerancia (elegida por nosotros, Ver Pruebas!!!!), es decir, consideramos que un valor es cero si es menor a la tolerancia).\\
 				
 				\underline{\texttt{Observación:}} Si tenemos intervalos sin raíces implica que no vamos a encontrarlas todas, ya que obtenemos una raíz por intervalo (vamos a encontrar tantas raíces como intervalos con raíces tengamos).\\
@@ -205,7 +204,7 @@
 		\end{itemize}
 	\end{subsection}
 	\begin{subsection}{Correctitud de $splines$}
-		Con el fin de probar que efectivamente los cálculos sean correctos, se creó la clase $SplineTester$ la cual exporta un constructor que recibe el $spline$ a analizar y un método $isSuccessful$ que devuelve un valor booleano correspondiente a si cumplió con todas las condiciones para ser un spline o no.
+		Con el fin de probar la efectiva correctitud de los cálculos, se creó la clase $SplineTester$ la cual exporta un constructor que recibe el $spline$ a analizar y un método $isSuccessful$ que devuelve un valor booleano correspondiente a si cumplió con todas las condiciones para ser un spline o no.
 		
 		Utilizamos $splines$ naturales.\\
 		
@@ -213,7 +212,7 @@
 		
 		\begin{itemize}
 			\item La derivada segunda en los puntos de control bordes es cero (natural).
-			\item Los resultado de evaluar el polinomio a izquierda y derecha de un punto de control en si mismo son iguales (en los casos bordes, es decir primer y último punto, se toma el primer y último $spline$ respectivamente).
+			\item Los resultados de evaluar el polinomio a izquierda y derecha de un punto de control son iguales (en los casos bordes, es decir primer y último punto, se toma únicamente el primer y último $spline$ respectivamente).
 			\item La primer derivada de cada par de polinomios contiguos evaluadas en el punto de control son iguales (valen las mismas consideraciones para el primer y último punto de control).
 			\item La derivada segunda de cada par de polinomios evaluadas en el punto de control que las une son iguales (iguales consideraciones que en el item anterior).
 		\end{itemize}
