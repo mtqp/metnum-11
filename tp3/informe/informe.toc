@@ -5,9 +5,12 @@
 \contentsline {subsection}{\numberline {2.2}Implementaci\IeC {\'o}n}{4}
 \contentsline {subsection}{\numberline {2.3}Correctitud de $splines$}{11}
 \contentsline {section}{\numberline {3}Resultados}{12}
+\contentsline {subsection}{\numberline {3.1}Ajuste de par\IeC {\'a}metros}{12}
+\contentsline {subsection}{\numberline {3.2}An\IeC {\'a}lisis de curvas}{14}
 \contentsline {section}{\numberline {4}Discusi\IeC {\'o}n}{20}
-\contentsline {section}{\numberline {5}Conclusiones}{22}
-\contentsline {section}{\numberline {6}Modo de compilaci\IeC {\'o}n y uso}{23}
-\contentsline {section}{\numberline {7}Ap\IeC {\'e}ndices}{24}
-\contentsline {subsection}{\numberline {7.1}Ap\IeC {\'e}ndice A: Enunciado}{24}
-\contentsline {section}{\numberline {8}Referencias}{27}
+\contentsline {section}{\numberline {5}Preguntas}{22}
+\contentsline {section}{\numberline {6}Conclusiones}{23}
+\contentsline {section}{\numberline {7}Modo de compilaci\IeC {\'o}n y uso}{24}
+\contentsline {section}{\numberline {8}Ap\IeC {\'e}ndices}{25}
+\contentsline {subsection}{\numberline {8.1}Ap\IeC {\'e}ndice A: Enunciado}{25}
+\contentsline {section}{\numberline {9}Referencias}{28}

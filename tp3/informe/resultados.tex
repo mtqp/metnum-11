@@ -1,101 +1,105 @@
 \begin{section}{Resultados}
-	El algoritmo de $Newton$ utilizado para buscar los ceros de un polinomio hace uso de dos parámetros, los cuales tuvimos que ajustar de manera de conseguir los mejores resultados posibles, mejores en el sentido de relación calidad de la solución y eficiencia en terminos de tiempo del algoritmo.
-	
-	Uno de los parámetros es para determinar la máxima cantidad de iteraciones que le permitimos al algoritmo buscar. Para ajustar este parámetro BALABALABNAKABALKABKANSJBFDFKBFKDBC.
-
-	La siguiente prueba se realizó para ajustar un parámetro ($tolerancia$) del programa que sirve buscar los $ceros$ de un polinomio. Este parámetro se utiliza para decidir si un valor es una raíz (más especificamente nos dice si estamos cerca del cero).
-	
-	Se muestra el siguiente gráfico para esclarecer el uso de este parámetro.
-	
-	\begin{figure}[H]
-	  \centering
-		\includegraphics[width=5cm]{graficos/newton.jpg}
-	  \caption{Método de Newton}
-	  \label{fig:newton}
-	\end{figure}
-	
-	Si el algortimo de $Newton$ termina porque consigue la $tolerancia$ pedida (no se le terminan las iteraciones permitidas) devuelve $x_{n+1}$ y la distancia entre $x_{n+1}$ y $x_n$ es menor a la $tolerancia$ ($x_{n+1} - x_n < tolerancia$).
-	
-	Esperamos ver que cuanto menor es la $tolerancia$ mejor es la aproximación al cero teórico. Recordar que el algoritmo que busca los ceros de un polinomio tiene dos criterios de parada (la tolerancia y la cantidad de iteraciones permitidas), creemos que la aproximación va a mejorar al disminuir la tolerancia ya que si termina por el primer motivo el valor conseguido va a ser igual o más refinado (más cercano a 0) y si lo hace por el segundo va a mejorar la aproximación durante más iteraciones. A pesar de esto, debemos buscar un equilibrio entre la calidad de la solución y el costo de la misma.\\
-	Realizamos el siguiente gráfico con el fin de conseguir un valor adecuado para dicho parámetro, se grafica costo del algoritmo en función de la calidad de la solución encontrada (evaluar el polinomio en la raíz obteniada por el algoritmo) para distintos valores de $tolerancia$: $1e^-1$, $1e^-3$, $1e^-5$, $1e^-9$, $1e^-13$, $1e^-17$ y $1e^-24$. Corrimos la prueba para $35$ instancias generadas aleatoriamente (hicimos un generador de polinomios, eligiendo de manera 'random' cada coeficiente).
-	
-	El gráfico se presenta bajo escala logarítmica en $y$\\
-
-	\begin{figure}[H]
-	  \centering
-		\includegraphics[width=14cm]{graficos/tol_graf.pdf}
-	  \caption{Costo del algoritmo de Newton en función de la calidad de la solución variando el parámetro tolerancia}
-	  \label{fig:5p_r}
-	\end{figure}
-	
-	\VSP
-	
-	Para poder analizar si existen diferencias en el uso de distintas parametrizaciones se creó un generador de puntos de control a partir de un par de polinomios (uno para la coordenada $x$ y otra para $y$ que fueron elegidos de manera arbitraria) los cuales forman la curva. Los puntos de control pueden ser elegidos de forma aleatoria o uniforme. Graficamos entonces la curva con los puntos de control seleccionados de alguna de las dos formas anteriormente mencionadas, y las curvas utilizando las distintas de parametrizaciones (uniforme, por longitud de cuerda y centripeta).
-	
-	Los siguientes gráficos utilizan un conjunto de cinco puntos de control aleatorios dada la misma curva.
+	\begin{subsection}{Ajuste de parámetros}
+		El algoritmo de $Newton$ utilizado para buscar los ceros de un polinomio hace uso de dos parámetros, los cuales tuvimos que ajustar de manera de conseguir los mejores resultados posibles, mejores en el sentido de relación calidad de la solución y eficiencia en terminos de tiempo del algoritmo.
 		
-	\begin{figure}[H]
-	  \centering
-		\includegraphics[width=14cm]{graficos/5p_r.pdf}
-	  \caption{Aproximación por las distintas parametrizaciones utilizando cinco puntos de control aleatoreos}
-	  \label{fig:5p_r}
-	\end{figure}
-	
-	\VSP
-	
-	\begin{figure}[H]
-	  \centering
-		\includegraphics[width=14cm]{graficos/5p.pdf}
-	  \caption{Aproximación por las distintas parametrizaciones utilizando cinco puntos de control aleatoreos}
-	  \label{fig:5p}
-	\end{figure}
-	
-	\VSP
-	
-	A continuación, se utiliza el mismo polinomio que el gráfico anterior pero tomando los puntos de control uniformemente.
-	
-	\begin{figure}[H]
-	  \centering
-		\includegraphics[width=14cm]{graficos/5p_u.pdf}
-	  \caption{Aproximación por las distintas parametrizaciones utilizando cinco puntos distribuidos uniformemente}
-	  \label{fig:5p_u}
-	\end{figure}
-	
-	\VSP
+		Uno de los parámetros es para determinar la máxima cantidad de iteraciones que le permitimos al algoritmo buscar. Para ajustar este parámetro BALABALABNAKABALKABKANSJBFDFKBFKDBC.
 
-	Los siguientes gráficos detallan cómo cambia la aproximación a una curva dada una parametrización a medida que se le proveen más puntos de control. 
-	Los puntos fueron tomados aleatoreamente y se utilizó la misma curva para las tres parametrizaciones para una comparación y análisis más claro.
+		La siguiente prueba se realizó para ajustar un parámetro ($tolerancia$) del programa que sirve buscar los $ceros$ de un polinomio. Este parámetro se utiliza para decidir si un valor es una raíz (más especificamente nos dice si estamos cerca del cero).
 		
-	El primero de los gráficos muestra la variación en la aproximación para la parametrización uniforme.
+		Se muestra el siguiente gráfico para esclarecer el uso de este parámetro.
 		
-	\begin{figure}[H]
-	  \centering
-		\includegraphics[width=14cm]{graficos/uniform_grafiquinSame.pdf}
-	  \caption{Aproximación utilizando parametrización uniforme}
-	  \label{fig:uniform}
-	\end{figure}
-	
-	\VSP
-	
-	El siguiente gráficos muestra la variación en la aproximación para la parametrización centripeta.
-	
-	\begin{figure}[H]
-	  \centering
-		\includegraphics[width=14cm]{graficos/centripetal_grafiquinSame.pdf}
-	  \caption{Aproximación utilizando parametrización centrípeta}
-	  \label{fig:centripetal}
-	\end{figure}
-	
-	\VSP
+		\begin{figure}[H]
+		  \centering
+			\includegraphics[width=5cm]{graficos/newton.jpg}
+		  \caption{Método de Newton}
+		  \label{fig:newton}
+		\end{figure}
+		
+		Si el algortimo de $Newton$ termina porque consigue la $tolerancia$ pedida (no se le terminan las iteraciones permitidas) devuelve $x_{n+1}$ y la distancia entre $x_{n+1}$ y $x_n$ es menor a la $tolerancia$ ($x_{n+1} - x_n < tolerancia$).
+		
+		Esperamos ver que cuanto menor es la $tolerancia$ mejor es la aproximación al cero teórico. Recordar que el algoritmo que busca los ceros de un polinomio tiene dos criterios de parada (la tolerancia y la cantidad de iteraciones permitidas), creemos que la aproximación va a mejorar al disminuir la tolerancia ya que si termina por el primer motivo el valor conseguido va a ser igual o más refinado (más cercano a 0) y si lo hace por el segundo va a mejorar la aproximación durante más iteraciones. A pesar de esto, debemos buscar un equilibrio entre la calidad de la solución y el costo de la misma.\\
+		Realizamos el siguiente gráfico con el fin de conseguir un valor adecuado para dicho parámetro, se grafica costo del algoritmo en función de la calidad de la solución encontrada (evaluar el polinomio en la raíz obteniada por el algoritmo) para distintos valores de $tolerancia$: $1e^-1$, $1e^-3$, $1e^-5$, $1e^-9$, $1e^-13$, $1e^-17$ y $1e^-24$. Corrimos la prueba para $35$ instancias generadas aleatoriamente (hicimos un generador de polinomios, eligiendo de manera 'random' cada coeficiente).
+		
+		El gráfico se presenta bajo escala logarítmica en $y$\\
 
-	Por ultimo, se muestra la variación utilizando parametrización por longitud de cuerda.
+		\begin{figure}[H]
+		  \centering
+			\includegraphics[width=14cm]{graficos/tol_graf.pdf}
+		  \caption{Costo del algoritmo de Newton en función de la calidad de la solución variando el parámetro tolerancia}
+		  \label{fig:5p_r}
+		\end{figure}
+		
+		\VSP
+	\end{subsection}
 
-	\begin{figure}[H]
-	  \centering
-		\includegraphics[width=14cm]{graficos/chordLength_grafiquinSame.pdf}
-	  \caption{Aproximación utilizando parametrización por longitud de cuerda}
-	  \label{fig:chordLength}
-	\end{figure}
-	
-	\VSP
+	\begin{subsection}{Análisis de curvas}
+		Para poder analizar si existen diferencias en el uso de distintas parametrizaciones se creó un generador de puntos de control a partir de un par de polinomios (uno para la coordenada $x$ y otra para $y$ que fueron elegidos de manera arbitraria) los cuales forman la curva. Los puntos de control pueden ser elegidos de forma aleatoria o uniforme. Graficamos entonces la curva con los puntos de control seleccionados de alguna de las dos formas anteriormente mencionadas, y las curvas utilizando las distintas de parametrizaciones (uniforme, por longitud de cuerda y centrípeta).
+		
+		Los siguientes gráficos utilizan un conjunto de cinco puntos de control aleatorios dada la misma curva.
+				
+		\begin{figure}[H]
+		  \centering
+			\includegraphics[width=14cm]{graficos/5p.pdf}
+		  \caption{Aproximación por las distintas parametrizaciones utilizando cinco puntos de control aleatoreos}
+		  \label{fig:5p}
+		\end{figure}
+		
+		\VSP
+		
+		\begin{figure}[H]
+		  \centering
+			\includegraphics[width=14cm]{graficos/5p_r.pdf}
+		  \caption{Aproximación por las distintas parametrizaciones utilizando cinco puntos de control aleatoreos}
+		  \label{fig:5p_r}
+		\end{figure}
+		
+		\VSP
+		
+		A continuación, se utiliza el mismo polinomio que el gráfico anterior pero tomando los puntos de control uniformemente.
+		
+		\begin{figure}[H]
+		  \centering
+			\includegraphics[width=14cm]{graficos/5p_u.pdf}
+		  \caption{Aproximación por las distintas parametrizaciones utilizando cinco puntos distribuidos uniformemente}
+		  \label{fig:5p_u}
+		\end{figure}
+		
+		\VSP
+
+		Los siguientes gráficos detallan cómo cambia la aproximación a una curva dada una parametrización a medida que se le provee más puntos de control. 
+		Los puntos fueron tomados aleatoreamente y se utilizó la misma curva para las tres parametrizaciones para una comparación y análisis más claro.
+			
+		El primero de los gráficos muestra la variación en la aproximación para la parametrización uniforme.
+			
+		\begin{figure}[H]
+		  \centering
+			\includegraphics[width=14cm]{graficos/uniform_grafiquinSame.pdf}
+		  \caption{Aproximación utilizando parametrización uniforme}
+		  \label{fig:uniform}
+		\end{figure}
+		
+		\VSP
+		
+		El siguiente gráficos muestra la variación en la aproximación para la parametrización centripeta.
+		
+		\begin{figure}[H]
+		  \centering
+			\includegraphics[width=14cm]{graficos/centripetal_grafiquinSame.pdf}
+		  \caption{Aproximación utilizando parametrización centrípeta}
+		  \label{fig:centripetal}
+		\end{figure}
+		
+		\VSP
+
+		Por último, se muestra la variación utilizando parametrización por longitud de cuerda.
+
+		\begin{figure}[H]
+		  \centering
+			\includegraphics[width=14cm]{graficos/chordLength_grafiquinSame.pdf}
+		  \caption{Aproximación utilizando parametrización por longitud de cuerda}
+		  \label{fig:chordLength}
+		\end{figure}
+		
+		\VSP
+	\end{subsection}
 \end{section}
