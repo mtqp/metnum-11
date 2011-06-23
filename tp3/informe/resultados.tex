@@ -2,7 +2,16 @@
 	\begin{subsection}{Ajuste de parámetros}
 		El algoritmo de $Newton$ utilizado para buscar los ceros de un polinomio hace uso de dos parámetros, los cuales tuvimos que ajustar de manera de conseguir los mejores resultados posibles, mejores en el sentido de relación calidad de la solución y eficiencia en terminos de tiempo del algoritmo.
 		
-		Uno de los parámetros es para determinar la máxima cantidad de iteraciones que le permitimos al algoritmo buscar. Para ajustar este parámetro BALABALABNAKABALKABKANSJBFDFKBFKDBC.
+		Uno de los parámetros es para determinar la máxima cantidad de iteraciones que le permitimos al algoritmo buscar. 
+		Para ajustar este parámetro elegimos de manera aleatorea $siete$ instancias (polinomios) y realizamos un gráfico de cantidad de iteraciones en función
+		del error al cero teórico.
+
+		\begin{figure}[H]
+		  \centering
+			\includegraphics[width=14cm]{graficos/iter_graf.pdf}
+		  \caption{Cantidad de iteraciones en función del error al cero teórico}
+		  \label{fig:iter}
+		\end{figure}
 
 		La siguiente prueba se realizó para ajustar un parámetro ($tolerancia$) del programa que sirve buscar los $ceros$ de un polinomio. Este parámetro se utiliza para decidir si un valor es una raíz (más especificamente nos dice si estamos cerca del cero).
 		
