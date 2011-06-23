@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  23 JUN 2011 19:05
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  23 JUN 2011 19:35
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
@@ -756,18 +756,46 @@ Underfull \hbox (badness 10000) in paragraph at lines 22--23
 
  []
 
-) [21] (./preguntas.tex) [22] (./conclusiones.tex) [23] (./modo_comp_y_uso.tex)
-[24] (./apendices.tex (./enunciado.tex [25] [26])) [27] (./referencias.tex)
-[28] (./informe.aux)
+) [21] (./preguntas.tex
+<graficos/paramVSreparamUniform.pdf, id=126, 341.43306pt x 315.82558pt>
+File: graficos/paramVSreparamUniform.pdf Graphic file (type pdf)
+
+<use graficos/paramVSreparamUniform.pdf>
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 16--17
+ [][] 
+ []
+
+[22]
+<graficos/paramVSreparamCentripetal.pdf, id=130, 369.88583pt x 312.98033pt>
+File: graficos/paramVSreparamCentripetal.pdf Graphic file (type pdf)
+
+<use graficos/paramVSreparamCentripetal.pdf>
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 23--24
+ [][] 
+ []
+
+[23 <./graficos/paramVSreparamUniform.pdf>]
+<graficos/paramVSreparamChord.pdf, id=136, 384.1122pt x 355.65945pt>
+File: graficos/paramVSreparamChord.pdf Graphic file (type pdf)
+
+<use graficos/paramVSreparamChord.pdf>
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 30--31
+ [][] 
+ []
+
+[24 <./graficos/paramVSreparamCentripetal.pdf>]) [25 <./graficos/paramVSreparam
+Chord.pdf>] (./conclusiones.tex) [26] (./modo_comp_y_uso.tex) [27]
+(./apendices.tex (./enunciado.tex [28] [29])) [30] (./referencias.tex) [31]
+(./informe.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 2956 strings out of 495061
- 35429 string characters out of 1182621
- 97242 words of memory out of 3000000
- 6051 multiletter control sequences out of 15000+50000
+ 2974 strings out of 495061
+ 36056 string characters out of 1182621
+ 97272 words of memory out of 3000000
+ 6066 multiletter control sequences out of 15000+50000
  16444 words of font info for 63 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  27i,13n,27p,882b,409s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -788,9 +816,9 @@ xmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive
 /fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-texlive/fonts/type
 1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf-texlive/fonts/type1/public/am
 sfonts/symbols/msbm10.pfb>
-Output written on informe.pdf (29 pages, 615430 bytes).
+Output written on informe.pdf (32 pages, 630783 bytes).
 PDF statistics:
- 209 PDF objects out of 1000 (max. 8388607)
+ 228 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 71 words of extra memory for PDF output out of 10000 (max. 10000000)
 

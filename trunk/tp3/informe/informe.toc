@@ -9,8 +9,8 @@
 \contentsline {subsection}{\numberline {3.2}An\IeC {\'a}lisis de curvas}{14}
 \contentsline {section}{\numberline {4}Discusi\IeC {\'o}n}{20}
 \contentsline {section}{\numberline {5}Preguntas}{22}
-\contentsline {section}{\numberline {6}Conclusiones}{23}
-\contentsline {section}{\numberline {7}Modo de compilaci\IeC {\'o}n y uso}{24}
-\contentsline {section}{\numberline {8}Ap\IeC {\'e}ndices}{25}
-\contentsline {subsection}{\numberline {8.1}Ap\IeC {\'e}ndice A: Enunciado}{25}
-\contentsline {section}{\numberline {9}Referencias}{28}
+\contentsline {section}{\numberline {6}Conclusiones}{26}
+\contentsline {section}{\numberline {7}Modo de compilaci\IeC {\'o}n y uso}{27}
+\contentsline {section}{\numberline {8}Ap\IeC {\'e}ndices}{28}
+\contentsline {subsection}{\numberline {8.1}Ap\IeC {\'e}ndice A: Enunciado}{28}
+\contentsline {section}{\numberline {9}Referencias}{31}
