@@ -3,7 +3,7 @@ eOBJS = setp_polynomial.o
 MATH = -lm
 CFLAGS = -ggdb 
 
-all: tp3 test set_params generador
+all: tp3 test
 
 tp3: main.cpp $(OBJS)
 	g++ -o tp3 $(CFLAGS) $(MATH) main.cpp $(OBJS)
@@ -11,22 +11,10 @@ tp3: main.cpp $(OBJS)
 test: test.cpp $(OBJS)
 	g++ -o test $(CFLAGS) $(MATH) test.cpp $(OBJS)
 	
-set_params: set_params.cpp $(OBJS) $(eOBJS)
-	g++ -o set_params $(CFLAGS) $(MATH) set_params.cpp $(OBJS) $(eOBJS)
-
-generador: instance_generator.cpp polynomial_generator.cpp curve_generator.cpp $(OBJS)
-	g++ -o instance_generator $(CFLAGS) $(MATH) instance_generator.cpp $(OBJS)
-	g++ -o polynomial_generator $(CFLAGS) $(MATH) polynomial_generator.cpp $(OBJS)
-	g++ -o curve_generator $(CFLAGS) $(MATH) curve_generator.cpp $(OBJS)
-
 %.o: %.cpp %.h
 	g++ -c $< $(MATH)
 	
 clean:
 	rm -f tp3
 	rm -f test
-	rm -f set_params
-	rm -f instance_generator
-	rm -f polynomial_generator
-	rm -f curve_generator
 	rm -f *.o

@@ -54,7 +54,6 @@ Curve Curve :: moveCurve(const pair fpoint, const pair ipoint) const{
 
 pair Curve :: getNearPoint(const pair xy) const {
 	double t = nearPoint(xy);
-	//cout << "min_dis --> " << t << endl;
 	pair near_point;
 	near_point.first = S_x->evaluate(t);
 	near_point.second= S_y->evaluate(t);
@@ -120,7 +119,6 @@ Curve Curve :: movePoint(const pair fpoint, double t) const
 	
 		
 double Curve :: nearPoint(const pair xy) const{
-	//cout << "Busco punto cercano a --> " << xy.first << " " << xy.second << endl;
 	double min_dist = 0;							//empiezo con t igual al parametro correspondiente al primer pto de control, es arbitraria la eleccion
 	double min_t;
 	vector<double> critic_points;
@@ -129,18 +127,10 @@ double Curve :: nearPoint(const pair xy) const{
 	vector<double> param = S_x->getParams();
 	for(int i=1; i<amount_control; i++){
 		Polynomial pol = derivedDistancePolynom(i,xy,param[i-1]);
-		//min_t = pol.zeros(param[i-1],param[i]);
-		//cout << "pol entre pto de control extremo izq --> " << S_x->evaluate(param[i-1]) << " " <<  S_y->evaluate(param[i-1]) << endl;
-		//cout << "pol entre pto de control extremo der --> " << S_x->evaluate(param[i]) << " " <<  S_y->evaluate(param[i]) << endl;
 		critic_points = pol.zeros(param[i-1],param[i]);
-		//pol.print();
-		//cout << "ceros del pol nro --> " << i << endl;
-		//for(int j=0; j<critic_points.size(); j++)
-			//cout << critic_points[j] << " --> ( " << S_x->evaluate(critic_points[j]) << " " << S_y->evaluate(critic_points[j]) << " ) --> " << evaluateDistance(xy,critic_points[j]) << endl;
 		min_t = minInPoints(xy,critic_points);
-		//cout << "min --> " << min_t << endl;
-		dist1 = evaluateDistance(xy,min_dist);//S_x->evaluate(min_dist),S_y->evaluate(min_dist),xy.first,xy.second);
-		dist2 = evaluateDistance(xy,min_t);//S_x->evaluate(min_t),S_y->evaluate(min_t),xy.first,xy.second);
+		dist1 = evaluateDistance(xy,min_dist);
+		dist2 = evaluateDistance(xy,min_t);
 		if(dist2<dist1) min_dist = min_t;
 	}
 	return min_dist;
@@ -160,12 +150,9 @@ vector<pair> Curve :: sampling(uint m) const{
 }
 
 double Curve :: minInPoints(const pair xy, vector<double> points) const {
-	//cout << "En minInPoints" << endl;
-	double globalMin = evaluateDistance(xy,points[0]);	//hay si o si uno por lo menos???
+	double globalMin = evaluateDistance(xy,points[0]);	//hay si o si uno por lo menos
 	double globalMinPoint = points[0];
 	for(int i=1;i<points.size();i++){
-		//cout << "global --> " << globalMin << endl;
-		//cout << "point --> " << globalMinPoint << endl;
 		if(globalMin > evaluateDistance(xy,points[i]))
 		{
 			globalMin = evaluateDistance(xy,points[i]);

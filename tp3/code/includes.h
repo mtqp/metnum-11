@@ -15,6 +15,9 @@ using namespace std;
 #define llint long long int
 #define ull unsigned long long
 #define pair pair<double,double>
-const static double EPSILON = 1.00000000000000000000e-25;
+const static double EPSILON = 1.0e-25;
+#define RADIUS 0.0001
+#define TOLERANCE 1.0e-17
+#define ITERATIONS 1000
 
 #endif
