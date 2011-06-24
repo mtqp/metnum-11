@@ -17,14 +17,12 @@ class Polynomial
 
 		Polynomial& operator= (const Polynomial &p);
 
-		vector<double> coefficients() const;
-		double evaluate(const double x) const;
 		Polynomial derive() const;
-		//double zeros(double a, double b) const;
+		double evaluate(const double x) const;
 		vector<double> zeros(double a, double b) const;
-		//double globalMin(vector<double> &points) const;
+		vector<double> coefficients() const;
+		
 		void print() const;
-
 	private:
 		double newton(double p0, double tolerance, llint iter) const;
 		double bisection(double a, double b, double radius) const;	//continua en el [a,b]

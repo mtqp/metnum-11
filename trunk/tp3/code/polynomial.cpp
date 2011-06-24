@@ -39,7 +39,7 @@ double Polynomial :: evaluate(const double x) const{
 
 Polynomial Polynomial :: derive() const{
 	if(_order == 1){
-		vector<double> c(1,0);	//==> esto hace lo que queremos????
+		vector<double> c(1,0);
 		Polynomial zero(c,this->_xj,0);
 		return zero;
 	}
@@ -54,30 +54,22 @@ Polynomial Polynomial :: derive() const{
 	return derived;
 }
 
-////////////////////////////////////////////////////////////////////////
 vector<double> Polynomial :: zeros(double a, double b) const
-{//ojo q esto debe recorrer de A a B pero x error de fucking doubles capas no llega a B exacto.
-	//cout << "busco cero entre --> " << a << " " << b << endl; 
-	int rootcount = _order;//-1;
+{
+	int rootcount = _order;
 	double interval = (b-a)/rootcount;
 	double x = a;
 	double x1= a+interval;
 	vector<double> roots(rootcount);
 	for(int i=0;i<rootcount;i++)
 	{
-		//cout << "intervalo --> " << x << " " << x1 << endl; 
 		roots[i] = findRoot(x, x1);
-		//cout << "encontro raiz --> " << roots[i] << endl;
 		x=x1;
 		x1+=interval;
 	}
-	return roots;//globalMin(roots);
+	return roots;
 }
 
-//SUPONEMOS QUE TENEMOS SOLO UNA RAIZ ENTRE A Y B
-#define RADIUS 0.0001
-#define TOLERANCE 1.0e-20
-#define ITERATIONS 10000000
 double Polynomial :: findRoot(double a, double b) const {
 	if(abs(evaluate(a)) < EPSILON){
 		return a;
@@ -90,29 +82,6 @@ double Polynomial :: findRoot(double a, double b) const {
 		return bisection(a,b,RADIUS);
 	return newton((a+b)/2,TOLERANCE,ITERATIONS);
 }
-
-//esto al menos recibe UNA raiz  /ESTA POSIBLEMENTE HAYA Q BORRARLA XQ NI LA VAMOS A USAR/
-/*double Polynomial :: globalMin(vector<double> &points) const {
-	int rootcount = points.size();
-	double globalMinEval = this->evaluate(points[0]);
-	double globalMin = points[0];
-	for(int i=1;i<rootcount;i++)
-		if(globalMinEval > this->evaluate(points[1]))
-			globalMin = points[i];
-	return globalMin;
-}*/
-///////////////////////////////////////////////////////////////////////
-
-/*
-double Polynomial :: zeros(double a, double b) const{
-	if(abs(evaluate(a)) < EPSILON){
-		return a;
-	}
-	if(abs(evaluate(b)) < EPSILON){
-		return b;
-	}	
-	return newton(a,1.0e-15,10000000);
-}*/
 
 double Polynomial :: newton(double p0, double tolerance, llint iter) const{
 	llint i=1;
