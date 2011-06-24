@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  23 JUN 2011 20:38
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  23 JUN 2011 20:53
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
@@ -743,12 +743,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--3
  []
 
 [21]
-Underfull \hbox (badness 10000) in paragraph at lines 24--25
+Underfull \hbox (badness 10000) in paragraph at lines 28--29
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 30--31
+Underfull \hbox (badness 10000) in paragraph at lines 34--35
 
  []
 
@@ -808,7 +808,7 @@ m/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-tex
 live/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf-texlive/fonts/
 type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on informe.pdf (34 pages, 634556 bytes).
+Output written on informe.pdf (34 pages, 635140 bytes).
 PDF statistics:
  238 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
