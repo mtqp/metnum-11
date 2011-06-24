@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  23 JUN 2011 22:13
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.5.12)  23 JUN 2011 22:34
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
@@ -771,15 +771,15 @@ Overfull \hbox (11.61528pt too wide) in paragraph at lines 43--44
  la parametrizaci^^Son
  []
 
-) [26 <./graficos/paramVSreparamChord.pdf>] (./conclusiones.tex [27]) [28]
-(./modo_comp_y_uso.tex
+[26 <./graficos/paramVSreparamChord.pdf>]) [27] (./conclusiones.tex [28])
+[29] (./modo_comp_y_uso.tex
 Overfull \hbox (2.66232pt too wide) in paragraph at lines 6--7
 []\OT1/cmr/m/n/12 Para eje-cu-tar el pro-gra-ma: \OT1/cmtt/m/n/12 ./tp3 input o
 utput parametrization[]mode
  []
 
-) [29] (./apendices.tex (./enunciado.tex [30] [31])) [32] (./referencias.tex)
-[33] (./informe.aux) ) 
+) [30] (./apendices.tex (./enunciado.tex [31] [32])) [33] (./referencias.tex)
+[34] (./informe.aux) ) 
 Here is how much of TeX's memory you used:
  2981 strings out of 495061
  36195 string characters out of 1182621
@@ -805,9 +805,9 @@ nts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy
 /share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texm
 f-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf-texlive/f
 onts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on informe.pdf (34 pages, 639853 bytes).
+Output written on informe.pdf (35 pages, 641207 bytes).
 PDF statistics:
- 238 PDF objects out of 1000 (max. 8388607)
+ 241 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  76 words of extra memory for PDF output out of 10000 (max. 10000000)
 
