@@ -4,10 +4,14 @@
 \begin{subsection}{Ajuste de parámetros}
 	Ambos gráficos están relacionados entre sí, por lo tanto, no analizaremos cada uno por separado. 
 	
-	Podemos notar en primera instancia, que utilizar como cantidad de iteraciones permitidas mayores a 1000 en el algoritmo, no tiene sentido, ya que las soluciones no mejoran, es decir el error cometido al buscar la raíz no disminuye. Si bien no estamos contemplando todos los casos posibles, ya que existen infinitos polinomios, por ende infinitas soluciones, podemos reforzar esta conclusión viendo que en el segundo gráfico (Figura \ref{fig:tol}) sin importar el costo (donde costo es una medida proporcional a la cantidad de iteraciones) la calidad de la solución no mejora en la casi totalidad de los caso de $1.0e-17$, es decir no se aproxima más al cero ideal.
+	Podemos notar en primera instancia, que utilizar como cantidad de iteraciones permitidas mayores a 1000 en el algoritmo, no tiene sentido, ya que las soluciones no mejoran, es decir el error cometido al buscar la raíz no disminuye. Si bien no estamos contemplando todos los casos posibles, ya que existen infinitos polinomios, por ende infinitas soluciones, podemos reforzar esta conclusión viendo que en el segundo gráfico (Figura \ref{fig:tol}) sin importar el costo (donde costo es una medida proporcional a la cantidad de iteraciones) la calidad de la solución no mejora en la casi totalidad de los casos de $1.0e-17$, es decir no se aproxima más al cero ideal.
 	Estos nos lleva a inducir que un parámetro para la cantidad de iteraciones máxima de valor $1000$ es suficiente para que el algoritmo aproxime lo más posible a la raíz.
 	
-	Por otro lado, el primer gráfico nos muestra que las soluciones no mejoran al error de $1.0e-17$. Al ser pocos polinomios los analizados, necesitamos más información para poder inferir una cota para la $tolerancia$. Recolectando información sobre el segundo gráfico, vemos que salvo escasos casos atípicos, el resto de las muestras,
+	Por otro lado, el primer gráfico nos muestra que las soluciones no mejoran al error de $1.0e-17$. Al ser pocos polinomios los analizados, necesitamos más información para poder inferir una cota para la $tolerancia$. Recolectando información sobre el segundo gráfico, vemos que salvo escasos casos atípicos, el resto de las muestras, no mejoran la misma cota impuesta para el gráfico anterior.
+	
+	Nuevamente no podemos afirmar que este comportamiento va a ser igual para cualquier instancia presentada. A pesar que el generador de polinomios al azar intenta ser lo mas uniforme posible, puede quizás existir un sesgo que no estamos tomando en cuenta y por lo tanto las soluciones no se pueden mejorar. Otra causa puede ser que el error intrínseco de las operaciones con punto flotante no nos dejen mejorar la solución.
+	
+	Es arbitraria la decisión tomada, pero considerando el uso que le damos y viendo que en nuestras muestras el error no se hace más chicos que la cota previamente mencionada, tomamos como $tolerancia$ al valor de $1.0e-17$.
 	
 \end{subsection}
 \begin{subsection}{Análisis de curvas}
