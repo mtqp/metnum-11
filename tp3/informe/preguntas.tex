@@ -6,35 +6,45 @@ A continuación pasamos a responder algunas de las preguntas enunciadas en el tr
 	
 		Como vimos en los gráficos de la sección resultados, la elección de la parametrización está completamente ligada a la forma de la curva. Como ejemplo de esto podemos hacer referencia a los gráficos \ref{fig:5p}, \ref{fig:5p_r} y \ref{fig:5p_u}. Si bien todas las parametrizaciones comparten ciertos puntos (por ejemplo los mismos puntos de control), la forma en que aproximan a la curva es distinta.
 
-	\item ¿Cambia la forma de la curva si en lugar de deformar la curva conservando la parametrización o el programa la recalcula al mover el punto?
+	\item ¿Cambia la forma de la curva si en lugar de deformar la curva conservando la parametrización el programa la recalcula al mover el punto?
 
-	Para poder responder esta pregunta modificamos el código en una carpeta aparte para poder recalcular la parametrización y graficamos los resultados en tres archivos distintos, donde en cada uno de ellos se utilizó sólo una parametrización. La curva es igual para los tres graficos.
-	Se presentan en el siguiente orden los gráficos, utilizando la parametrización uniforme , la centrípeta y por último por longitud de cuerda.
+	Para poder responder esta pregunta deformamos la curva manteniendo la parametrización y recalculándola (el código implementa la primer opción). Graficamos los resultados, donde en cada uno de ellos se utilizó sólo una parametrización. La curva original es igual para los tres gráficos.
+	Se presentan los mismos en el siguiente orden, utilizando la parametrización uniforme, la centrípeta y por último por longitud de cuerda.
 	
+	En las figuras visualizamos en color $rojo$ la curva original y los puntos de control. En $negro$ el punto seleccionado y en $rosa$ el punto en la curva más proximo a este.
+	Vemos también en $azul$ la curva modificada manteniendo la parametrización y en $verde$ la curva deformada recalculándola.
 	\begin{figure}[H]
 		  \centering
-			\includegraphics[width=14cm]{graficos/paramVSreparamUniform.pdf}
+			\includegraphics[width=7cm]{graficos/paramVSreparamUniform.pdf}
 		  \caption{Cambio de parametrización (Uniforme)}
 		  \label{fig:paramChangeUniform}
 	\end{figure}
 	
+	\VSP
+	
 	\begin{figure}[H]
 		  \centering
-			\includegraphics[width=14cm]{graficos/paramVSreparamCentripetal.pdf}
+			\includegraphics[width=7cm]{graficos/paramVSreparamCentripetal.pdf}
 		  \caption{Cambio de parametrización (Centrípeta)}
 		  \label{fig:paramChangeCentripetal}
 	\end{figure}
-
+	
+	\VSP
+	
 	\begin{figure}[H]
 		  \centering
-			\includegraphics[width=14cm]{graficos/paramVSreparamChord.pdf}
+			\includegraphics[width=7cm]{graficos/paramVSreparamChord.pdf}
 		  \caption{Cambio de parametrización (Longitud de cuerda)}
 		  \label{fig:paramChangeCHLength}
 	\end{figure}
+	
 	\VSP
+	
+	Efectivamente la forma de la curva cambia al recalcular la parametrización respecto a no hacerlo. 
+	
+	Las curvas donde se recalcula la parametrización (curva $verde$) en las $tres$ figuras (usando cualquiera de las parametrizaciones) tienen una forma más similar a la curva original en los puntos alejados 
+	al punto movido en contraste con la curva que mantiene la parametrización (curva $azul$). 
+	%ya que esta cambia de manera proporcional a la distancia entre la posición del punto más próximo al elegido ($rosa$) y la posición final del mismo ($azul$).
 
-\end{itemize}	
-
-
-
+	\end{itemize}	
 \end{section}
