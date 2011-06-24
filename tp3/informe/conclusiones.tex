@@ -1,3 +1,15 @@
 \begin{section}{Conclusiones}
-	NO OLVIDARSE DE RESPONDER LAS PREGUNTAS!!!
+	La utilización de splines para aproximación de curvas resulta ser muy efectiva ya que posee una implementación sencilla, y a su vez posee tiempo de procesamiento aceptables, consiguiendo buenas aproximaciones necesitando poca información sobre la curva. La distribución uniforme o semi uniforme de los puntos de control mejora la aproximación significativamente.
+	
+	La selección de la parametrización a utilizar depende de la curva a aproximar en particular, por lo tanto para poder elegir la más apta, es necesario tener alguna información extra sobre la misma, la cual pueda ser relacionada con esta elección.
+	
+	El método heurístico utilizado para conseguir el punto en la curva más cercano al $clickeado$ resultó ser altamente efectivo en los polinomios de grado cinco (5) utilizados. La relación costo-presición, satisfizo nuestras necesidades.
+	
+	La dificultad más grande que tuvimos fue en el análisis de los datos obtenidos y en la realización de las pruebas. Mencionándolo una vez más, existen infinitos polinomios, y no es posible englobar sus comportamientos en una familia finita de casos. Todas nuestras conclusiones se basan en instancias elegidas al azar, suponiendo que el generador no condiciona los resultados obtenidos (son pseudo-aleatoreos con distribución uniforme). Hemos de resaltar que nuestras conclusiones posiblemente no apliquen para todos los casos.
+	
+	La elección de los parámetros tuvo el mismo problema, fueron elegidos basados en pocas instancias. La realización de gráficos entendibles y a la vez que aporten suficiente información es complicada ya que si por ejemplo utilizaramos cientos o miles de curvas, no podríamos entender cuál es el comportamiento. Pero a su vez si la entrada es poca y ahora sí entendible, al ser un problema tan grande, como por ejemplo acotar la cantidad de iteraciones necesarias para conseguir una buena precisión en la búsqueda de raíces para polinomios de grado cinco (5), las conclusiones y por ende las desiciones tomadas, son poco generales.
+	
+	Con respecto a la implementación, la idea original consistía en implementar todo de la forma más genérica posible para luego por ejemplo, poder utilizar $splines$ de grado distinto a tres (3), y probar si había diferencias si existían diferencias en la forma de la curva según la condición de borde usada (natural, sujeto, etc). Como primero debíamos implementar lo básico requerido, y dado que mantener la generalidad complicaba la implementación se tomaron decisiones que hicieron imposible realizar pruebas como estas.
+	
+	Nos hubiera gustado poder implementar una interfaz gráfica para la visualización de la curva con posibilidad de moverla arrastrándola con el $mouse$. Lamentablemente por falta de tiempo esto no fue posible, pero de así haber sido, nos hubiera ayudado a responder la pregunta opcional número cuatro (4), ya que hubieramos tenido que pensar la mejor forma de realizar todos los cálculos.
 \end{section}
