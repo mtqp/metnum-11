@@ -1,9 +1,25 @@
 #include "curve.h"
 
+ParamType getParametrization(char* param)
+{
+	if(strcmp("u",param) == 0)
+			return Uniform;
+	if(strcmp("cp",param) == 0)
+			return Centripetal;
+	if(strcmp("cl",param) == 0)
+			return Chord_length;
+	
+	cout << "Parametrización incorrecta, se utilizará la uniforme" << endl;
+	return Uniform;
+}
+
 int main(int argc, char** argv){
 	
-	if(argc<3){
-		cout << "uso: ./tp3 [input] [output]" << endl;
+	if(argc<4){
+		cout << "uso: ./tp3 [input] [output] [parametrization_type]" << endl;
+		cout << "	parametrization_type: u  --> uniform" << endl;
+		cout << "						  cp --> centripetal" << endl;
+		cout << "						  cl --> chord length" << endl;
 		exit(0);
 	}
 	
@@ -53,7 +69,7 @@ int main(int argc, char** argv){
 	/******************************************************************/
 	
 	// Creo la parametrizacion y la curva
-	Parametrization param(n,xy,Chord_length);	
+	Parametrization param(n,xy,getParametrization(argv[3]));	
 	Curve curve(n,xy,param);
 
 	// Obtengo el muestreo de la spline original
