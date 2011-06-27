@@ -11,16 +11,18 @@
 	\begin{subsection}{Implementación}
 		Al necesitar manejar presición arbitraria los tipos de datos nativos del lenguaje C++ no satisfacían nuestras necesidades.
 		
-		Una solución encontrada a este problema, fue implementar un tipo de datos (clase $Real$) con esta funcionalidad (presición variable). La clase $Real$ implementa los operadores básicos: suma, resta, multiplicación. división y asignación, los observadores sobre la presición y truncamiento, y funciones para visualización de la información del $Real$ en stdout. Se exporta además dos métodos con funcionalidad importante, uno de ellos para convertir el $Real$ en $double$ (tipo nativo de C++) y otro método que dado un $double$ refresca esta información en la instancia $Real$ correspondiente.
+		Una solución encontrada a este problema, fue implementar un tipo de datos (clase $Real$) con esta funcionalidad (presición variable). La clase $Real$ implementa los operadores básicos: suma, resta, multiplicación. división y asignación, los observadores sobre la presición y truncamiento, y funciones para visualización de la información del $Real$ en stdout. Se exporta además dos métodos con funcionalidad importante, uno de ellos para convertir el $Real$ en $double$ (tipo nativo de C++) y otro método que dado un $double$ modifica la instancia $Real$, representando ahora, el valor pasado por parámetro.
 		
-		Como precondición de este trabajo práctico la presición máxima de digitos (en base 2) del cálculo de $\pi$ debe ser a lo sumo 51 bits.
-		Sabiendo que C++ cumple con el standar IEEE-754, el cual establece 52 bits de mantisa para un tipo de datos $double$, utilizamos a este como cimiento de nuestra clase $Real$. Las operaciones aritméticas sobre $Real$ consisten en convertirlos en $double$, realizar la operación correspondiente y transformar el resultado nuevamente en un $Real$, aplicándole previamente el algoritmo de truncamiento
+		Como precondición de este trabajo práctico la precisión máxima de digitos (en base 2) del cálculo de $\pi$ debe ser a lo sumo 51 bits.
+		Utilizamos el tipo $double$ de C++ como cimiento de nuestra clase $Real$. Las operaciones aritméticas sobre $Real$ consisten en convertirlos en $double$, realizar la operación correspondiente y transformar el resultado nuevamente en un $Real$, aplicándole previamente el algoritmo de truncamiento
 		 %o redondeo según corresponda 
 		acorde a los parámetros de entrada del programa (cantidad de dígitos).
 		
-		Fuera de la clase implementamos el cálculo de raíz cuadrada, arco tangente y exponenciación de $Real$. Se tomó esta decisión ya que consideramos que estas no son operaciones básicas, por lo que el uso de estas sólo tiene sentido en instancias de $Real$ en situaciones complejas (por ejemplo el cálculo de $\pi$). Tomamos como modelo la implementación de estas operaciones en C++ que requiere la inclusión de una biblioteca (cmath).
+		Fuera de la clase implementamos el cálculo de raíz cuadrada, arco tangente y exponenciación de $Real$. Se tomó esta decisión porque el uso de estas operaciones sólo tiene sentido en instancias de $Real$ en situaciones complejas (por ejemplo el cálculo de $\pi$). Tomamos como modelo la implementación de estas operaciones en C++ que requiere la inclusión de una biblioteca (cmath).
 		
-		 La implementación de todos los algoritmos del cálculo de $\pi$ maximizan el uso de variables de tipo entero ya que las cuentas en número flotante poseen error mientras que enteros no. Cuando los cálculos dejan de tener sentido en el mundo de los enteros o su presición no es suficiente, se crea una instancia de $Real$ que represente al valor entero y se continúa operando sobre este tipo. Por ese motivo una instancia de $Real$ se puede generar sólo a partir de un entero de 64 bits con signo.\\
+		La implementación de todos los algoritmos del cálculo de $\pi$ maximizan el uso de variables de tipo entero ya que las cuentas en número flotante poseen error mientras que enteros no. Cuando los cálculos dejan de tener sentido en el mundo de los enteros o su precisión no es suficiente, se crea una instancia de $Real$ que represente al valor entero y se continúa operando sobre este tipo. Por ese motivo una instancia de $Real$ se puede generar sólo a partir de un entero de 64 bits con signo.\\
+		
+		\underline{Observación:} Dada la utilización de la clase $Real$ en este trabajo práctico no fue necesario crear una instancia de la misma a partir de un $double$ ya que por ejemplo si pretendemos crear un $Real$ que represente $sqrt{8}$ se podría generar a partir de $8$ y luego aplicarle la función raíz. Este constructor seria de mayor necesidad si el diseño de esta clase tuviera como fin un uso desconocido.
 		   
 	   A continuación detallamos las optimizaciones de los algoritmos:
 
@@ -29,7 +31,7 @@
 							
 				$\sum_{n=0}^{\infty}\frac{(-1)^n}{2n+1} = \sum_{n \in \mathbb{N} / n\;mod(2)=0}^{\infty}\frac{1}{2n+1}-\sum_{n \in \mathbb{N} / n\;mod(2)=1}^{\infty}\frac{1}{2n+1}$\\
 				
-				Al hacerlo de esta manera en la ejecución de cada iteración del algoritmo evitamos el cálculo de una potencia al costo de almacenar dos números que acumulan las sumas.
+				Al hacerlo de esta manera en la ejecución de cada iteración del algoritmo evitamos el cálculo de una potencia o la utilización de una sentencia $if$ para determinar el signo, al costo de almacenar dos números que acumulan las sumas.
 				
 				Por otro lado, decidimos calcular $2n+1$ en un tipo de dato entero de 64 bits sin signo ya que de esta forma podemos evitar el error en el cálculo (a diferencia de si se realizara con números flotantes) y sería necesario un $n$ muy grande (cantidad de sumandos de la serie) para producir $overflow$.
 				
@@ -37,9 +39,6 @@
 			
 			\item \underline{Ramanujan:} Este algoritmo fue rediseñado en varias oportunidades al observar diferentes problemas en cada implementación que realizamos. Entre sus operaciones encontramos la función factorial la cual en pocas iteraciones (en enteros sin signo de 64 bits) produce $overflow$. Sabiendo que el rango de valores representable en $double$, y por consiguiente en $Real$ es mayor al de cualquier entero de 64 bits, optamos por realizar la operación factorial en nuestro tipo de datos ($Real$).
 			
-			\begin{itemize}
-				\item \underline{NOTA:} No olvidar que la cantidad de valores representable en $double$ y enteros de 64 bits es la misma, ya que las permutaciones binarias posibles de ambos es igual a $2^{64}-1$.\\
-			\end{itemize}
 		Nuestra primer aproximación fue definir la función factorial, la cual dado un $n$ calculaba la $\prod_{k=1}^{n}{k}$. Observamos que la cantidad de operaciones elementales que factorial realiza en cada llamada es lineal en función de $n$. El uso que se le da en el algoritmo de $Ramanujan$ es calcular el factorial de números consecutivos pudiéndose entonces, reutilizar el resultado de la iteración previa.\VSP
 		
 		A continuación se muestra un breve pseudcódigo del uso de la función factorial en el algoritmo de $Ramanujan$ (primera implementación).
@@ -73,6 +72,8 @@
 		De esta forma, se realiza una cantidad constante de multiplicaciones en cada iteración del ciclo $for$ para el cálculo del factorial (suponiendo el resto de las operaciones del ciclo de costo constante) el algoritmo tiene complejidad lineal en función de $n$.
 		
 		La complejidad final del algoritmo de $Ramanujan$ no es esta ya que entre las operaciones del ciclo $for$ se encuentra la operación potencia con costo lineal en función del exponente ($4*j$). La complejidad es de \Ode{n^2}.
+		
+		\underline{Observación:} De manera similar a la implementación del factorial, se puede realizar el cálculo de la potencia utilizando acumuladores. Dado que esta función es utilizada en más de un algoritmo decidimos reutilizar código.
 		
 		Cabe mencionar que el primer término de la serie es un valor constante y entero, por lo que decidimos excluirlo del cálculo de la sumatoria y adicionarlo al final (por ese motivo la implementación final itera de 1 a n).
 		\end{itemize}
