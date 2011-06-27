@@ -20,7 +20,6 @@ PI_15=3.1415
 PI_25=3.14159
 PI_45=3.141592
 
-
 cota_gregory(x) = 5*(2**(1-x))
 cota_machin(x) = 15*(2**(5-x))
 cota_ramanujan(x) = 3*(2**(2-x))
