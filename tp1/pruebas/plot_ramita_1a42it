@@ -1,0 +1,24 @@
+#!/usr/bin/gnuplot -persist
+load 'error_relativo'
+
+set key top right
+
+#le pone titulo al grafico
+set title "Error relativo en funcion la cantidad de terminos de la serie de Ramanujan"
+
+#pone la descripccion de los ejes
+set xlabel "Iteraciones"
+set ylabel "Error relativo"
+
+set logscale y
+
+set output 'truncamiento/graficos/ramanujan_1a42it.eps'
+plot [1:4]'truncamiento/data/ramanujan/nuevo/5p_1a42it.dat' using 1:(er_5($2)) title "5 dig. precision" with lines,\
+		'truncamiento/data/ramanujan/nuevo/15p_1a42it.dat' using 1:(er_15($2)) title "15 dig. precision" with lines,\
+		'truncamiento/data/ramanujan/nuevo/25p_1a42it.dat' using 1:(er_25($2)) title "25 dig. precision" with lines,\
+		'truncamiento/data/ramanujan/nuevo/45p_1a42it.dat' using 1:(er_45($2)) title "45 dig. precision" with lines
+
+#pongo la salida default para mostrar en pantalla
+set term pop
+set output
+replot
