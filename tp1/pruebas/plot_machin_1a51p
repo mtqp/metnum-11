@@ -1,0 +1,24 @@
+#!/usr/bin/gnuplot -persist
+load 'error_relativo'
+
+set key top right
+
+#le pone titulo al grafico
+set title "Error relativo en funcion la cantidad de digitos de la serie de Machin"
+
+#pone la descripccion de los ejes
+set xlabel "Digitos"
+set ylabel "Error relativo"
+
+set logscale y
+
+set output 'truncamiento/graficos/machin_1a51p.eps'
+plot [1:52]'truncamiento/data/machin/nuevo/1a51p_5it.dat' using 1:(er_5($2)) title "5 iteraciones" with lines,\
+		'truncamiento/data/machin/nuevo/1a51p_10it.dat' using 1:(er_15($2)) title "10 iteraciones" with lines,\
+		'truncamiento/data/machin/nuevo/1a51p_100it.dat' using 1:(er_25($2)) title "100 iteraciones" with lines,\
+		'truncamiento/data/machin/nuevo/1a51p_1000it.dat' using 1:(er_45($2)) title "1000 iteraciones" with lines
+
+#pongo la salida default para mostrar en pantalla
+set term pop
+set output
+replot
