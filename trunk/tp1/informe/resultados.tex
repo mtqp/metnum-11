@@ -20,11 +20,15 @@
 	
 	Estos gráficos se muestra en el siguiente orden: Gregory, Ramanujan y Machin. Todos ellos se encuentran en escala logarítmica en el eje $y$
 
+	\texttt{NOTA:}
+	
+	Para cada precisión utilizada, el error relativo calculado es contra un valor de $\pi$ exacto en los primeros $\lceil\log_2{t}\rceil$ dígitos (en base diez), seguidos de cero.
+
 	\begin{figure}[H]
 	  \centering
 		\includegraphics[width=10cm,angle=-90]{graficos/gregory_1a1000it.eps}
 	  \caption{Comparación del error relativo de la serie de Gregory utilizando diferentes precisiones, variando de 1 a 1000 la cantidad de iteraciones.}
-	  \label{fig:51p}
+	  \label{fig:gregory_1000it}
 	\end{figure}
 	
 	\VSP
@@ -33,7 +37,7 @@
 	  \centering
 		\includegraphics[width=10cm,angle=-90]{graficos/ramanujan_1a42it.eps}
 	  \caption{Comparación del error relativo de la serie de Ramanujan utilizando diferentes precisiones, variando de 1 a 42 la cantidad de iteraciones.}
-	  \label{fig:51p}
+	  \label{fig:ramanujan_42it}
 	\end{figure}
 	
 	\VSP	
@@ -42,7 +46,7 @@
 	  \centering
 		\includegraphics[width=10cm,angle=-90]{graficos/machin_1a100it.eps}
 	  \caption{Comparación del error relativo de la serie de Machin utilizando diferentes precisiones, variando de 1 a 100 la cantidad de iteraciones.}
-	  \label{fig:51p}
+	  \label{fig:machin_100it}
 	\end{figure}
 	
 	Para un posterior análisis, se agrega utilizando el mismo origen de datos, un gráfico restringiendo la visualizacion a los primeros valores del ejes de coordenadas $x$ para la serie de Machin.
@@ -52,7 +56,7 @@
 	  \centering
 		\includegraphics[width=10cm,angle=-90]{graficos/machin_1a8it.eps}
 	  \caption{Comparación del error relativo de la serie de Machin utilizando diferentes precisiones, variando de 1 a 8 la cantidad de iteraciones.}
-	  \label{fig:51p}
+	  \label{fig:machin_8it}
 	\end{figure}
 	
 	\VSP	
@@ -93,7 +97,7 @@
 	  \centering
 		\includegraphics[width=10cm,angle=-90]{graficos/gregory_1a51p.eps}
 	  \caption{Comparación del error relativo de la serie de Gregory fijando diferentes cantidades de términos en cada curva variando de 1 y 51 la cantidad de bits en la mantisa.}
-	  \label{fig:5it}
+	  \label{fig:gregory_51p}
 	\end{figure}
 	
 	\VSP
@@ -102,7 +106,7 @@
 	  \centering
 		\includegraphics[width=10cm,angle=-90]{graficos/ramanujan_1a51p.eps}
 	  \caption{Comparación del error relativo de la serie de Ramanujan diferentes cantidades de términos en cada curva variando de 1 y 51 la cantidad de bits en la mantisa.}
-	  \label{fig:5it}
+	  \label{fig:ramanujan_51p}
 	\end{figure}
 	
 	\VSP
@@ -111,7 +115,7 @@
 	  \centering
 		\includegraphics[width=10cm,angle=-90]{graficos/machin_1a51p.eps}
 	  \caption{Comparación del error relativo de la serie de Machin diferentes cantidades de términos en cada curva variando de 1 y 51 la cantidad de bits en la mantisa.}
-	  \label{fig:5it}
+	  \label{fig:machin_51p}
 	\end{figure}
 	
 	\VSP
