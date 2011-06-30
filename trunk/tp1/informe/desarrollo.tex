@@ -1,10 +1,32 @@
 \begin{section}{Desarrollo}
-	En este trabajo práctico aproximamos $\pi$ evaluando hasta cierto término la \texttt{Serie de Gregory}, la \texttt{Fórmula de Machin} y la \texttt{Serie de Ramanujan}.
-	Como dichos métodos se implementan mediante aritmética finita de $t$ dígitos pretendemos analizar el comportamiento numérico de cada uno de estos.
+	En este trabajo práctico aproximamos $\pi$ evaluando hasta un término dado la \texttt{Serie de Gregory}, la \texttt{Fórmula de Machin} y la \texttt{Serie de Ramanujan}.
+	Como dichos métodos se implementan mediante aritmética finita de $t$ dígitos pretendemos analizar el comportamiento numérico de cada uno de estos métodos.
 	 
 	\begin{subsection}{Analisis teórico}
 		A continuación analizamos la propagación del error de cada una de las series en el tercer término (en función de los errores de los primeros).\\
-			
+		
+		Para simplificar dicha tarea calculamos previamente el error de operaciones comunes a las $tres$ series (division, suma, resta y multiplicación).\\
+		
+		Sea $\funcFull{div(x,y)} {\frac{x}{y}}$.\\
+		
+		$\e{div}{x,y,:}{\frac{\frac{x}{y}\ev{x}}{f} + \frac{\frac{-xy}{y^2}\ev{y}}{f} + \er{:}{x,y}} = 
+		\frac{\frac{x}{y}\ev{x}}{\frac{x}{y}} + \frac{\frac{-x}{y}\ev{y}}{\frac{x}{y}} + \er{:}{x,y} = \ev{x} - \ev{y} + \er{:}{x,y}$\\
+		
+		Sea $\funcFull{sum(x,y)}{x+y}$\\
+	
+		$\e{sum}{x,y,+} = \frac{x}{x+y}\ev{x} + \frac{y}{x+y}\ev{y} + \er{+}{x,y}$\\
+		
+		Sea $\funcFull{resta(x,y)}{x-y}$\\
+	
+		$\e{resta}{x,y,-} = \frac{x}{x-y}\ev{x} - \frac{y}{x-y}\ev{y} + \er{-}{x,y}$\\
+		
+		Sea $\funcFull{mult(x,y)}{x*y}$\\
+	
+		$\e{mult}{x,y,*} = \frac{y*x}{x*y}\ev{x} + \frac{x*y}{x*y}\ev{y} + \er{*}{x,y} = \ev{x} + \ev{y} + \er{*}{x,y}$\\
+	
+		\underline{Nota:} Realizamos la mayor cantidad de operaciones posibles en el tipo de datos $entero$ ya que de esta manera no poseen error, es decir, son exactas.
+		Asumimos que el algoritmo nunca se va a ejecutar con una cantidad de iteraciones tal que desborde.\\
+		
 		\input{gregory.tex}
 		\newpage
 		\input{machin.tex}
