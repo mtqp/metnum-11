@@ -1,0 +1,22 @@
+#!/usr/bin/gnuplot -persist
+load 'error_relativo'
+
+set key bottom center
+
+#le pone titulo al grafico
+set title "Error relativo en funcion la cantidad de terminos de la serie de Gregory"
+
+#pone la descripccion de los ejes
+set xlabel "Iteraciones"
+set ylabel "Error relativo"
+
+set logscale y
+
+set output 'greg_25p_100000it.eps'
+plot	'greg_25p_100000it.dat' using 1:(er_45($2)) title "25 dig. precision" with lines,\
+		'greg_45p_50000it.dat' using 1:(er_45($2)) title "45 dig. precision" with lines
+
+#pongo la salida default para mostrar en pantalla
+set term pop
+set output
+replot
