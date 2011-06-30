@@ -1,56 +1,72 @@
 \begin{subsection}{Fórmula de Machin}
 
-	\large
+	\begin{equation*}
+		\frac{\pi}{4} = 4 \; \mathrm{arctan}(1/5) - \mathrm{arctan}(1/239), \text{con } \mathrm{arctan}(x) = \sum_{n=0}^{\infty} \left(-1\right)^n \frac{x^{2n+1}}{2n+1} \quad \text{cuando } \left|x\right|<1
+    \end{equation*}
 	
 	Definimos primero el error de calcular $arctan(k)$ con $|k|<1$. Para ello definimos el error de cada uno de los términos de la sumatoria.\\
 	
-	Dado $n \in \N$, sea $\funcFull{f(x,y)} {\frac{x}{y}}$, donde $x=k^{2n+1}$ e $y=2n+1$.\\
+	Dado $n \in \N$, sea $x=k^{2n+1}$ e $y=2n+1$.\\
 	
-	\underline{Analicemos el error de $\func{f}{x,y}$:}\\
+	$\e{div}{x,y,:} = \ev{x} - \ev{y} + \er{:}{x,y}$ como vimos previamente.\\
 	
-	$\funcFull{$\e{f}{x,y,:}$}{\frac{\frac{x}{y}\ev{x}}{f} + \frac{\frac{-xy}{y^2}\ev{y}}{f} + \er{:}{x,y}} = 
-	\frac{\frac{x}{y}\ev{x}}{\frac{x}{y}} + \frac{\frac{-x}{y}\ev{y}}{\frac{x}{y}} + \er{:}{x,y} =$\\
+	Como $y$ es de tipo entero (exacto) en este caso con $n \leq 2$ lo que implica $y \leq 5$ no hay $overflow$. Resta calcular el error de $x$.\\
 	
-	$\ev{x} - \ev{y} + \er{:}{x,y}$ (1)\\
-	
-	Como $y$ es de tipo entero (exacto) resta calcular el error de $x$.\\
-	
-	\underline{Analicemos el error de $x=k^y$:}\\
+	\underline{Analicemos el error de $x=k^y$ ($k=\frac{1}{5}$ o $k=\frac{1}{239} \Rightarrow k>0$):}\\
 	
 	$\funcFull{$\ev{x}$}{\frac{yk^{y-1}k}{k^y}\ev{k}+\frac{k^y ln(k) y}{k^y}\ev{y} + \er{POT}{k,y}} = y\ev{k} + ln(k) y\ev{y} + \er{POT}{k,y}$ (2)\\ 
 	
 	$\Rightarrow_{Reemplazando \; (2) \; en \; (1)}$\\
 	
-	que el error de un termino de la arco tangente es:\\
+	Tenemos entonces que el error de un término de la arcotangente es:\\
 	
 	$y\ev{k} + ln(k) y\ev{y} + \er{POT}{k,y} - \ev{y} + \er{:}{x,y}$\\
 	
-	Teniendo esta información, queremos realizar el análisis teórico para los primeros tres términos de la sumatoria. Para poder realizarlo, llamamos $a$ al primer término,
-	$b$ al segundo y $c$ al tercero (llamamos $k=a+c$).\\
+	$\Rightarrow  \left|\ev{t_i}\right| = \left|\ev{\frac{k^y}{y}}\right| \leq \left|y\ev{k}\right| + \left|ln(k)y\ev{y}\right| + \left|\er{POT}{k,y}\right| + \left|\ev{y}\right| + \left|\er{:}{x,y}\right| =$\\
 	
-	Sea $\funcFull{g(a,c)}{a+c}$\\
+	$(2n+1)(\left|\ev{k}\right| + \left|ln(k)\right|\left|\ev{y}\right|) + \left|\er{POT}{k,(2n+1)}\right| + \left|\ev{(2n+1)}\right| + \left|\er{:}{k^{2n+1},2n+1}\right|$\\
 	
-	$\e{g}{a,c,+} = \frac{a}{a+c}\ev{a} + \frac{c}{a+c}\ev{c} + \er{+}{a,c}$\\
+	Sea $u$ el error máximo de todas operaciones en módulo.\\
 	
-	Sea $\funcFull{g'(k,b)}{k-b}$\\
+	$\Rightarrow \left|\ev{\frac{k^{2n+1}}{2n+1}}\right| \leq (2n+1)(u + \left|ln(k)\right|u) + 3u$\\
 	
-	$\e{g'}{k,b,-} = \frac{k}{k-b}\ev{k} - \frac{b}{k-b}\ev{b} + \er{-}{k,b}$\\
+	Teniendo esta información, queremos realizar el análisis teórico para los primeros tres términos de la sumatoria. Para poder realizarlo, llamamos $a$ $(n=0)$ al primer término,
+	$b$ $(n=1)$ al segundo y $c$ $(n=2)$ al tercero.
 	
-	$\e{g}{a+c,b,+} = \frac{a+c}{a+c-b}(\frac{a}{a+c}\ev{a} + \frac{c}{a+c}\ev{c} + \er{+}{a,c}) - \frac{b}{a+c-b}\ev{b} + \er{-}{a+c,b} =$\\
+	Dado que tanto $a$ como $c$ corresponden a $n$ par son términos tal que $(-1)^n = 1$ en contraste con $b$ que tiene signo negativo. Por este motivo,\\
+	tenemos que la arcotangente hasta el tercer término es: $a - b + c$.\\
 	
-	$\frac{a\ev{a} + c\ev{c} - b\ev{b} + (a+c)\er{+}{a,c}}{a-b+c} + \er{-}{a+c,b} = \ev{a+c-b}$\\
+	Analizamos primero el error cometido de realizar $a+c$.\\
 	
+	$\e{sum}{a,c,+} = \frac{a}{a+c}\ev{a} + \frac{c}{a+c}\ev{c} + \er{+}{a,c}$\\
+	
+	Analizamos ahora el error de restar el segundo término ($b$).\\
+		
+	$\e{restar}{a+c,b,-} = \frac{a+c}{a+c-b}\er{+}{a,c} - \frac{b}{a+c-b}\ev{b} + \er{-}{a+c,b} =$\\
+	
+	$\frac{a+c}{a+c-b}(\frac{a}{a+c}\ev{a} + \frac{c}{a+c}\ev{c} + \er{+}{a,c}) - \frac{b}{a+c-b}\ev{b} + \er{-}{a+c,b} =$\\
+	
+	$\frac{a\ev{a} + c\ev{c} - b\ev{b} + (a+c)\er{+}{a,c}}{a-b+c} + \er{-}{a+c,b} = \ev{a+c-b} = \ev{arctan_2}$\\
+		
 	Para la fórmula de Machin se necesita calcular $arctan(\frac{1}{5})$ y $arctan(\frac{1}{239})$.\\
 	
-	$\Rightarrow \e{arctan}{\frac{1}{5}} =$\\
-	$\frac{\frac{1}{5}( \ev{\frac{1}{5}} + ln(\frac{1}{5}) \ev{1} + \er{POT}{\frac{1}{5},1} - \ev{1} + \er{:}{\frac{1}{5},1}) + (\frac{1}{5})^6( 5\ev{\frac{1}{5}} + ln(\frac{1}{5}) 5\ev{5} + \er{POT}{\frac{1}{5},5} - \ev{5} + \er{:}{(\frac{1}{5})^5,5}) }{\frac{1}{5}+(\frac{1}{5})^5-\frac{1}{3}(\frac{1}{5})^3} - $\\
+	$\e{arctan_2}{\frac{1}{5}} = \frac{\frac{1}{5}\ev{a} + (\frac{1}{5})^6\ev{c} - \frac{1}{3}(\frac{1}{5})^3\ev{b} + (\frac{1}{5} + (\frac{1}{5})^5)\er{+}{\frac{1}{5},(\frac{1}{5})^5}}{\frac{1}{5} + (\frac{1}{5})^6 - \frac{1}{3}(\frac{1}{5})^3} + \er{-}{\frac{1}{5} + \frac{1}{5} + (\frac{1}{5})^5,(\frac{1}{5})^3}$\\
 	
-	$\frac{\frac{1}{3}(\frac{1}{5})^3(3\ev{\frac{1}{5}} + ln(\frac{1}{5}) 3\ev{3} + \er{POT}{\frac{1}{5},3} - \ev{3} + \er{:}{(\frac{1}{5})^3,3}) + (\frac{1}{5}+(\frac{1}{5})^6)\er{+}{\frac{1}{5},(\frac{1}{5})^6}}{\frac{1}{5}+(\frac{1}{5})^6-\frac{1}{5}(\frac{1}{5})^3} + \er{-}{\frac{1}{5}+(\frac{1}{5})^6,\frac{1}{3}(\frac{1}{5})^3}$\\
-
-	$\Rightarrow \e{arctan}{\frac{1}{239}} =$\\
-	$\frac{\frac{1}{239}(\ev{\frac{1}{239}} + ln(\frac{1}{239}) \ev{1} + \er{POT}{\frac{1}{239},1} - \ev{1} + \er{:}{\frac{1}{239},1}) + \frac{(\frac{1}{239})^5}{5}(5\ev{\frac{1}{239}} + ln(\frac{1}{239}) 5\ev{5} + \er{POT}{\frac{1}{239},5} - \ev{5} + \er{:}{(\frac{1}{239})^5,5})}{\frac{1}{239}+\frac{1}{5}(\frac{1}{239})^5-\frac{1}{3}(\frac{1}{239})^3} -$ \\
+	$\Rightarrow \left| \e{arctan_2}{\frac{1}{5}} \right| \leq \frac{\frac{1}{5}\left| \ev{a} \right| + (\frac{1}{5})^6\left| \ev{c} \right| + \frac{1}{3}(\frac{1}{5})^3\left| \ev{b} \right| + (\frac{1}{5} + (\frac{1}{5})^5)\left| \er{+}{\frac{1}{5},(\frac{1}{5})^5} \right|}{\frac{1}{5} + (\frac{1}{5})^6 - \frac{1}{3}(\frac{1}{5})^3} + \left|\er{-}{\frac{1}{5} + \frac{1}{5} + (\frac{1}{5})^5,(\frac{1}{5})^3} \right|$\\
 	
-	$\frac{\frac{(\frac{1}{239})^3}{3}(3\ev{\frac{1}{239}} + ln(\frac{1}{239}) 3\ev{\frac{1}{239}} + \er{POT}{\frac{1}{239},3} - \ev{3} + \er{:}{(\frac{1}{239})^3,3}) + (\frac{1}{239}+\frac{(\frac{1}{239})^5}{5})\er{+}{\frac{1}{239},\frac{(\frac{1}{239})^5}{5}}}{\frac{1}{239}+\frac{1}{5}((\frac{1}{239})^5-\frac{1}{3}(\frac{1}{239})^3}+\er{-}{\frac{1}{239}+\frac{(\frac{1}{239})^5}{5},(\frac{1}{239})^3}$\\
+	Como vimos antes:\\
+	
+	$\left|\ev{a}\right| \leq (u + \left|ln(\frac{1}{5})\right|u) + 3u \leq 6u$\\
+	
+	$\left|\ev{b}\right| \leq 3(u + \left|ln(\frac{1}{5})\right|u) + 3u \leq 12u$\\
+	
+	$\left|\ev{c}\right| \leq 5(u + \left|ln(\frac{1}{5})\right|u) + 3u \leq 18u$\\
+	
+	$\Rightarrow \left| \e{arctan_2}{\frac{1}{5}} \right| \leq \frac{\frac{6}{5}u + (\frac{1}{5})^618u + (\frac{1}{5})^34u + (\frac{1}{5} + (\frac{1}{5})^5)\left| \er{+}{\frac{1}{5},(\frac{1}{5})^5} \right|}{\frac{1}{5} + (\frac{1}{5})^6 - \frac{1}{3}(\frac{1}{5})^3} + \left|\er{-}{\frac{1}{5} + \frac{1}{5} + (\frac{1}{5})^5,(\frac{1}{5})^3} \right|$\\
+		
+	Si bien no conocemos cuál es el error exacto que posee cada operación, podemos tomar $u'$ como el error máximo de todas ellas en módulo, tal que $u' \geq u$. Por lo tanto el resultado obtenido es menor igual a:\\
+	
+	$\frac{\frac{6}{5}u' + (\frac{1}{5})^618u' + (\frac{1}{5})^34u' + (\frac{1}{5} + (\frac{1}{5})^5)u'}{\frac{1}{5} + (\frac{1}{5})^6 - \frac{1}{3}(\frac{1}{5})^3} + u'$\\
 	
 	Finalmente calculamos el error de la fórmula de Machin.\\
 	
