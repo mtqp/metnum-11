@@ -8,9 +8,9 @@
 	
 	Dado $n \in \N$, sea $x=k^{2n+1}$ e $y=2n+1$.\\
 	
-	$\e{div}{x,y,:} = \ev{x} - \ev{y} + \er{:}{x,y}$ como vimos previamente.\\
+	$\e{div}{x,y,:} = \ev{x} - \ev{y} + \er{:}{x,y}$ (1).\\
 	
-	Como $y$ es de tipo entero (exacto) en este caso con $n \leq 2$ lo que implica $y \leq 5$ no hay $overflow$. Resta calcular el error de $x$.\\
+	Como $y$ es de tipo entero (exacto) ya que $n \leq 2$ lo que implica $y \leq 5$ no hay $overflow$. Resta calcular el error de $x$.\\
 	
 	\underline{Analicemos el error de $x=k^y$ ($k=\frac{1}{5}$ o $k=\frac{1}{239} \Rightarrow k>0$):}\\
 	
@@ -22,13 +22,31 @@
 	
 	$y\ev{k} + ln(k) y\ev{y} + \er{POT}{k,y} - \ev{y} + \er{:}{x,y}$\\
 	
-	$\Rightarrow  \left|\ev{t_i}\right| = \left|\ev{\frac{k^y}{y}}\right| \leq \left|y\ev{k}\right| + \left|ln(k)y\ev{y}\right| + \left|\er{POT}{k,y}\right| + \left|\ev{y}\right| + \left|\er{:}{x,y}\right| =$\\
+	Para acotar el error de un término de la arcotangente empezamos por acotar el error de $k$.
 	
-	$(2n+1)(\left|\ev{k}\right| + \left|ln(k)\right|\left|\ev{y}\right|) + \left|\er{POT}{k,(2n+1)}\right| + \left|\ev{(2n+1)}\right| + \left|\er{:}{k^{2n+1},2n+1}\right|$\\
+	\pa
 	
-	Sea $u$ el error máximo de todas operaciones en módulo.\\
+	$\left|\ev{k}\right| = \left\{ 
+	\begin{array}{l}
+	\left|\ev{\frac{1}{5}}\right| \leq \left|\ev{1}\right| + \left|\ev{5}\right| + \left|\er{:}{1,5}\right| = \left|\ev{5}\right| + \left|\er{:}{1,5}\right|\\
+	\left|\ev{\frac{1}{239}}\right| \leq \left|\ev{1}\right| + \left|\ev{239}\right| + \left|\er{:}{1,239}\right| = \left|\ev{239}\right| + \left|\er{:}{1,239}\right|\\
+	\end{array}
+	\leq 2u\\
+	\right.$\\
 	
-	$\Rightarrow \left|\ev{\frac{k^{2n+1}}{2n+1}}\right| \leq (2n+1)(u + \left|ln(k)\right|u) + 3u$\\
+	\pa
+	
+	Por otra parte tenemos:\\
+	
+	$\left|\ev{\frac{k^y}{y}}\right| \leq \left|y\ev{k}\right| + \left|ln(k)y\ev{y}\right| + \left|\er{POT}{k,y}\right| + \left|\ev{y}\right| + \left|\er{:}{x,y}\right| =$\\
+	
+	$(2n+1)(\left|\ev{k}\right| + \left|ln(k)\right|\left|\ev{2n+1}\right|) + \left|\er{POT}{k,(2n+1)}\right| + \left|\ev{(2n+1)}\right| + \left|\er{:}{k^{2n+1},2n+1}\right|$\\
+	
+	$\Rightarrow \left|\ev{\frac{k^{2n+1}}{2n+1}}\right| \leq (2n+1)(2u + \left|ln(k)\right|u) + 3u = [(2n+1)(2 + \left|ln(k)\right|) + 3]u$\\
+	
+	donde $u = max\left\{\left|\ev{5}\right|,\;\left|\er{:}{1,5}\right|,\;\left|\ev{239}\right|,\;\left|\er{:}{1,239}\right|,\;\left|\ev{2n+1}\right|,\;\left|\er{POT}{k,(2n+1)}\right|,\;\left|\er{:}{k^{2n+1},2n+1}\right|\right\}$.\\
+	
+	\pa
 	
 	Teniendo esta información, queremos realizar el análisis teórico para los primeros tres términos de la sumatoria. Para poder realizarlo, llamamos $a$ $(n=0)$ al primer término,
 	$b$ $(n=1)$ al segundo y $c$ $(n=2)$ al tercero.
@@ -47,60 +65,88 @@
 	$\frac{a+c}{a+c-b}(\frac{a}{a+c}\ev{a} + \frac{c}{a+c}\ev{c} + \er{+}{a,c}) - \frac{b}{a+c-b}\ev{b} + \er{-}{a+c,b} =$\\
 	
 	$\frac{a\ev{a} + c\ev{c} - b\ev{b} + (a+c)\er{+}{a,c}}{a-b+c} + \er{-}{a+c,b} = \ev{a+c-b} = \ev{arctan_2}$\\
-		
+	
+	$\left|\ev{arctan_2}\right| \leq \frac{|a||\ev{a}| + |c||\ev{c}| + |b||\ev{b}| + |a+c|\left|\er{+}{a,c}\right|}{|a-b+c|} + \left|\er{-}{a+c,b}\right|$\\
+	
+	\underline{Como vimos antes:}
+	
+	$\left|\ev{a}\right| \leq [(2 + \left|ln(k)\right|) + 3]u$
+	
+	$\left|\ev{b}\right| \leq [3(2 + \left|ln(k)\right|) + 3]u$
+	
+	$\left|\ev{c}\right| \leq [5(2 + \left|ln(k)\right|) + 3]u$\\
+	
+	$\Rightarrow$\\
+	$\left|\ev{arctan_2(k)}\right| \leq \frac{|a|[(2 + \left|ln(k)\right|) + 3]u + |c|[5(2 + \left|ln(k)\right|) + 3]u + |b|[3(2 + \left|ln(k)\right|) + 3]u + |a+c|\left|\er{+}{a,c}\right|}{|a-b+c|} + \left|\er{-}{a+c,b}\right|$\\
+	
 	Para la fórmula de Machin se necesita calcular $arctan(\frac{1}{5})$ y $arctan(\frac{1}{239})$.\\
-	
-	$\e{arctan_2}{\frac{1}{5}} = \frac{\frac{1}{5}\ev{a} + (\frac{1}{5})^6\ev{c} - \frac{1}{3}(\frac{1}{5})^3\ev{b} + (\frac{1}{5} + (\frac{1}{5})^5)\er{+}{\frac{1}{5},(\frac{1}{5})^5}}{\frac{1}{5} + (\frac{1}{5})^6 - \frac{1}{3}(\frac{1}{5})^3} + \er{-}{\frac{1}{5} + \frac{1}{5} + (\frac{1}{5})^5,(\frac{1}{5})^3}$\\
-	
-	$\Rightarrow \left| \e{arctan_2}{\frac{1}{5}} \right| \leq \frac{\frac{1}{5}\left| \ev{a} \right| + (\frac{1}{5})^6\left| \ev{c} \right| + \frac{1}{3}(\frac{1}{5})^3\left| \ev{b} \right| + (\frac{1}{5} + (\frac{1}{5})^5)\left| \er{+}{\frac{1}{5},(\frac{1}{5})^5} \right|}{\frac{1}{5} + (\frac{1}{5})^6 - \frac{1}{3}(\frac{1}{5})^3} + \left|\er{-}{\frac{1}{5} + \frac{1}{5} + (\frac{1}{5})^5,(\frac{1}{5})^3} \right|$\\
-	
-	Como vimos antes:\\
-	
-	$\left|\ev{a}\right| \leq (u + \left|ln(\frac{1}{5})\right|u) + 3u \leq 6u$\\
-	
-	$\left|\ev{b}\right| \leq 3(u + \left|ln(\frac{1}{5})\right|u) + 3u \leq 12u$\\
-	
-	$\left|\ev{c}\right| \leq 5(u + \left|ln(\frac{1}{5})\right|u) + 3u \leq 18u$\\
-	
-	$\Rightarrow \left| \e{arctan_2}{\frac{1}{5}} \right| \leq \frac{\frac{6}{5}u + (\frac{1}{5})^618u + (\frac{1}{5})^34u + (\frac{1}{5} + (\frac{1}{5})^5)\left| \er{+}{\frac{1}{5},(\frac{1}{5})^5} \right|}{\frac{1}{5} + (\frac{1}{5})^6 - \frac{1}{3}(\frac{1}{5})^3} + \left|\er{-}{\frac{1}{5} + \frac{1}{5} + (\frac{1}{5})^5,(\frac{1}{5})^3} \right|$\\
 		
-	Si bien no conocemos cuál es el error exacto que posee cada operación, podemos tomar $u'$ como el error máximo de todas ellas en módulo, tal que $u' \geq u$. Por lo tanto el resultado obtenido es menor igual a:\\
+	%$\e{arctan_2}{\frac{1}{5}} = \frac{\frac{1}{5}\ev{a} + (\frac{1}{5})^6\ev{c} - \frac{1}{3}(\frac{1}{5})^3\ev{b} + (\frac{1}{5} + (\frac{1}{5})^5)\er{+}{\frac{1}{5},(\frac{1}{5})^5}}{\frac{1}{5} + (\frac{1}{5})^6 - \frac{1}{3}(\frac{1}{5})^3} + \er{-}{\frac{1}{5} + \frac{1}{5} + (\frac{1}{5})^5,(\frac{1}{5})^3}$\\
+	%$\Rightarrow \left| \e{arctan_2}{\frac{1}{5}} \right| \leq \frac{\frac{1}{5}\left| \ev{a} \right| + (\frac{1}{5})^6\left| \ev{c} \right| + \frac{1}{3}(\frac{1}{5})^3\left| \ev{b} \right| + (\frac{1}{5} + (\frac{1}{5})^5)\left| \er{+}{\frac{1}{5},(\frac{1}{5})^5} \right|}{\frac{1}{5} + (\frac{1}{5})^6 - \frac{1}{3}(\frac{1}{5})^3} + \left|\er{-}{\frac{1}{5} + \frac{1}{5} + (\frac{1}{5})^5,(\frac{1}{5})^3} \right|$\\
+	%Como vimos antes:\\
+	%$\left|\ev{a}\right| \leq [2 + \left|ln(\frac{1}{5})\right| + 3]u \leq [2 + 2 + 3]u \leq 7u$\\
+	%$\left|\ev{b}\right| \leq [3(2 + \left|ln(\frac{1}{5})\right|) + 3]u \leq [3(2 + 2) + 3]u \leq 15u$\
+	%$\left|\ev{c}\right| \leq [5(2 + \left|ln(\frac{1}{5})\right|) + 3]u \leq [5(2 + 2) + 3]u \leq 23u$\\
 	
-	$\frac{\frac{6}{5}u' + (\frac{1}{5})^618u' + (\frac{1}{5})^34u' + (\frac{1}{5} + (\frac{1}{5})^5)u'}{\frac{1}{5} + (\frac{1}{5})^6 - \frac{1}{3}(\frac{1}{5})^3} + u'$\\
+	$\left|\ev{arctan_2(\frac{1}{5})}\right| \leq \frac{\frac{1}{5}[(2 + 2) + 3]u + \frac{1}{5^6}[5(2 + 2) + 3]u + \frac{1}{3}\frac{1}{5^3}[3(2 + 2) + 3]u + (\frac{1}{5}+\frac{1}{5^6})\left|\er{+}{\frac{1}{5},\frac{1}{5^6}}\right|}{\frac{1}{5}-\frac{1}{3}\frac{1}{5^3}+\frac{1}{5^6}} + \left|\er{-}{\frac{1}{5}+\frac{1}{5^6},\frac{1}{3}\frac{1}{5^3}}\right| =$\\
 	
-	Finalmente calculamos el error de la fórmula de Machin.\\
+	$\frac{\frac{7}{5}u + \frac{23}{5^6}u +\frac{1}{5}^2u + (\frac{1}{5} + \frac{1}{5^6})\left|\er{+}{\frac{1}{5},\frac{1}{5^6}}\right|}{\frac{1}{5} - \frac{1}{3}\frac{1}{5^3} + \frac{1}{5^6}} + \left|\er{-}{\frac{1}{5} + \frac{1}{5^6},\frac{1}{3}\frac{1}{5^3}} \right|$\\
 	
-	Sea $\funcFull{f'}{z*4}$,\\
+	\pa
 	
-	$\e{f'}{z,4,*} = \ev{z} + \ev{4} + \er{*}{z,4}$ (3)\\
+	Si bien no conocemos cuál es el error exacto que posee cada operación, podemos tomar $u'$ como el error máximo de todas ellas en módulo.\\
 	
-	Por otro lado calculamos el error de $z$ instanciando $g'$ con $k=4*arctan(\frac{1}{5})$ y $b=arctan(\frac{1}{239})$\\
+	$u' =$ máx$\left\{u,\;\left|\er{+}{\frac{1}{5},\frac{1}{5^6}}\right|,\;\left|\er{-}{\frac{1}{5} + \frac{1}{5^6},\frac{1}{3}\frac{1}{5^3}}\right|\right\}$.\\
 	
-	$\ev{z} = \frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{4*arctan(\frac{1}{5})} - \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{arctan(\frac{1}{239})} + \er{-}{\frac{1}{5},\frac{1}{239}} (4)$
+	\pa
 	
-	$\Rightarrow_{Reemplazando \; (4) \; en \; (3)}$\\
+	$\left| \e{arctan_2}{\frac{1}{5}} \right| \leq \frac{\frac{7}{5}u' + \frac{23}{5^6}u' +\frac{1}{5^2}u' + (\frac{1}{5} + \frac{1}{5^6})u'}{\frac{1}{5} - \frac{1}{3}\frac{1}{5^3} + \frac{1}{5^6}} + u' \leq 10u'$\\
 	
-	$\frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{4*arctan(\frac{1}{5})} - \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{arctan(\frac{1}{239})} + \er{-}{\frac{1}{5}),\frac{1}{239})} + \ev{4} + \er{*}{4*arctan(\frac{1}{5}-arctan(\frac{1}{239})),4}$\\
+	\pa
 	
-	$\Rightarrow$\\
+	Por otro lado,\\
 	
-	$\frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}(\ev{arctan(\frac{1}{5})}+\ev{4}+\er{*}{arctan(\frac{1}{5}),4}) - \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}\ev{arctan(\frac{1}{239})} + \er{-}{\frac{1}{5}),\frac{1}{239})} + \ev{4} + \er{*}{z,4} < $
+	$\left|\ev{arctan_2(\frac{1}{239})}\right| \leq \frac{\frac{1}{239}[(2 + 6) + 3]u + \frac{1}{5}\frac{1}{239^5}[5(2 + 6) + 3]u + \frac{1}{3}\frac{1}{239^3}[3(2 + 6) + 3]u + (\frac{1}{239}+\frac{1}{5}\frac{1}{239^5})\left|\er{+}{\frac{1}{239},\frac{1}{5}\frac{1}{239^5}}\right|}{\frac{1}{239}-\frac{1}{3}\frac{1}{239^3}+\frac{1}{5}\frac{1}{239^5}} + \left|\er{-}{\frac{1}{239}+\frac{1}{5}\frac{1}{239^5},\frac{1}{3}\frac{1}{239^3}}\right| =$\\
 	
-	$\Rightarrow_{Acotando \; los \; errores \; por \; k, \; es \; menor \; a:}$\\
+	$\frac{\frac{11}{239}u + \frac{43}{5}\frac{1}{239^5}u + \frac{35}{3}\frac{1}{239^3}u + (\frac{1}{239}+\frac{1}{5}\frac{1}{239^5})\left|\er{+}{\frac{1}{239},\frac{1}{5}\frac{1}{239^5}}\right|}{\frac{1}{239}-\frac{1}{3}\frac{1}{239^3}+\frac{1}{5}\frac{1}{239^5}} + \left|\er{-}{\frac{1}{239}+\frac{1}{5}\frac{1}{239^5},\frac{1}{3}\frac{1}{239^3}}\right|$\\
 	
-	$< \frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}3k - \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}k+3k $
+	\pa
 	
-	$\Rightarrow$\\
+	Podemos al igual que antes tomar $u''$ como el error máximo en módulo de todas las operaciones involucradas.\\
 	
-	$< \frac{4*arctan(\frac{1}{5})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}3k + \frac{arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})}3k+3k $
+	$\left|\ev{arctan_2(\frac{1}{239})}\right| \leq \frac{\frac{11}{239}u'' + \frac{43}{5}\frac{1}{239^5}u'' + \frac{35}{3}\frac{1}{239^3}u'' + (\frac{1}{239}+\frac{1}{5}\frac{1}{239^5})u''}{\frac{1}{239}-\frac{1}{3}\frac{1}{239^3}+\frac{1}{5}\frac{1}{239^5}} + u'' \leq 13u''$\\
 	
-	$\Rightarrow$\\
+	\pa
 	
-	$< (\frac{4*arctan(\frac{1}{5})+arctan(\frac{1}{239})}{4*arctan(\frac{1}{5})-arctan(\frac{1}{239})} + 1) 3k <  (\frac{5*arctan(\frac{1}{5})}{3*arctan(\frac{1}{239})} + 1)3k < 240k$\\
-		
-	Reemplazando $k=2^{1-t}$ nos queda que el error relativo del algoritmo de Machin:
+	Finalmente calculamos el error de la fórmula de Machin:
 	
-		$\ev{\pi} < 240*2^{1-t}$
+	\begin{equation*}
+		\frac{\pi}{4} = 4 \; \mathrm{arctan}(1/5) - \mathrm{arctan}(1/239) \Rightarrow \pi = 16 \; \mathrm{arctan}(1/5) - 4 \; \mathrm{arctan}(1/239)
+    \end{equation*}
+	
+	Tomamos $z=16arctan(\frac{1}{5})$ y $w=4arctan(\frac{1}{239})$\\
+	
+	$\ev{\pi} = \e{restar}{z,w,-} = \frac{z\ev{z} - w\ev{w}}{z-w} + \er{-}{z,w}$\\
+	
+	$\ev{z} = \e{mult}{16,arctan(\frac{1}{5}),*} = \ev{16} + \ev{arctan(\frac{1}{5})} + \er{*}{16,arctan(\frac{1}{5})}$\\
+	
+	$\ev{w} = \e{mult}{4,arctan(\frac{1}{239}),*} = \ev{4} + \ev{arctan(\frac{1}{239})} + \er{*}{4,arctan(\frac{1}{239})}$\\
+	
+	$\Rightarrow \ev{\pi} = \frac{16arctan_2(\frac{1}{5})(\ev{16} + \ev{arctan(\frac{1}{5})} + \er{*}{16,arctan(\frac{1}{5})}) - 4arctan_2(\frac{1}{239})(\ev{4} + \ev{arctan(\frac{1}{239})} + \er{*}{4,arctan(\frac{1}{239})})}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + \er{-}{16arctan_2(\frac{1}{5}),4arctan_2(\frac{1}{239})}$\\
+	
+	$\Rightarrow \left|\ev{\pi}\right| \leq \frac{16arctan_2(\frac{1}{5})(|\ev{16}| + 10u' + \left|\er{*}{16,arctan(\frac{1}{5})}\right|) + 4arctan_2(\frac{1}{239})(|\ev{4}| + 13u'' + \left|\er{*}{4,arctan(\frac{1}{239})}\right|)}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + \left|\er{-}{16arctan_2(\frac{1}{5}),4arctan_2(\frac{1}{239})}\right|$\\
+	
+	Sea $u''' =$ máx$\left\{ u',\;u''\;|\ev{16}|,\;\left|\er{*}{16,arctan(\frac{1}{5})}\right|,\;|\ev{4}|,\;\left|\er{*}{4,arctan(\frac{1}{239})}\right|,\;\left|\er{-}{16arctan_2(\frac{1}{5}),4arctan_2(\frac{1}{239})}\right|\right\}$\\
+	
+	\pa
+	
+	$\Rightarrow \left|\ev{\pi}\right| \leq \frac{16arctan_2(\frac{1}{5})(u''' + 10u''' + u''') + 4arctan_2(\frac{1}{239})(u''' + 13u''' + u''')}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + u''' =$\\
+	
+	$(\frac{192arctan_2(\frac{1}{5}) + 60arctan_2(\frac{1}{239})}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + 1) u''' \leq 14u'''$\\
+	
+	Reemplazando $u'''=2^{1-t}$ nos queda que el error relativo del algoritmo de Machin:
+	
+	$\left|\ev{\pi}\right| \leq 14*2^{1-t}$
 	
 	
 \end{subsection}
