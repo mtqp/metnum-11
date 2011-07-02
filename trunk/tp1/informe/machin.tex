@@ -4,6 +4,8 @@
 		\frac{\pi}{4} = 4 \; \mathrm{arctan}(1/5) - \mathrm{arctan}(1/239), \text{con } \mathrm{arctan}(x) = \sum_{n=0}^{\infty} \left(-1\right)^n \frac{x^{2n+1}}{2n+1} \quad \text{cuando } \left|x\right|<1
     \end{equation*}
 	
+	\pa
+	
 	Definimos primero el error de calcular $arctan(k)$ con $|k|<1$. Para ello definimos el error de cada uno de los términos de la sumatoria.\\
 	
 	Dado $n \in \N$, sea $x=k^{2n+1}$ e $y=2n+1$.\\
@@ -14,7 +16,7 @@
 	
 	\underline{Analicemos el error de $x=k^y$ ($k=\frac{1}{5}$ o $k=\frac{1}{239} \Rightarrow k>0$):}\\
 	
-	$\funcFull{$\ev{x}$}{\frac{yk^{y-1}k}{k^y}\ev{k}+\frac{k^y ln(k) y}{k^y}\ev{y} + \er{POT}{k,y}} = y\ev{k} + ln(k) y\ev{y} + \er{POT}{k,y}$ (2)\\ 
+	$\e{pot}{k,y,POT} = y\ev{k} + ln(k) y\ev{y} + \er{POT}{k,y}$ (2)\\
 	
 	$\Rightarrow_{Reemplazando \; (2) \; en \; (1)}$\\
 	
@@ -118,9 +120,9 @@
 	
 	$\Rightarrow \ev{\pi} = \frac{16arctan_2(\frac{1}{5})(\ev{16} + \ev{arctan(\frac{1}{5})} + \er{*}{16,arctan(\frac{1}{5})}) - 4arctan_2(\frac{1}{239})(\ev{4} + \ev{arctan(\frac{1}{239})} + \er{*}{4,arctan(\frac{1}{239})})}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + \er{-}{16arctan_2(\frac{1}{5}),4arctan_2(\frac{1}{239})}$\\
 	
-	$\Rightarrow \left|\ev{\pi}\right| \leq \frac{16arctan_2(\frac{1}{5})(|\ev{16}| + 10u + \left|\er{*}{16,arctan(\frac{1}{5})}\right|) + 4arctan_2(\frac{1}{239})(|\ev{4}| + 13u + \left|\er{*}{4,arctan(\frac{1}{239})}\right|)}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + \left|\er{-}{16arctan_2(\frac{1}{5}),4arctan_2(\frac{1}{239})}\right|$\\
+	$\Rightarrow \left|\ev{\pi}\right| \leq \frac{16arctan_2(\frac{1}{5})(|\ev{16}| + 10u + \left|\er{*}{16,arctan(\frac{1}{5})}\right|) + 4arctan_2(\frac{1}{239})(|\ev{4}| + 13u + \left|\er{*}{4,arctan(\frac{1}{239})}\right|)}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + \left|\er{-}{16arctan_2(\frac{1}{5}),4arctan_2(\frac{1}{239})}\right| \leq$\\
 	
-	$\Rightarrow \left|\ev{\pi}\right| \leq \frac{16arctan_2(\frac{1}{5})(u + 10u + u) + 4arctan_2(\frac{1}{239})(u + 13u + u)}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + u =$\\
+	$\leq \frac{16arctan_2(\frac{1}{5})(u + 10u + u) + 4arctan_2(\frac{1}{239})(u + 13u + u)}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + u =$\\
 	
 	$(\frac{192arctan_2(\frac{1}{5}) + 60arctan_2(\frac{1}{239})}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + 1) u \leq 14u$\\
 	
