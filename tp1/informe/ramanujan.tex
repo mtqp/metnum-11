@@ -1,139 +1,108 @@
 \begin{subsection}{Serie de Ramanujan}
-	\large
+	\begin{equation*}
+		\frac{1}{\pi} = \frac{\sqrt{8}}{9801} \sum_{n=0}^{\infty} \frac{(4n)! \, (1103 + 26390 n)}{(n!)^4 \, 396^{4n}}
+    \end{equation*}
+	
+	\pa
 	
 	Definimos primero el error de un término de la serie de Ramanujan.\\
 
-	Dado $n \in \N$, sea $\funcFull{f(x,y)} {\frac{x}{y}}$, donde $x=(4n)!(1103+26390n)$ e $y=(n!)^4396^{4n}$.\\
+	Dado $n \in \N$, sea $x=(4n)!(1103+26390n)$ e $y=(n!)^4396^{4n}$.\\
 	
-	\underline{Analicemos el error de $\func{f}{x,y}$:}\\
+	$\e{div}{x,y,:} = \ev{x} - \ev{y} + \er{:}{x,y}$ (1).\\
 	
-	$\funcFull{$\e{f}{x,y,:}$}{\frac{\frac{x}{y}\ev{x}}{f} + \frac{\frac{-xy}{y^2}\ev{y}}{f} + \er{:}{x,y}} = 
-	\frac{\frac{x}{y}\ev{x}}{\frac{x}{y}} + \frac{\frac{-x}{y}\ev{y}}{\frac{x}{y}} + \er{:}{x,y} =$\\
-	
-	$\ev{x} - \ev{y} + \er{:}{x,y}$	(1)\\
-	
-	Como calculamos $x$ e $y$ en punto flotante tenemos que calcular el error cometido.\\ Tanto para el cálculo del error de $x$ como de $y$ necesitamos calcular el error del producto.\\
-	
-	Sea $\funcFull{f'(x',y')} {x'*y'}$ entonces,\\
-	
-	$\funcFull{$\e{f'}{x',y',*}$}{\ev{x'}+\ev{y'}+\er{*}{x',y'}}$	(2)\\
+	Como calculamos $x$ e $y$ en punto flotante tenemos que calcular el error cometido.\\
 	
 	\underline{Analicemos el error de $x=(4n)!(1103+26390n)$:}\\
 	
-	Instanciando $x'=(4n)!$ e $y'=1103+26390n$ en (2) obtenemos:\\
+	Llamamos $x_x=(4n)!$ e $y_x=1103+26390n$.\\
 
-	$\ev{x} = {\ev{(4n)!}+\ev{1103+26390n}+\er{*}{(4n)!,1103+26390n}}$\\
+	$\ev{x} = \e{mult}{x_x,y_x,*} = \ev{x_x}+\ev{y_x}+\er{*}{x_x,y_x}$\\
 	
-	Resta calcular el error de $x'$ ya que $y'$ se calcula en enteros (exacto). Basandonos en nuestra implementacion podemos decir que $x'=x_1*(4n)*(4n-1)*(4n-2)*(4n-3)$ donde $x_1$ es una variable de punto flotante que acumula el resultado del factorial obtenido en el calculo del termino anterior.\\
+	Resta calcular el error de $x_x$ porque $y_x$ se calcula en enteros (exacto) ya que no hay $overflow$ ($n \leq 2$).\\
 	
-	$\ev{x'} =\ev{x_1}+\ev{4n}+\er{*}{x_1,4n}+\ev{4n-1}+\er{*}{x_1*4n,4n-1}+\ev{4n-2}+\er{*}{x_1*4n*(4n-1),4n-2}+\ev{4n-3}+\er{*}{x_1*4n*(4n-1)*(4n-2),4n-3}$	(3)\\
-	
-	$\Rightarrow_{Reemplazando \; (3) \; en \; (2)}$\\
-	
-	$\ev{x} = \ev{x_1}+\ev{4n}+\er{*}{x_1,4n}+\ev{4n-1}+\er{*}{x_1*4n,4n-1}+\ev{4n-2}+\er{*}{x_1*4n*(4n-1),4n-2}+\ev{4n-3}+\er{*}{x_1*4n*(4n-1)*(4n-2),4n-3}+\ev{y'}+\er{*}{(4n)!,(1103+26390n)}$\\
+	$\Rightarrow \left|\ev{x}\right| \leq \left|\ev{x_x}\right| + 2u$\\
 	
 	\underline{Analicemos el error de $y=(n!)^4396^{4n}$:}\\
 	
-	Instanciando $x'=(n!)^4$ e $y'=396^{4n}$ en (2) obtenemos:\\
+	Llamamos $x_y=(n!)^4$ e $y_y=396^{4n}$.\\
 	
-	$\ev{y} = {\ev{(n!)^4}+\ev{396^{4n}}+\er{*}{(n!)^4,396^{4n}}}$\\
-	
-	Resta calcular el error de $x'$ e $y'$.\\
-	
-	Para calcular el error de $x'$ llamamos $k_1=n!$ y $k_2=4$.\\
+	$\ev{y} = \e{mult}{x_y,y_y,*} = {\ev{x_y}+\ev{y_y}+\er{*}{x_y,y_y}}$\\
 
-	Veamos entonces el error de $x'=k_1^{k_2}$\\
+	Veamos entonces el error de $x_y$:\\
 	
-	$\funcFull{$\ev{x'}$}{\frac{k_1^{k_2-1}k_2k_1}{k_1^{k_2}}\ev{k_1}+\frac{k_2k_1^{k_2}ln(k_1)}{k_1^{k_2}}\ev{k_2}}$\\
+	$\ev{x_y} = \e{pot}{n!,4,POT} = 4\ev{n!} + ln(n!) 4\ev{4} + \er{POT}{n!,4}$\\
 	
-	$\funcFull{$\ev{x'}$}{k_2\ev{k_1}+k_2ln(k_1)\ev{k_2}}$	(4)\\
+	$\ev{y_y} = \e{pot}{396,4n,POT} = 4n\ev{396} + ln(396) 4n\ev{4n} + \er{POT}{396,4n}$\\
+	
+	Como $\ev{4n} = \e{mult}{4,n,*} = \ev{4} + \ev{n} + \er{*}{4,n}$\\
+	
+	$\Rightarrow \ev{y_y} = 4n\ev{396} + ln(396)4n(\ev{4} + \ev{n} + \er{*}{4,n}) + \er{POT}{396,4n}$\\
+	
+	Teniendo toda esta información podemos decir que el error de $y$ es:\\
+	
+	$4\ev{n!} + ln(n!) 4\ev{4} + \er{POT}{n!,4} + 4n\ev{396} + ln(396)4n(\ev{4} + \ev{n} + \er{*}{4,n}) + \er{POT}{396,4n} + \er{*}{x_y,y_y}$\\
+	
+	$\Rightarrow \left|\ev{y}\right| \leq 4\left|\ev{n!}\right| + ln(n!)4u + 4nu + 75u$\\
+	
+	Finalmente, el error de un término de la serie esta acotado por:
+	
+	\pa
+
+	$\left|\ev{\frac{x}{y}}\right| \leq \left|\ev{x}\right| + \left|\ev{y}\right| + \left|\er{:}{x,y}\right| \leq \left|\ev{(4n)!}\right| + 4\left|\ev{n!}\right| + ln(n!)4u + 4nu + 78u$\\
+	
+	Teniendo esta información, queremos realizar el análisis teórico para los primeros tres términos de la sumatoria. Para poder realizarlo, llamamos $a$ $(n=0)$ al primer término,
+	$b$ $(n=1)$ al segundo y $c$ $(n=2)$ al tercero.
+	
+	Dado que tanto $a$ como $c$ corresponden a $n$ par son términos tal que $(-1)^n = 1$ en contraste con $b$ que tiene signo negativo. Por este motivo,\\
+	tenemos que la arcotangente hasta el tercer término es: $a - b + c$.\\
+	
+	Analizamos primero el error cometido de realizar $a+c$.\\
+	
+	$\e{sum}{a,c,+} = \frac{a}{a+c}\ev{a} + \frac{c}{a+c}\ev{c} + \er{+}{a,c}$\\
+	
+	Analizamos ahora el error de restar el segundo término ($b$).\\
 		
-	Basandonos nuevamente en nuestra implementación podemos decir que $k_1=f'(k_1',n)$ donde $k_1'$ es una variable de punto flotante que acumula el resultado del factorial obtenido en el calculo del termino anterior.\\
+	$\e{restar}{a+c,b,-} = \frac{a+c}{a+c-b}\er{+}{a,c} - \frac{b}{a+c-b}\ev{b} + \er{-}{a+c,b} =$\\
+	
+	$\frac{a+c}{a+c-b}(\frac{a}{a+c}\ev{a} + \frac{c}{a+c}\ev{c} + \er{+}{a,c}) - \frac{b}{a+c-b}\ev{b} + \er{-}{a+c,b} =$\\
+	
+	$\frac{a\ev{a} + c\ev{c} - b\ev{b} + (a+c)\er{+}{a,c}}{a-b+c} + \er{-}{a+c,b} = \ev{a+c-b} = \ev{sum_2}$\\
+	
+	$\left|\ev{sum_2}\right| \leq \frac{|a||\ev{a}| + |c||\ev{c}| + |b||\ev{b}| + |a+c|\left|\er{+}{a,c}\right|}{|a-b+c|} + \left|\er{-}{a+c,b}\right|$\\
+	
+	Dado que $a=1103$, $b=\frac{659832}{396^4}$ y $c=\frac{8!*53883}{2^4*396^8}$.\\
+	
+	Basandonos en nuestra implementación y usando el hecho de que calculamos el error sólo para los $tres$ primeros términos de la sumatoria tenemos:\\
+	
+	El error de $a$ es el error de represetar $1103$ ya que lo adicionamos al final sin calcularlo.\\
+	
+	$\left|\ev{b}\right| \leq \left|\ev{4!}\right| + 4\left|\ev{1!}\right| + 82u = $\\
+	
+	$\left|\ev{1} + \ev{2} + \er{*}{1,2} + \ev{3} + \er{*}{1*2,3} + \ev{4} + \er{*}{1*2*3,4} + \ev{1} + \er{*}{1*2*3*4,1}\right| + 4\left|\e{mult}{1,1}\right| + 82u \leq \left|\ev{2}\right| + \left|\er{*}{1,2}\right| + \left|\ev{3}\right| + \left|\er{*}{1*2,3}\right| + \left|\ev{4}\right| + \left|\er{*}{1*2*3,4}\right| + \left|\er{*}{1*2*3*4,1}\right| + 4\left|\er{*}{1,1}\right| + 82u \leq 93u$\\
+	
+	$\left|\ev{c}\right| \leq \left|\ev{8!}\right| + 4\left|\ev{2!}\right| + 90u =$\\
+	
+	$\leq \left|\ev{5} + \ev{6} + \er{*}{5,6} + \ev{7} + \er{*}{5*6,7} + \ev{8} + \er{*}{5*6*7,8} + \ev{24} + \er{*}{5*6*7*8,24}\right| + 4\left|\e{mult}{1,2}\right| + 90u \leq \left|\ev{5}\right| + \left|\ev{6}\right| + \left|\er{*}{5,6}\right| + \left|\ev{7}\right| + \left|\er{*}{5*6,7}\right| + \left|\ev{8}\right| + \left|\er{*}{5*6*7,8}\right| + \left|\ev{24}\right| + \left|\er{*}{5*6*7*8,24}\right| + 4(\left|\ev{2}\right| + \left|\er{*}{1,2}\right|) + 90u \leq 107u$\\
+	
+	$\Rightarrow$\\
+	$\left|\ev{sum_2}\right| \leq \frac{1103u + \frac{8!*53883}{2^4*396^8}107u + \frac{659832}{396^4}93u + (1103+\frac{8!*53883}{2^4*396^8})\left|\er{+}{1103,\frac{8!*53883}{2^4*396^8}}\right|}{1103 - \frac{659832}{396^4} + \frac{8!*53883}{2^4*396^8}} + \left|\er{-}{1103 + \frac{8!*53883}{2^4*396^8},\frac{659832}{396^4}}\right|$\\
 
-	$\ev{k_1}=\ev{k_1'}+\ev{n}+\er{*}{k_1',n}$\\
+	$\leq \frac{1103u + \frac{8!*53883}{2^4*396^8}107u + \frac{659832}{396^4}93u + (1103+\frac{8!*53883}{2^4*396^8})u}{1103 - \frac{659832}{396^4} + \frac{8!*53883}{2^4*396^8}} + u =$\\
 	
-	$\Rightarrow_{Reemplazando en (4)} \funcFull{$\ev{x'}$}{k_2\ev{k_1'}+\ev{n}+\er{*}{k_1',n}+k_2ln(k_1)\ev{k_2}}$\\
+	$\frac{2206u + \frac{8!*53883}{2^4*396^8}108u + \frac{659832}{396^4}93u}{1103 - \frac{659832}{396^4} + \frac{8!*53883}{2^4*396^8}} + u \leq 4u$\\
 	
-	$\Rightarrow \funcFull{$\ev{x'}$}{4\ev{k_1'}+\ev{n}+\er{*}{k_1',n}+4ln(n!)\ev{4}}$\\
+	\pa
 	
-	Instanciando en (4) $k_1=396$ y $k_2=4n$ (4n es calculado en enteros)\\
+	Por ultimo, $\pi_2=\frac{\frac{9801}{\sqrt{8}}}{sum_2}$\\
 	
-	$\ev{y'}={4n\ev{396}+4nln(396)\ev{4n}}$\\
-	
-	Teniendo el error de $x'$ e $y'$ podemos obtener el error de $y$ reemplazando dichos errores en (2)\\
-	
-	$\ev{y}=4\ev{k_1'}+\ev{n}+\er{*}{k_1',n}+4ln(n!)\ev{4}+4n\ev{396}+4nln(396)\ev{4n}+\er{*}{(n!)^4,396^4n}$\\
-	
-	Finalmente, con el error de $x$ e $y$ obtenemos reemplazando en (1) el error de calcular un término de la serie de $Ramanujan$.
-	
-	\VSP
-	$\ev{x_1}+\ev{4n}+\er{*}{x_1,4n}+\ev{4n-1}+\er{*}{x_1*4n,4n-1}+\ev{4n-2}+\er{*}{x_1*4n*(4n-1),4n-2}+\ev{4n-3}+\er{*}{x_1*4n*(4n-1)*(4n-2),4n-3}+\ev{y'}+\er{*}{(4n)!,(1103+26390n)}-4\ev{k_1'}+\ev{n}+\er{*}{k_1',n}+4ln(n!)\ev{4}+4n\ev{396}+4nln(396)\ev{4n}+\er{*}{(n!)^4,396^4n}+\er{:}{(4n)!(1103+26390n),(n!)^4396^{4n}}$\\
-
-	Queremos realizar el análisis teórico sobre la serie de Ramanujan para los primeros tres términos de la sumatoria. Para poder realizarlo, llamamos $a$ al primer término de la serie,
-	$b$ al segundo y $c$ al tercero (llamamos $k=a+b$).\\
-	
-	Sea $\funcFull{g(k,c)}{k+c}$\\
-	
-	$\e{g}{k,c,+} = \frac{k}{k+c}\ev{k} + \frac{c}{k+c}\ev{c} + \er{+}{k,c}$\\
-	
-	$\e{g}{a+b,c,+} = \frac{a+b}{a+b+c}(\frac{a}{a+b}\ev{a} + \frac{b}{a+b}\ev{b} + \er{+}{a,b}) + \frac{c}{a+b+c}\ev{c} + \er{+}{a+b,c} =$\\
-	 
-	$= \frac{a\ev{a} + b\ev{b} + c\ev{c} + (a+b)\er{+}{a,b}}{a+b+c} + \er{+}{a+b,c}$\\
-	
-	Dado $a=1103$, $b=\frac{659832}{396^4}$ y $c=\frac{8!*53883}{2^4*396^8}$ el error de los tres primeros términos es el siguiente:\\
-	
-	El error de $a$ es el error de representar 1103 ya que lo adicionamos al final sin calcularlo.
-	
-	\VSP
-	$\ev{b}=\ev{1}+\ev{4}+\er{*}{1,4}+\ev{3}+\er{*}{4,3}+\ev{2}+\er{*}{12,2}+\ev{1}+\er{*}{24,1}+\ev{1103+26390}+\er{*}{24,1103+26390}-4\ev{1}+\ev{1}+\er{*}{1,1}+4\ev{396}+4ln(396)\ev{4}+\er{*}{1,396^4}+\er{:}{24(1103+26390),396^{4}}$\\
-	
-	$\Rightarrow_{Acotando\;todos\;los\;errrores\;por\;k,\;y\;usando\;que\;ln(396)<6\;es\;menor\;a:}$ $39k$
-	
-	\VSP
-	$\ev{c}=\ev{24}+\ev{8}+\er{*}{24,8}+\ev{7}+\er{*}{192,7}+\ev{6}+\er{*}{1344,6}+\ev{5}+\er{*}{8064,5}+\ev{1103+52780}+\er{*}{8!,(1103+52780)}-4\ev{1}+\ev{2}+\er{*}{1,2}+4ln(2)\ev{4}+8\ev{396}+8ln(396)\ev{8}+\er{*}{16,396^8}+\er{:}{8!(1103+52780),16*396^8}$\\
-	
-	$\Rightarrow_{Acotando\;todos\;los\;errrores\;por\;k,\;y\;usando\;que\;ln(396)<6\;es\;menor\;a:}$ $71k$
-	
-	\VSP
-	
-	$\frac{1103\ev{1103}+\frac{659832}{396^4}\ev{b} + \frac{8!*53883}{2^4*396^8}\ev{c} + (1103+\frac{659832}{396^4})\er{+}{1103,\frac{659832}{396^4}}}{1103+\frac{659832}{396^4}+\frac{8!*53883}{2^4*396^8}} + \er{+}{1103+\frac{659832}{396^4},\frac{8!*53883}{2^4*396^8}}$\\
-	
-	Por otro lado calculamos el error de $\funcFull{h(z)}{\sqrt{z}}$.\\
+	Para calcular el error de $\pi_2$ calculamos el error de $\funcFull{h(z)}{\sqrt{z}}$.\\
 	
 	$\e{h}{z,\sqrt{ }} = \frac{\frac{1}{2\sqrt{z}}}{\sqrt{z}}z\ev{z} + \er{\sqrt{ }}{z} = \frac{1}{2\sqrt{z}}\frac{1}{\sqrt{z}}z\ev{z} + \er{\sqrt{ }}{z} = \frac{\ev{z}}{2} + \er{\sqrt{ }}{z}$\\
 	
-	Conociendo el error de $\func{f}{x,y}$ calculamos el error de $\frac{\sqrt{8}}{9801}$\\ instanciando $x=\sqrt{z}$ e $y=9801$.\\
-	
-	$\Rightarrow \frac{\ev{z}}{2} + \er{\sqrt{ }}{z} - \ev{9801} + \er{:}{\sqrt{8},9801}$\\
-	
-	Sea $\funcFull{h'(x,y)} {x*y}$, donde $x=\frac{\sqrt{8}}{9801}$ e $y=\sum_{n=0}^{\infty}{\frac{(4n)!(1103+26390n)}{(n!)^4396^{4n}}}$.\\
-	
-	sabemos que: $\e{h'}{x,y,*} = \ev{x} + \ev{y} + \er{*}{x,y}$\\
-	
-	$\Rightarrow \e{h'}{x,y,*} = \ev{\frac{\sqrt{8}}{9801}} + \ev{\sum_{n=0}^{2}{\frac{(4n)!(1103+26390n)}{(n!)^4396^{4n}}}} + \er{*}{\frac{\sqrt{8}}{9801},\sum_{n=0}^{2}{\frac{(4n)!(1103+26390n)}{(n!)^4396^{4n}}}} = $\\
-	
-	$\frac{\ev{z}}{2}+\er{\sqrt{}}{z}-\ev{9801}+\er{:}{\sqrt{8},9801}+\frac{1103\ev{1103}+\frac{659832}{396^4}\ev{b}+ \frac{8!*53883}{2^4*396^8}\ev{c}+(1103+\frac{659832}{396^4})\er{+}{1103,\frac{659832}{396^4}}}{1103+\frac{659832}{396^4} +\frac{8!*53883}{2^4*396^8}} + \er{+}{1103+\frac{659832}{396^4},\frac{8!*53883}{2^4*396^8}} + \er{*}{\frac{\sqrt{8}}{9801},\sum_{n=0}^{2}{\frac{(4n)!(1103+26390n)}{(n!)^4396^{4n}}}}$\\
-	
-	Conociendo el error de $\func{f}{x,y}$ calculamos el error de $\frac{1}{\frac{\sqrt{8}}{9801}\sum_{n=0}^{2}{\frac{(4n)!(1103+26390n)}{(n!)^4396^{4n}}}}$ instanciando $x=1$ e $y=\frac{\sqrt{8}}{9801}\sum_{n=0}^{2}{\frac{(4n)!(1103+26390n)}{(n!)^4396^{4n}}}$.\\
-	
-	$\Rightarrow \ev{\pi}=\ev{1} - \frac{1103\ev{1103}+\frac{659832}{396^4}\ev{b} + \frac{8!*53883}{2^4*396^8}\ev{c} + (1103+\frac{659832}{396^4})\er{+}{1103,\frac{659832}{396^4}}}{1103+\frac{659832}{396^4}+\frac{8!*53883}{2^4*396^8}} + \er{+}{1103+\frac{659832}{396^4},\frac{8!*53883}{2^4*396^8}} + \er{:}{1,\sum_{n=0}^{2}{\frac{(4n)!(1103+26390n)}{(n!)^4396^{4n}}}}$\\
-	
-	$\Rightarrow_{Tomando \; k \; el \; maximo \; error}$\\
-	
-	$k - {\frac{2207k}{1103+\frac{659832}{396^4}+\frac{8!*53883}{2^4*396^8}}} + 2k < k - {\frac{2207k}{1103+ 0 + 0}} + 2k = k - {\frac{2207k}{1103}} + 2k$ \\
-	$< k - {\frac{5k}{2}} + 2k < k - 3k + 2k < k + 3k + 2k = 6k$
-	
-	Tomamos de esta forma a $k=2^{1-t}$.
-	
-	Acotando el error de Ramanujan, tenemos que $\ev{\pi} < 6*2^{1-t} = 3*2^{2-t}$\\
-	
+	$\ev{\frac{9801}{\sqrt{8}}} = \ev{9801} - \ev{\sqrt{8}} + \er{:}{9801,\sqrt{8}}$\\
+	$\Rightarrow \left|\ev{\frac{9801}{\sqrt{8}}}\right| = \left|\ev{9801}\right| + \left|\frac{\ev{8}}{2}\right| + \left|\er{\sqrt{ }}{8}\right| + \left|\er{:}{9801,\sqrt{8}}\right| \leq \frac{7}{2}u$\\
+		
+	$\ev{\pi_2} = \e{div}{\frac{9801}{\sqrt{8}},sum_2} = \ev{\frac{9801}{\sqrt{8}}} - \ev{sum_2} + \er{:}{\frac{9801}{\sqrt{8}},sum_2} \leq \left|\ev{\frac{9801}{\sqrt{8}}}\right| + \left|\ev{sum_2}\right| + \left|\er{:}{\frac{9801}{\sqrt{8}},sum_2}\right| \leq \frac{7}{2}u + 5u = \frac{17}{2}u$\\
+		
 \end{subsection}
-
-
-
-
-
-
-
-
-

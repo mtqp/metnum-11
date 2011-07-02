@@ -23,6 +23,10 @@
 		Sea $\funcFull{mult(x,y)}{x*y}$\\
 	
 		$\e{mult}{x,y,*} = \frac{y*x}{x*y}\ev{x} + \frac{x*y}{x*y}\ev{y} + \er{*}{x,y} = \ev{x} + \ev{y} + \er{*}{x,y}$\\
+		
+		Sea $\funcFull{pot(x,y)}{x^y}$\\
+		
+		$\e{pot}{x,y,POT} = \frac{yx^{y-1}x}{x^y}\ev{x}+\frac{x^y ln(x) y}{x^y}\ev{y} + \er{POT}{x,y} = y\ev{x} + ln(x) y\ev{y} + \er{POT}{x,y}$\\
 	
 		\underline{Nota:} Realizamos la mayor cantidad de operaciones posibles en el tipo de datos $entero$ ya que de esta manera no poseen error, es decir, son exactas.
 		Asumimos que el algoritmo nunca se va a ejecutar con una cantidad de iteraciones tal que desborde.\\
@@ -32,6 +36,7 @@
 		\input{machin.tex}
 		\newpage
 		\input{ramanujan.tex}
+		\newpage
 		
 	\end{subsection}
 	\begin{subsection}{Implementación}
