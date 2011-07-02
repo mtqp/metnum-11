@@ -23,6 +23,7 @@
 	$y\ev{k} + ln(k) y\ev{y} + \er{POT}{k,y} - \ev{y} + \er{:}{x,y}$\\
 	
 	Para acotar el error de un término de la arcotangente empezamos por acotar el error de $k$.
+	Sea $u=2^{1-t}$.\\
 	
 	\pa
 	
@@ -43,8 +44,6 @@
 	$(2n+1)(\left|\ev{k}\right| + \left|ln(k)\right|\left|\ev{2n+1}\right|) + \left|\er{POT}{k,(2n+1)}\right| + \left|\ev{(2n+1)}\right| + \left|\er{:}{k^{2n+1},2n+1}\right|$\\
 	
 	$\Rightarrow \left|\ev{\frac{k^{2n+1}}{2n+1}}\right| \leq (2n+1)(2u + \left|ln(k)\right|u) + 3u = [(2n+1)(2 + \left|ln(k)\right|) + 3]u$\\
-	
-	donde $u = max\left\{\left|\ev{5}\right|,\;\left|\er{:}{1,5}\right|,\;\left|\ev{239}\right|,\;\left|\er{:}{1,239}\right|,\;\left|\ev{2n+1}\right|,\;\left|\er{POT}{k,(2n+1)}\right|,\;\left|\er{:}{k^{2n+1},2n+1}\right|\right\}$.\\
 	
 	\pa
 	
@@ -80,13 +79,6 @@
 	$\left|\ev{arctan_2(k)}\right| \leq \frac{|a|[(2 + \left|ln(k)\right|) + 3]u + |c|[5(2 + \left|ln(k)\right|) + 3]u + |b|[3(2 + \left|ln(k)\right|) + 3]u + |a+c|\left|\er{+}{a,c}\right|}{|a-b+c|} + \left|\er{-}{a+c,b}\right|$\\
 	
 	Para la fórmula de Machin se necesita calcular $arctan(\frac{1}{5})$ y $arctan(\frac{1}{239})$.\\
-		
-	%$\e{arctan_2}{\frac{1}{5}} = \frac{\frac{1}{5}\ev{a} + (\frac{1}{5})^6\ev{c} - \frac{1}{3}(\frac{1}{5})^3\ev{b} + (\frac{1}{5} + (\frac{1}{5})^5)\er{+}{\frac{1}{5},(\frac{1}{5})^5}}{\frac{1}{5} + (\frac{1}{5})^6 - \frac{1}{3}(\frac{1}{5})^3} + \er{-}{\frac{1}{5} + \frac{1}{5} + (\frac{1}{5})^5,(\frac{1}{5})^3}$\\
-	%$\Rightarrow \left| \e{arctan_2}{\frac{1}{5}} \right| \leq \frac{\frac{1}{5}\left| \ev{a} \right| + (\frac{1}{5})^6\left| \ev{c} \right| + \frac{1}{3}(\frac{1}{5})^3\left| \ev{b} \right| + (\frac{1}{5} + (\frac{1}{5})^5)\left| \er{+}{\frac{1}{5},(\frac{1}{5})^5} \right|}{\frac{1}{5} + (\frac{1}{5})^6 - \frac{1}{3}(\frac{1}{5})^3} + \left|\er{-}{\frac{1}{5} + \frac{1}{5} + (\frac{1}{5})^5,(\frac{1}{5})^3} \right|$\\
-	%Como vimos antes:\\
-	%$\left|\ev{a}\right| \leq [2 + \left|ln(\frac{1}{5})\right| + 3]u \leq [2 + 2 + 3]u \leq 7u$\\
-	%$\left|\ev{b}\right| \leq [3(2 + \left|ln(\frac{1}{5})\right|) + 3]u \leq [3(2 + 2) + 3]u \leq 15u$\
-	%$\left|\ev{c}\right| \leq [5(2 + \left|ln(\frac{1}{5})\right|) + 3]u \leq [5(2 + 2) + 3]u \leq 23u$\\
 	
 	$\left|\ev{arctan_2(\frac{1}{5})}\right| \leq \frac{\frac{1}{5}[(2 + 2) + 3]u + \frac{1}{5^6}[5(2 + 2) + 3]u + \frac{1}{3}\frac{1}{5^3}[3(2 + 2) + 3]u + (\frac{1}{5}+\frac{1}{5^6})\left|\er{+}{\frac{1}{5},\frac{1}{5^6}}\right|}{\frac{1}{5}-\frac{1}{3}\frac{1}{5^3}+\frac{1}{5^6}} + \left|\er{-}{\frac{1}{5}+\frac{1}{5^6},\frac{1}{3}\frac{1}{5^3}}\right| =$\\
 	
@@ -94,13 +86,7 @@
 	
 	\pa
 	
-	Si bien no conocemos cuál es el error exacto que posee cada operación, podemos tomar $u'$ como el error máximo de todas ellas en módulo.\\
-	
-	$u' =$ máx$\left\{u,\;\left|\er{+}{\frac{1}{5},\frac{1}{5^6}}\right|,\;\left|\er{-}{\frac{1}{5} + \frac{1}{5^6},\frac{1}{3}\frac{1}{5^3}}\right|\right\}$.\\
-	
-	\pa
-	
-	$\left| \e{arctan_2}{\frac{1}{5}} \right| \leq \frac{\frac{7}{5}u' + \frac{23}{5^6}u' +\frac{1}{5^2}u' + (\frac{1}{5} + \frac{1}{5^6})u'}{\frac{1}{5} - \frac{1}{3}\frac{1}{5^3} + \frac{1}{5^6}} + u' \leq 10u'$\\
+	$\left| \e{arctan_2}{\frac{1}{5}} \right| \leq \frac{\frac{7}{5}u + \frac{23}{5^6}u +\frac{1}{5^2}u + (\frac{1}{5} + \frac{1}{5^6})u}{\frac{1}{5} - \frac{1}{3}\frac{1}{5^3} + \frac{1}{5^6}} + u \leq 10u$\\
 	
 	\pa
 	
@@ -112,9 +98,7 @@
 	
 	\pa
 	
-	Podemos al igual que antes tomar $u''$ como el error máximo en módulo de todas las operaciones involucradas.\\
-	
-	$\left|\ev{arctan_2(\frac{1}{239})}\right| \leq \frac{\frac{11}{239}u'' + \frac{43}{5}\frac{1}{239^5}u'' + \frac{35}{3}\frac{1}{239^3}u'' + (\frac{1}{239}+\frac{1}{5}\frac{1}{239^5})u''}{\frac{1}{239}-\frac{1}{3}\frac{1}{239^3}+\frac{1}{5}\frac{1}{239^5}} + u'' \leq 13u''$\\
+	$\left|\ev{arctan_2(\frac{1}{239})}\right| \leq \frac{\frac{11}{239}u + \frac{43}{5}\frac{1}{239^5}u + \frac{35}{3}\frac{1}{239^3}u + (\frac{1}{239}+\frac{1}{5}\frac{1}{239^5})u}{\frac{1}{239}-\frac{1}{3}\frac{1}{239^3}+\frac{1}{5}\frac{1}{239^5}} + u \leq 13u$\\
 	
 	\pa
 	
@@ -134,17 +118,11 @@
 	
 	$\Rightarrow \ev{\pi} = \frac{16arctan_2(\frac{1}{5})(\ev{16} + \ev{arctan(\frac{1}{5})} + \er{*}{16,arctan(\frac{1}{5})}) - 4arctan_2(\frac{1}{239})(\ev{4} + \ev{arctan(\frac{1}{239})} + \er{*}{4,arctan(\frac{1}{239})})}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + \er{-}{16arctan_2(\frac{1}{5}),4arctan_2(\frac{1}{239})}$\\
 	
-	$\Rightarrow \left|\ev{\pi}\right| \leq \frac{16arctan_2(\frac{1}{5})(|\ev{16}| + 10u' + \left|\er{*}{16,arctan(\frac{1}{5})}\right|) + 4arctan_2(\frac{1}{239})(|\ev{4}| + 13u'' + \left|\er{*}{4,arctan(\frac{1}{239})}\right|)}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + \left|\er{-}{16arctan_2(\frac{1}{5}),4arctan_2(\frac{1}{239})}\right|$\\
+	$\Rightarrow \left|\ev{\pi}\right| \leq \frac{16arctan_2(\frac{1}{5})(|\ev{16}| + 10u + \left|\er{*}{16,arctan(\frac{1}{5})}\right|) + 4arctan_2(\frac{1}{239})(|\ev{4}| + 13u + \left|\er{*}{4,arctan(\frac{1}{239})}\right|)}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + \left|\er{-}{16arctan_2(\frac{1}{5}),4arctan_2(\frac{1}{239})}\right|$\\
 	
-	Sea $u''' =$ máx$\left\{ u',\;u''\;|\ev{16}|,\;\left|\er{*}{16,arctan(\frac{1}{5})}\right|,\;|\ev{4}|,\;\left|\er{*}{4,arctan(\frac{1}{239})}\right|,\;\left|\er{-}{16arctan_2(\frac{1}{5}),4arctan_2(\frac{1}{239})}\right|\right\}$\\
+	$\Rightarrow \left|\ev{\pi}\right| \leq \frac{16arctan_2(\frac{1}{5})(u + 10u + u) + 4arctan_2(\frac{1}{239})(u + 13u + u)}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + u =$\\
 	
-	\pa
-	
-	$\Rightarrow \left|\ev{\pi}\right| \leq \frac{16arctan_2(\frac{1}{5})(u''' + 10u''' + u''') + 4arctan_2(\frac{1}{239})(u''' + 13u''' + u''')}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + u''' =$\\
-	
-	$(\frac{192arctan_2(\frac{1}{5}) + 60arctan_2(\frac{1}{239})}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + 1) u''' \leq 14u'''$\\
-	
-	Reemplazando $u'''=2^{1-t}$ nos queda que el error relativo del algoritmo de Machin:
+	$(\frac{192arctan_2(\frac{1}{5}) + 60arctan_2(\frac{1}{239})}{16arctan_2(\frac{1}{5})-4arctan_2(\frac{1}{239})} + 1) u \leq 14u$\\
 	
 	$\left|\ev{\pi}\right| \leq 14*2^{1-t}$
 	
