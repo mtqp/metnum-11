@@ -12,11 +12,20 @@ void help();
 bool eligeModoTruncamiento(int argc, char** argv);
 bool eligeModoUso(char** argv);
 
+Real PI(M_PI, 51, true);
+
 int main(int argc, char** argv){
 	int t_digits = 51;
 	int  cantIt = 10;
 	bool truncate = true;
 
+	/*
+	Real a(M_PI, 51, true);
+	Real b((long long int)2, 51, true);
+	
+	cout << a-b << endl;
+
+	return 0;*/
 	if(argc<2){
 		usage();
 		exit(0);
@@ -95,17 +104,17 @@ void out(SERIES* funcion, char* arg, int cantIt, int t_digits, bool truncate){
 	if(strcmp(arg,"-terminos")==0){
 		for(int j=1; j<=t_digits; j++){
 			cout.precision(j);
-			cout << j << "\t" << funcion(j, cantIt, truncate) << endl;
+			cout << j << "\t" << (PI-funcion(j, cantIt, truncate))/PI << endl;
 		}
 	}
 	else{
 		if(strcmp(arg,"-digitos")==0){
 			for(int j=1; j<=cantIt; j++){
-				cout << j << "\t" << funcion(t_digits, j, truncate) << endl;
+				cout << j << "\t" << (PI-funcion(t_digits, j, truncate))/PI << endl;
 			}
 		}
 		else{
-			cout << funcion(t_digits, cantIt, truncate) << endl;
+			cout << (PI-funcion(t_digits, cantIt, truncate))/PI << endl;
 		}
 	}
 }

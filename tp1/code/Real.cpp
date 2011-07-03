@@ -16,6 +16,12 @@ Real ::	Real(llInt number, int t_digits,bool truncates){
 	setReal(number,t_digits,truncates);
 }
 
+Real :: Real(double value, int t_digits, bool truncates)
+{
+	setReal(0,t_digits,truncates);
+	this->save(value);
+}
+
 Real ::	~Real(){
 }
 
