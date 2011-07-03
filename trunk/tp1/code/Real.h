@@ -12,6 +12,7 @@ class Real {
 	public:
 		/*Constructores*/
 		Real(llInt value, int t_digits,bool truncates);
+		Real(double value, int t_digits, bool truncates);
 		Real(int t_digits, bool truncates);
 		~Real();
 		
