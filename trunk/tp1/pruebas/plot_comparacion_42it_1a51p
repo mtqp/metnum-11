@@ -11,12 +11,12 @@ set ylabel "Error relativo"
 set logscale y
 
 set output 'truncamiento/graficos_nuevos/comparacion_42it_1a51p.eps'
-plot[1:]	'truncamiento/data_nueva/gregory/gregory_42it_1a51p.dat' using 1:(abs($2)) title "Gregory" linestyle 1 with lines,\
+plot[1:51]	'truncamiento/data_nueva/gregory/gregory_42it_1a51p.dat' using 1:(abs($2)) title "Gregory" linestyle 1 with lines,\
 		'truncamiento/data_nueva/machin/machin_42it_1a51p.dat' using 1:(abs($2)) title "Machin" linestyle 2 with lines,\
 		'truncamiento/data_nueva/ramanujan/ramanujan_42it_1a51p.dat' using 1:(abs($2)) title "Ramanujan" linestyle 3 with lines
 		
 set output 'truncamiento/graficos_nuevos/comparacion_5it_1a51p.eps'
-plot[1:]	'truncamiento/data_nueva/gregory/gregory_5it_1a51p.dat' using 1:(abs($2)) title "Gregory 5it" linestyle 1 with lines,\
+plot[1:51]	'truncamiento/data_nueva/gregory/gregory_5it_1a51p.dat' using 1:(abs($2)) title "Gregory 5it" linestyle 1 with lines,\
 		'truncamiento/data_nueva/machin/machin_5it_1a51p.dat' using 1:(abs($2)) title "Machin 5it" linestyle 2 with lines,\
 		'truncamiento/data_nueva/ramanujan/ramanujan_5it_1a51p.dat' using 1:(abs($2)) title "Ramanujan 5it" linestyle 3 with lines
 
