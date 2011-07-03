@@ -13,10 +13,10 @@ set ylabel "Error relativo"
 set logscale y
 
 set output 'truncamiento/graficos_nuevos/ramanujan_1a51p.eps'
-plot [1:52]'truncamiento/data/ramanujan/nuevo/1a51p_5it.dat' using 1:(abs($2)) title "5 iteraciones" with lines,\
-		'truncamiento/data/ramanujan/nuevo/1a51p_10it.dat' using 1:(abs($2)) title "10 iteraciones" with lines,\
-		'truncamiento/data/ramanujan/nuevo/1a51p_30it.dat' using 1:(abs($2)) title "30 iteraciones" with lines,\
-		'truncamiento/data/ramanujan/nuevo/1a51p_40it.dat' using 1:(abs($2)) title "40 iteraciones" with lines
+plot [1:52]'truncamiento/data_nueva/ramanujan/1a51p_5it.dat' using 1:(abs($2)) title "5 iteraciones" with lines,\
+		'truncamiento/data_nueva/ramanujan/1a51p_10it.dat' using 1:(abs($2)) title "10 iteraciones" with lines,\
+		'truncamiento/data_nueva/ramanujan/1a51p_30it.dat' using 1:(abs($2)) title "30 iteraciones" with lines,\
+		'truncamiento/data_nueva/ramanujan/1a51p_40it.dat' using 1:(abs($2)) title "40 iteraciones" with lines
 
 #pongo la salida default para mostrar en pantalla
 set term pop
