@@ -2,17 +2,23 @@ all: digitos terminos cotas
 
 digitos: plot_comparacion_1a42it_51p
 	./plot_comparacion_1a42it_51p
-	ps2pdf truncamiento/graficos/comparacion_1a42it_51p.eps ../informe/graficos/comparacion_1a42it_51p.pdf
-	ps2pdf truncamiento/graficos/comparacion_machin-ram.eps ../informe/graficos/comparacion_machin-ram.pdf
+	./plot_gregory_1a1000it
+	./plot_machin_1a1000it
+	./plot_ramita_1a42it
+	#ps2pdf truncamiento/graficos/comparacion_1a42it_51p.eps ../informe/graficos/comparacion_1a42it_51p.pdf
+	#ps2pdf truncamiento/graficos/comparacion_machin-ram.eps ../informe/graficos/comparacion_machin-ram.pdf
 
 terminos: plot_comparacion_42it_1a51p
 	./plot_comparacion_42it_1a51p
-	ps2pdf truncamiento/graficos/comparacion_42it_1a51p.eps ../informe/graficos/comparacion_42it_1a51p.pdf
-	ps2pdf truncamiento/graficos/comparacion_5it_1a51p.eps ../informe/graficos/comparacion_5it_1a51p.pdf
+	./plot_gregory_1a51p
+	./plot_machin_1a51p
+	./plot_ramita_1a51p
+	#ps2pdf truncamiento/graficos/comparacion_42it_1a51p.eps ../informe/graficos/comparacion_42it_1a51p.pdf
+	#ps2pdf truncamiento/graficos/comparacion_5it_1a51p.eps ../informe/graficos/comparacion_5it_1a51p.pdf
 
 cotas: plot_cotas 
 	./plot_cotas
-	ps2pdf truncamiento/graficos/cotas.eps ../informe/graficos/cotas.pdf
+	#ps2pdf truncamiento/graficos/cotas.eps ../informe/graficos/cotas.pdf
 	
 clean:
 	rm truncamiento/graficos/*.eps
