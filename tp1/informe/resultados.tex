@@ -14,18 +14,18 @@
 	
 	\VSP
 	
-	Se anexan a continuación, tres gráficos correspondientes a cada una de series en los cuales se grafican cuatro curvas correspondientes al error relativo dado precisiones diferentes, variando la cantidad de iteraciones. Para cada uno de ellos la escala del eje $x$ toma distintos valores, esto sucede ya que dependiendo del algoritmo para el cálculo $\pi$ el error relativo graficado varía a partir en distintos valores.
+	Se anexan a continuación, tres gráficos correspondientes a cada una de series en los cuales se grafican cuatro curvas correspondientes al error relativo en función la cantidad de iteraciones dado distintas precisiones. Para cada uno de ellos el rango de valores del eje $x$ es distinto, esto sucede ya que dependiendo del algoritmo utilizado para el cálculo $\pi$ el error relativo graficado varía a partir de distintos valores.
 	
 	La idea inicial de estos gráficos es poder contestar la pregunta de si existe o no relación entre el error y la cantidad de iteraciones, así como en qué afecta el uso de distintas precisiones.
 	
 	Estos gráficos se muestra en el siguiente orden: Gregory, Ramanujan y Machin. Todos ellos se encuentran en escala logarítmica en el eje $y$
 
-	\underline{Nota:} Para cada precisión utilizada, el error relativo calculado es contra un valor de $\pi$ exacto en los primeros $\lceil\log_2{t}\rceil$ dígitos (en base diez), seguidos de cero.
+	%\underline{Nota:} Para cada precisión utilizada, el error relativo calculado es contra un valor de $\pi$ exacto en los primeros $\lceil\log_2{t}\rceil$ dígitos (en base diez), seguidos de cero.
 
 	\begin{figure}[H]
 	  \centering
 		\includegraphics[width=10cm,angle=-90]{graficos/gregory_1a1000it.eps}
-	  \caption{Comparación del error relativo de la serie de Gregory utilizando diferentes precisiones, variando de 1 a 1000 la cantidad de iteraciones.}
+	  \caption{Error relativo de la serie de Gregory utilizando distintas precisiones, variando de 1 a 1000 la cantidad de iteraciones.}
 	  \label{fig:gregory_1000it}
 	\end{figure}
 	
@@ -34,7 +34,7 @@
 	\begin{figure}[H]
 	  \centering
 		\includegraphics[width=10cm,angle=-90]{graficos/ramanujan_1a42it.eps}
-	  \caption{Comparación del error relativo de la serie de Ramanujan utilizando diferentes precisiones, variando de 1 a 42 la cantidad de iteraciones.}
+	  \caption{Error relativo de la serie de Ramanujan utilizando distintas precisiones, variando de 1 a 42 la cantidad de iteraciones.}
 	  \label{fig:ramanujan_42it}
 	\end{figure}
 	
@@ -43,7 +43,7 @@
 	\begin{figure}[H]
 	  \centering
 		\includegraphics[width=10cm,angle=-90]{graficos/machin_1a100it.eps}
-	  \caption{Comparación del error relativo de la serie de Machin utilizando diferentes precisiones, variando de 1 a 100 la cantidad de iteraciones.}
+	  \caption{Error relativo de la serie de Machin utilizando distintas precisiones, variando de 1 a 100 la cantidad de iteraciones.}
 	  \label{fig:machin_100it}
 	\end{figure}
 	
@@ -53,13 +53,13 @@
 	\begin{figure}[H]
 	  \centering
 		\includegraphics[width=10cm,angle=-90]{graficos/machin_1a8it.eps}
-	  \caption{Comparación del error relativo de la serie de Machin utilizando diferentes precisiones, variando de 1 a 8 la cantidad de iteraciones.}
+	  \caption{Error relativo de la serie de Machin utilizando distintas precisiones, variando de 1 a 8 la cantidad de iteraciones.}
 	  \label{fig:machin_8it}
 	\end{figure}
 	
 	\VSP	
 
-	Se realizaron además, experimentaciones sobre el error relativo en función de la cantidad de bits de precisión (variando este parámetro de 1 a 51). A continuación se detallan los resultados de estos experimientos.
+	Se realizaron además, experimentaciones sobre el error relativo en función de la cantidad de bits de precisión (variando este parámetro de 1 a 51). A continuación se detallan estos experimientos.
 	
 	Se corrieron las pruebas hasta 42 iteraciones debido a que la serie de $Ramanujan$ es informativa hasta esa iteración (a partir de 43 iteraciones devuelve $nan$), es decir, el error relativo presentado corresponde al error cometido al calcular 42 términos de la serie.
 	
@@ -85,16 +85,16 @@
 	
 	\VSP
 	
-	Creímos conveniente además para analizar las diferencias variando las iteraciones, realizar tres gráficos (uno para cada serie) graficando en cada uno de ellos cuatro curvas las que corresponden a diferentes cantidad de iteraciones. Cada uno de los gráficos representan el error relativo cometido en función de la precisión del cálculo (variando este último de uno a cincuenta y uno).
+	Creímos conveniente además para analizar las diferencias variando las iteraciones, realizar tres gráficos (uno para cada serie) graficando en cada uno de ellos cuatro curvas las que corresponden a distintas cantidad de iteraciones. Cada uno de los gráficos representan el error relativo cometido en función de la precisión del cálculo (variando este último de 1 a 51).
 	
-	Utilizaremos estos gráficos para poder ver el cambio de precisión modifica el error producido o no. La visualización de varias curvas con distintas precisiones tiene como objeto analizar en qué afecta el aumento de este parámetro.
+	Utilizaremos estos gráficos para poder ver si el cambio de precisión modifica el error producido o no. La visualización de varias curvas con distintas precisiones tiene como objeto analizar en qué afecta el aumento de este parámetro.
 	
 	Los gráficos poseen escala logarítmica en el eje $y$ y se presentan en el siguiente orden: Gregory, Ramanujan y Machin.
 	
 	\begin{figure}[H]
 	  \centering
 		\includegraphics[width=10cm,angle=-90]{graficos/gregory_1a51p.eps}
-	  \caption{Comparación del error relativo de la serie de Gregory fijando diferentes cantidades de términos en cada curva variando de 1 y 51 la cantidad de bits en la mantisa.}
+	  \caption{Error relativo de la serie de Gregory para distintos valores del parámetro correspondiente a la cantidad de iteraciones, variando de 1 y 51 la cantidad de bits en la mantisa.}
 	  \label{fig:gregory_51p}
 	\end{figure}
 	
@@ -103,7 +103,7 @@
 	\begin{figure}[H]
 	  \centering
 		\includegraphics[width=10cm,angle=-90]{graficos/ramanujan_1a51p.eps}
-	  \caption{Comparación del error relativo de la serie de Ramanujan diferentes cantidades de términos en cada curva variando de 1 y 51 la cantidad de bits en la mantisa.}
+	  \caption{Error relativo de la serie de Ramanujan para distintos valores del parámetro correspondiente a la cantidad de iteraciones, variando de 1 y 51 la cantidad de bits en la mantisa.}
 	  \label{fig:ramanujan_51p}
 	\end{figure}
 	
@@ -112,13 +112,15 @@
 	\begin{figure}[H]
 	  \centering
 		\includegraphics[width=10cm,angle=-90]{graficos/machin_1a51p.eps}
-	  \caption{Comparación del error relativo de la serie de Machin diferentes cantidades de términos en cada curva variando de 1 y 51 la cantidad de bits en la mantisa.}
+	  \caption{Error relativo de la serie de Machin para distintos valores del parámetro correspondiente a la cantidad de iteraciones, variando de 1 y 51 la cantidad de bits en la mantisa.}
 	  \label{fig:machin_51p}
 	\end{figure}
 	
 	\VSP
 
 	\underline{Nota:} Para hacer más simple el análisis de los gráficos, cada par de valores correspondientes a puntos consecutivos del eje $x$, se los unió mediante una recta, funcionalidad utilizada de GNUPLOT.
+	
+	\pa
 	
 	El último gráfico corresponde al error relativo en función de la cantidad de dígitos, pero evaluando las cotas obtenidas en el análisis teórico con el error relativo de implementación.
 	
