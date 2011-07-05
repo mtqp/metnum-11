@@ -20,9 +20,7 @@
 	
 	Estos gráficos se muestra en el siguiente orden: Gregory, Ramanujan y Machin. Todos ellos se encuentran en escala logarítmica en el eje $y$
 
-	\texttt{NOTA:}
-	
-	Para cada precisión utilizada, el error relativo calculado es contra un valor de $\pi$ exacto en los primeros $\lceil\log_2{t}\rceil$ dígitos (en base diez), seguidos de cero.
+	\underline{Nota:} Para cada precisión utilizada, el error relativo calculado es contra un valor de $\pi$ exacto en los primeros $\lceil\log_2{t}\rceil$ dígitos (en base diez), seguidos de cero.
 
 	\begin{figure}[H]
 	  \centering
@@ -54,7 +52,7 @@
 	\VSP	
 	\begin{figure}[H]
 	  \centering
-		\includegraphics[width=10cm,angle=-90]{graficos/machin_1a10it.eps}
+		\includegraphics[width=10cm,angle=-90]{graficos/machin_1a8it.eps}
 	  \caption{Comparación del error relativo de la serie de Machin utilizando diferentes precisiones, variando de 1 a 8 la cantidad de iteraciones.}
 	  \label{fig:machin_8it}
 	\end{figure}
@@ -120,9 +118,7 @@
 	
 	\VSP
 
-	NOTA: 
-	
-	Para hacer más simple el análisis de los gráficos, cada par de valores correspondientes a puntos consecutivos del eje $x$, se los unió mediante una recta, funcionalidad utilizada de GNUPLOT.
+	\underline{Nota:} Para hacer más simple el análisis de los gráficos, cada par de valores correspondientes a puntos consecutivos del eje $x$, se los unió mediante una recta, funcionalidad utilizada de GNUPLOT.
 	
 	El último gráfico corresponde al error relativo en función de la cantidad de dígitos, pero evaluando las cotas obtenidas en el análisis teórico con el error relativo de implementación.
 	
