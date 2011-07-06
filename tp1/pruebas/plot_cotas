@@ -1,6 +1,8 @@
 #!/usr/bin/gnuplot -persist
 load 'error_relativo'
 
+set key bottom left box
+
 #le pone titulo al grafico
 set title "Error relativo en funcion de la cantidad de digitos"
 

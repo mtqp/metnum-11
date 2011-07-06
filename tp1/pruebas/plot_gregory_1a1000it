@@ -13,10 +13,12 @@ set ylabel "Error relativo"
 set logscale y
 
 set output 'truncamiento/graficos_nuevos/gregory_1a1000it.eps'
-plot	'truncamiento/data_nueva/gregory/5p_1a1000it.dat' using 1:(abs($2)) title "5p" with lines,\
-		'truncamiento/data_nueva/gregory/15p_1a1000it.dat' using 1:(abs($2)) title "15p" with lines,\
-		'truncamiento/data_nueva/gregory/25p_1a1000it.dat' using 1:(abs($2)) title "25p" with lines,\
-		'truncamiento/data_nueva/gregory/45p_1a1000it.dat' using 1:(abs($2)) title "45p" with lines
+plot 'truncamiento/data_nueva/gregory/5p_1a1000it.dat' using 1:(abs($2)) title "5p" with lines,\
+	 'truncamiento/data_nueva/gregory/15p_1a1000it.dat' using 1:(abs($2)) title "15p" with lines,\
+	 'truncamiento/data_nueva/gregory/25p_1a1000it.dat' using 1:(abs($2)) title "25p" with lines,\
+	 'truncamiento/data_nueva/gregory/45p_1a1000it.dat' using 1:(abs($2)) title "45p" with lines
+	
+		
 
 #pongo la salida default para mostrar en pantalla
 set term pop
