@@ -17,6 +17,8 @@ plot [1:100]'truncamiento/data_nueva/machin/5p_1a1000it.dat' using 1:(abs($2)) t
 		'truncamiento/data_nueva/machin/15p_1a1000it.dat' using 1:(abs($2)) title "15p" with lines,\
 		'truncamiento/data_nueva/machin/25p_1a1000it.dat' using 1:(abs($2)) title "25p" with lines,\
 		'truncamiento/data_nueva/machin/45p_1a1000it.dat' using 1:(abs($2)) title "45p" with lines
+		
+set key bottom left box
 
 set output 'truncamiento/graficos_nuevos/machin_1a10it.eps'
 plot [1:10]'truncamiento/data_nueva/machin/5p_1a1000it.dat' using 1:(abs($2)) title "5p" with lines,\
