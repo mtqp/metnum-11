@@ -5,7 +5,7 @@
 	
 	\pa
 	
-	Definimos primero el error de un término de la serie de Ramanujan.\\
+	Definimos primero el error de un término de la sumatoria de la serie de Ramanujan.\\
 
 	Dado $n \in \N$, sea $x=(4n)!(1103+26390n)$ e $y=(n!)^4396^{4n}$.\\
 	
@@ -15,41 +15,41 @@
 	
 	\underline{Analicemos el error de $x=(4n)!(1103+26390n)$:}\\
 	
-	Llamamos $x_x=(4n)!$ e $y_x=1103+26390n$.\\
+	Llamamos $w=(4n)!$.\\
 
-	$\ev{x} = \e{mult}{x_x,y_x,*} = \ev{x_x}+\ev{y_x}+\er{*}{x_x,y_x}$\\
+	$\ev{x} = \e{mult}{w,1103+26390n,*} = \ev{w}+\ev{1103+26390n}+\er{*}{w,1103+26390n}$\\
 	
-	Resta calcular el error de $x_x$ porque $y_x$ se calcula en enteros (exacto) ya que no hay $overflow$ ($n \leq 2$).\\
+	Resta calcular el error de $w$ porque para $1103+26390n$ consideramos sólo el error de representación ya que se calcula en enteros (exacto, no hay $overflow$ ($n \leq 2$)).\\
 	
-	$\Rightarrow \left|\ev{x}\right| \leq \left|\ev{x_x}\right| + 2u$\\
+	$\Rightarrow \left|\ev{x}\right| \leq \left|\ev{w}\right| + 2u$\\
 	
 	\underline{Analicemos el error de $y=(n!)^4396^{4n}$:}\\
 	
-	Llamamos $x_y=(n!)^4$ e $y_y=396^{4n}$.\\
+	Llamamos $v=(n!)^4$ e $z=396^{4n}$.\\
 	
-	$\ev{y} = \e{mult}{x_y,y_y,*} = {\ev{x_y}+\ev{y_y}+\er{*}{x_y,y_y}}$\\
-
-	Veamos entonces el error de $x_y$:\\
+	$\ev{y} = \e{mult}{v,z,*} = {\ev{v}+\ev{z}+\er{*}{v,z}}$\\
 	
-	$\ev{x_y} = \e{pot}{n!,4,POT} = 4\ev{n!} + ln(n!) 4\ev{4} + \er{POT}{n!,4}$\\
+	donde,
 	
-	$\ev{y_y} = \e{pot}{396,4n,POT} = 4n\ev{396} + ln(396) 4n\ev{4n} + \er{POT}{396,4n}$\\
+	$\ev{v} = \e{pot}{n!,4,POT} = 4\ev{n!} + ln(n!) 4\ev{4} + \er{POT}{n!,4}$
+	
+	$\ev{z} = \e{pot}{396,4n,POT} = 4n\ev{396} + ln(396) 4n\ev{4n} + \er{POT}{396,4n}$\\
 	
 	Como $\ev{4n} = \e{mult}{4,n,*} = \ev{4} + \ev{n} + \er{*}{4,n}$\\
 	
-	$\Rightarrow \ev{y_y} = 4n\ev{396} + ln(396)4n(\ev{4} + \ev{n} + \er{*}{4,n}) + \er{POT}{396,4n}$\\
+	$\Rightarrow \ev{z} = 4n\ev{396} + ln(396)4n(\ev{4} + \ev{n} + \er{*}{4,n}) + \er{POT}{396,4n}$\\
 	
 	Teniendo toda esta información podemos decir que el error de $y$ es:\\
 	
-	$4\ev{n!} + ln(n!) 4\ev{4} + \er{POT}{n!,4} + 4n\ev{396} + ln(396)4n(\ev{4} + \ev{n} + \er{*}{4,n}) + \er{POT}{396,4n} + \er{*}{x_y,y_y}$\\
+	$4\ev{n!} + ln(n!) 4\ev{4} + \er{POT}{n!,4} + 4n\ev{396} + ln(396)4n(\ev{4} + \ev{n} + \er{*}{4,n}) + \er{POT}{396,4n} + \er{*}{v,z}$\\
 	
-	$\Rightarrow \left|\ev{y}\right| \leq 4\left|\ev{n!}\right| + ln(n!)4u + 4nu + 75u$\\
+	$\Rightarrow_{usando\;que\;ln(396)<6} \left|\ev{y}\right| \leq 4\left|\ev{n!}\right| + ln(n!)4u + 76nu + 3u$\\
 	
-	Finalmente, el error de un término de la serie esta acotado por:
+	Finalmente, el error de un término de la sumatoria está acotado por:
 	
 	\pa
 
-	$\left|\ev{\frac{x}{y}}\right| \leq \left|\ev{x}\right| + \left|\ev{y}\right| + \left|\er{:}{x,y}\right| \leq \left|\ev{(4n)!}\right| + 4\left|\ev{n!}\right| + ln(n!)4u + 4nu + 78u$\\
+	$\left|\ev{\frac{x}{y}}\right| \leq \left|\ev{x}\right| + \left|\ev{y}\right| + \left|\er{:}{x,y}\right| \leq \left|\ev{(4n)!}\right| + 4\left|\ev{n!}\right| + ln(n!)4u + 76nu + 6u$\\
 	
 	Teniendo esta información, queremos realizar el análisis teórico para los primeros tres términos de la sumatoria. Para poder realizarlo, llamamos $a$ $(n=0)$ al primer término,
 	$b$ $(n=1)$ al segundo y $c$ $(n=2)$ al tercero.
@@ -81,24 +81,24 @@
 	
 	$\left|\ev{1} + \ev{2} + \er{*}{1,2} + \ev{3} + \er{*}{1*2,3} + \ev{4} + \er{*}{1*2*3,4} + \ev{1} + \er{*}{1*2*3*4,1}\right| + 4\left|\e{mult}{1,1}\right| + 82u \leq \left|\ev{2}\right| + \left|\er{*}{1,2}\right| + \left|\ev{3}\right| + \left|\er{*}{1*2,3}\right| + \left|\ev{4}\right| + \left|\er{*}{1*2*3,4}\right| + \left|\er{*}{1*2*3*4,1}\right| + 4\left|\er{*}{1,1}\right| + 82u \leq 93u$\\
 	
-	$\left|\ev{c}\right| \leq \left|\ev{8!}\right| + 4\left|\ev{2!}\right| + 90u =$\\
+	$\left|\ev{c}\right| \leq \left|\ev{8!}\right| + 4\left|\ev{2!}\right| + 161u =$\\
 	
-	$\leq \left|\ev{5} + \ev{6} + \er{*}{5,6} + \ev{7} + \er{*}{5*6,7} + \ev{8} + \er{*}{5*6*7,8} + \ev{24} + \er{*}{5*6*7*8,24}\right| + 4\left|\e{mult}{1,2}\right| + 90u \leq \left|\ev{5}\right| + \left|\ev{6}\right| + \left|\er{*}{5,6}\right| + \left|\ev{7}\right| + \left|\er{*}{5*6,7}\right| + \left|\ev{8}\right| + \left|\er{*}{5*6*7,8}\right| + \left|\ev{24}\right| + \left|\er{*}{5*6*7*8,24}\right| + 4(\left|\ev{2}\right| + \left|\er{*}{1,2}\right|) + 90u \leq 107u$\\
+	$\leq \left|\ev{5} + \ev{6} + \er{*}{5,6} + \ev{7} + \er{*}{5*6,7} + \ev{8} + \er{*}{5*6*7,8} + \ev{24} + \er{*}{5*6*7*8,24}\right| + 4\left|\e{mult}{1,2}\right| + 161u \leq \left|\ev{5}\right| + \left|\ev{6}\right| + \left|\er{*}{5,6}\right| + \left|\ev{7}\right| + \left|\er{*}{5*6,7}\right| + \left|\ev{8}\right| + \left|\er{*}{5*6*7,8}\right| + \left|\ev{24}\right| + \left|\er{*}{5*6*7*8,24}\right| + 4(\left|\ev{2}\right| + \left|\er{*}{1,2}\right|) + 161u \leq 178u$\\
 	
 	$\Rightarrow$\\
-	$\left|\ev{sum_2}\right| \leq \frac{1103u + \frac{8!*53883}{2^4*396^8}107u + \frac{659832}{396^4}93u + (1103+\frac{8!*53883}{2^4*396^8})\left|\er{+}{1103,\frac{8!*53883}{2^4*396^8}}\right|}{1103 - \frac{659832}{396^4} + \frac{8!*53883}{2^4*396^8}} + \left|\er{-}{1103 + \frac{8!*53883}{2^4*396^8},\frac{659832}{396^4}}\right|$\\
+	$\left|\ev{sum_2}\right| \leq \frac{1103u + \frac{8!*53883}{2^4*396^8}178u + \frac{659832}{396^4}93u + (1103+\frac{8!*53883}{2^4*396^8})\left|\er{+}{1103,\frac{8!*53883}{2^4*396^8}}\right|}{1103 - \frac{659832}{396^4} + \frac{8!*53883}{2^4*396^8}} + \left|\er{-}{1103 + \frac{8!*53883}{2^4*396^8},\frac{659832}{396^4}}\right|$\\
 
-	$\leq \frac{1103u + \frac{8!*53883}{2^4*396^8}107u + \frac{659832}{396^4}93u + (1103+\frac{8!*53883}{2^4*396^8})u}{1103 - \frac{659832}{396^4} + \frac{8!*53883}{2^4*396^8}} + u =$\\
+	$\leq \frac{1103u + \frac{8!*53883}{2^4*396^8}178u + \frac{659832}{396^4}93u + (1103+\frac{8!*53883}{2^4*396^8})u}{1103 - \frac{659832}{396^4} + \frac{8!*53883}{2^4*396^8}} + u =$\\
 	
-	$\frac{2206u + \frac{8!*53883}{2^4*396^8}108u + \frac{659832}{396^4}93u}{1103 - \frac{659832}{396^4} + \frac{8!*53883}{2^4*396^8}} + u \leq 4u$\\
+	$\frac{2206u + \frac{8!*53883}{2^4*396^8}179u + \frac{659832}{396^4}93u}{1103 - \frac{659832}{396^4} + \frac{8!*53883}{2^4*396^8}} + u \leq 4u$\\
 	
 	\pa
 	
 	Por ultimo, $\pi_2=\frac{\frac{9801}{\sqrt{8}}}{sum_2}$\\
 	
-	Para calcular el error de $\pi_2$ calculamos el error de $\funcFull{h(z)}{\sqrt{z}}$.\\
+	Para calcular el error de $\pi_2$ calculamos el error de $\funcFull{h(k)}{\sqrt{k}}$.\\
 	
-	$\e{h}{z,\sqrt{ }} = \frac{\frac{1}{2\sqrt{z}}}{\sqrt{z}}z\ev{z} + \er{\sqrt{ }}{z} = \frac{1}{2\sqrt{z}}\frac{1}{\sqrt{z}}z\ev{z} + \er{\sqrt{ }}{z} = \frac{\ev{z}}{2} + \er{\sqrt{ }}{z}$\\
+	$\e{h}{k,\sqrt{ }} = \frac{\frac{1}{2\sqrt{k}}}{\sqrt{k}}k\ev{k} + \er{\sqrt{ }}{k} = \frac{1}{2\sqrt{k}}\frac{1}{\sqrt{k}}k\ev{k} + \er{\sqrt{ }}{k} = \frac{\ev{k}}{2} + \er{\sqrt{ }}{k}$\\
 	
 	$\ev{\frac{9801}{\sqrt{8}}} = \ev{9801} - \ev{\sqrt{8}} + \er{:}{9801,\sqrt{8}}$\\
 	$\Rightarrow \left|\ev{\frac{9801}{\sqrt{8}}}\right| = \left|\ev{9801}\right| + \left|\frac{\ev{8}}{2}\right| + \left|\er{\sqrt{ }}{8}\right| + \left|\er{:}{9801,\sqrt{8}}\right| \leq \frac{7}{2}u$\\
