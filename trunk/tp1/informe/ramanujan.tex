@@ -51,25 +51,22 @@
 
 	$\left|\ev{\frac{x}{y}}\right| \leq \left|\ev{x}\right| + \left|\ev{y}\right| + \left|\er{:}{x,y}\right| \leq \left|\ev{(4n)!}\right| + 4\left|\ev{n!}\right| + ln(n!)4u + 76nu + 6u$\\
 	
-	Teniendo esta información, queremos realizar el análisis teórico para los primeros tres términos de la sumatoria. Para poder realizarlo, llamamos $a$ $(n=0)$ al primer término,
+	Queremos realizar el análisis teórico para los primeros tres términos de la sumatoria. Para poder realizarlo, llamamos $a$ $(n=0)$ al primer término,
 	$b$ $(n=1)$ al segundo y $c$ $(n=2)$ al tercero.
 	
-	Dado que tanto $a$ como $c$ corresponden a $n$ par son términos tal que $(-1)^n = 1$ en contraste con $b$ que tiene signo negativo. Por este motivo,\\
-	tenemos que la arcotangente hasta el tercer término es: $a - b + c$.\\
+	Analizamos primero el error cometido de realizar $a+b$.\\
 	
-	Analizamos primero el error cometido de realizar $a+c$.\\
+	$\e{sum}{a,b,+} = \frac{a}{a+b}\ev{a} + \frac{b}{a+b}\ev{b} + \er{+}{a,b}$\\
 	
-	$\e{sum}{a,c,+} = \frac{a}{a+c}\ev{a} + \frac{c}{a+c}\ev{c} + \er{+}{a,c}$\\
-	
-	Analizamos ahora el error de restar el segundo término ($b$).\\
+	Analizamos ahora el error de sumar el tercer término ($c$).\\
 		
-	$\e{restar}{a+c,b,-} = \frac{a+c}{a+c-b}\er{+}{a,c} - \frac{b}{a+c-b}\ev{b} + \er{-}{a+c,b} =$\\
+	$\e{sum}{a+b,c,+} = \frac{a+b}{a+b+c}\ev{a+b} + \frac{c}{a+b+c}\ev{c} + \er{+}{a+b,c} =$\\
 	
-	$\frac{a+c}{a+c-b}(\frac{a}{a+c}\ev{a} + \frac{c}{a+c}\ev{c} + \er{+}{a,c}) - \frac{b}{a+c-b}\ev{b} + \er{-}{a+c,b} =$\\
+	$\frac{a+b}{a+b+c}(\frac{a}{a+b}\ev{a} + \frac{b}{a+b}\ev{b} + \er{+}{a,b}) + \frac{c}{a+b+c}\ev{c} + \er{+}{a+b,c} =$\\
 	
-	$\frac{a\ev{a} + c\ev{c} - b\ev{b} + (a+c)\er{+}{a,c}}{a-b+c} + \er{-}{a+c,b} = \ev{a+c-b} = \ev{sum_2}$\\
+	$\frac{a\ev{a} + b\ev{b} + c\ev{c} + (a+b)\er{+}{a,b}}{a+b+c} + \er{+}{a+b,c} = \ev{a+b+c} = \ev{sum_2}$\\
 	
-	$\left|\ev{sum_2}\right| \leq \frac{|a||\ev{a}| + |c||\ev{c}| + |b||\ev{b}| + |a+c|\left|\er{+}{a,c}\right|}{|a-b+c|} + \left|\er{-}{a+c,b}\right|$\\
+	$\left|\ev{sum_2}\right| \leq \frac{|a||\ev{a}| + |b||\ev{b}| + |c||\ev{c}| + |a+b|\left|\er{+}{a,b}\right|}{|a+b+c|} + \left|\er{+}{a+b,c}\right|$\\
 	
 	Dado que $a=1103$, $b=\frac{659832}{396^4}$ y $c=\frac{8!*53883}{2^4*396^8}$.\\
 	
@@ -86,11 +83,11 @@
 	$\leq \left|\ev{5} + \ev{6} + \er{*}{5,6} + \ev{7} + \er{*}{5*6,7} + \ev{8} + \er{*}{5*6*7,8} + \ev{24} + \er{*}{5*6*7*8,24}\right| + 4\left|\e{mult}{1,2}\right| + 161u \leq \left|\ev{5}\right| + \left|\ev{6}\right| + \left|\er{*}{5,6}\right| + \left|\ev{7}\right| + \left|\er{*}{5*6,7}\right| + \left|\ev{8}\right| + \left|\er{*}{5*6*7,8}\right| + \left|\ev{24}\right| + \left|\er{*}{5*6*7*8,24}\right| + 4(\left|\ev{2}\right| + \left|\er{*}{1,2}\right|) + 161u \leq 178u$\\
 	
 	$\Rightarrow$\\
-	$\left|\ev{sum_2}\right| \leq \frac{1103u + \frac{8!*53883}{2^4*396^8}178u + \frac{659832}{396^4}93u + (1103+\frac{8!*53883}{2^4*396^8})\left|\er{+}{1103,\frac{8!*53883}{2^4*396^8}}\right|}{1103 - \frac{659832}{396^4} + \frac{8!*53883}{2^4*396^8}} + \left|\er{-}{1103 + \frac{8!*53883}{2^4*396^8},\frac{659832}{396^4}}\right|$\\
+	$\left|\ev{sum_2}\right| \leq \frac{1103u + \frac{659832}{396^4}93u + \frac{8!*53883}{2^4*396^8}178u + (1103+\frac{659832}{396^4})\left|\er{+}{1103,\frac{659832}{396^4}}\right|}{1103 + \frac{659832}{396^4} + \frac{8!*53883}{2^4*396^8}} + \left|\er{+}{1103 + \frac{659832}{396^4},\frac{8!*53883}{2^4*396^8}}\right|$\\
 
-	$\leq \frac{1103u + \frac{8!*53883}{2^4*396^8}178u + \frac{659832}{396^4}93u + (1103+\frac{8!*53883}{2^4*396^8})u}{1103 - \frac{659832}{396^4} + \frac{8!*53883}{2^4*396^8}} + u =$\\
+	$\leq \frac{1103u + \frac{659832}{396^4}93u + \frac{8!*53883}{2^4*396^8}178u + (1103+\frac{659832}{396^4})u}{1103 + \frac{659832}{396^4} + \frac{8!*53883}{2^4*396^8}} + u =$\\
 	
-	$\frac{2206u + \frac{8!*53883}{2^4*396^8}179u + \frac{659832}{396^4}93u}{1103 - \frac{659832}{396^4} + \frac{8!*53883}{2^4*396^8}} + u \leq 4u$\\
+	$\frac{2206u + \frac{659832}{396^4}94u + \frac{8!*53883}{2^4*396^8}178u}{1103 + \frac{659832}{396^4} + \frac{8!*53883}{2^4*396^8}} + u \leq 4u$\\
 	
 	\pa
 	
