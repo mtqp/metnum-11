@@ -1,15 +1,15 @@
 \begin{section}{Conclusiones}
 	El cálculo sobre aritmética finita presenta un gran desafío para los desarrolladores, al intentar proponer nuevas maneras que minimicen esta pérdida de información, como para quienes utilizan estas herramienta para el cálculo. Si bien hasta el momento no hemos encontrado herramientas que puedan presentar un resultado exacto en todos los casos, conocer como acotar estos errores, nos da una ayuda extra para poder entender a qué corresponde los resultados en la experimentación.
 
-	Inclusive, sabiendo el error cometido en los cálculos, la representación de esta información tanto en gráficos, como en cualquier medio observable de datos, también agrega un margen de error que hay que ser muy precavido que existe, para no llegar a falsas conclusiones.
+	Inclusive, sabiendo el error cometido en los cálculos, la representación de esta información tanto en gráficos como en cualquier medio observable de datos también agrega un margen de error que hay que hay que tener en cuenta, para no llegar a falsas conclusiones.
 	
-	Existe un factor dominante a la hora de implementar algoritmos o utilizarlos, que es el requerimiento de eficiencia. Los tres algoritmos muestran esta estrecha relación que hay entre precisión y eficiencia. Si bien el tercer algoritmo es el que más rápido aproxima, también su complejidad asíntotica es la mayor (se podría demostrar que es \Ode{n^2}), al igual que $Machin$ y complejidad lineal para $Gregory$. Dependiendo del contexto en el que se utilice, quizás la pérdida de precisión, se justifica por el orden de magnitud de diferencia en el cálculo.\\
+	Un factor importante a la hora de implementar algoritmos o utilizarlos es la eficiencia. Los tres algoritmos muestran una estrecha relación entre precisión y eficiencia. Si bien el tercer algoritmo es el que más rápido aproxima, también su complejidad asíntotica es la mayor (se podría demostrar que es \Ode{n^2}), al igual que $Machin$ y complejidad lineal para $Gregory$. Como siempre la elección dependerá del contexto de uso.\\
 	
-	Deberíamos tener en cuenta también, que utilizamos como base, los tipos nativos de C++, si necesitamos por ejemplo, mayor precisión, agregamos un nuevo factor que es la cantidad de memoria utilizada, la cual en principio podría no ser acotada.
+	Deberíamos tener en cuenta también, que utilizamos como base, los tipos nativos de C++. Si necesitamos por ejemplo, mayor precisión, agregamos un nuevo factor que es la cantidad de memoria utilizada, la cual en principio podría no ser acotada.
 	
-	Encontrar el balance entre estos tres problemas reales es muy complejo, pero herramientas como el cálculo del error relativo, nos ayudan a bislumbrar con mejor claridad, cuál es la mejor opción para cada contexto.\\
+	Encontrar el balance entre estos tres problemas reales es muy complejo, pero herramientas como el cálculo del error relativo nos ayudan a bislumbrar con mejor claridad cuál es la mejor opción para cada contexto.\\
 	
-	Nos han surgido varias implementaciones alternativas, así como desiciones estructurales quizás mejores, equilibrando el tiempo disponible y la complejidad de llevarlas acabo, optamos por esta clase $Real$. Sin embargo, nos gustaría denotar algunas de esas ideas a continuación.
+	Nos han surgido varias implementaciones alternativas, así como decisiones estructurales quizás mejores. Equilibrando el tiempo disponible y la complejidad de llevarlas acabo, optamos por esta clase $Real$. Sin embargo, nos gustaría comentar algunas de esas ideas a continuación.
 	
 	Con respecto a la implementación de los algoritmos, existen funciones que podrían haber sido optimizadas, como el cálculo de la potencia el cual podría haberse implementado de forma más inteligente utilizando programación dinámica, recordando los valores ya calculado para no repetirlos. Podría haberse evitado la generación de un objeto $Real$ por cada iteración de los algoritmos de aproximación a $\pi$.
 
