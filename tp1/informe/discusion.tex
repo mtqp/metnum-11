@@ -8,13 +8,13 @@
 	
 	En la primer aproximación a la comprensión del error relativo cometido al aproximar $\pi$ con la fórmula de $Machin$ en función de la cantidad de iteraciones, vemos que los valores obtenidos en cada iteración forman una recta con pendiente negativa. Como la escala utilizada para representar dicho error es la logarítmica, podemos decir que el error decrece exponencialmente.
 	
-	Además observamos que a partir de la décima iteración el gráfico el error en la fórmula de $Machin$ se torna cero.
+	Además observamos que a partir de la décima iteración en el gráfico, el error en la fórmula de $Machin$ se torna cero.
 	
 	Por otro lado, podemos apreciar que con pocas iteraciones la serie de $Ramanujan$ obtiene un error constante, similar observación puede hacerse a $Machin$ aunque le toma una cantidad mayor de iteraciones hasta lograrlo.\\
 	
 	Los siguientes cuatro gráficos (Figura \ref{fig:gregory_1000it}, \ref{fig:ramanujan_42it} \ref{fig:machin_100it} y \ref{fig:machin_10it}) profundizan el análisis, centrándose ahora en cada serie en particular. Decidimos agregarlos para poder utilizar la escala más adecuada para cada serie, ya que un mismo gráfico para todas puede conducir a errores de interpretación propios de utilizar una escala que pueda contemplar todas las curvas.
 	
-	La diferencia en la cantidad de iteraciones con las que fueron realizados los gráficos depende de la velocidad en la que cada serie reduce el error relativo a $\pi$. Cada serie se acerca a $\pi$ a diferente velocida, elegimos la cantidad de iteraciones entonces acorde a cada serie. Así, obtuvimos un idea de cuál de ellas se acerca más rápido a obtener un error tan pequeño como se desee (suponiendo aritmética tan grande como uno quiera).
+	La diferencia en la cantidad de iteraciones con las que fueron realizados los gráficos depende de la velocidad en la que cada serie reduce el error relativo a $\pi$. Cada serie se acerca a $\pi$ a diferente velocida, elegimos la cantidad de iteraciones entonces acorde a cada serie. Así, obtuvimos una idea de cuál de ellas se acerca más rápido a obtener un error tan pequeño como se desee (suponiendo aritmética tan grande como uno quiera).
 	
 	El primer gráfico corresponde a la serie de Gregory, analizándola en mil iteraciones, utilizando precisiones de 5, 15, 25 y 45 bits. 
 	
@@ -27,20 +27,20 @@
 	
 	Este comportamiento también sucede aunque en menor medida, utilizando precisión de quince dígitos. Si bien no alcanzan los valores que toma el eje $x$ para ver si se estabiliza el error, todo parece indicar que sí, ya que cada vez la pendiente positiva se hace menos pronunciada. Llama mucho la atención como entre las 150 y 250 iteraciones se obtienen errores relativos mucho más chicos que utilizando mayor precisión, nuevamente este comportamiento viene de la mano de la naturaleza de la serie (sumar en las iteraciones pares y restar en las impares valores que impactan en el resultado final). Para precisiones de alrededor de 15 bits, es conveniente entonces utilizar entre 100 y 300 iteraciones.
 
-	A medida que aumenta la precisión la diferencia entre cada par de curvas disminuye, como ejemplo de esto podemos notar a las dos que utilizan precisiones de 25 y 45 bits. Estas curvas disminuyen suavemente, minimizando el error en cada iteración, su pendiente es cada vez menor. Sin duda, a medida que la presición es mayor, el error relativo disminuye.\\
+	A medida que aumenta la precisión la diferencia entre cada par de curvas disminuye, como ejemplo de esto podemos notar a las dos que utilizan precisiones de 25 y 45 bits. Estas curvas disminuyen suavemente, disminuyendo el error en cada iteración, su pendiente es cada vez menor. Sin duda, a medida que la presición es mayor, el error relativo disminuye.\\
 
 	
 	Continuando con el siguiente gráfico, Ramanujan, vemos que el error relativo depende estrictamente de la precisión utilizada. Recién con precisión de 45 bits, existe diferencia entre la primera y segunda iteración. Esto habla fuertemente de la velocidad con la que se aproxima dicho algoritmo. Es interesante observar, relacionando la información con la del gráfico anterior (Gregory), cuando la precisión es muy chica, en este caso 5 bits, el error relativo cometido es ligeramente mayor utilizando el segundo algoritmo. A medida que la precisión aumenta, esta relación se invierte.\\
 	
 	En la sección de resultados, se incluyeron dos gráficos más bajo el mismo tipo de análisis para Machin, la diferencia entre ellos rádica únicamente en los valores que toma el eje $x$, siendo los mismos datos de entrada utilizados.
 	
-	El primero de los dos gráficos muestra simplemente que a mayor precisión, menor error relativo. El segundo en cambio, muestra que con poca precisión es mejor realizar muy pocas iteraciones, ya que el error aumenta.\\
+	El primero de los dos gráficos muestra que cuanto mayor es la precisión utilizada mayor es la cantidad de iteraciones donde el algoritmo logra mejorar la solución, para luego estabilizarse en un error que por lo dicho anteriormente, disminuye conforme aumenta dicha precisión. El segundo en cambio, muestra que con poca precisión es mejor realizar muy pocas iteraciones, ya que el error aumenta.\\
 	
 	Como otro resultado, tenemos al gráfico que muestra el error relativo con respecto a la cantidad de dígitos, fijando la cantidad de iteraciones en $42$ (Figura:\ref{fig:42it})
 	
 	La apreciación (lineal/exponencial para nuestro caso) del decrecimiento de los errores en función de la cantidad de dígitos es la misma que en función de la cantidad de iteraciones para $Ramanujan$ y $Machin$. El primero de los dos en este caso, decrece lineal (pensándolo en escala logarítmica) sin cambiar el valor de su pendiente a partir de cierto valor. Parece reducir entonces, de manera exponencial el error cometido conforme aumenta la precisión utilizada (debido a la relación entre la escala y la forma de la pendiente).
 	
-	$Gregory$ muestra una pendiente logarítmica monótona decreciente hasta un $t$ cercano a doce, donde según este gráfico, se estabiliza y se transforma en constante. Si esto sucede, significaría que no tiene sentido seguir calculando más iteraciones, ya que el error de estos dígitos no va a mejorar con respecto al valor exacto de la constante a calcular. Nuevamente, esto viene de la mano de la propagación de errores de cálculo.
+	$Gregory$ muestra una pendiente logarítmica monótona decreciente hasta un $t$ cercano a doce, donde según este gráfico, se estabiliza y se transforma en constante. Si esto sucede, significaría que no tiene sentido seguir aumentando la precisión, ya que el error no va a mejorar con respecto al valor exacto de la constante a calcular. Nuevamente, esto viene de la mano de la propagación de errores de cálculo.
 	
 	La Figura:\ref{fig:5it} fija la cantidad de iteraciones en un valor menor (cinco en este caso), para analizar si existe diferencias con respecto al anterior de 42.
 	
@@ -50,9 +50,9 @@
 	
 	Los gráficos \ref{fig:gregory_51p}, \ref{fig:ramanujan_51p} y \ref{fig:machin_51p} son muy interesantes, ya que muestran que elegir la máxima precisión no siempre nos lleva como resultado obtener un error más pequeño. Existe como fue mencionado en el párrafo pasado, una relación estricta entre cantidad de iteraciones y precisión. El ejemplo más claro, es el gráfico de $Gregory$. Realizando tan sólo cinco iteraciones del algoritmo, obtenemos mejores resultados que las otras iteraciones cuando la cantidad de dígitos es chica. Esto también sucede en $Machin$, las diferencias son menores, pero aún percibibles.
 	
-	Para el caso de $Ramanujan$, no es posible ver que realizar menos iteraciones cuando la precisión es chica mejore la solución. Lo interesante que tiene este gráfico es que tampoco es mejorada por aumentar la cantidad de iteraciones. Quizás esta diferencia se haga visible si la cantidad de iteraciones aumenta significativamente. Lamentablemente, no podemos hacer este análisis debido a que nuestra implementación no nos permite excedernos de 42 iteraciones.
+	Para el caso de $Ramanujan$, no es posible ver que realizar menos iteraciones cuando la precisión es chica mejore la solución. Lo interesante que tiene este gráfico es que tampoco es mejorada de manera perceptible por aumentar la cantidad de iteraciones. Quizás esta diferencia se haga visible si la cantidad de iteraciones aumenta significativamente. Lamentablemente, no podemos hacer este análisis debido a que nuestra implementación no nos permite excedernos de 42 iteraciones.
 	
-	El gráfico de $Machin$ muestra que la cantidad de iteraciones define la precisión máxima que vamos a tener, como es el caso de la curva con 5 iteraciones la cual no disminuye el error por más de mejorar la precisión a partir de los 30 dígitos. 
+	El gráfico de $Machin$ muestra que la cantidad de iteraciones define el error mínimo que vamos a tener, como es el caso de la curva con 5 iteraciones la cual no disminuye el error por más de mejorar la precisión a partir de los 30 dígitos. 
 	
 	Los tres gráficos muestran que cuanto mayor es la precisión y mayor la cantidad de iteraciones, mejores soluciones vamos a obtener.
 	
